@@ -23,24 +23,16 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-
 #pragma once
 
-
-#include <QObject>
-
+#include "libparser_global.hpp"
 
 namespace ptng {
 
-class constants : public QObject
+class LIBPARSER_EXPORT libparser
 {
-    Q_OBJECT
 public:
-    explicit constants(QObject *parent = nullptr);
-
-signals:
-
+    libparser();
 };
 
 } // namespace ptng
-

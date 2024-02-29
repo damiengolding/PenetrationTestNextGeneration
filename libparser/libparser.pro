@@ -13,8 +13,8 @@ SOURCES += \
     constants.cpp
 
 HEADERS += \
-    constants.hpp \
-    libparser_global.hpp
+    libparser_global.hpp \
+    constants.hpp
 
 # Default rules for deployment.
 unix {

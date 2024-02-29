@@ -23,9 +23,7 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-
-#ifndef LIBPARSER_GLOBAL_HPP
-#define LIBPARSER_GLOBAL_HPP
+#pragma once
 
 #include <QtCore/qglobal.h>
 
@@ -34,5 +32,3 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #else
 #  define LIBPARSER_EXPORT Q_DECL_IMPORT
 #endif
-
-#endif // LIBPARSER_GLOBAL_HPP

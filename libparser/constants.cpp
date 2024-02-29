@@ -23,16 +23,12 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-
 #include "constants.hpp"
 
 namespace ptng {
 
-constants::constants(QObject *parent)
-    : QObject{parent}
+libparser::libparser()
 {
-
 }
 
 } // namespace ptng
-
