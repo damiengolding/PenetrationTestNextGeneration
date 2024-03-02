@@ -26,13 +26,31 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #pragma once
 
 #include "libparser_global.hpp"
+#include "PtngEnums.hpp"
+
+#include <QObject>
 
 namespace ptng {
 
-class LIBPARSER_EXPORT libparser
+/*!
+   \brief The PtngIdent class
+
+   Provides input file identification
+ */
+class LIBPARSER_EXPORT PtngIdent : public QObject
 {
+    Q_OBJECT
 public:
-    libparser();
+    explicit PtngIdent(QObject *parent = nullptr);
+    PtngEnums::SupportedInputTypes checkFile(const QString &file);
+
+private:
+        PtngEnums::SupportedInputTypes checkXmlFile(const QString &file);
+        PtngEnums::SupportedInputTypes checkTextFile(const QString &file);
+
+signals:
+ void typeIdentified(PtngEnums::SupportedInputTypes);
 };
 
 } // namespace ptng
+

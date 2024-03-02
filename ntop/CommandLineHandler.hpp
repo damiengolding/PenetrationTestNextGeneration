@@ -25,22 +25,16 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
 
-#include <QtCore/qglobal.h>
-#include <QDomDocument>
-#include <QDomNode>
-#include <QDomNodeList>
-#include <QDomElement>
-#include <QDomText>
-#include <QDomAttr>
-#include <QFile>
-#include <QTextStream>
-#include <QMultiMap>
-#include <QList>
-#include <QDebug>
-#include <QScopedPointer>
+#include "GlobalIncludes.hpp"
 
-#if defined(LIBPARSER_LIBRARY)
-#  define LIBPARSER_EXPORT Q_DECL_EXPORT
-#else
-#  define LIBPARSER_EXPORT Q_DECL_IMPORT
-#endif
+// Argument processing
+void showTypes();
+
+// Option processing
+QList<PtngHostBuilder*> parseInputFiles( QString networkMapSource,
+                QString zoneTransferFile,
+                QString hshFile,
+                QString ipLocationAPIKey,
+                QString subnetFilter,
+                QString outputFileStem,
+                QString fontFamily);

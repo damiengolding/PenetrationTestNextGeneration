@@ -25,22 +25,45 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
 
-#include <QtCore/qglobal.h>
-#include <QDomDocument>
-#include <QDomNode>
-#include <QDomNodeList>
-#include <QDomElement>
-#include <QDomText>
-#include <QDomAttr>
-#include <QFile>
-#include <QTextStream>
-#include <QMultiMap>
-#include <QList>
-#include <QDebug>
-#include <QScopedPointer>
+#include "libparser_global.hpp"
+#include "PtngEnums.hpp"
+#include <QObject>
 
-#if defined(LIBPARSER_LIBRARY)
-#  define LIBPARSER_EXPORT Q_DECL_EXPORT
-#else
-#  define LIBPARSER_EXPORT Q_DECL_IMPORT
-#endif
+namespace ptng {
+
+/*!
+   \brief The PtngIP4Address class
+
+   Encapsulates the data needed to process an IP v4 address. Built around the data supplied by nmap or a Zone Transfer, including (if available) MAC address,
+   geo-location and OS guess.
+
+   It also provides a small number of validation andcomparison functions, as well as conversion to GraphViz dot entry and other formats
+ */
+class LIBPARSER_EXPORT PtngIP4Address : public QObject
+{
+    Q_OBJECT
+public:
+    explicit PtngIP4Address(QObject *parent = nullptr);
+
+signals:
+    /*!
+       \brief AddressParseSucceeded
+     */
+    void AddressParseSucceeded();
+    void AddressParseFailed();
+
+signals: // for Q_PROPERTY
+    void ipAddressChanged();
+
+public: // Accessors and mutators for Q_PROPERTY
+    QString getIpAddress() const{return(ipAddress);}
+    void setIpAddress(const QString &ipAddress){this->ipAddress = ipAddress;}
+
+private: // Q_PROPERTY
+    QString ipAddress;
+    Q_PROPERTY(QString ipAddress READ getIpAddress WRITE setIpAddress NOTIFY ipAddressChanged)
+
+};
+
+} // namespace ptng
+

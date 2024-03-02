@@ -23,24 +23,14 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#pragma once
+#include "PtngIP4Address.hpp"
 
-#include <QtCore/qglobal.h>
-#include <QDomDocument>
-#include <QDomNode>
-#include <QDomNodeList>
-#include <QDomElement>
-#include <QDomText>
-#include <QDomAttr>
-#include <QFile>
-#include <QTextStream>
-#include <QMultiMap>
-#include <QList>
-#include <QDebug>
-#include <QScopedPointer>
+namespace ptng {
 
-#if defined(LIBPARSER_LIBRARY)
-#  define LIBPARSER_EXPORT Q_DECL_EXPORT
-#else
-#  define LIBPARSER_EXPORT Q_DECL_IMPORT
-#endif
+PtngIP4Address::PtngIP4Address(QObject *parent)
+    : QObject{parent}
+{
+
+}
+
+} // namespace ptng

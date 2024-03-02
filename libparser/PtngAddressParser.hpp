@@ -23,12 +23,43 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "constants.hpp"
+#pragma once
+
+#include "libparser_global.hpp"
+#include <QObject>
+
+#include "PtngEnums.hpp"
+#include "PtngIdent.hpp"
 
 namespace ptng {
+/*!
+   \brief The PtngAddressParser class
 
-libparser::libparser()
+   Parses IP addresses, and if available DNS names from a variety of input types:
+
+   \see PtngIdent, PtngEnums
+ */
+class LIBPARSER_EXPORT PtngAddressParser : public QObject
 {
-}
+    Q_OBJECT
+public:
+    explicit PtngAddressParser(QObject *parent = nullptr);
+    /*!
+       \brief parseAddresses
+       \param inputFile
+       \return QMultiMap<QString,QString>
+     */
+    QMultiMap<QString,QString> parseAddresses(const QString &inputFile);
+private:
+    QMultiMap<QString,QString> parseAxfrDnsRecon(const QString &inputFile);
+    QMultiMap<QString,QString> parseAxfrNslookupWin(const QString &inputFile);
+    QMultiMap<QString,QString> parseAxfrNslookupLin(const QString &inputFile);
+    QMultiMap<QString,QString> parseArpscan(const QString &inputFile);
+    QMultiMap<QString,QString> parseNbtscan(const QString &inputFile);
+    QMultiMap<QString,QString> parseHostScan(const QString &inputFile);
+signals:
+
+};
 
 } // namespace ptng
+

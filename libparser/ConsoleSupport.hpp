@@ -25,22 +25,44 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
 
-#include <QtCore/qglobal.h>
-#include <QDomDocument>
-#include <QDomNode>
-#include <QDomNodeList>
-#include <QDomElement>
-#include <QDomText>
-#include <QDomAttr>
-#include <QFile>
 #include <QTextStream>
-#include <QMultiMap>
-#include <QList>
-#include <QDebug>
-#include <QScopedPointer>
 
-#if defined(LIBPARSER_LIBRARY)
-#  define LIBPARSER_EXPORT Q_DECL_EXPORT
-#else
-#  define LIBPARSER_EXPORT Q_DECL_IMPORT
+// Colors in console output
+
+#ifdef WIN32
+//#include "ConsoleApi2.h"
+#include "WinCon.h"
+#include "Windows.h"
+void OutInfo(const QString &message){
+    HANDLE hO = GetStdHandle(STD_OUTPUT_HANDLE);
+    QTextStream out(stdout);
+    SetConsoleTextAttribute(hO, 0x09);
+    out <<"[*] " << qPrintable(message) << endl;
+}
+
+void OutSuccess(const QString &message){
+    HANDLE hO = GetStdHandle(STD_OUTPUT_HANDLE);
+    QTextStream out(stdout);
+    SetConsoleTextAttribute(hO, 0x02);
+    out <<"[+] " << qPrintable(message) << endl;
+}
+
+void OutWarning(const QString &message){
+    HANDLE hO = GetStdHandle(STD_OUTPUT_HANDLE);
+    QTextStream out(stdout);
+    SetConsoleTextAttribute(hO, 0x0E);
+    out <<"[!] " << qPrintable(message) << endl;
+}
+
+void OutFail(const QString &message){
+    HANDLE hO = GetStdHandle(STD_OUTPUT_HANDLE);
+    QTextStream out(stdout);
+    SetConsoleTextAttribute(hO, 0x0C);
+    out <<"[-] " << qPrintable(message) << endl;
+}
+
+#else // Linux
+
+
 #endif
+

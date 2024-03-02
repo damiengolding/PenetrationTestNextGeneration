@@ -23,24 +23,24 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#pragma once
+#include "PtngStyleSheet.hpp"
 
-#include <QtCore/qglobal.h>
-#include <QDomDocument>
-#include <QDomNode>
-#include <QDomNodeList>
-#include <QDomElement>
-#include <QDomText>
-#include <QDomAttr>
-#include <QFile>
-#include <QTextStream>
-#include <QMultiMap>
-#include <QList>
-#include <QDebug>
-#include <QScopedPointer>
+namespace ptng {
 
-#if defined(LIBPARSER_LIBRARY)
-#  define LIBPARSER_EXPORT Q_DECL_EXPORT
-#else
-#  define LIBPARSER_EXPORT Q_DECL_IMPORT
-#endif
+PtngStyleSheet::PtngStyleSheet(QObject *parent)
+    : QObject{parent}
+{
+
+}
+
+bool PtngStyleSheet::loadStyleSheet(const QString &file)
+{
+    bool ret = false;
+
+
+    emit styleSheetLoadFail();
+    emit styleSheetLoadSuccess();
+    return(ret);
+}
+
+} // namespace ptng
