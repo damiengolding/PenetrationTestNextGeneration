@@ -45,6 +45,7 @@ QString subnetFilter="";
 QString outputFileStem="";
 QString fontFamily="";
 int ret = 0;
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -82,13 +83,13 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
 
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     // Options
-    parser.addOption({{"i","input"},"[required] The network file to use (to view the currently supported formats use ntop -t | --types option)","file"});
+    parser.addOption({{"f","file"},"[required] The network file to use (to view the currently supported formats use ntop -t | --types option)","file"});
     parser.addOption({{"x","axfr"},"[optional] The Zone Transfer to use (to view the currently supported formats use ntop -t | --types option)","file"});
     parser.addOption({{"s","sev"},"[optional] The Highest Severity by Host (*.hsh) file to use. See nhsh.exe for details about how to generate this file type","file"});
     parser.addOption({{"a","api"},"[optional] An API key for geolocation (either IPInfoDB or IP2Location","key"});
     parser.addOption({{"n","net"},"[optional] A subnet filter in the form 192.168.1. (use the trailing \'.\' to avoid including 192.168.10. and 192.168.100.)","subnet"});
     parser.addOption({{"o","output"},"[optional] An output file name stem. This will be prefixed by a system date/time string. If it is omitted just the system date/time string will be used as the output file name(s)","stem"});
-    parser.addOption({{"f","font"},"[optional] The font family to use in image generaton","font"});
+    parser.addOption({{"t","typeface"},"[optional] The font family to use in image generaton","font"});
     // Positional arguments
     parser.addPositionalArgument("types","Currently supported input file types");
 }
@@ -108,14 +109,14 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     }
     // Options
     // network source file - mandatory
-    if(!parser.isSet("input")){
+    if(!parser.isSet("file")){
         qWarning() << "[fatal] No network map source file specified";
         parser.showHelp();
         ret = 1;
         return;
     }
     else{
-        networkMapSource = parser.value("input");
+        networkMapSource = parser.value("file");
         if( !QFile::exists(networkMapSource) ){
             std::cout << "[fatal] Specified network map source file does not exist." << std::endl;
             parser.showHelp();
@@ -126,7 +127,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
             type = ident->checkFile(networkMapSource);
             if( type  != PtngEnums::NMAP){
                 qInfo() << "[info] File" << networkMapSource << "is not supported by ntop. Use ntop types for a list.";
-                qInfo() << "[info] Supplied file is of type: " << type;
+                qInfo() << "[info] Supplied file is of type:" << type;
             }
             else{
                 qInfo() << "[info] Processing" << networkMapSource << "which is of type:" << type;
@@ -188,8 +189,8 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     else{
         qInfo() << "[info] Optional argument output not set. Moving on.";
     }
-    if( parser.isSet("font")  ){
-        fontFamily= parser.value("font");
+    if( parser.isSet("typeface")  ){
+        fontFamily= parser.value("typeface");
         qInfo() << "[info] Optional argument font set to:" <<fontFamily;
     }
     else{

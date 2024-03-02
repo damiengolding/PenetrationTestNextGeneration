@@ -49,8 +49,6 @@ QList<PtngHostBuilder*> parseInputFiles( QString networkMapSource,
                                          QString outputFileStem,
                                          QString fontFamily)
 {
-    PtngAddressParser pad;
-    pad.parseAddresses(zoneTransferFile);
     qInfo() << "[info] Starting nmap parse on"<<networkMapSource;
     QList<PtngHostBuilder*> builderList;
     QScopedPointer<QDomDocument> doc(new QDomDocument("mydocument"));
@@ -112,7 +110,6 @@ QList<PtngHostBuilder*> addSeverities(const QList<PtngHostBuilder*> &builders, c
         nv.insert(entry.at(0), entry.at(1));
     }
     // qInfo() << "[info] Pairs:"<<nv.count();
-
     for( auto builder : bl ){
         PtngHost *host = builder->getHost();
         if( nv.contains( host->getIpAddress() ) ){
@@ -217,7 +214,7 @@ void addPorts(PtngHostBuilder* builder, const QDomNode &node){
 }
 
 QList<PtngHostBuilder*> addAxfrEntry(const QList<PtngHostBuilder*> &builders, const QString &axfrFile){
-    qInfo() << "[info] Starting to add AXFR entries";
+    qInfo() << "[info] Starting AXFR parse on"<<axfrFile;
     QList<PtngHostBuilder*> bl = builders;
     QScopedPointer<QDomDocument> doc(new QDomDocument("mydocument"));
     QScopedPointer<QFile> file(new QFile(axfrFile));
@@ -226,50 +223,52 @@ QList<PtngHostBuilder*> addAxfrEntry(const QList<PtngHostBuilder*> &builders, co
         qWarning() << "[warning] Unable to open AXFR file:"<<axfrFile;
         return(bl);
     }
-    // TODO implement additional axfr parsers, use PtngAddressParser
-    PtngEnums::SupportedInputTypes type = ident.checkFile(axfrFile);
-    if( type  == PtngEnums::AXFR_DNS_RECON ){
-        if( !doc->setContent(file.data())){
-            qWarning() << "[warning] Unable to parse"<< axfrFile;
-            file->close();
-            return(bl);
-        }
-        QStringList ipAddresses;
-        QDomElement root = doc->documentElement();
-        QDomNodeList records = root.elementsByTagName("record");
-        for( int i = 0;i<records.length();++i ){
-            QDomElement record = records.at(i).toElement();
-            if(record.isNull()){
-                continue;
-            }
-            if( record.attribute("type") != "A" ){
-                continue;
-            }
-            QString type = record.attribute("type");
-            QString address = record.attribute("address");
-            QString name = record.attribute("name");
-            if(name.toLower().startsWith("domaindnszones")
-                    || name.toLower().startsWith("forestdnszones")
-                    || name.toLower().startsWith("@")
-                    ){
-                continue;
-            }
-            if( !ipAddresses.contains("address") ){
-                ipAddresses.append(address);
-            }
-        }
+    PtngAddressParser parser;
+    QMultiMap<QString,QString> addresses = parser.parseAddresses(axfrFile);
+    qInfo() << "[info] InputParser - number of addresses from AXFR:"<<addresses.count();
+    // PtngEnums::SupportedInputTypes type = ident.checkFile(axfrFile);
+    // if( type  == PtngEnums::AXFR_DNS_RECON ){
+    //     if( !doc->setContent(file.data())){
+    //         qWarning() << "[warning] Unable to parse"<< axfrFile;
+    //         file->close();
+    //         return(bl);
+    //     }
+    //     QStringList ipAddresses;
+    //     QDomElement root = doc->documentElement();
+    //     QDomNodeList records = root.elementsByTagName("record");
+    //     for( int i = 0;i<records.length();++i ){
+    //         QDomElement record = records.at(i).toElement();
+    //         if(record.isNull()){
+    //             continue;
+    //         }
+    //         if( record.attribute("type") != "A" ){
+    //             continue;
+    //         }
+    //         QString type = record.attribute("type");
+    //         QString address = record.attribute("address");
+    //         QString name = record.attribute("name");
+    //         if(name.toLower().startsWith("domaindnszones")
+    //                 || name.toLower().startsWith("forestdnszones")
+    //                 || name.toLower().startsWith("@")
+    //                 ){
+    //             continue;
+    //         }
+    //         if( !ipAddresses.contains("address") ){
+    //             ipAddresses.append(address);
+    //         }
+    //     }
 
-        for( int i = 0;i<bl.length();++i ){
-            PtngHostBuilder *builder = bl.at(i);
-            PtngHost *host = builder->getHost();
-            if( ipAddresses.contains(host->getIpAddress()) ){
-                builder->setIsAXFR(true);
-            }
-        }
-    }
-    else{
-        PtngAddressParser parser;
-        QMultiMap<QString,QString> addresses = parser.parseAddresses(axfrFile);
-    }
+    //     for( int i = 0;i<bl.length();++i ){
+    //         PtngHostBuilder *builder = bl.at(i);
+    //         PtngHost *host = builder->getHost();
+    //         if( ipAddresses.contains(host->getIpAddress()) ){
+    //             builder->setIsAXFR(true);
+    //         }
+    //     }
+    // }
+    // else{
+    //     PtngAddressParser parser;
+    //     QMultiMap<QString,QString> addresses = parser.parseAddresses(axfrFile);
+    // }
     return(bl);
 }

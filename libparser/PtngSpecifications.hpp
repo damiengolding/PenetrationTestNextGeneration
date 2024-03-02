@@ -37,6 +37,7 @@ namespace ptng {
 */
 LIBPARSER_EXPORT struct PtngIssue{
 public:
+    QString ipAddress="";
     int portNumber = 0;
     int severity = 0;
     QString serviceName = "";
@@ -51,8 +52,6 @@ public:
     QString solution = ""; // Report -> ReportHost -> ReportItem -> solution
     QString seeAlso = "";  // Report -> ReportHost -> ReportItem -> xref
     QString riskFactor = "";  // Report -> ReportHost -> ReportItem -> risk_factor
-    bool scanComplete  = false;
-    bool scanSuccess = false;
 };
 
 /*!

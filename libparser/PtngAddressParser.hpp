@@ -51,11 +51,41 @@ public:
      */
     QMultiMap<QString,QString> parseAddresses(const QString &inputFile);
 private:
+    /*!
+       \brief parseAxfrDnsRecon
+       \param inputFile
+       \return QMultiMap<QString,QString>
+     */
     QMultiMap<QString,QString> parseAxfrDnsRecon(const QString &inputFile);
+    /*!
+       \brief parseAxfrNslookupWin
+       \param inputFile
+       \return QMultiMap<QString,QString>
+     */
     QMultiMap<QString,QString> parseAxfrNslookupWin(const QString &inputFile);
+    /*!
+       \brief parseAxfrNslookupLin
+       \param inputFile
+       \return QMultiMap<QString,QString>
+     */
     QMultiMap<QString,QString> parseAxfrNslookupLin(const QString &inputFile);
+    /*!
+       \brief parseArpscan
+       \param inputFile
+       \return QMultiMap<QString,QString>
+     */
     QMultiMap<QString,QString> parseArpscan(const QString &inputFile);
+    /*!
+       \brief parseNbtscan
+       \param inputFile
+       \return QMultiMap<QString,QString>
+     */
     QMultiMap<QString,QString> parseNbtscan(const QString &inputFile);
+    /*!
+       \brief parseHostScan
+       \param inputFile
+       \return QMultiMap<QString,QString>
+     */
     QMultiMap<QString,QString> parseHostScan(const QString &inputFile);
 signals:
 

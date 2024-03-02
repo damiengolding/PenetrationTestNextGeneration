@@ -51,17 +51,17 @@ QMultiMap<QString, QString> PtngAddressParser::parseAddresses(const QString &inp
 
     switch(type){
     case PtngEnums::AXFR_DNS_RECON:{
-        qInfo() << "[info] AXFR_DNS_RECON :"<<inputFile;
+        qInfo() << "[info] AXFR_DNS_RECON:"<<inputFile;
         addresses = parseAxfrDnsRecon(inputFile);
         break;
     }
     case PtngEnums::AXFR_NS_WIN:{
-        qInfo() << "[info] AXFR_NS_WIN :"<<inputFile;
+        qInfo() << "[info] AXFR_NS_WIN:"<<inputFile;
         addresses = parseAxfrNslookupWin(inputFile);
         break;
     }
     case PtngEnums::AXFR_NS_LIN:{
-        qInfo() << "[info] AXFR_NS_LIN :"<<inputFile;
+        qInfo() << "[info] AXFR_NS_LIN:"<<inputFile;
         addresses = parseAxfrNslookupLin(inputFile);
         break;
     }
@@ -71,17 +71,17 @@ QMultiMap<QString, QString> PtngAddressParser::parseAddresses(const QString &inp
         break;
     }
     case PtngEnums::NBTSCAN:{
-        qInfo() << "[info] NBTSCAN :"<<inputFile;
+        qInfo() << "[info] NBTSCAN:"<<inputFile;
         addresses = parseNbtscan(inputFile);
         break;
     }
     case PtngEnums::AXFR_HOST:{
-        qInfo() << "[info] AXFR_HOST :"<<inputFile;
+        qInfo() << "[info] AXFR_HOST:"<<inputFile;
         addresses = parseHostScan(inputFile);
         break;
     }
     default:{
-        qInfo() << "[info] Supplied AXFr file"<<inputFile<<"is not supported";
+        qInfo() << "[info] Supplied AXFR file"<<inputFile<<"is not supported";
         break;
     }
     }
@@ -177,7 +177,7 @@ QMultiMap<QString, QString> PtngAddressParser::parseArpscan(const QString &input
     for(int i = 0;i<lines.length();++i){
         QString line = lines.at(i).simplified();
         // REFACT The following could be simplified
-        if( line.toLower().startsWith("interface") || line.toLower().startsWith("starting") || line == "" ){
+        if( line.toLower().startsWith("interface") || line.toLower().startsWith("starting") || line.isEmpty() ){
             continue;
         }
         if( line.count(".") < 3 || line.count(":") < 5 ){

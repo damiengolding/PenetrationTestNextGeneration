@@ -126,7 +126,7 @@ PtngEnums::SupportedInputTypes PtngIdent::checkXmlFile(const QString &file){
         ret = PtngEnums::OWASP_ZAP;
         return(ret);
     }
-    else if( rootElem.tagName().toLower().contains("nessusclientdata" )){
+    else if( rootElem.tagName().toLower().startsWith("nessusclientdata" )){
         ret = PtngEnums::NESSUS;
         return(ret);
     }
