@@ -58,6 +58,12 @@ private:
      */
     QMultiMap<QString,QString> parseAxfrDnsRecon(const QString &inputFile);
     /*!
+       \brief parseAxfrNmap
+       \param inputFile
+       \return
+     */
+    QMultiMap<QString,QString> parseAxfrNmap(const QString &inputFile);
+    /*!
        \brief parseAxfrNslookupWin
        \param inputFile
        \return QMultiMap<QString,QString>
@@ -74,19 +80,19 @@ private:
        \param inputFile
        \return QMultiMap<QString,QString>
      */
-    QMultiMap<QString,QString> parseArpscan(const QString &inputFile);
+    QMultiMap<QString,QString> parseAxfrArpscan(const QString &inputFile);
     /*!
        \brief parseNbtscan
        \param inputFile
        \return QMultiMap<QString,QString>
      */
-    QMultiMap<QString,QString> parseNbtscan(const QString &inputFile);
+    QMultiMap<QString,QString> parseAxfrNbtscan(const QString &inputFile);
     /*!
        \brief parseHostScan
        \param inputFile
        \return QMultiMap<QString,QString>
      */
-    QMultiMap<QString,QString> parseHostScan(const QString &inputFile);
+    QMultiMap<QString,QString> parseAxfrHostScan(const QString &inputFile);
 signals:
 
 };

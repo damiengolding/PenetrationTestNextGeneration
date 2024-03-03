@@ -144,6 +144,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
                 || type == PtngEnums::NBTSCAN
                 || type == PtngEnums::ARPSCAN
                 || type == PtngEnums::AXFR_HOST
+                || type == PtngEnums::AXFR_NMAP
                 ){
             zoneTransferFile = parser.value("axfr");
             qInfo() << "[info] Optional argument axfr set to:" << zoneTransferFile << "which is of type" << type;

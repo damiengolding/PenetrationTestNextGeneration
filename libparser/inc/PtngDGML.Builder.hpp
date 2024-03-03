@@ -23,14 +23,23 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "inc\PtngIP4Address.hpp"
+#pragma once
+
+#include "libparser_global.hpp"
+
+#include <QObject>
 
 namespace ptng {
 
-PtngIP4Address::PtngIP4Address(QObject *parent)
-    : QObject{parent}
+class LIBPARSER_EXPORT PtngDGML : public QObject
 {
+    Q_OBJECT
+public:
+    explicit PtngDGML(QObject *parent = nullptr);
 
-}
+signals:
+
+};
 
 } // namespace ptng
+

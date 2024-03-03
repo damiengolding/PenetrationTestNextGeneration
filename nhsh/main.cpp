@@ -220,7 +220,7 @@ void processNessusFile(){
 
     for( int i = 0;i<ipAddresses.count();++i ){
         QString address = ipAddresses.at(i);
-        qInfo() << "[info] address from ipAddresses list:"<<address;
+        // qInfo() << "[info] address from ipAddresses list:"<<address;
         QString entry=address;
         // qInfo() << "[info] entry:"<<entry;
         for( int i = 0;i<issueList.count();++i){
@@ -263,11 +263,6 @@ void processNessusFile(){
         low=0;
         none=0;
     }
-
-
-
-
-
     QFile writeFile(outputFile);
     if( !writeFile.open(QIODevice::WriteOnly)){
         qWarning() << "[warning] Could not open file"<<outputFile<<"for writing.";

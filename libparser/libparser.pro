@@ -11,13 +11,13 @@ CONFIG += c++20 warn_off
 
 SOURCES += \
     PtngAddressParser.cpp \
+    PtngDGMLBuilder.cpp \
     PtngHostBuilder.cpp \
     PtngIP4Address.cpp \
     PtngIdent.cpp \
     PtngStyleSheet.cpp
 
 HEADERS += \
-    ConsoleSupport.hpp \
     PtngAddressParser.hpp \
     PtngEnums.hpp \
     PtngHostBuilder.hpp \
@@ -25,6 +25,16 @@ HEADERS += \
     PtngIdent.hpp \
     PtngSpecifications.hpp \
     PtngStyleSheet.hpp \
+    inc/ConsoleSupport.hpp \
+    inc/PtngAddressParser.hpp \
+    inc/PtngDGML.Builder.hpp \
+    inc/PtngEnums.hpp \
+    inc/PtngHostBuilder.hpp \
+    inc/PtngIP4Address.hpp \
+    inc/PtngIdent.hpp \
+    inc/PtngSpecifications.hpp \
+    inc/PtngStyleSheet.hpp \
+    inc/libparser_global.hpp \
     libparser_global.hpp
 
 # Default rules for deployment.
@@ -32,3 +42,5 @@ unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+
+QMAKE_CXXFLAGS += -Wunused-parameter -Wattributes

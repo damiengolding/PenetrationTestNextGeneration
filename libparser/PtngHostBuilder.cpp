@@ -23,7 +23,7 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "PtngHostBuilder.hpp"
+#include "inc\PtngHostBuilder.hpp"
 
 namespace ptng {
 /*

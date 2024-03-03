@@ -23,7 +23,7 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "PtngAddressParser.hpp"
+#include "inc\PtngAddressParser.hpp"
 
 namespace ptng {
 
@@ -67,17 +67,22 @@ QMultiMap<QString, QString> PtngAddressParser::parseAddresses(const QString &inp
     }
     case PtngEnums::ARPSCAN:{
         qInfo() << "[info] ARPSCAN :"<<inputFile;
-        addresses = parseArpscan(inputFile);
+        addresses = parseAxfrArpscan(inputFile);
         break;
     }
     case PtngEnums::NBTSCAN:{
         qInfo() << "[info] NBTSCAN:"<<inputFile;
-        addresses = parseNbtscan(inputFile);
+        addresses = parseAxfrNbtscan(inputFile);
         break;
     }
     case PtngEnums::AXFR_HOST:{
         qInfo() << "[info] AXFR_HOST:"<<inputFile;
-        addresses = parseHostScan(inputFile);
+        addresses = parseAxfrHostScan(inputFile);
+        break;
+    }
+    case PtngEnums::AXFR_NMAP:{
+        qInfo() << "[info] AXFR_NMAP:"<<inputFile;
+        addresses = parseAxfrNmap(inputFile);
         break;
     }
     default:{
@@ -114,6 +119,9 @@ QMultiMap<QString, QString> PtngAddressParser::parseAxfrNslookupWin(const QStrin
             continue;
         }
         QString dnsName =  entries.at(0);
+        if(dnsName.isEmpty()){
+            dnsName= "Not resolved";
+        }
         QString address =  entries.at(2).trimmed();
         // qInfo() << "[info] ns_win Name:"<<dnsName<<"Address:"<<address;
         addresses.insert(address,dnsName);
@@ -151,6 +159,9 @@ QMultiMap<QString, QString> PtngAddressParser::parseAxfrNslookupLin(const QStrin
             }
             address = lineSplit.at(1).trimmed();
             // qInfo() << "[info] ns_linux Name:"<<dnsName<<"Address:"<<address;
+            if(dnsName.isEmpty()){
+                dnsName= "Not resolved";
+            }
             addresses.insert(address,dnsName);
         }
     }
@@ -158,7 +169,7 @@ QMultiMap<QString, QString> PtngAddressParser::parseAxfrNslookupLin(const QStrin
     return(addresses);
 }
 
-QMultiMap<QString, QString> PtngAddressParser::parseArpscan(const QString &inputFile)
+QMultiMap<QString, QString> PtngAddressParser::parseAxfrArpscan(const QString &inputFile)
 {
     QMultiMap<QString, QString> addresses;
     QScopedPointer<QFile> file(new QFile(inputFile));
@@ -192,7 +203,7 @@ QMultiMap<QString, QString> PtngAddressParser::parseArpscan(const QString &input
     return(addresses);
 }
 
-QMultiMap<QString, QString> PtngAddressParser::parseNbtscan(const QString &inputFile)
+QMultiMap<QString, QString> PtngAddressParser::parseAxfrNbtscan(const QString &inputFile)
 {
     QMultiMap<QString, QString> addresses;
     QScopedPointer<QFile> file(new QFile(inputFile));
@@ -218,6 +229,9 @@ QMultiMap<QString, QString> PtngAddressParser::parseNbtscan(const QString &input
         }
         QString address = lineSplit.at(0);
         QString dnsName = lineSplit.at(1);
+        if(dnsName.isEmpty()){
+            dnsName= "Not resolved";
+        }
         // qInfo() << "[info] From nbtscan - name:"<<dnsName<<"Address:"<<address;
         addresses.insert(address,dnsName);
     }
@@ -225,7 +239,7 @@ QMultiMap<QString, QString> PtngAddressParser::parseNbtscan(const QString &input
     return(addresses);
 }
 
-QMultiMap<QString, QString> PtngAddressParser::parseHostScan(const QString &inputFile)
+QMultiMap<QString, QString> PtngAddressParser::parseAxfrHostScan(const QString &inputFile)
 {
     QMultiMap<QString, QString> addresses;
     QScopedPointer<QFile> file(new QFile(inputFile));
@@ -253,6 +267,9 @@ QMultiMap<QString, QString> PtngAddressParser::parseHostScan(const QString &inpu
         }
         // qInfo() << "[info] Line from host scan:"<<line;
         QString dnsName = lineSplit.at(0);
+        if(dnsName.isEmpty()){
+            dnsName= "Not resolved";
+        }
         QString address = lineSplit.at(4);
         // qInfo() << "[info] Name:"<<dnsName<<"Address:"<<address;
         addresses.insert(address,dnsName);
@@ -295,10 +312,62 @@ QMultiMap<QString, QString> PtngAddressParser::parseAxfrDnsRecon(const QString &
                 ){
             continue;
         }
-        if( !addresses.contains("address") ){
-            addresses.insert(address,dnsName);
+        if(dnsName.isEmpty()){
+            dnsName= "Not resolved";
         }
+        addresses.insert(address,dnsName);
     }
+    return(addresses);
+}
+
+QMultiMap<QString, QString> PtngAddressParser::parseAxfrNmap(const QString &inputFile)
+{
+    QMultiMap<QString, QString> addresses;
+    QScopedPointer<QFile> file(new QFile(inputFile));
+    QScopedPointer<QDomDocument> doc(new QDomDocument);
+    if( !file->open(QIODevice::ReadOnly)){
+        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading";
+        return(addresses);
+    }
+    if( !doc->setContent(file.data())){
+        qWarning() << "[warning] Unable to parse"<< inputFile;
+        file->close();
+        return(addresses);
+    }
+    QStringList ipAddresses;
+    QDomElement root = doc->documentElement();
+    QDomNodeList scripts = root.elementsByTagName("script");
+    // qInfo() << "[info] Scripts:"<<scripts.count();
+    if( scripts.count() != 1 ){
+        qWarning() << "[warning] Incorrect number of script nodes in source nmap xml"<<inputFile;
+        return(addresses);
+    }
+
+    QDomElement elem = scripts.at(0).toElement();
+    if( elem.isNull()){
+        return(addresses);
+    }
+
+    QStringList lines = elem.attribute("output").split("\n", Qt::SkipEmptyParts);
+    // qInfo() << "[info] number of lines:"<<lines.count();
+    for(QString line : lines){
+        if( line.startsWith("_") || line.toLower().startsWith("domaindnszones") || line.toLower().startsWith("forestdnszones") ){
+            continue;
+        }
+        QString entry = line.simplified();
+        QStringList lineSplit = entry.split(" ");
+        if( lineSplit.count()  < 3 ){
+            continue;
+        }
+        if( lineSplit.at(1) != "A" ){
+            continue;
+        }
+        QString dnsName = lineSplit.at(0);
+        QString address = lineSplit.at(2);
+        // qInfo() << "[info] name:"<<dnsName<<"address:"<<address;
+        addresses.insert(address,dnsName);
+    }
+    // qInfo() << "[info] addresses count:"<<addresses.count();
     return(addresses);
 }
 } // namespace ptng

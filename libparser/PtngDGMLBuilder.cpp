@@ -23,11 +23,11 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "inc\PtngIP4Address.hpp"
+#include "inc/PtngDGML.hpp"
 
 namespace ptng {
 
-PtngIP4Address::PtngIP4Address(QObject *parent)
+PtngDGML::PtngDGML(QObject *parent)
     : QObject{parent}
 {
 
