@@ -30,7 +30,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 
 #include <QObject>
 #include <QList>
-#include <QMultiMap>
+#include <QMap>
 namespace ptng {
 /*!
    \brief The PtngHost class
@@ -43,7 +43,7 @@ class LIBPARSER_EXPORT PtngHost : public QObject
 {
     Q_OBJECT
     friend class PtngHostBuilder;
-public:
+protected:
     explicit PtngHost(QObject *parent = nullptr);
 
 public: // Accessors and mutators for Q_PROPERTY
@@ -54,6 +54,7 @@ public: // Accessors and mutators for Q_PROPERTY
     QList<PtngPort> &getPortSpecs(){ return(portSpecs); }
     QMultiMap<QString,QString> &getHostScripts(){ return(hostScripts); }
     QString &getIpAddress(){ return( ipAddress ); }
+    QString &getDnsName(){ return( dnsName ); }
     QString &getLongitude(){ return( longitude ); }
     QString &getLatitude(){ return( latitude ); }
     QString &getCity(){ return( city ); }
@@ -75,6 +76,7 @@ public: // Q_PROPERTY declarations
     Q_PROPERTY(QList<PtngPort> portSpecs READ getPortSpecs)
     Q_PROPERTY(QMultiMap<QString,QString> hostScripts READ getHostScripts)
     Q_PROPERTY(QString ipAddress READ getIpAddress)
+    Q_PROPERTY(QString dnsName READ getDnsName)
     Q_PROPERTY(QString longitude READ getLongitude)
     Q_PROPERTY(QString latitude READ getLatitude)
     Q_PROPERTY(QString city READ getCity)
@@ -95,6 +97,7 @@ protected: //Members
     QList<PtngPort> portSpecs;
     QMultiMap<QString,QString> hostScripts;
     QString ipAddress;
+    QString dnsName;
     QString longitude = "";
     QString latitude = "";
     QString city = "";
@@ -124,15 +127,54 @@ public:
     explicit PtngHostBuilder(QObject *parent = nullptr);
 
 public: // Builder methods
-    PtngHost* getHost(){ return(&host); }
+    PtngHost* getHost(){ return(host); }
+    /*!
+       \brief createSimple
+       \param ipAddress
+       \param dnsName
+       \return PtngHostBuilder&
+     */
+    PtngHostBuilder &createSimple(const QString &ipAddress,const QString &dnsName);
+    /*!
+       \brief addNmapScanXmlNode
+       \param node
+       \return PtngHostBuilder&
+     */
     PtngHostBuilder& addNmapScanXmlNode(const QDomNode &node);
+    /*!
+       \brief addNmapAXFRXmlNode
+       \param node
+       \return PtngHostBuilder&
+     */
     PtngHostBuilder& addNmapAXFRXmlNode(const QDomNode &node);
+    /*!
+       \brief setSeverity
+       \param sev
+       \return PtngHostBuilder&
+     */
     PtngHostBuilder& setSeverity( PtngEnums::IssueSeverity sev );
+    /*!
+       \brief setIsAXFR
+       \param isAxfr
+       \return PtngHostBuilder&
+     */
     PtngHostBuilder& setIsAXFR(bool isAxfr );
+    /*!
+       \brief addPortSpec
+       \param portSpec
+       \return PtngHostBuilder&
+     */
     PtngHostBuilder& addPortSpec(const PtngPort &portSpec );
+    /*!
+       \brief addScript
+       \param id
+       \param output
+       \return PtngHostBuilder&
+     */
     PtngHostBuilder& addScript( const QString &id, const QString &output );
+
 private:
-    PtngHost host;
+    PtngHost *host;
 
 signals:
 

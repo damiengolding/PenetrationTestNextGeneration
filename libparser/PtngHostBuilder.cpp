@@ -41,27 +41,34 @@ PtngHost::PtngHost(QObject *parent)
 PtngHostBuilder::PtngHostBuilder(QObject *parent)
     : QObject{parent}
 {
+    host = new PtngHost();
+}
 
+PtngHostBuilder &PtngHostBuilder::createSimple(const QString &ipAddress, const QString &dnsName)
+{
+    host->ipAddress = ipAddress;
+    host->dnsName = dnsName;
+    return(*this);
 }
 
 PtngHostBuilder& PtngHostBuilder::setSeverity( PtngEnums::IssueSeverity sev )
 {
-    host.highestSeverity = sev;
+    host->highestSeverity = sev;
     return(*this);
 }
 
 PtngHostBuilder& PtngHostBuilder::setIsAXFR(bool isAxfr ){
-    host.inAxfr = isAxfr;
+    host->inAxfr = isAxfr;
     return(*this);
 }
 
 PtngHostBuilder& PtngHostBuilder::addScript( const QString &id, const QString &output ){
-
+    host->hostScripts.insert(id,output);
     return(*this);
 }
 
 PtngHostBuilder& PtngHostBuilder::addPortSpec(const PtngPort &portSpec ){
-    host.portSpecs.append(portSpec);
+    host->portSpecs.append(portSpec);
     return(*this);
 }
 
@@ -80,8 +87,8 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
     }
     QDomNodeList nodes = e.childNodes();
 
-    for( int i = 0; i < nodes.length(); ++i){
-        QDomNode node = nodes.at(i);
+    for( int i = 0;i<nodes.count();++i){
+        QDomNode node = nodes.item(i);
         QDomElement elem = node.toElement();
         if( elem.isNull()){
             continue;
@@ -90,38 +97,50 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
         if( elem.tagName() == "address" ){
             QString t = elem.attribute("addrtype");
             if( t.toLower() == "ipv4" ){
-                host.ipAddress = elem.attribute("addr");
-                host.addrType = elem.attribute("addrtype");
+                host->ipAddress = elem.attribute("addr");
+                host->addrType = elem.attribute("addrtype");
             }
             else if( t.toLower() == "mac" ){
-                host.macAddress = elem.attribute("addr");
-                host.macVendor = elem.attribute("vendor");
+                host->macAddress = elem.attribute("addr");
+                host->macVendor = elem.attribute("vendor");
             }
 
         }
         else if( elem.tagName() == "status" ){
-            host.hostState = elem.attribute("state");
-            host.hostStateReason = elem.attribute("reason");
+            host->hostState = elem.attribute("state");
+            host->hostStateReason = elem.attribute("reason");
+        }
+        else if( elem.tagName() == "hostnames" ){
+             QDomElement hn = elem.firstChildElement("hostname");
+            host->dnsName = hn.attribute("name");
+            qInfo() << "[info] Host name 2:"<<host->dnsName;
+            qInfo() << "[info] Host name 3:"<<host->getDnsName();
         }
         else if( elem.tagName() == "os" ){
-            // qInfo() << "[info] in the os node for:"<<host.getIpAddress();
-            host.osName = elem.attribute("name");
+            // qInfo() << "[info] in the os node for:"<<host->getIpAddress();
             QDomNodeList osmatch = elem.elementsByTagName("osmatch");
             // qInfo() << "[info] osmatch:"<<osmatch.length();
             if( osmatch.length() > 0){
-                for( int i = 0;i<osmatch.length();++i ){
-                    QDomElement e = osmatch.at(i).toElement();
+                for( int i = 0;i<osmatch.count();++i ){
+                    QDomNode match = osmatch.item(i);
+                    QDomElement e = match.toElement();
+                    host->osName = e.attribute("name");
                     if( !e.isNull()){
-                        QDomNodeList osclass = e.elementsByTagName("osclass");
-                        // qInfo() << "[info] osclass:"<<osclass.length();
-                        if( osclass.isEmpty() ){
+                        QDomNodeList osclasses = e.elementsByTagName("osclass");
+                        // qInfo() << "[info] osclasses:"<<osclasses.length();
+                        if( osclasses.isEmpty() ){
                             continue;
                         }
-                        for( int j = 0;j<osclass.length();++j ){
-                            QDomElement e = osclass.at(j).toElement();
+                        for(int i = 0;i<osclasses.count();++i){
+                            QDomNode osclass = osclasses.item(i);
+                            QDomElement e = osclass.toElement();
                             if( !e.isNull()){
                                 QString cpe = e.firstChildElement().text();
-                                // qInfo() << "[info] OS CPE text:"<<cpe;
+                                QDomNodeList cpes = e.elementsByTagName("cpe");
+                                for( int i = 0; i< cpes.count();++i ){
+                                    QDomElement elem = cpes.at(i).toElement();
+                                    host->hostCPE.append(elem.text() + "#");
+                                }
                             }
                         }
                     }
@@ -129,44 +148,45 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
             }
         }
         else if( elem.tagName() == "distance" ){
-            host.distance = elem.attribute("value").toInt();
+            host->distance = elem.attribute("value").toInt();
         }
         else if( elem.tagName() == "hostscript" ){
             QDomNodeList scripts = elem.elementsByTagName("script");
-            for( int i =0; i < scripts.length(); ++i ){
-                QDomElement elem = scripts.at(i).toElement();
+            for( int i = 0;i<scripts.count();++i ){
+                QDomNode script = scripts.item(i);
+                QDomElement elem = script.toElement();
                 if( elem.isNull() ){
                     continue;
                 }
                 QString id = elem.attribute("id");
                 QString output = elem.attribute("output");
-                host.hostScripts.insert( id,  output);
+                host->hostScripts.insert( id,  output);
 
                 if( id == "ip-geolocation-ipinfodb"  ){
                     qInfo() << "[info] ip-geolocation-ipinfodb";
-                    host.geoLocation = true;
-                    QStringList ol = output.split("\n",Qt::SkipEmptyParts);
-                    qInfo() << "[info] ip-geolocation-ipinfodb split:"<<ol.length();
-                    for( int i = 0; i < ol.length(); ++i ){
-                        QString o = ol.at(i).trimmed();
+                    host->geoLocation = true;
+                    QStringList results = output.split("\n",Qt::SkipEmptyParts);
+                    qInfo() << "[info] ip-geolocation-ipinfodb split:"<<results.length();
+                    for(auto result : results ){
+                        QString o = result.trimmed();
                       if( o.toLower().startsWith("coordinates") ){
                           QStringList coords = o.split(":");
                           QString ll = coords.at(1).trimmed();
                           QStringList lll = ll.split(",");
-                          host.latitude = lll.at(0);
-                          host.longitude = lll.at(1);
-                          qInfo() << "[info] Latitude:"<<host.latitude<< "Longitude:"<< host.longitude;
+                          host->latitude = lll.at(0);
+                          host->longitude = lll.at(1);
+                          qInfo() << "[info] Latitude:"<<host->latitude<< "Longitude:"<< host->longitude;
                       }
                       else if( o.toLower().startsWith("city") ){
                            QStringList cy = o.split(":");
-                           host.city = cy.at(1).trimmed();
-                           qInfo() << "[info] City:"<<host.city;
+                           host->city = cy.at(1).trimmed();
+                           qInfo() << "[info] City:"<<host->city;
                       }
                     }
                 }
                 if( id == "ip-forwarding"  ){
                     qInfo() << "[info] ip-forwarding";
-                    host.gateway = true;
+                    host->gateway = true;
                 }
             }
         }

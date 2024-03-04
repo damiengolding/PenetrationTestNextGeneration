@@ -70,7 +70,7 @@ public:
     QString serviceVersion = "";
     QString idMethod = "";
     QStringList serviceCPE;
-    QMultiMap<QString,QString> portScripts;
+    QMap<QString,QString> portScripts;
 };
 
 } // end of namespace

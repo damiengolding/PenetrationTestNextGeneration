@@ -7,6 +7,7 @@ CONFIG += c++20 cmdline warn_off
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        CommandLineHandler.cpp \
         main.cpp
 
 # Default rules for deployment.
@@ -20,3 +21,6 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../PTNG_Output/libpa
 
 INCLUDEPATH += $$PWD/../libparser/inc
 DEPENDPATH += $$PWD/../libparser/inc
+
+HEADERS += \
+    GlobalIncludes.hpp

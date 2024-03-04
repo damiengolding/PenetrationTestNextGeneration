@@ -34,7 +34,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QDomAttr>
 #include <QFile>
 #include <QTextStream>
-#include <QMultiMap>
+#include <QMap>
 #include <QList>
 #include <QDebug>
 #include <QScopedPointer>

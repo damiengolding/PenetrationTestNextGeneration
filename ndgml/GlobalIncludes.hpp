@@ -25,21 +25,30 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
 
-#include "libparser_global.hpp"
+// Qt
+#include <QtCore/qglobal.h>
+#include <QDomDocument>
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QDomElement>
+#include <QDomText>
+#include <QDomAttr>
+#include <QFile>
+#include <QTextStream>
+#include <QMap>
+#include <QList>
+#include <QDebug>
 
-#include <QObject>
+// STD
+#include <iostream>
+#include <string>
 
-namespace ptng {
-
-class LIBPARSER_EXPORT PtngDGML : public QObject
-{
-    Q_OBJECT
-public:
-    explicit PtngDGML(QObject *parent = nullptr);
-
-signals:
-
-};
-
-} // namespace ptng
-
+// ptng
+#include "PtngEnums.hpp"
+#include "PtngIdent.hpp"
+#include "PtngHostBuilder.hpp"
+#include "PtngSpecifications.hpp"
+#include "PtngInputParser.hpp"
+#include "PtngDGMLBuilder.hpp"
+#include "PtngIP4Address.hpp"
+using namespace ptng;

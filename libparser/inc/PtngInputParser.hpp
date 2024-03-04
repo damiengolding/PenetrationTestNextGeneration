@@ -30,69 +30,57 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 
 #include "PtngEnums.hpp"
 #include "PtngIdent.hpp"
+#include "PtngHostBuilder.hpp"
 
 namespace ptng {
 /*!
-   \brief The PtngAddressParser class
+   \brief The PtngInputParser class
 
    Parses IP addresses, and if available DNS names from a variety of input types:
 
    \see PtngIdent, PtngEnums
  */
-class LIBPARSER_EXPORT PtngAddressParser : public QObject
+class LIBPARSER_EXPORT PtngInputParser : public QObject
 {
     Q_OBJECT
 public:
-    explicit PtngAddressParser(QObject *parent = nullptr);
+    explicit PtngInputParser(QObject *parent = nullptr);
     /*!
-       \brief parseAddresses
+       \brief parseZoneTransfer
        \param inputFile
-       \return QMultiMap<QString,QString>
+       \return QMap<QString,QString>
      */
-    QMultiMap<QString,QString> parseAddresses(const QString &inputFile);
-private:
+    static QMap<QString,QString> parseZoneTransfer(const QString &inputFile);
+
     /*!
-       \brief parseAxfrDnsRecon
-       \param inputFile
-       \return QMultiMap<QString,QString>
-     */
-    QMultiMap<QString,QString> parseAxfrDnsRecon(const QString &inputFile);
-    /*!
-       \brief parseAxfrNmap
+       \brief parseNmap
        \param inputFile
        \return
      */
-    QMultiMap<QString,QString> parseAxfrNmap(const QString &inputFile);
+    static QList<PtngHostBuilder*> parseNmap(const QString &inputFile);
     /*!
-       \brief parseAxfrNslookupWin
+       \brief parseNesusIssues
        \param inputFile
-       \return QMultiMap<QString,QString>
+       \return QList<PtngIssue*>
      */
-    QMultiMap<QString,QString> parseAxfrNslookupWin(const QString &inputFile);
+    static QList<PtngIssue> parseNesusIssues(const QString &inputFile);
     /*!
-       \brief parseAxfrNslookupLin
+       \brief parseNesusSeverities
        \param inputFile
-       \return QMultiMap<QString,QString>
+       \return QMap<QString,QString>
      */
-    QMultiMap<QString,QString> parseAxfrNslookupLin(const QString &inputFile);
-    /*!
-       \brief parseArpscan
-       \param inputFile
-       \return QMultiMap<QString,QString>
-     */
-    QMultiMap<QString,QString> parseAxfrArpscan(const QString &inputFile);
-    /*!
-       \brief parseNbtscan
-       \param inputFile
-       \return QMultiMap<QString,QString>
-     */
-    QMultiMap<QString,QString> parseAxfrNbtscan(const QString &inputFile);
-    /*!
-       \brief parseHostScan
-       \param inputFile
-       \return QMultiMap<QString,QString>
-     */
-    QMultiMap<QString,QString> parseAxfrHostScan(const QString &inputFile);
+    static QMap<QString,QString> parseNesusSeverities(const QString &inputFile);
+
+private:
+    static QMap<QString,QString> parseAxfrDnsRecon(const QString &inputFile);
+    static QMap<QString,QString> parseAxfrNmap(const QString &inputFile);
+    static QMap<QString,QString> parseAxfrNslookupWin(const QString &inputFile);
+    static QMap<QString,QString> parseAxfrNslookupLin(const QString &inputFile);
+    static QMap<QString,QString> parseAxfrArpscan(const QString &inputFile);
+    static QMap<QString,QString> parseAxfrNbtscan(const QString &inputFile);
+    static QMap<QString,QString> parseAxfrHostScan(const QString &inputFile);
+    static void addPorts(PtngHostBuilder* builder, const QDomNode &node);
+
 signals:
 
 };

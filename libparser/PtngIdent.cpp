@@ -36,24 +36,20 @@ PtngEnums::SupportedInputTypes PtngIdent::checkFile(const QString &file){
     QDomDocument doc("input");
     QFile f(file);
     if( !f.open(QIODevice::ReadOnly) ){
-        emit typeIdentified(ret);
         return(ret);
     }
 
     if(doc.setContent(&f)){
         f.close();
         ret = checkXmlFile(file);
-        emit typeIdentified(ret);
         return(ret);
     }
     else{
         f.close();
         ret = checkTextFile(file);
-        emit typeIdentified(ret);
         return(ret);
     }
 
-    emit typeIdentified(ret);
     return(ret);
 }
 
@@ -93,6 +89,10 @@ PtngEnums::SupportedInputTypes PtngIdent::checkXmlFile(const QString &file){
         else{
             return(ret);
         }
+    }
+    else if( rootElem.tagName().toLower() == "directedgraph" ){
+        ret = PtngEnums::DGML;
+        return(ret);
     }
     else if( rootElem.tagName().toLower() == "records" ){
         ret = PtngEnums::AXFR_DNS_RECON;

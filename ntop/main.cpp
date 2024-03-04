@@ -39,7 +39,7 @@ QList<QCommandLineOption> commandLineOptions;
 
 QString networkMapSource="";
 QString zoneTransferFile="";
-QString hshFile="";
+QString nessusFile="";
 QString ipLocationAPIKey="";
 QString subnetFilter="";
 QString outputFileStem="";
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     QCommandLineParser p;
     initArgumentParser(a,p);
-    parseInputFiles(networkMapSource,zoneTransferFile,hshFile,ipLocationAPIKey,subnetFilter,outputFileStem,fontFamily);
+    parseInputFiles(networkMapSource,zoneTransferFile,nessusFile,ipLocationAPIKey,subnetFilter,outputFileStem,fontFamily);
     //    return(a.exec());
     return(ret);
 }
@@ -85,7 +85,7 @@ void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     // Options
     parser.addOption({{"f","file"},"[required] The network file to use (to view the currently supported formats use ntop -t | --types option)","file"});
     parser.addOption({{"x","axfr"},"[optional] The Zone Transfer to use (to view the currently supported formats use ntop -t | --types option)","file"});
-    parser.addOption({{"s","sev"},"[optional] The Highest Severity by Host (*.hsh) file to use. See nhsh.exe for details about how to generate this file type","file"});
+    parser.addOption({{"i","issues"},"[optional] Output from a vulneablilty scanner contining a list of issues; used for highest severity for each host. Currently nessus only","file"});
     parser.addOption({{"a","api"},"[optional] An API key for geolocation (either IPInfoDB or IP2Location","key"});
     parser.addOption({{"n","net"},"[optional] A subnet filter in the form 192.168.1. (use the trailing \'.\' to avoid including 192.168.10. and 192.168.100.)","subnet"});
     parser.addOption({{"o","output"},"[optional] An output file name stem. This will be prefixed by a system date/time string. If it is omitted just the system date/time string will be used as the output file name(s)","stem"});
@@ -95,7 +95,7 @@ void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
 }
 
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
-    QScopedPointer<PtngIdent> ident(new PtngIdent());
+
     PtngEnums::SupportedInputTypes type;
     // Positional arguments
     for(QString pos : parser.positionalArguments()){
@@ -103,6 +103,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
             showTypes();
         }
     }
+    // Don't handle poitional arguments and options together, one or the other
     if( parser.positionalArguments().count() > 0 ){
         ret = 0;
         return;
@@ -124,8 +125,8 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
             return;
         }
         else{
-            type = ident->checkFile(networkMapSource);
-            if( type  != PtngEnums::NMAP){
+            type = PtngIdent::checkFile(networkMapSource);
+            if( type  != PtngEnums::DGML){
                 qInfo() << "[info] File" << networkMapSource << "is not supported by ntop. Use ntop types for a list.";
                 qInfo() << "[info] Supplied file is of type:" << type;
             }
@@ -137,7 +138,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
 
     // Other (optional) options
     if( parser.isSet("axfr")  ){
-        type = ident->checkFile(parser.value("axfr"));
+        type = PtngIdent::checkFile(parser.value("axfr"));
         if( type == PtngEnums::AXFR_DNS_RECON
                 || type == PtngEnums::AXFR_NS_WIN
                 || type == PtngEnums::AXFR_NS_LIN
@@ -157,13 +158,13 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         qInfo() << "[info] Optional argument axfr not set. Moving on.";
     }
     if( parser.isSet("sev")  ){
-        type = ident->checkFile(parser.value("sev"));
+        type = PtngIdent::checkFile(parser.value("issues"));
         if( type == PtngEnums::NESSUS_HSH){
-            hshFile = parser.value("sev");
-            qInfo() << "[info] Optional argument sev set to:" << hshFile << "which is of type" << type;
+            nessusFile = parser.value("issues");
+            qInfo() << "[info] Optional argument issues set to:" << nessusFile << "which is of type" << type;
         }
         else{
-            qInfo() << "[info] Supplied file" << parser.value("sev") << "is not supported:" << type;
+            qInfo() << "[info] Supplied file" << parser.value("issues") << "is not supported:" << type;
         }
     }
     else{

@@ -27,6 +27,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 
 #include "libparser_global.hpp"
 #include "PtngEnums.hpp"
+#include "PtngHostBuilder.hpp"
 #include <QObject>
 
 namespace ptng {
@@ -44,24 +45,30 @@ class LIBPARSER_EXPORT PtngIP4Address : public QObject
     Q_OBJECT
 public:
     explicit PtngIP4Address(QObject *parent = nullptr);
-
-signals:
     /*!
-       \brief AddressParseSucceeded
+       \brief isValidIpV4Address
+       \param address
+       \return bool
      */
-    void AddressParseSucceeded();
-    void AddressParseFailed();
-
-signals: // for Q_PROPERTY
-    void ipAddressChanged();
-
-public: // Accessors and mutators for Q_PROPERTY
-    QString getIpAddress() const{return(ipAddress);}
-    void setIpAddress(const QString &ipAddress){this->ipAddress = ipAddress;}
-
-private: // Q_PROPERTY
-    QString ipAddress;
-    Q_PROPERTY(QString ipAddress READ getIpAddress WRITE setIpAddress NOTIFY ipAddressChanged)
+    static bool isValidIpV4Address(const QString &address);
+    /*!
+       \brief isReservedAddress
+       \param address
+       \return bool
+     */
+    static bool isReservedAddress(const QString &address);
+    /*!
+       \brief parseAddressInt
+       \param address
+       \return QList<int>
+     */
+    static QList<int> parseAddressInt(const QString &address);
+    /*!
+       \brief parseAddressString
+       \param address
+       \return QStringList
+     */
+    static QStringList parseAddressString(const QString &address);
 
 };
 

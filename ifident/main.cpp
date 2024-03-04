@@ -42,6 +42,8 @@ void processFile(const QString &file);
 
 QList<QCommandLineOption> commandLineOptions;
 
+void showTypes();
+
 int main(int argc, char *argv[])
 {
     qInfo() << "[info] Starting ifident";
@@ -50,6 +52,18 @@ int main(int argc, char *argv[])
     initArgumentParser(a,p);
     //    return(a.exec());
     return(0);
+}
+
+void showTypes(){
+    qInfo() << "[info] Supported file types:";
+    qInfo() << "[info] nmap - standard scan";
+    qInfo() << "[info] nmap - with the dns-zone-transfer.nse script";
+    qInfo() << "[info] dns recon - use \'dnsrecon -d <domain> -n <nameserver> -t axfr -x <outputfile>.xml\'";
+    qInfo() << "[info] nslookup (windows) - use \'ls -d discworld.io > nslookup_win_axfr.txt\'";
+    qInfo() << "[info] nslookup (linux)";
+    qInfo() << "[info] arp-scan - use\'arp-scan <address_range> > <outputfile>.txt\'";
+    qInfo() << "[info] nbtscan - use \'nbtscan -s : <address_range> <outputfile>.txt\' (the \'s : '\ is required as it is the separator used on each entry)";
+    qInfo() << "[info] host - use \'host -t axfr <domain> <nameserver> > host_axfr.txt\'";
 }
 
 void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
@@ -94,9 +108,7 @@ void processArgumentOptions(QCommandLineParser &parser){
 }
 
 void processFile(const QString &file){
-    QScopedPointer<PtngIdent> ident(new PtngIdent());
-    PtngEnums::SupportedInputTypes ret = PtngEnums::NUM_SUPPORTED_INPUT_TYPES;
-    ret = ident->checkFile(file);
+    PtngEnums::SupportedInputTypes ret = PtngIdent::checkFile(file);
     qInfo() << "[info]" << "File type guess:" << ret;
 }
 

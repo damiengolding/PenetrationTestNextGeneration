@@ -53,6 +53,7 @@ public:
         AXFR_HOST,
         AXFR_NS_LIN,
         AXFR_NS_WIN,
+        DGML,
         HASHES,
         MASSCAN,
         METASPLOIT,
@@ -96,7 +97,7 @@ public:
        \brief The IssueSeverity enum
      */
     enum IssueSeverity {
-        INFO,
+        NONE,
         LOW,
         MEDUIM,
         HIGH,

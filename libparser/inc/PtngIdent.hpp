@@ -42,14 +42,14 @@ class LIBPARSER_EXPORT PtngIdent : public QObject
     Q_OBJECT
 public:
     explicit PtngIdent(QObject *parent = nullptr);
-    PtngEnums::SupportedInputTypes checkFile(const QString &file);
+    static PtngEnums::SupportedInputTypes checkFile(const QString &file);
 
 private:
-        PtngEnums::SupportedInputTypes checkXmlFile(const QString &file);
-        PtngEnums::SupportedInputTypes checkTextFile(const QString &file);
+        static PtngEnums::SupportedInputTypes checkXmlFile(const QString &file);
+        static PtngEnums::SupportedInputTypes checkTextFile(const QString &file);
 
 signals:
- void typeIdentified(PtngEnums::SupportedInputTypes);
+
 };
 
 } // namespace ptng

@@ -26,6 +26,8 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 
 #include "GlobalIncludes.hpp"
 #include "CommandLineHandler.hpp"
+#include "PtngDGMLBuilder.hpp"
+#include "PtngIdent.hpp"
 
 // Miscellaneous - everything has got to live somewhere it can stay here for now
 void showTypes(){
@@ -36,7 +38,6 @@ void showTypes(){
 }
 
 // Parser functions
-
 QList<PtngHostBuilder*> addSeverities(const QList<PtngHostBuilder*> &builders, const QString &hshFile);
 QList<PtngHostBuilder*> addAxfrEntry(const QList<PtngHostBuilder*> &builders, const QString &axfrFile);
 void addPorts(PtngHostBuilder* builder, const QDomNode &node);
@@ -50,29 +51,10 @@ QList<PtngHostBuilder*> parseInputFiles( QString networkMapSource,
                                          QString fontFamily)
 {
     qInfo() << "[info] Starting nmap parse on"<<networkMapSource;
-    QList<PtngHostBuilder*> builderList;
-    QScopedPointer<QDomDocument> doc(new QDomDocument("mydocument"));
-    QScopedPointer<QFile> file(new QFile(networkMapSource));
-
-    if( !file->open(QIODevice::ReadOnly)){
-        qWarning() << "[warning] Failed opening file"<<networkMapSource;
-        return(builderList);
-    }
-
-    if( !doc->setContent(file.data()) ){
-        qWarning() << "[warning] Failed parsing"<<networkMapSource;
-        file->close();
-        return(builderList);
-    }
-    QDomNodeList nodes = doc->elementsByTagName("host");
-    qInfo() << "[info] Number of host nodes:"<<nodes.length();
-    for( int i = 0; i != nodes.length(); ++i ){
-        QDomNode node = nodes.at(i);
-        PtngHostBuilder *hb = new PtngHostBuilder();
-        hb->addNmapScanXmlNode(node);
-        addPorts(hb,node);
-        builderList.append(hb);
-    }
+     QList<PtngHostBuilder*> builderList;
+    PtngInputParser ip;
+    builderList = ip.parseNmap(networkMapSource);
+    qInfo() << "[info] New builder list size:"<<builderList.count();
 
     if( hshFile != ""  ){
         builderList = addSeverities(builderList, hshFile);
@@ -97,7 +79,7 @@ QList<PtngHostBuilder*> addSeverities(const QList<PtngHostBuilder*> &builders, c
     while( !stream.atEnd() ){
         lines.append(stream.readLine());
     }
-    QMultiMap<QString,QString> nv;
+    QMap<QString,QString> nv;
     for( auto line : lines ){
         if( line.toLower() == "[nessus_hsh]"){
             continue;
@@ -127,7 +109,7 @@ QList<PtngHostBuilder*> addSeverities(const QList<PtngHostBuilder*> &builders, c
                 builder->setSeverity( PtngEnums::LOW );
             }
             else if( sev.toLower() == "info" ){
-                builder->setSeverity( PtngEnums::INFO );
+                builder->setSeverity( PtngEnums::NONE );
             }
             else{
                 builder->setSeverity( PtngEnums::NUM_ISSUE_SEVERITIES );
@@ -137,80 +119,6 @@ QList<PtngHostBuilder*> addSeverities(const QList<PtngHostBuilder*> &builders, c
     }
     file->close();
     return(bl);
-}
-
-void addPorts(PtngHostBuilder* builder, const QDomNode &node){
-    // qInfo() << "[info] addPorts";
-    PtngHost *host = builder->getHost();
-    QDomElement elem = node.toElement();
-    if( elem.isNull() ){
-        return;
-    }
-    QDomNodeList portList = elem.elementsByTagName("ports");
-    if( portList.length() == 0 ){
-        // qInfo() << "[info] No open ports found on"<<host->getIpAddress();
-        return;
-    }
-    else{
-        // qInfo() << "[info] Found"<< portList.length() <<"ports open on"<<host->getIpAddress();
-        QDomElement portListElem = portList.at(0).toElement();
-        if( portListElem.isNull() ){
-            return;
-        }
-
-        QDomNodeList ports = portListElem.elementsByTagName("port");
-        // qInfo() << "[info] Found"<< ports.length() <<"ports open on"<<host->getIpAddress();
-
-        for( int i = 0;i< ports.length();++i){
-            QDomNode node = ports.at(i);
-            QDomElement e = node.toElement();
-            PtngPort port;
-            if( e.isNull() ){
-                continue;
-            }
-
-            port.portNumber = e.attribute("portid").toInt();
-            QString prot = e.attribute("protocol");
-            if( prot.toLower() == "tcp" ){
-                port.protocol = PtngEnums::TCP;
-            }
-            else if( prot.toLower() == "udp" ){
-                port.protocol = PtngEnums::UDP;
-            }
-            QDomElement state = e.firstChildElement("state");
-            if( !state.isNull()){
-                port.state = state.attribute("state");
-                port.reason = state.attribute("reason");
-            }
-            QDomElement service = e.firstChildElement("service");
-            if( !service.isNull()){
-                port.serviceName = service.attribute("name");
-                port.serviceProduct = service.attribute("product");
-                port.serviceVersion = service.attribute("version");
-                port.idMethod =  service.attribute("method");
-                QDomNodeList cpe = service.elementsByTagName("cpe");
-                if( cpe.length() > 0 ){
-                    for(int i =0;i<cpe.length();++i){
-                        QDomElement entry = cpe.at(i).toElement();
-                        if( !entry.isNull()){
-                            port.serviceCPE.append( entry.text() );
-                        }
-                    }
-                }
-                QDomNodeList scripts = e.elementsByTagName("script");
-                for( int i =0;i<scripts.length();++i ){
-                    QDomElement e = scripts.at(i).toElement();
-                    if( e.isNull()){
-                        continue;
-                    }
-                    QString id = e.attribute("id");
-                    QString output = e.attribute("output");
-                    port.portScripts.insert(id,output);
-                }
-            }
-            builder->addPortSpec(port);
-        }
-    }
 }
 
 QList<PtngHostBuilder*> addAxfrEntry(const QList<PtngHostBuilder*> &builders, const QString &axfrFile){
@@ -223,9 +131,9 @@ QList<PtngHostBuilder*> addAxfrEntry(const QList<PtngHostBuilder*> &builders, co
         qWarning() << "[warning] Unable to open AXFR file:"<<axfrFile;
         return(bl);
     }
-    PtngAddressParser parser;
-    QMultiMap<QString,QString> addresses = parser.parseAddresses(axfrFile);
-    qInfo() << "[info] InputParser - number of addresses from AXFR:"<<addresses.count();
+
+    QMap<QString,QString> addresses = PtngInputParser::parseZoneTransfer(axfrFile);
+    qInfo() << "[info] Number of addresses from AXFR:"<<addresses.count();
 
     return(bl);
 }

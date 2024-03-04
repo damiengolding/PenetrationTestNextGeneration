@@ -34,7 +34,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QDomAttr>
 #include <QFile>
 #include <QTextStream>
-#include <QMultiMap>
+#include <QMap>
 #include <QList>
 #include <QDebug>
 
@@ -47,5 +47,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "PtngIdent.hpp"
 #include "PtngHostBuilder.hpp"
 #include "PtngSpecifications.hpp"
-#include "PtngAddressParser.hpp"
+#include "PtngInputParser.hpp"
+#include "PtngDGMLBuilder.hpp"
+#include "PtngIP4Address.hpp"
 using namespace ptng;

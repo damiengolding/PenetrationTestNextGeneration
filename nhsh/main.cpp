@@ -36,7 +36,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QFile>
 #include <QFileInfo>
 #include <QTextStream>
-#include <QMultiMap>
+#include <QMap>
 #include <QList>
 #include <QDebug>
 #include <QScopedPointer>
@@ -92,10 +92,10 @@ void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
 }
 
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
-    QScopedPointer<PtngIdent> ident(new PtngIdent());
+    PtngEnums::SupportedInputTypes type;
     if( parser.isSet("file") ){
         nessusFile = parser.value("file");
-        PtngEnums::SupportedInputTypes type = ident->checkFile(nessusFile);
+        PtngIdent::checkFile(nessusFile);
         if( type != PtngEnums::NESSUS ){
             qInfo() << "[info] File" << nessusFile << "is not a nessus xml report file.";
             qInfo() << "[info] Supplied file is of type:" << type;
@@ -136,8 +136,8 @@ void processNessusFile(){
     QDomNodeList hosts = rootElem.elementsByTagName("ReportHost");
     // qInfo() << "[info] Number of ReportHosts:"<<hosts.count();
     QString ipAddress;
-    for( int i = 0; i< hosts.count();++i){
-        QDomNode host = hosts.at(i);
+    for( int i = 0;i<hosts.count();++i ){
+        QDomNode host = hosts.item(i);
         QDomElement elem = host.toElement();
         if( elem.isNull()){
             continue;
@@ -168,7 +168,7 @@ void processNessusFile(){
             int sev  = elem.attribute("severity").toInt();
             switch(sev){
             case 0:{
-                issue.severity = PtngEnums::INFO;
+                issue.severity = PtngEnums::NONE;
                 break;
             }
             case 1:{
@@ -218,13 +218,13 @@ void processNessusFile(){
     // QString ipAddress="";
     QString outputString="[NESSUS_HSH]\n";
 
-    for( int i = 0;i<ipAddresses.count();++i ){
-        QString address = ipAddresses.at(i);
+    for( auto address : ipAddresses ){
+        // QString address = ipAddresses.at(i);
         // qInfo() << "[info] address from ipAddresses list:"<<address;
         QString entry=address;
         // qInfo() << "[info] entry:"<<entry;
-        for( int i = 0;i<issueList.count();++i){
-            PtngIssue issue = issueList.at(i);
+        for( auto issue : issueList){
+            // PtngIssue issue = issueList.at(i);
             if( address == issue.ipAddress ){
                 QString risk_factor = issue.riskFactor.toLower();
                 if( risk_factor == "critical" )

@@ -1,6 +1,6 @@
 QT = core gui xml
 
-CONFIG += c++20 cmdline
+CONFIG += c++20 cmdline warn_off
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -15,13 +15,13 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-# libparser references
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../PTNG_Output/libparser/release/ -llibparser
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../PTNG_Output/libparser/debug/ -llibparser
-
-INCLUDEPATH += $$PWD/../libparser
-DEPENDPATH += $$PWD/../libparser
 
 HEADERS += \
     CommandLineHandler.hpp \
     GlobalIncludes.hpp
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../PTNG_Output/libparser/release/ -llibparser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../PTNG_Output/libparser/debug/ -llibparser
+
+INCLUDEPATH += $$PWD/../../PTNG_Output/libparser/inc
+DEPENDPATH += $$PWD/../../PTNG_Output/libparser/inc
