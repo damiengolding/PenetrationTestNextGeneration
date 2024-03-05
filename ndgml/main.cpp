@@ -41,12 +41,12 @@ QString inputFile="";
 QString outputFile="";
 QString issuesFile="";
 QString zoneFile="";
+QString subnetFilters="";
+bool showLabels=true;
 
-void processFile(const QString& inputFile,const QString& outputFile,const QString& zoneFile, const QString &issuesFile, bool labels);
+void processFile(const QString& inputFile,const QString& outputFile,const QString& zoneFile, const QString &issuesFile, const QString &subnets, bool labels);
 void showTypes();
 bool fileIsSupported(const QString &inputFile);
-bool showLabels=true;
-QStringList subnetFilters;
 
 int main(int argc, char *argv[])
 {
@@ -186,9 +186,9 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
 
     // Subnet filters
     if(  parser.isSet("subnets")){
-        subnetFilters = parser.value("subnets").split(",");
+        subnetFilters = parser.value("subnets");
     }
 
-    processFile(inputFile,outputFile,issuesFile, zoneFile, showLabels);
+    processFile(inputFile,outputFile,issuesFile, zoneFile, subnetFilters, showLabels);
 }
 

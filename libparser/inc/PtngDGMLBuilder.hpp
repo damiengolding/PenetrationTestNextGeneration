@@ -98,12 +98,13 @@ public: // Creational - the user can create a DGML string from an arbitrary sour
     PtngDGMLBuilder& addPath(const QString &id, const QString &label, const QString &dataType, bool isReference, const QMap<QString,QString> &attributes);
 
 public: // Creational - from known source types, e.g. nmap QList<PtngHostBuilder*> and QMap<QString,QString>
-    PtngDGMLBuilder& createSimple(const QMap<QString,QString> &hosts, bool addLabels = true);
-    PtngDGMLBuilder& createFromNmap(QList<PtngHostBuilder*> builders, const QString &issuesFile = "", const QString &zoneFile = "", bool addLabels = true);
+    PtngDGMLBuilder& createSimple(const QMap<QString,QString> &hosts, const QString &subnetFilters = "", bool addLabels = true);
+    PtngDGMLBuilder& createFromNmap(QList<PtngHostBuilder*> builders, const QString &issuesFile = "", const QString &zoneFile = "", const QString &subnetFilters = "", bool addLabels = true);
 
 private: // Helper functions
     QMap<QString,QString> getAttributes(PtngHost *host);
     QList<PtngHostBuilder*> setHighestSeverity(QList<PtngHostBuilder*> builderList);
+    bool isInFilter(const QStringList &subnetFilters, const QString &testString);
 
 public: // Other accessors/mutators
     QString toString(int indent = 1);

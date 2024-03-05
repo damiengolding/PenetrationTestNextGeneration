@@ -53,21 +53,21 @@ void showTypes(){
     qInfo() << "[info] host - use \'host -t axfr <domain> <nameserver> > host_axfr.txt\'";
 }
 
-void processFile(const QString& inputFile, const QString &outputFile, const QString &issuesFile, const QString &zoneFile, bool labels){
+void processFile(const QString& inputFile, const QString &outputFile, const QString &issuesFile, const QString &zoneFile, const QString &subnetFilters, bool labels){
     PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(inputFile);
     QString dgml;
     PtngDGMLBuilder builder;
     if( type == PtngEnums::NMAP ){
         QList<PtngHostBuilder*> hostBuilders = PtngInputParser::parseNmap(inputFile);
         // qInfo() << "[info] Number of hosts (nmap):"<<hostBuilders.count();
-        builder.createFromNmap(hostBuilders,issuesFile,zoneFile,labels);
+        builder.createFromNmap(hostBuilders,issuesFile,zoneFile,subnetFilters,labels);
         dgml = builder.toString(4);
         qInfo() << "[info] DGML:"<<dgml;
     }
     else{
         QMap<QString,QString> hosts = PtngInputParser::parseZoneTransfer(inputFile);
         // qInfo() << "[info] Number of hosts (simple):"<<hosts.count();
-        builder.createSimple(hosts,labels);
+        builder.createSimple(hosts, subnetFilters, labels);
         dgml = builder.toString(4);
         qInfo() << "[info] DGML:"<<dgml;
     }

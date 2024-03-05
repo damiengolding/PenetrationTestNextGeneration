@@ -175,10 +175,10 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
                 host->hostScripts.insert( id,  output);
 
                 if( id == "ip-geolocation-ipinfodb"  ){
-                    qInfo() << "[info] ip-geolocation-ipinfodb";
+                    // qInfo() << "[info] ip-geolocation-ipinfodb";
                     host->geoLocation = true;
                     QStringList results = output.split("\n",Qt::SkipEmptyParts);
-                    qInfo() << "[info] ip-geolocation-ipinfodb split:"<<results.length();
+                    // qInfo() << "[info] ip-geolocation-ipinfodb split:"<<results.length();
                     for(auto result : results ){
                         QString o = result.trimmed();
                       if( o.toLower().startsWith("coordinates") ){
@@ -187,17 +187,16 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
                           QStringList lll = ll.split(",");
                           host->latitude = lll.at(0);
                           host->longitude = lll.at(1);
-                          qInfo() << "[info] Latitude:"<<host->latitude<< "Longitude:"<< host->longitude;
+                          // qInfo() << "[info] Latitude:"<<host->latitude<< "Longitude:"<< host->longitude;
                       }
                       else if( o.toLower().startsWith("city") ){
                            QStringList cy = o.split(":");
                            host->city = cy.at(1).trimmed();
-                           qInfo() << "[info] City:"<<host->city;
+                           // qInfo() << "[info] City:"<<host->city;
                       }
                     }
                 }
                 if( id == "ip-forwarding"  ){
-                    qInfo() << "[info] ip-forwarding";
                     host->gateway = true;
                 }
             }

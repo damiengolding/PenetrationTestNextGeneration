@@ -270,7 +270,7 @@ PtngDGMLBuilder& PtngDGMLBuilder::addPath(const QString &id, const QString &labe
     return(*this);
 }
 
-PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anPairs, bool addLabels)
+PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anPairs, const QString &subnetFilters, bool addLabels)
 {
     // qInfo() << "[info] In fromSimple";
     QStringList aClasses,bClasses,cClasses,leaves;
@@ -280,21 +280,61 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
 
     // Separate the entries into classes
     QStringList ips;
+    QStringList subnets = subnetFilters.split(",",Qt::SkipEmptyParts);
+
     for(auto [address,name] : anPairs.asKeyValueRange()){
         QStringList tempList;
         QString tempStr;
+        QString testStr;
         tempList=address.split(".");
         tempStr = tempList.at(0) + ".*.*.*";
+        testStr = tempList.at(0) + ".";
         if( !aClasses.contains(tempStr) ){
-            aClasses.append(tempStr);
+            if( subnets.count()>0 ){
+                for( auto subnet : subnets ){
+                    if( subnet.startsWith(testStr) ){
+                        aClasses.append(tempStr);
+                        break;
+                    }
+                }
+            }
+            else{
+                aClasses.append(tempStr);
+            }
         }
+
         tempStr = tempList.at(0) + "." + tempList.at(1) + ".*.*";
+        testStr = tempList.at(0) + "."+ tempList.at(1) + ".";
         if( !bClasses.contains(tempStr) ){
-            bClasses.append(tempStr);
+            if( subnets.count()>0 ){
+                for( auto subnet : subnets ){
+                    if( subnet.startsWith(testStr) ){
+                        bClasses.append(tempStr);
+                        break;
+                    }
+                }
+            }
+            else{
+                bClasses.append(tempStr);
+            }
         }
+
         tempStr = tempList.at(0)  + "." + tempList.at(1)  + "." + tempList.at(2) + ".*";
+        testStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";
         if( !cClasses.contains(tempStr) ){
-            cClasses.append(tempStr);
+            if( subnets.count()>0 ){
+                for( auto subnet : subnets ){
+                    if( subnets.count()>0 ){
+                        if( subnet.startsWith(testStr) ){
+                            cClasses.append(tempStr);
+                            break;
+                        }
+                    }
+                }
+            }
+            else{
+                cClasses.append(tempStr);
+            }
         }
         if( !leaves.contains(address) ){
             leaves.append(address);
@@ -311,14 +351,13 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
             addLink("attack_machine", aClass, "" ,map);
         }
     }
+    qInfo() << "[info] aClasses 2:"<<aClasses.count();
 
     // Add the B class nodes and link to the A Class nodes
     for( auto aClass : aClasses){
         QStringList tempList = aClass.split(".");
         QString tempStr = tempList.at(0) + ".";
-        // qInfo() << "[info] tempStr for bClass:"<<tempStr;
         for( auto bc : bClasses){
-            // qInfo() << "[info] bClass:"<<bc;
             if( bc.startsWith(tempStr)){
                 addNode(bc, bc, map);
                 if( addLabels ){
@@ -329,14 +368,11 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
                 }
             }
         }
-
         // Add the C class nodes and link to the B Class nodes
         for( auto bClass : bClasses){
             QStringList tempList = bClass.split(".");
             QString tempStr = tempList.at(0) + "." + tempList.at(1) + ".";
-            // qInfo() << "[info] tempStr for cClass:"<<tempStr;
             for( auto cc : cClasses){
-                // qInfo() << "[info] cClass:"<<cc;
                 if( cc.startsWith(tempStr)){
                     addNode(cc, cc, map);
                     if( addLabels ){
@@ -372,13 +408,13 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
     }
 }
 
-PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builders, const QString &issuesFile, const QString &zoneFile, bool addLabels)
+PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builders, const QString &issuesFile, const QString &zoneFile, const QString &subnetFilters, bool addLabels)
 {
-    qInfo() << "[info] Creating from nmap:";
+    qInfo() << "[info] Creating from nmap";
+    QStringList subnets = subnetFilters.split(",");
     QMap<QString,QString> zoneAddesses;
     if( !zoneFile.isEmpty()){
         zoneAddesses = PtngInputParser::parseZoneTransfer(zoneFile);
-        qInfo() << "[info] Number of hosts in zone:"<<zoneAddesses.count();
     }
     QMap<QString,QString> severities;
     if( !issuesFile.isEmpty()){
@@ -386,38 +422,46 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
     }
     QStringList aClasses,bClasses,cClasses,leaves;
     QMap<QString,QString> map; // For attributes
+    QMap<QString,QString> emptyMap; // For empty attributes
     // Create the 'Attack Machine' root node
     addNode("attack_machine","Attack Machine",map);
 
     QStringList ips;
     PtngHost *host;
+
     // Separate the entries into classes
     for( auto builder : builders ){
         host=builder->getHost();
         QStringList tempList;
         QString tempStr;
+        QString testStr;
         QString address = host->getIpAddress();
         tempList = address.split(".");
         // A Class
         tempStr = tempList.at(0) + ".*.*.*";
-        // qInfo() << "[info] A Class temp string:"<<tempStr;
-        if( !aClasses.contains(tempStr) ){
+        testStr = tempList.at(0) + ".";
+        if( !aClasses.contains(tempStr) && isInFilter(subnetFilters.split(",",Qt::SkipEmptyParts), testStr)  ){
             aClasses.append(tempStr);
         }
         // B Class
         tempStr = tempList.at(0) + "." + tempList.at(1) + ".*.*";
-        // qInfo() << "[info] B Class ttring:"<<tempStr;
-        if( !bClasses.contains(tempStr) ){
+        if( !bClasses.contains(tempStr) && isInFilter(subnetFilters.split(",",Qt::SkipEmptyParts), tempStr)  ){
+
+            if( !aClasses.contains(tempStr) ){
+                aClasses.append(tempList.at(0) + ".*.*.*");
+            }
+            // aClasses.append(tempList.at(0) + ".*.*.*");
             bClasses.append(tempStr);
         }
+
         // C Class
         tempStr = tempList.at(0) + "." + tempList.at(1)  + "." + tempList.at(2) + ".*";
-        // qInfo() << "[info] C Class temp string:"<<tempStr;
-        if( !cClasses.contains(tempStr) ){
+        testStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";
+        if( !cClasses.contains(tempStr) && isInFilter(subnetFilters.split(",",Qt::SkipEmptyParts),testStr)  ){
             cClasses.append(tempStr);
         }
+
         // Leaf
-        // qInfo() << "[info] Orginal address:"<<address;
         if( !leaves.contains(address) ){
             leaves.append(address);
         }
@@ -425,29 +469,41 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
 
     // Add the A class nodes and link to the 'Attack Machine'
     for( auto aClass : aClasses){
+        // QString testStr = aClass.split(".").at(0) + ".";
+        // if( !isInFilter(subnetFilters.split(","), testStr , 0 )){
+        //     continue;
+        // }
+
         addNode(aClass, aClass, map);
         if( addLabels ){
-            addLink("attack_machine", aClass, "Attack Machine->" + aClass ,map);
+            addLink("attack_machine", aClass, "Attack Machine->" + aClass ,emptyMap);
         }
         else{
-            addLink("attack_machine", aClass, "" ,map);
+            addLink("attack_machine", aClass, "" ,emptyMap);
         }
     }
 
     // Add the B class nodes and link to the C Class nodes
     for( auto aClass : aClasses){
         QStringList tempList = aClass.split(".");
-        QString tempStr = tempList.at(0) + ".";
-        // qInfo() << "[info] tempStr for bClass:"<<tempStr;
+        QString tempStr = tempList.at(0);
+        qInfo() << "[info] tempStr for bClass:"<<tempStr;
         for( auto bc : bClasses){
+
+            // QString testStr = bc.split(".").at(0) + "." + bc.split(".").at(1) + ".";
+            // qInfo() << "[info] bClass teststr:"<<testStr;
+            // if( !isInFilter(subnetFilters.split(","), testStr , 1 )){
+            //     continue;
+            // }
             // qInfo() << "[info] bClass:"<<bc;
+
             if( bc.startsWith(tempStr)){
                 addNode(bc, bc, map);
                 if( addLabels ){
-                    addLink(aClass, bc,aClass + "->" + bc,map);
+                    addLink(aClass, bc,aClass + "->" + bc,emptyMap);
                 }
                 else{
-                    addLink(aClass, bc,"",map);
+                    addLink(aClass, bc,"",emptyMap);
                 }
             }
         }
@@ -459,22 +515,25 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
         QString tempStr = tempList.at(0) + "." + tempList.at(1) + ".";
         // qInfo() << "[info] tempStr for cClass:"<<tempStr;
         for( auto cc : cClasses){
+            // QString testStr = cc.split(".").at(0) + "." + cc.split(".").at(1) + "." + cc.split(".").at(2) + ".";
+            // qInfo() << "[info] cClass teststr:"<<testStr;
+            // if( !isInFilter(subnetFilters.split(","), testStr , 2 )){
+            //     continue;
+            // }
             // qInfo() << "[info] cClass:"<<cc;
             if( cc.startsWith(tempStr)){
                 addNode(cc, cc, map);
                 if( addLabels ){
-                    addLink(bClass, cc,bClass + "->" +cc,map);
+                    addLink(bClass, cc,cc + "->" +bClass,emptyMap);
                 }
                 else{
-                    addLink(bClass, cc,"",map);
+                    addLink(bClass, cc,"",emptyMap);
                 }
             }
         }
     }
 
     // Add the leaf nodes and link to the C Class nodes
-    qInfo() << "[info] Num severities:"<<severities.count();
-
     for(auto cClass : cClasses){
         QStringList tempList = cClass.split(".");
         QString tempStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";
@@ -483,6 +542,7 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
             if( !leaves.contains(address)){
                 continue;
             }
+
             for( auto [ipAddress,sev] : severities.asKeyValueRange()){
                 // Add severity category and PtngEnums::IssueSeverities to nodes
                 if(address != ipAddress){
@@ -520,10 +580,10 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
                     addNode(address, zAddress, map);
                 }
                 if( addLabels ){
-                    addLink(cClass, address,cClass + "->" +address,map);
+                    addLink(cClass, address,cClass + "->" +address,emptyMap);
                 }
                 else{
-                    addLink(cClass,address,"",map);
+                    addLink(cClass,address,"",emptyMap);
                 }
             }
 
@@ -565,6 +625,19 @@ QList<PtngHostBuilder*> PtngDGMLBuilder::setHighestSeverity(QList<PtngHostBuilde
 
 
     return(builderList);
+}
+
+bool PtngDGMLBuilder::isInFilter(const QStringList &subnetFilters, const QString &testString)
+{
+    if( subnetFilters.isEmpty() ){
+        return(true);
+    }
+    for( auto subnetFilter : subnetFilters){
+        if( testString.startsWith(subnetFilter) ){
+            return(true);
+        }
+    }
+    return(false);
 }
 
 QString PtngDGMLBuilder::toString(int indent)
