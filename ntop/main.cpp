@@ -157,7 +157,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     else{
         qInfo() << "[info] Optional argument axfr not set. Moving on.";
     }
-    if( parser.isSet("sev")  ){
+    if( parser.isSet("issues")  ){
         type = PtngIdent::checkFile(parser.value("issues"));
         if( type == PtngEnums::NESSUS_HSH){
             nessusFile = parser.value("issues");

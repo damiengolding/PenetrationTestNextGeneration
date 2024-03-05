@@ -39,11 +39,14 @@ QList<QCommandLineOption> commandLineOptions;
 int ret = 0;
 QString inputFile="";
 QString outputFile="";
+QString issuesFile="";
+QString zoneFile="";
 
-void processFile(const QString& inputFile,const QString& outputFile, bool labels);
+void processFile(const QString& inputFile,const QString& outputFile,const QString& zoneFile, const QString &issuesFile, bool labels);
 void showTypes();
 bool fileIsSupported(const QString &inputFile);
 bool showLabels=true;
+QStringList subnetFilters;
 
 int main(int argc, char *argv[])
 {
@@ -62,7 +65,10 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
     // Convenience options
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.setApplicationDescription("myapp description");
+    parser.setApplicationDescription("Creates a basic xml output based on Microsoft DGML\n\n"
+                                     "Caveat: the DGML output is viewable and editable in Microsoft Visual Studio, but most edits render the DGML unusable by PTNG, so if you wish to make changes for display and reporting make two output files and keep one separate for VS usage.\n\n"
+                                     "N.B. This is VERY specific to pen testing; for instance, the core DGML created at instantiation includes categories for colouring critical, high, medium, low and info issues according to a nessus input file"
+                                     );
     // Init options from here, defined separately in initArgumentOptions
     initArgumentOptions(app,parser);
     // Process the supplied arguments into the parser
@@ -73,9 +79,12 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
 
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addPositionalArgument("types","Currently supported input file types");
-    parser.addOption({{"f","file"},"Write to file. Use \'ndgml types\' to list supported types.","file"});
-    parser.addOption({{"o","output"},"Write to file","file"});
-    parser.addOption({{"l","labels"},"Add labels to links; this is necessary for conversion to dot runcontrol (default is '\on\')","on|off"});
+    parser.addOption({{"f","file"},"Input file. Use \'ndgml types\' to list supported types.","file"});
+    parser.addOption({{"o","output"},"[optional] Write to file","file"});
+    parser.addOption({{"l","labels"},"[optional] Add labels to links; this is necessary for conversion to dot runcontrol (default is '\on\')","on|off"});
+    parser.addOption({{"i","issues"},"[optional] Output from a vulneablilty scanner contining a list of issues; used for highest severity for each host. Currently nessus only","file"});
+    parser.addOption({{"z","zone"},"[optional] Output from a zone transfer file.  Use \'ndgml types\' to list supported types.","file"});
+    parser.addOption({{"s","subnets"},"[optional] A comma delimited list of subnet filters in the form 192.168.1.,192.168.48. (use the trailing \'.\' to avoid including 192.168.10. and 192.168.100. etc)","subnet"});
 }
 
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
@@ -109,35 +118,77 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         else{
             type = PtngIdent::checkFile(inputFile);
             if( !fileIsSupported(inputFile)){
-                qInfo() << "[info] File" << inputFile << "is not supported by ndgml. Use ndgml types for a list.";
+                qInfo() << "[info] Network source file" << inputFile << "is not supported by ndgml. Use ndgml types for a list.";
                 qInfo() << "[info] Supplied file is of type:" << type;
+                ret = 4;
+                return;
             }
-            // else{
-            //     qInfo() << "[info] Processing" << inputFile << "which is of type:" << type;
-            //     processFile(inputFile);
-            // }
+            else{
+                qInfo() << "[info] Input file set to" << inputFile << "which is of type:" << type;
+            }
+        }
+    }
+
+    // Issues file
+    if( parser.isSet("issues") ){
+        issuesFile = parser.value("issues");
+        type = PtngIdent::checkFile(issuesFile);
+        if( type != PtngEnums::NESSUS ){
+            qInfo() << "[info] Issues file" << issuesFile << "is not supported by ndgml. Use ndgml types for a list.";
+            qInfo() << "[info] Supplied file is of type:" << type;
+        }
+        else{
+            qInfo() << "[info] Issues file set to" << issuesFile << "which is of type:" << type;}
+    }
+
+    // Zone file
+    if( parser.isSet("zone") ){
+        zoneFile = parser.value("zone");
+        type = PtngIdent::checkFile(zoneFile);
+        if( type == PtngEnums::ARPSCAN
+                || type == PtngEnums::NBTSCAN
+                || type == PtngEnums::AXFR_DIG
+                || type == PtngEnums::AXFR_DNS_RECON
+                || type == PtngEnums::AXFR_HOST
+                || type == PtngEnums::AXFR_NMAP
+                || type == PtngEnums::AXFR_NS_LIN
+                || type == PtngEnums::AXFR_NS_WIN
+                ){
+            qInfo() << "[info] Issues file set to" << issuesFile << "which is of type:" << type;
+        }
+        else{
+            qInfo() << "[info] Issues file" << zoneFile << "is not supported by ndgml. Use ndgml types for a list.";
+            qInfo() << "[info] Supplied file is of type:" << type;
         }
     }
 
     // Output file
     if( parser.isSet("output") ){
         outputFile = parser.value("output");
+        qInfo() << "[info] Output file set to" << inputFile;
     }
 
     // Show labels
     if( parser.isSet("labels") ){
         if( parser.value("labels").toLower() == "on"){
             showLabels = true;
+            qInfo() << "[info] Show labels set to:" << "True";
         }
         else if(parser.value("labels").toLower() == "off"){
             showLabels = false;
+            qInfo() << "[info] Show labels set to:" << "False";
         }
         else{
             showLabels = true;
+            qInfo() << "[info] Show labels set to:" << "True";
         }
     }
 
-    qInfo() << "[info] Processing" << inputFile << "which is of type:" << type;
-    processFile(inputFile,outputFile,showLabels);
+    // Subnet filters
+    if(  parser.isSet("subnets")){
+        subnetFilters = parser.value("subnets").split(",");
+    }
+
+    processFile(inputFile,outputFile,issuesFile, zoneFile, showLabels);
 }
 

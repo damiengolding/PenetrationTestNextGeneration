@@ -103,7 +103,7 @@ QList<PtngHostBuilder*> addSeverities(const QList<PtngHostBuilder*> &builders, c
                 builder->setSeverity( PtngEnums::HIGH );
             }
             else if( sev.toLower() == "medium" ){
-                builder->setSeverity( PtngEnums::MEDUIM );
+                builder->setSeverity( PtngEnums::MEDIUM );
             }
             else if( sev.toLower() == "low" ){
                 builder->setSeverity( PtngEnums::LOW );

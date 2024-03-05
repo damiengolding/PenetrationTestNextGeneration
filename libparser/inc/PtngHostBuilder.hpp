@@ -173,6 +173,9 @@ public: // Builder methods
      */
     PtngHostBuilder& addScript( const QString &id, const QString &output );
 
+    PtngHostBuilder& setHighestSeverity( PtngEnums::IssueSeverity severity );
+    PtngHostBuilder& setIsInZoneFile( bool axfr );
+
 private:
     PtngHost *host;
 

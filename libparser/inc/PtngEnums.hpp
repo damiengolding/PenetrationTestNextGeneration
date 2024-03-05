@@ -99,7 +99,7 @@ public:
     enum IssueSeverity {
         NONE,
         LOW,
-        MEDUIM,
+        MEDIUM,
         HIGH,
         CRITICAL,
         NUM_ISSUE_SEVERITIES

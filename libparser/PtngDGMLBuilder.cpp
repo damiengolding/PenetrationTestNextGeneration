@@ -54,51 +54,96 @@ void PtngDGML::createXml(){
     root.appendChild(links);
 
     QDomElement categories = doc->createElement("Categories");
-    root.appendChild(categories);
+
+    // See here for style attribute options: https://github.com/MicrosoftDocs/visualstudio-docs/blob/main/docs/modeling/customize-code-maps-by-editing-the-dgml-files.md#OrganizeNodes
 
     // QUERY need some null tests here?
+    QDomElement criticalCategory = doc->createElement("Category");
+    criticalCategory.setAttribute("Id","critical");
+    criticalCategory.setAttribute("Label","Critical");
+    criticalCategory.setAttribute("Stroke","Firebrick"); // Border colour
+    criticalCategory.setAttribute("Background","White");
+    criticalCategory.setAttribute("Foreground","Black");
+    criticalCategory.setAttribute("StrokeThickness","1");
+    // criticalCategory.setAttribute("Icon","<path>");
+    criticalCategory.setAttribute("FontFamily","Open Sans");
+    criticalCategory.setAttribute("FontSize","10");
+    // criticalCategory.setAttribute("FontWeight","<value>");
+    criticalCategory.setAttribute("FontStyle","<Style>"); // Italic or Bold
+    criticalCategory.setAttribute("Style","Plain"); // "Plain" or "Glass"
+    categories.appendChild(criticalCategory);
+
+    QDomElement highCategory = doc->createElement("Category");
+    highCategory.setAttribute("Id","high");
+    highCategory.setAttribute("Label","High");
+    highCategory.setAttribute("Stroke","OrangeRed"); // Border colour
+    highCategory.setAttribute("Background","White");
+    highCategory.setAttribute("Foreground","Black");
+    highCategory.setAttribute("StrokeThickness","1");
+    // highCategory.setAttribute("Icon","<path>");
+    highCategory.setAttribute("FontFamily","Open Sans");
+    highCategory.setAttribute("FontSize","10");
+    // highCategory.setAttribute("FontWeight","<value>");
+    highCategory.setAttribute("FontStyle","<Style>"); // Italic or Bold
+    highCategory.setAttribute("Style","Plain"); // "Plain" or "Glass"
+    categories.appendChild(highCategory);
+
+    QDomElement mediumCategory = doc->createElement("Category");
+    mediumCategory.setAttribute("Id","medium");
+    mediumCategory.setAttribute("Label","Medium");
+    mediumCategory.setAttribute("Stroke","DarkSalmon"); // Border colour
+    mediumCategory.setAttribute("Background","White");
+    mediumCategory.setAttribute("Foreground","Black");
+    mediumCategory.setAttribute("StrokeThickness","1");
+    // mediumCategory.setAttribute("Icon","<path>");
+    mediumCategory.setAttribute("FontFamily","Open Sans");
+    mediumCategory.setAttribute("FontSize","10");
+    // mediumCategory.setAttribute("FontWeight","<value>");
+    mediumCategory.setAttribute("FontStyle","<Style>"); // Italic or Bold
+    mediumCategory.setAttribute("Style","Plain"); // "Plain" or "Glass"
+    categories.appendChild(mediumCategory);
+
+    QDomElement lowCategory = doc->createElement("Category");
+    lowCategory.setAttribute("Id","low");
+    lowCategory.setAttribute("Label","Low");
+    lowCategory.setAttribute("Stroke","DarkGreen"); // Border colour
+    lowCategory.setAttribute("Background","White");
+    lowCategory.setAttribute("Foreground","Black");
+    lowCategory.setAttribute("StrokeThickness","1");
+    // lowCategory.setAttribute("Icon","<path>");
+    lowCategory.setAttribute("FontFamily","Open Sans");
+    lowCategory.setAttribute("FontSize","10");
+    // lowCategory.setAttribute("FontWeight","<value>");
+    lowCategory.setAttribute("FontStyle","<Style>"); // Italic or Bold
+    lowCategory.setAttribute("Style","Plain"); // "Plain" or "Glass"
+    categories.appendChild(lowCategory);
+
+    QDomElement noneCategory = doc->createElement("Category");
+    noneCategory.setAttribute("Id","none");
+    noneCategory.setAttribute("Label","None");
+    noneCategory.setAttribute("Stroke","Navy"); // Border colour
+    noneCategory.setAttribute("Background","White");
+    noneCategory.setAttribute("Foreground","Black");
+    noneCategory.setAttribute("StrokeThickness","1");
+    // noneCategory.setAttribute("Icon","<path>");
+    noneCategory.setAttribute("FontFamily","Open Sans");
+    noneCategory.setAttribute("FontSize","10");
+    // noneCategory.setAttribute("FontWeight","<value>");
+    noneCategory.setAttribute("FontStyle","<Style>"); // Italic or Bold
+    noneCategory.setAttribute("Style","Plain"); // "Plain" or "Glass"
+    categories.appendChild(noneCategory);
+    root.appendChild(categories);
+
     QDomElement properties = doc->createElement("Properties");
-    QDomElement criticalProperty = doc->createElement("Property");
-    criticalProperty.setAttribute("Id","critical");
-    criticalProperty.setAttribute("Label","Critical");
-    criticalProperty.setAttribute("Background","Red");
-    criticalProperty.setAttribute("Foreground","White");
-    properties.appendChild(criticalProperty);
-
-    QDomElement highProperty = doc->createElement("Property");
-    highProperty.setAttribute("Id","high");
-    highProperty.setAttribute("Label","Medium");
-    highProperty.setAttribute("Background","Orange");
-    highProperty.setAttribute("Foreground","White");
-    properties.appendChild(highProperty);
-
-    QDomElement mediumProperty = doc->createElement("Property");
-    mediumProperty.setAttribute("Id","medium");
-    mediumProperty.setAttribute("Label","Medium");
-    mediumProperty.setAttribute("Background","Green");
-    mediumProperty.setAttribute("Foreground","White");
-    properties.appendChild(mediumProperty);
-
-    QDomElement lowProperty = doc->createElement("Property");
-    lowProperty.setAttribute("Id","low");
-    lowProperty.setAttribute("Label","Low");
-    lowProperty.setAttribute("Background","Blue");
-    lowProperty.setAttribute("Foreground","White");
-    properties.appendChild(lowProperty);
-
-    QDomElement noneProperty = doc->createElement("Property");
-    noneProperty.setAttribute("Id","none");
-    noneProperty.setAttribute("Label","None");
-    noneProperty.setAttribute("Background","White");
-    noneProperty.setAttribute("Foreground","Black");
-    properties.appendChild(noneProperty);
-
     root.appendChild(properties);
 
     QDomElement paths = doc->createElement("Paths");
     root.appendChild(paths);
 
-    QDomElement elem = doc->elementsByTagName("Paths").at(0).toElement();
+    QDomElement styles = doc->createElement("Styles");
+    root.appendChild(styles);
+
+    // QDomElement elem = doc->elementsByTagName("Paths").at(0).toElement();
 }
 
 /*
@@ -119,6 +164,7 @@ PtngDGMLBuilder &PtngDGMLBuilder::addNode(const QString &id, const QString &labe
     QDomElement newNode = dgmlObject->doc->createElement("Node");
     newNode.setAttribute("Id",id);
     newNode.setAttribute("Label",label);
+    newNode.setAttribute("Category","none");
     QDomNodeList nodeList = dgmlObject->doc->elementsByTagName("Nodes");
     // qInfo() << "[info] Number of Nodes:"<<nodeList.count();
     if( nodeList.count() != 1 ){
@@ -326,16 +372,26 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
     }
 }
 
-PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builders, bool addLabels)
+PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builders, const QString &issuesFile, const QString &zoneFile, bool addLabels)
 {
     qInfo() << "[info] Creating from nmap:";
+    QMap<QString,QString> zoneAddesses;
+    if( !zoneFile.isEmpty()){
+        zoneAddesses = PtngInputParser::parseZoneTransfer(zoneFile);
+        qInfo() << "[info] Number of hosts in zone:"<<zoneAddesses.count();
+    }
+    QMap<QString,QString> severities;
+    if( !issuesFile.isEmpty()){
+        severities = PtngInputParser::parseNesusSeverities(issuesFile);
+    }
     QStringList aClasses,bClasses,cClasses,leaves;
     QMap<QString,QString> map; // For attributes
     // Create the 'Attack Machine' root node
     addNode("attack_machine","Attack Machine",map);
-    // Separate the entries into classes
+
     QStringList ips;
     PtngHost *host;
+    // Separate the entries into classes
     for( auto builder : builders ){
         host=builder->getHost();
         QStringList tempList;
@@ -367,113 +423,153 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
         }
     }
 
-        // Add the A class nodes and link to the 'Attack Machine'
-        for( auto aClass : aClasses){
-            addNode(aClass, aClass, map);
-            if( addLabels ){
-                addLink("attack_machine", aClass, "Attack Machine->" + aClass ,map);
-            }
-            else{
-                addLink("attack_machine", aClass, "" ,map);
-            }
+    // Add the A class nodes and link to the 'Attack Machine'
+    for( auto aClass : aClasses){
+        addNode(aClass, aClass, map);
+        if( addLabels ){
+            addLink("attack_machine", aClass, "Attack Machine->" + aClass ,map);
         }
+        else{
+            addLink("attack_machine", aClass, "" ,map);
+        }
+    }
 
-        for( auto aClass : aClasses){
-            QStringList tempList = aClass.split(".");
-            QString tempStr = tempList.at(0) + ".";
-            // qInfo() << "[info] tempStr for bClass:"<<tempStr;
-            for( auto bc : bClasses){
-                // qInfo() << "[info] bClass:"<<bc;
-                if( bc.startsWith(tempStr)){
-                    addNode(bc, bc, map);
-                    if( addLabels ){
-                        addLink(aClass, bc,aClass + "->" + bc,map);
-                    }
-                    else{
-                        addLink(aClass, bc,"",map);
-                    }
+    // Add the B class nodes and link to the C Class nodes
+    for( auto aClass : aClasses){
+        QStringList tempList = aClass.split(".");
+        QString tempStr = tempList.at(0) + ".";
+        // qInfo() << "[info] tempStr for bClass:"<<tempStr;
+        for( auto bc : bClasses){
+            // qInfo() << "[info] bClass:"<<bc;
+            if( bc.startsWith(tempStr)){
+                addNode(bc, bc, map);
+                if( addLabels ){
+                    addLink(aClass, bc,aClass + "->" + bc,map);
+                }
+                else{
+                    addLink(aClass, bc,"",map);
                 }
             }
         }
-
-            // Add the C class nodes and link to the B Class nodes
-            for( auto bClass : bClasses){
-                QStringList tempList = bClass.split(".");
-                QString tempStr = tempList.at(0) + "." + tempList.at(1) + ".";
-                // qInfo() << "[info] tempStr for cClass:"<<tempStr;
-                for( auto cc : cClasses){
-                    // qInfo() << "[info] cClass:"<<cc;
-                    if( cc.startsWith(tempStr)){
-                        addNode(cc, cc, map);
-                        if( addLabels ){
-                            addLink(bClass, cc,bClass + "->" +cc,map);
-                        }
-                        else{
-                            addLink(bClass, cc,"",map);
-                        }
-                    }
-                }
-            }
-
-            // Add the leaf nodes and link to the C Class nodes
-            for( auto cClass : cClasses){
-                QStringList tempList = cClass.split(".");
-                QString tempStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";
-                // qInfo() << "[info] tempStr for leaf:"<<tempStr;
-                for( auto leaf : leaves){
-                    // qInfo() << "[info] leaf:"<<leaf;
-                    PtngHost *lhost;
-                    for( auto builder : builders){
-                        if( builder->getHost()->getIpAddress() == leaf ){
-                            lhost = builder->getHost();
-                            break;
-                        }
-                    }
-                    if( leaf.startsWith(tempStr)){
-                        addNode(leaf, leaf, getAttributes(lhost));
-                        if( addLabels ){
-                            addLink(cClass, leaf,cClass + "->" +leaf,map);
-                        }
-                        else{
-                            addLink(cClass,leaf,"",map);
-                        }
-                    }
-                }
-            }
-        return(*this);
     }
 
-    QMap<QString,QString> PtngDGMLBuilder::getAttributes(PtngHost *host){
-        QMap<QString,QString> attrs;
-        QMetaEnum metaEnum = QMetaEnum::fromType<PtngEnums::IssueSeverity>();
-        QString sev = metaEnum.valueToKey(host->getHighestSeverity());
-        QString dnsName = host->getDnsName().isEmpty() ? "Not resolved" :  host->getDnsName();
-        attrs.insert("HighestSeverity",sev);
-        attrs.insert("DnsName",dnsName);
-        attrs.insert("MacAddress",host->getMacAddress());
-        attrs.insert("MacVendor",host->getMacVendor());
-        attrs.insert("OsName",host->getOsName());
-        // qInfo() << "[info] OsName:"<<host->getOsName();
-        attrs.insert("Gateway",host->isGateway() ? "True" : "False");
-        attrs.insert("InAxfr",host->isInAxfr() ? "True" : "False");
-        attrs.insert("GeoLocation",host->hasGeoLocation() ? "True" : "False");
-        if( host->hasGeoLocation() ){
-            attrs.insert("City",host->getCity());
-            attrs.insert("Longitude",host->getLongitude());
-            attrs.insert("Latitude",host->getLatitude());
+    // Add the C class nodes and link to the B Class nodes
+    for( auto bClass : bClasses){
+        QStringList tempList = bClass.split(".");
+        QString tempStr = tempList.at(0) + "." + tempList.at(1) + ".";
+        // qInfo() << "[info] tempStr for cClass:"<<tempStr;
+        for( auto cc : cClasses){
+            // qInfo() << "[info] cClass:"<<cc;
+            if( cc.startsWith(tempStr)){
+                addNode(cc, cc, map);
+                if( addLabels ){
+                    addLink(bClass, cc,bClass + "->" +cc,map);
+                }
+                else{
+                    addLink(bClass, cc,"",map);
+                }
+            }
         }
-        attrs.insert("HostState",host->getHostState());
-        attrs.insert("HostReason",host->getHostStateReason());
-        attrs.insert("HostCPE",host->getHostCPE().join(":"));
-        attrs.insert("HostHops",QString::number(host->getDistance()));
-        attrs.insert("HostRecordType",host->getRecordType());
-
-        return(attrs);
     }
 
-    QString PtngDGMLBuilder::toString(int indent)
-    {
-        return(dgmlObject->doc->toString(indent));
+    // Add the leaf nodes and link to the C Class nodes
+    qInfo() << "[info] Num severities:"<<severities.count();
+
+    for(auto cClass : cClasses){
+        QStringList tempList = cClass.split(".");
+        QString tempStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";
+        for( auto builder : builders ) {
+            QString address = builder->getHost()->getIpAddress();
+            if( !leaves.contains(address)){
+                continue;
+            }
+            for( auto [ipAddress,sev] : severities.asKeyValueRange()){
+                // Add severity category and PtngEnums::IssueSeverities to nodes
+                if(address != ipAddress){
+                    continue;
+                }
+                QString severity = sev.toLower();
+                map.insert("Category",severity.toLower());
+                if( severity == "critical"){
+                    builder->setHighestSeverity( PtngEnums::CRITICAL);
+                }
+                else if( severity == "high"){
+                    builder->setHighestSeverity( PtngEnums::HIGH);
+                }
+                else if( severity == "medium"){
+                    builder->setHighestSeverity( PtngEnums::MEDIUM);
+                }
+                else if( severity == "low"){
+                    builder->setHighestSeverity( PtngEnums::LOW);
+                }
+                else if( severity == "none"){
+                    builder->setHighestSeverity( PtngEnums::NONE);
+                }
+                else{
+                    builder->setHighestSeverity(  PtngEnums::NUM_ISSUE_SEVERITIES);
+                }
+            }
+
+            if( address.startsWith(tempStr)){
+                map.insert(getAttributes(builder->getHost()));
+                QString zAddress = "!"+address+"\n"+builder->getHost()->getDnsName();
+                if( zoneAddesses.keys().contains(address) ){
+                    addNode(address, address+"\n"+builder->getHost()->getDnsName(), map);
+                }
+                else{
+                    addNode(address, zAddress, map);
+                }
+                if( addLabels ){
+                    addLink(cClass, address,cClass + "->" +address,map);
+                }
+                else{
+                    addLink(cClass,address,"",map);
+                }
+            }
+
+        }
     }
+    return(*this);
+}
+
+QMap<QString,QString> PtngDGMLBuilder::getAttributes(PtngHost *host){
+    QMap<QString,QString> attrs;
+    QMetaEnum metaEnum = QMetaEnum::fromType<PtngEnums::IssueSeverity>();
+    QString sev = metaEnum.valueToKey(host->getHighestSeverity());
+    QString dnsName = host->getDnsName().isEmpty() ? "Not resolved" :  host->getDnsName();
+    attrs.insert("HighestSeverity",sev);
+    attrs.insert("DnsName",dnsName);
+    attrs.insert("MacAddress",host->getMacAddress());
+    attrs.insert("MacVendor",host->getMacVendor());
+    attrs.insert("OsName",host->getOsName());
+    attrs.insert("Gateway",host->isGateway() ? "True" : "False");
+    attrs.insert("InAxfr",host->isInAxfr() ? "True" : "False");
+    attrs.insert("GeoLocation",host->hasGeoLocation() ? "True" : "False");
+    if( host->hasGeoLocation() ){
+        attrs.insert("City",host->getCity());
+        attrs.insert("Longitude",host->getLongitude());
+        attrs.insert("Latitude",host->getLatitude());
+    }
+    attrs.insert("HostState",host->getHostState());
+    attrs.insert("HostReason",host->getHostStateReason());
+    attrs.insert("HostCPE",host->getHostCPE().join(":"));
+    attrs.insert("HostHops",QString::number(host->getDistance()));
+    attrs.insert("HostRecordType",host->getRecordType());
+
+    return(attrs);
+}
+
+QList<PtngHostBuilder*> PtngDGMLBuilder::setHighestSeverity(QList<PtngHostBuilder*> builders)
+{
+    QList<PtngHostBuilder*> builderList = builders;
+
+
+    return(builderList);
+}
+
+QString PtngDGMLBuilder::toString(int indent)
+{
+    return(dgmlObject->doc->toString(indent));
+}
 
 } // namespace ptng

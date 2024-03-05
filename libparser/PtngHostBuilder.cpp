@@ -67,6 +67,18 @@ PtngHostBuilder& PtngHostBuilder::addScript( const QString &id, const QString &o
     return(*this);
 }
 
+PtngHostBuilder &PtngHostBuilder::setHighestSeverity(PtngEnums::IssueSeverity severity)
+{
+    host->highestSeverity = severity;
+    return(*this);
+}
+
+PtngHostBuilder &PtngHostBuilder::setIsInZoneFile(bool axfr)
+{
+    host->gateway = axfr;
+    return(*this);
+}
+
 PtngHostBuilder& PtngHostBuilder::addPortSpec(const PtngPort &portSpec ){
     host->portSpecs.append(portSpec);
     return(*this);
@@ -113,8 +125,8 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
         else if( elem.tagName() == "hostnames" ){
              QDomElement hn = elem.firstChildElement("hostname");
             host->dnsName = hn.attribute("name");
-            qInfo() << "[info] Host name 2:"<<host->dnsName;
-            qInfo() << "[info] Host name 3:"<<host->getDnsName();
+            // qInfo() << "[info] Host name 2:"<<host->dnsName;
+            // qInfo() << "[info] Host name 3:"<<host->getDnsName();
         }
         else if( elem.tagName() == "os" ){
             // qInfo() << "[info] in the os node for:"<<host->getIpAddress();

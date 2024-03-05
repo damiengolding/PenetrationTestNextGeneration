@@ -99,10 +99,11 @@ public: // Creational - the user can create a DGML string from an arbitrary sour
 
 public: // Creational - from known source types, e.g. nmap QList<PtngHostBuilder*> and QMap<QString,QString>
     PtngDGMLBuilder& createSimple(const QMap<QString,QString> &hosts, bool addLabels = true);
-    PtngDGMLBuilder& createFromNmap(QList<PtngHostBuilder*> builders, bool addLabels = true);
+    PtngDGMLBuilder& createFromNmap(QList<PtngHostBuilder*> builders, const QString &issuesFile = "", const QString &zoneFile = "", bool addLabels = true);
 
 private: // Helper functions
     QMap<QString,QString> getAttributes(PtngHost *host);
+    QList<PtngHostBuilder*> setHighestSeverity(QList<PtngHostBuilder*> builderList);
 
 public: // Other accessors/mutators
     QString toString(int indent = 1);
