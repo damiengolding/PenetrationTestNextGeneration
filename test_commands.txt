@@ -1,0 +1,7 @@
+-f discworld_tcp_01.xml --output discworld_nmap_dgml.dgml -l off --issues discworld_network_01_nessus.xml
+
+-f discworld_tcp_01.xml --output discworld_nmap_dgml.dgml -l on --issues discworld_network_01_nessus.xml --zone discworld_nmap_axfr_01.xml
+
+-f sample_nmap_iplocation_ipforwarding.xml -o sample_nmap_iplocation_ipforwarding.dgml --subnets 60.,59.100.
+
+-f discworld_nmap_axfr_01.xml -o discworld_nmap_axfr_simple_dgml.dgml --subnets 192.168.4.

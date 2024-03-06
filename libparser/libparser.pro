@@ -11,6 +11,7 @@ CONFIG += c++20 warn_off
 
 SOURCES += \
     PtngDGMLBuilder.cpp \
+    PtngDGMLConvDot.cpp \
     PtngHostBuilder.cpp \
     PtngIP4Address.cpp \
     PtngIdent.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     inc/PtngDGMLBuilder.hpp \
+    inc/PtngDGMLConv.hpp \
     inc/PtngEnums.hpp \
     inc/PtngHostBuilder.hpp \
     inc/PtngIdent.hpp \

@@ -24,17 +24,30 @@ SOFTWARE.
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
+// Qt
+#include <QtCore/qglobal.h>
+#include <QDomDocument>
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QDomElement>
+#include <QDomText>
+#include <QDomAttr>
+#include <QFile>
+#include <QTextStream>
+#include <QMap>
+#include <QList>
+#include <QDebug>
 
-#include "GlobalIncludes.hpp"
+// STD
+#include <iostream>
+#include <string>
 
-// Argument processing
-void showTypes();
-
-// Option processing
-QList<PtngHostBuilder*> parseInputFiles( QString networkMapSource,
-                QString zoneTransferFile,
-                QString hshFile,
-                QString ipLocationAPIKey,
-                QString subnetFilter,
-                QString outputFileStem,
-                QString fontFamily);
+// ptng
+#include "PtngEnums.hpp"
+#include "PtngIdent.hpp"
+#include "PtngHostBuilder.hpp"
+#include "PtngSpecifications.hpp"
+#include "PtngInputParser.hpp"
+#include "PtngDGMLBuilder.hpp"
+#include "PtngIP4Address.hpp"
+using namespace ptng;

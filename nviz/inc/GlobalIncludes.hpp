@@ -24,7 +24,7 @@ SOFTWARE.
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
-
+// Qt
 #include <QtCore/qglobal.h>
 #include <QDomDocument>
 #include <QDomNode>
@@ -37,13 +37,17 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QMap>
 #include <QList>
 #include <QDebug>
-#include <QScopedPointer>
-#include <QStringBuilder>
-#include <QColor>
-#include <QFont>
 
-#if defined(LIBPARSER_LIBRARY)
-#  define LIBPARSER_EXPORT Q_DECL_EXPORT
-#else
-#  define LIBPARSER_EXPORT Q_DECL_IMPORT
-#endif
+// STD
+#include <iostream>
+#include <string>
+
+// ptng
+#include "PtngEnums.hpp"
+#include "PtngIdent.hpp"
+#include "PtngHostBuilder.hpp"
+#include "PtngSpecifications.hpp"
+#include "PtngInputParser.hpp"
+#include "PtngDGMLBuilder.hpp"
+#include "PtngIP4Address.hpp"
+using namespace ptng;

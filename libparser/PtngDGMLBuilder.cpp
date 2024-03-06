@@ -43,7 +43,8 @@ void PtngDGML::createXml(){
     doc = new QDomDocument("");
     // doc->createProcessingInstruction("xml", "version=\"1.0\" encoding=\"utf-8\"");
     root = doc->createElement("DirectedGraph");
-    root.setAttribute("Title","Network DGML");
+    root.setAttribute("Title","NetworkDGML");
+    root.setAttribute("Background","#DCDCDC");
     root.setAttribute("xmlns","http://schemas.microsoft.com/vs/2009/dgml");
     doc->appendChild(root);
 
@@ -54,17 +55,19 @@ void PtngDGML::createXml(){
     root.appendChild(links);
 
     QDomElement categories = doc->createElement("Categories");
-
+// Default categroies
+    {
     // See here for style attribute options: https://github.com/MicrosoftDocs/visualstudio-docs/blob/main/docs/modeling/customize-code-maps-by-editing-the-dgml-files.md#OrganizeNodes
 
     // QUERY need some null tests here?
     QDomElement criticalCategory = doc->createElement("Category");
     criticalCategory.setAttribute("Id","critical");
     criticalCategory.setAttribute("Label","Critical");
-    criticalCategory.setAttribute("Stroke","Firebrick"); // Border colour
-    criticalCategory.setAttribute("Background","White");
-    criticalCategory.setAttribute("Foreground","Black");
-    criticalCategory.setAttribute("StrokeThickness","1");
+    // criticalCategory.setAttribute("Stroke","Firebrick"); // Border colour
+    criticalCategory.setAttribute("Stroke","#B22222"); // Border colour
+    criticalCategory.setAttribute("Background","#FFFFFF");
+    criticalCategory.setAttribute("Foreground","#000000");
+    criticalCategory.setAttribute("StrokeThickness","2");
     // criticalCategory.setAttribute("Icon","<path>");
     criticalCategory.setAttribute("FontFamily","Open Sans");
     criticalCategory.setAttribute("FontSize","10");
@@ -76,10 +79,11 @@ void PtngDGML::createXml(){
     QDomElement highCategory = doc->createElement("Category");
     highCategory.setAttribute("Id","high");
     highCategory.setAttribute("Label","High");
-    highCategory.setAttribute("Stroke","OrangeRed"); // Border colour
-    highCategory.setAttribute("Background","White");
-    highCategory.setAttribute("Foreground","Black");
-    highCategory.setAttribute("StrokeThickness","1");
+    // highCategory.setAttribute("Stroke","OrangeRed"); // Border colour
+    highCategory.setAttribute("Stroke","#FF4500"); // Border colour
+    highCategory.setAttribute("Background","#FFFFFF");
+    highCategory.setAttribute("Foreground","#000000");
+    highCategory.setAttribute("StrokeThickness","2");
     // highCategory.setAttribute("Icon","<path>");
     highCategory.setAttribute("FontFamily","Open Sans");
     highCategory.setAttribute("FontSize","10");
@@ -91,10 +95,11 @@ void PtngDGML::createXml(){
     QDomElement mediumCategory = doc->createElement("Category");
     mediumCategory.setAttribute("Id","medium");
     mediumCategory.setAttribute("Label","Medium");
-    mediumCategory.setAttribute("Stroke","DarkSalmon"); // Border colour
-    mediumCategory.setAttribute("Background","White");
-    mediumCategory.setAttribute("Foreground","Black");
-    mediumCategory.setAttribute("StrokeThickness","1");
+    // mediumCategory.setAttribute("Stroke","DarkSalmon"); // Border colour
+    mediumCategory.setAttribute("Stroke","#E9967A"); // Border colour
+    mediumCategory.setAttribute("Background","#FFFFFF");
+    mediumCategory.setAttribute("Foreground","#000000");
+    mediumCategory.setAttribute("StrokeThickness","2");
     // mediumCategory.setAttribute("Icon","<path>");
     mediumCategory.setAttribute("FontFamily","Open Sans");
     mediumCategory.setAttribute("FontSize","10");
@@ -106,10 +111,11 @@ void PtngDGML::createXml(){
     QDomElement lowCategory = doc->createElement("Category");
     lowCategory.setAttribute("Id","low");
     lowCategory.setAttribute("Label","Low");
-    lowCategory.setAttribute("Stroke","DarkGreen"); // Border colour
-    lowCategory.setAttribute("Background","White");
-    lowCategory.setAttribute("Foreground","Black");
-    lowCategory.setAttribute("StrokeThickness","1");
+    // lowCategory.setAttribute("Stroke","DarkGreen"); // Border colour
+    lowCategory.setAttribute("Stroke","#006400"); // Border colour
+    lowCategory.setAttribute("Background","#FFFFFF");
+    lowCategory.setAttribute("Foreground","#000000");
+    lowCategory.setAttribute("StrokeThickness","2");
     // lowCategory.setAttribute("Icon","<path>");
     lowCategory.setAttribute("FontFamily","Open Sans");
     lowCategory.setAttribute("FontSize","10");
@@ -121,10 +127,11 @@ void PtngDGML::createXml(){
     QDomElement noneCategory = doc->createElement("Category");
     noneCategory.setAttribute("Id","none");
     noneCategory.setAttribute("Label","None");
-    noneCategory.setAttribute("Stroke","Navy"); // Border colour
-    noneCategory.setAttribute("Background","White");
-    noneCategory.setAttribute("Foreground","Black");
-    noneCategory.setAttribute("StrokeThickness","1");
+    // noneCategory.setAttribute("Stroke","Navy"); // Border colour
+    noneCategory.setAttribute("Stroke","#000080"); // Border colour
+    noneCategory.setAttribute("Background","#FFFFFF");
+    noneCategory.setAttribute("Foreground","#000000");
+    noneCategory.setAttribute("StrokeThickness","2");
     // noneCategory.setAttribute("Icon","<path>");
     noneCategory.setAttribute("FontFamily","Open Sans");
     noneCategory.setAttribute("FontSize","10");
@@ -134,14 +141,47 @@ void PtngDGML::createXml(){
     categories.appendChild(noneCategory);
     root.appendChild(categories);
 
+    QDomElement commentCategory = doc->createElement("Category");
+    commentCategory.setAttribute("Id","comment");
+    commentCategory.setAttribute("Label","Comment");
+    commentCategory.setAttribute("Stroke","#000000"); // Border colour
+    commentCategory.setAttribute("Background","#FFD700");
+    commentCategory.setAttribute("Foreground","#000000");
+    commentCategory.setAttribute("StrokeThickness","2");
+    // commentCategory.setAttribute("Icon","<path>");
+    commentCategory.setAttribute("FontFamily","Open Sans");
+    commentCategory.setAttribute("FontSize","10");
+    // commentCategory.setAttribute("FontWeight","<value>");
+    commentCategory.setAttribute("FontStyle","<Style>"); // Italic or Bold
+    commentCategory.setAttribute("Style","Plain"); // "Plain" or "Glass"
+    categories.appendChild(commentCategory);
+    root.appendChild(categories);
+
+    QDomElement subnetCategory = doc->createElement("Category");
+    subnetCategory.setAttribute("Id","subnet");
+    subnetCategory.setAttribute("Label","Subnet");
+    subnetCategory.setAttribute("Stroke","#000000"); // Border colour
+    subnetCategory.setAttribute("Background","#FFFFFF");
+    subnetCategory.setAttribute("Foreground","#000000");
+    subnetCategory.setAttribute("StrokeThickness","2");
+    // subnetCategory.setAttribute("Icon","<path>");
+    subnetCategory.setAttribute("FontFamily","Open Sans");
+    subnetCategory.setAttribute("FontSize","10");
+    // subnetCategory.setAttribute("FontWeight","<value>");
+    subnetCategory.setAttribute("FontStyle","<Style>"); // Italic or Bold
+    subnetCategory.setAttribute("Style","Plain"); // "Plain" or "Glass"
+    categories.appendChild(subnetCategory);
+    root.appendChild(categories);
+}
     QDomElement properties = doc->createElement("Properties");
     root.appendChild(properties);
 
     QDomElement paths = doc->createElement("Paths");
     root.appendChild(paths);
 
-    QDomElement styles = doc->createElement("Styles");
-    root.appendChild(styles);
+    // QUERY I don't seem to ever use this, implement?
+    // QDomElement styles = doc->createElement("Styles");
+    // root.appendChild(styles);
 
     // QDomElement elem = doc->elementsByTagName("Paths").at(0).toElement();
 }
@@ -156,23 +196,22 @@ PtngDGMLBuilder::PtngDGMLBuilder(QObject *parent)
     dgmlObject = new PtngDGML();
 }
 
-// TODO test all these 'add' methods
-// REFACT is there a way to put all of these into a single function with a switch on teh tpye?
+// REFACT is there a way to put all of these into a single function with a switch on the tpye?
 PtngDGMLBuilder &PtngDGMLBuilder::addNode(const QString &id, const QString &label, const QMap<QString, QString> &attributes)
 {
     // qInfo() << "[info] Adding node:"<<"Id:"<<id<<"Label:"<<label;
     QDomElement newNode = dgmlObject->doc->createElement("Node");
     newNode.setAttribute("Id",id);
     newNode.setAttribute("Label",label);
-    newNode.setAttribute("Category","none");
+    // newNode.setAttribute("Category","none");
     QDomNodeList nodeList = dgmlObject->doc->elementsByTagName("Nodes");
     // qInfo() << "[info] Number of Nodes:"<<nodeList.count();
     if( nodeList.count() != 1 ){
-        qInfo() << "[info] Wrong number of \'Nodes'\:"<<nodeList.count();
+        qInfo() << "[info] Wrong number of \'Nodes\':"<<nodeList.count();
         return(*this);
     }
     for( auto [name,value] : attributes.asKeyValueRange()){
-        // qInfo() << "[info] Node attributes: "<<name<<"Value:"<<value;
+        // qInfo() << "[info] Node attribute: "<<name<<"Value:"<<value;
         newNode.setAttribute(name,value);
     }
     QDomElement nodes = nodeList.at(0).toElement();
@@ -194,7 +233,7 @@ PtngDGMLBuilder &PtngDGMLBuilder::addLink(const QString &source, const QString &
     QDomNodeList nodeList = dgmlObject->doc->elementsByTagName("Links");
     // qInfo() << "[info] Number of Links:"<<nodeList.count();
     if( nodeList.count() != 1 ){
-        // qInfo() << "[info] Wrong number of \'Links'\:"<<nodeList.count();
+        // qInfo() << "[info] Wrong number of \'Links\'"<<nodeList.count();
         return(*this);
     }
     for( auto [name,value] : attributes.asKeyValueRange()){
@@ -216,7 +255,7 @@ PtngDGMLBuilder &PtngDGMLBuilder::addCategory(const QString &id, const QString &
     newNode.setAttribute("Label",label);
     QDomNodeList nodeList = dgmlObject->doc->elementsByTagName("Categories");
     if( nodeList.count() != 1 ){
-        qInfo() << "[info] Wrong number of \'Categories'\:"<<nodeList.count();
+        qInfo() << "[info] Wrong number of \'Categories\':"<<nodeList.count();
         return(*this);
     }
     for( auto [name,value] : attributes.asKeyValueRange()){
@@ -236,7 +275,7 @@ PtngDGMLBuilder &PtngDGMLBuilder::addProperty(const QString &id, const QString &
     newNode.setAttribute("DataType",dataType);
     QDomNodeList nodeList = dgmlObject->doc->elementsByTagName("Properties");
     if( nodeList.count() != 1 ){
-        qInfo() << "[info] Wrong number of \'Properties'\:"<<nodeList.count();
+        qInfo() << "[info] Wrong number of \'Properties\':"<<nodeList.count();
         return(*this);
     }
     for( auto [name,value] : attributes.asKeyValueRange()){
@@ -258,7 +297,7 @@ PtngDGMLBuilder& PtngDGMLBuilder::addPath(const QString &id, const QString &labe
     newNode.setAttribute("IsReference",isRef);
     QDomNodeList nodeList = dgmlObject->doc->elementsByTagName("Properties");
     if( nodeList.count() != 1 ){
-        qInfo() << "[info] Wrong number of \'Properties'\:"<<nodeList.count();
+        qInfo() << "[info] Wrong number of \'Properties\':"<<nodeList.count();
         return(*this);
     }
     for( auto [name,value] : attributes.asKeyValueRange()){
@@ -275,6 +314,8 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
     // qInfo() << "[info] In fromSimple";
     QStringList aClasses,bClasses,cClasses,leaves;
     QMap<QString,QString> map; // For attributes
+    QMap<QString,QString> emptyMap; // For empty attributes
+    map.insert("Category","subnet");
     // Create the 'Attack Machine' root node
     addNode("attack_machine","Attack Machine",map);
 
@@ -345,13 +386,13 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
     for( auto aClass : aClasses){
         addNode(aClass, aClass, map);
         if( addLabels ){
-            addLink("attack_machine", aClass, "Attack Machine->" + aClass ,map);
+            addLink("attack_machine", aClass, "Attack Machine->" + aClass ,emptyMap);
         }
         else{
-            addLink("attack_machine", aClass, "" ,map);
+            addLink("attack_machine", aClass, "" ,emptyMap);
         }
     }
-    qInfo() << "[info] aClasses 2:"<<aClasses.count();
+    // qInfo() << "[info] aClasses 2:"<<aClasses.count();
 
     // Add the B class nodes and link to the A Class nodes
     for( auto aClass : aClasses){
@@ -361,10 +402,10 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
             if( bc.startsWith(tempStr)){
                 addNode(bc, bc, map);
                 if( addLabels ){
-                    addLink(aClass, bc,aClass + "->" + bc,map);
+                    addLink(aClass, bc,aClass + "->" + bc,emptyMap);
                 }
                 else{
-                    addLink(aClass, bc,"",map);
+                    addLink(aClass, bc,"",emptyMap);
                 }
             }
         }
@@ -376,10 +417,10 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
                 if( cc.startsWith(tempStr)){
                     addNode(cc, cc, map);
                     if( addLabels ){
-                        addLink(bClass, cc,bClass + "->" +cc,map);
+                        addLink(bClass, cc,bClass + "->" +cc,emptyMap);
                     }
                     else{
-                        addLink(bClass, cc,"",map);
+                        addLink(bClass, cc,"",emptyMap);
                     }
                 }
             }
@@ -395,10 +436,10 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
                 if( leaf.startsWith(tempStr)){
                     addNode(leaf, leaf, map);
                     if( addLabels ){
-                        addLink(cClass, leaf,cClass + "->" +leaf,map);
+                        addLink(cClass, leaf,cClass + "->" +leaf,emptyMap);
                     }
                     else{
-                        addLink(cClass,leaf,"",map);
+                        addLink(cClass,leaf,"",emptyMap);
                     }
                 }
             }
@@ -422,6 +463,7 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
     }
     QStringList aClasses,bClasses,cClasses,leaves;
     QMap<QString,QString> map; // For attributes
+    map.insert("Category","subnet");
     QMap<QString,QString> emptyMap; // For empty attributes
     // Create the 'Attack Machine' root node
     addNode("attack_machine","Attack Machine",map);
@@ -469,10 +511,6 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
 
     // Add the A class nodes and link to the 'Attack Machine'
     for( auto aClass : aClasses){
-        // QString testStr = aClass.split(".").at(0) + ".";
-        // if( !isInFilter(subnetFilters.split(","), testStr , 0 )){
-        //     continue;
-        // }
 
         addNode(aClass, aClass, map);
         if( addLabels ){
@@ -489,13 +527,6 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
         QString tempStr = tempList.at(0);
         qInfo() << "[info] tempStr for bClass:"<<tempStr;
         for( auto bc : bClasses){
-
-            // QString testStr = bc.split(".").at(0) + "." + bc.split(".").at(1) + ".";
-            // qInfo() << "[info] bClass teststr:"<<testStr;
-            // if( !isInFilter(subnetFilters.split(","), testStr , 1 )){
-            //     continue;
-            // }
-            // qInfo() << "[info] bClass:"<<bc;
 
             if( bc.startsWith(tempStr)){
                 addNode(bc, bc, map);
@@ -534,6 +565,7 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
     }
 
     // Add the leaf nodes and link to the C Class nodes
+    map.clear();
     for(auto cClass : cClasses){
         QStringList tempList = cClass.split(".");
         QString tempStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";

@@ -4,4 +4,4 @@ SUBDIRS += \
     libparser \
     ifident \
     ndgml \
-    ntop
+    nviz
