@@ -33,6 +33,6 @@ void showTypes(){
 
 }
 
-void processFile(){
+void processFile(const QString &dgmlSource, const QString &conversionType, const QString &outputFileStem, const QString &command){
 
 }
