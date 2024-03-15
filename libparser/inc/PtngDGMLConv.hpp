@@ -42,67 +42,74 @@ class LIBPARSER_EXPORT PtngDGMLConv : public QObject
 public:
     explicit PtngDGMLConv(QObject *parent = nullptr);
 
-    QString toDot(const QString &dgml);
+    /*!
+       \brief toDot
+       \param dgml
+       \param ok
+       \return QString
+     */
+    QString toDot(const QString &dgml, bool &ok);
 
 private:
     void setCategories(const QString &dgml);
+    QStringList getDisplaySettings(const QDomNode &node);
 
 public: // Category settings
     // Critical
-    QColor criticalColor;
-    QColor criticalForeground;
-    QColor criticalBackground;
-    QFont criticalFont;
-    int criticalFontSize;
-    int criticalStroke;
+    QString criticalColor;
+    QString criticalForeground;
+    QString criticalBackground;
+    QString criticalFont;
+    QString criticalFontSize;
+    QString criticalStroke;
 
     // High
-    QColor highColor;
-    QColor highForeground;
-    QColor highBackground;
-    QFont highFont;
-    int highFontSize;
-    int highStroke;
+    QString highColor;
+    QString highForeground;
+    QString highBackground;
+    QString highFont;
+    QString highFontSize;
+    QString highStroke;
 
     // Medium
-    QColor mediumColor;
-    QColor mediumForeground;
-    QColor mediumBackground;
-    QFont mediumFont;
-    int mediumFontSize;
-    int mediumStroke;
+    QString mediumColor;
+    QString mediumForeground;
+    QString mediumBackground;
+    QString mediumFont;
+    QString mediumFontSize;
+    QString mediumStroke;
 
     // Low
-    QColor lowColor;
-    QColor lowForeground;
-    QColor lowBackground;
-    QFont lowFont;
-    int lowFontSize;
-    int lowStroke;
+    QString lowColor;
+    QString lowForeground;
+    QString lowBackground;
+    QString lowFont;
+    QString lowFontSize;
+    QString lowStroke;
 
     // None
-    QColor noneColor;
-    QColor noneForeground;
-    QColor noneBackground;
-    QFont noneFont;
-    int noneFontSize;
-    int noneStroke;
+    QString noneColor;
+    QString noneForeground;
+    QString noneBackground;
+    QString noneFont;
+    QString noneFontSize;
+    QString noneStroke;
 
     // Comment
-    QColor commentColor;
-    QColor commentForeground;
-    QColor commentBackground;
-    QFont commentFont;
-    int commentFontSize;
-    int commentStroke;
+    QString commentColor;
+    QString commentForeground;
+    QString commentBackground;
+    QString commentFont;
+    QString commentFontSize;
+    QString commentStroke;
 
     // Subnet
-    QColor subnetColor;
-    QColor subnetForeground;
-    QColor subnetBackground;
-    QFont subnetFont;
-    int subnetFontSize;
-    int subnetStroke;
+    QString subnetColor;
+    QString subnetForeground;
+    QString subnetBackground;
+    QString subnetFont;
+    QString subnetFontSize;
+    QString subnetStroke;
 
 };
 

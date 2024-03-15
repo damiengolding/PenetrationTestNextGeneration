@@ -27,7 +27,8 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QCoreApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
-#include "GlobalIncludes.hpp"
+#include "inc/GlobalIncludes.hpp"
+#include "inc/CommandLineHandler.hpp"
 
 void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser);
 void initArgumenviztions(QCoreApplication &app, QCommandLineParser &parser);
@@ -36,9 +37,10 @@ void processArgumenviztions(QCoreApplication &app, QCommandLineParser &parser);
 QList<QCommandLineOption> commandLineOptions;
 
 QString dgmlSource="";
+QString conversionType="";
 QString outputFileStem="";
 QString command="";
-QString conversionType="";
+QString subnetFilters="";
 
 int ret = 0;
 
@@ -76,7 +78,7 @@ void initArgumenviztions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addOption({{"t","type"},"[required] The required conversion type. Currently supported switches are: dot, tcp, udp, vtxt, vvln, vplg","type"});
     parser.addOption({{"o","output"},"[optional] An output file name stem. This will be prefixed by a system date/time string. If it is omitted just the system date/time string will be used as the output file name(s)","stem"});
     //dot.exe <*****.dot> -Tpng -o <imagename.png>
-    parser.addOption({{"e","exec"},"[optional] A command to call on the output file (name supplied with the -o/--output option)","command"});
+    parser.addOption({{"e","exec"},"[optional] A command to call on the output file (name supplied with the -o/--output option). For instance, to obtain a dot network model enter: dot.exe %input_file% -Tpng -o <imagename.png> ","command"});
 
 }
 
@@ -110,6 +112,8 @@ void processArgumenviztions(QCoreApplication &app, QCommandLineParser &parser){
             }
         }
     }
+
+    // Converson type
     if( parser.isSet("type")){
         QString t = parser.value("type").toLower();
         if( t != "dot" || t != "tcp" || t != "udp" || t != "vtxt" || t != "vvln" || t != "vplg"  ){
@@ -123,6 +127,8 @@ void processArgumenviztions(QCoreApplication &app, QCommandLineParser &parser){
             conversionType = t;
         }
     }
+
+    // Output file stem
     if( parser.isSet("output")  ){
         outputFileStem= parser.value("output");
         qInfo() << "[info] Optional argument output set to:" <<outputFileStem;
@@ -130,6 +136,7 @@ void processArgumenviztions(QCoreApplication &app, QCommandLineParser &parser){
     else{
         qInfo() << "[info] Optional argument output not set. Moving on.";
     }
+    // Command to execute on the output file
     if( parser.isSet("exec") ){
         command = parser.value("exec");
         qInfo() << "[info] Optional argument exec set to:" <<command;
@@ -137,4 +144,6 @@ void processArgumenviztions(QCoreApplication &app, QCommandLineParser &parser){
     else{
         qInfo() << "[info] Optional argument exec not set. Moving on.";
     }
+
+    processFile(dgmlSource,conversionType,outputFileStem,command);
 }

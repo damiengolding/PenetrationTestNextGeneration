@@ -25,14 +25,60 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
 
-#include "inc/GlobalIncludes.hpp"
 #include "inc/CommandLineHandler.hpp"
+#include <QFontInfo>
 
 // Argument processing
 void showTypes(){
 
 }
 
-void processFile(const QString &dgmlSource, const QString &conversionType, const QString &outputFileStem, const QString &command){
+void processFile(const QString &dgmlSource,
+                 const QString &conversionType,
+                 const QString &outputFileStem,
+                 const QString &command){
+    QScopedPointer<QFile> file( new QFile(dgmlSource ) ) ;
+    qInfo() << "[info] Starting to process file";
+    if( !file->open(QIODevice::ReadOnly)  ){
+        qWarning() << "[warning] Could not open"<<dgmlSource<<"For reading";
+        return;
+    }
+    QString dgml = file->readAll();
+    QScopedPointer<PtngDGMLConv> converter(new PtngDGMLConv());
+    bool ok = false;
+    QString dotOutput = converter->toDot(dgml,ok);
 
+    // Create output file and write the result
+    QString ofName = outputFileStem;
+    if( ofName.isEmpty() ){
+        ofName = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch()) % "_";
+        ofName += "network_model";
+        ofName += ".dot";
+    }
+    else{
+        if( !ofName.endsWith(".dot") ){
+            ofName += ".dot";
+        }
+    }
+    QFile oFile(ofName);
+    if( !oFile.open(QIODevice::WriteOnly) ){
+        qWarning() << "[warning] Could not open file for writing";
+        return;
+    }
+    QTextStream out(&oFile);
+    out <<dotOutput;
+    oFile.close();
+
+    qInfo() << "[info] Dot runcontrol:\n\n"<<dotOutput;
+    file->close();
+
+    // Execute the command if one is supplied
+    if( command.isEmpty() ){
+        return;
+    }
+    QString procCmd = command;
+    procCmd = procCmd.replace("%input_file%",ofName);
+    QProcess proc;
+    proc.startCommand(procCmd);
+    proc.waitForFinished();
 }

@@ -37,6 +37,9 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QMap>
 #include <QList>
 #include <QDebug>
+#include <QFont>
+#include <QDateTime>
+#include <QProcess>
 
 // STD
 #include <iostream>
@@ -50,4 +53,5 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "PtngInputParser.hpp"
 #include "PtngDGMLBuilder.hpp"
 #include "PtngIP4Address.hpp"
+#include "PtngDGMLConv.hpp"
 using namespace ptng;

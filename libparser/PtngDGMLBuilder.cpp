@@ -44,7 +44,7 @@ void PtngDGML::createXml(){
     // doc->createProcessingInstruction("xml", "version=\"1.0\" encoding=\"utf-8\"");
     root = doc->createElement("DirectedGraph");
     root.setAttribute("Title","NetworkDGML");
-    root.setAttribute("Background","#DCDCDC");
+    // root.setAttribute("Background","#DCDCDC");
     root.setAttribute("xmlns","http://schemas.microsoft.com/vs/2009/dgml");
     doc->appendChild(root);
 
@@ -525,7 +525,6 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
     for( auto aClass : aClasses){
         QStringList tempList = aClass.split(".");
         QString tempStr = tempList.at(0);
-        qInfo() << "[info] tempStr for bClass:"<<tempStr;
         for( auto bc : bClasses){
 
             if( bc.startsWith(tempStr)){

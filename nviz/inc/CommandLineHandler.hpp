@@ -29,4 +29,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 
 void showTypes();
 
-void processFile(const QString &dgmlSource, const QString &conversionType, const QString &outputFileStem="", const QString &command="");
+void processFile(const QString &dgmlSource,
+                 const QString &conversionType,
+                 const QString &outputFileStem="",
+                 const QString &command="");
