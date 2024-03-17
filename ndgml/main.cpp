@@ -42,7 +42,7 @@ QString outputFile="";
 QString issuesFile="";
 QString zoneFile="";
 QString subnetFilters="";
-bool showLabels=true;
+bool showLabels=false;
 
 void processFile(const QString& inputFile,const QString& outputFile,const QString& zoneFile, const QString &issuesFile, const QString &subnets, bool labels);
 void showTypes();
@@ -78,7 +78,7 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
 }
 
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
-    parser.addPositionalArgument("types","Currently supported input file types");
+    parser.addPositionalArgument("show-types","Currently supported input file types");
     parser.addOption({{"f","file"},"Input file. Use \'ndgml types\' to list supported types.","file"});
     parser.addOption({{"o","output"},"[optional] Write to file","file"});
     parser.addOption({{"l","labels"},"[optional] Add labels to links; this is necessary for conversion to dot runcontrol (default is '\on\')","on|off"});
@@ -91,7 +91,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     PtngEnums::SupportedInputTypes type;
     // Positional arguments
     for(QString pos : parser.positionalArguments()){
-        if( pos.toLower() == "types"){
+        if( pos.toLower() == "show-types"){
             showTypes();
         }
     }
@@ -172,16 +172,16 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     if( parser.isSet("labels") ){
         if( parser.value("labels").toLower() == "on"){
             showLabels = true;
-            qInfo() << "[info] Show labels set to:" << "True";
+            qInfo() << "[info] Show labels set to: True";
         }
         else if(parser.value("labels").toLower() == "off"){
             showLabels = false;
-            qInfo() << "[info] Show labels set to:" << "False";
+            qInfo() << "[info] Show labels set to: False";
         }
-        else{
-            showLabels = true;
-            qInfo() << "[info] Show labels set to:" << "True";
-        }
+    }
+    else{
+        showLabels = false;
+        qInfo() << "[info] Show labels set to: False";
     }
 
     // Subnet filters

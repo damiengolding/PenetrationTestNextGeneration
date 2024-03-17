@@ -84,13 +84,24 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
 }
 
 void initArgumentOptions(QCommandLineParser &parser){
+    parser.addPositionalArgument("show-types","Currently supported input file types");
     parser.addOption({{"f","file"},"File to identify <file>","file"});
 }
 
 void processArgumentOptions(QCommandLineParser &parser){
+    // Positional arguments
+    for(QString pos : parser.positionalArguments()){
+        if( pos.toLower() == "show-types"){
+            showTypes();
+        }
+    }
+    // Don't handle poitional arguments and options together, one or the other
+    if( parser.positionalArguments().count() > 0 ){
+        return;
+    }
+
     if(parser.isSet("file")){
         QString inputFile = parser.value("f");
-        // cout << "Input file: " << qPrintable(inputFile) << endl;
         qInfo() << "[info]"<< "Input file:" << qPrintable(inputFile);
         if( !QFile::exists(inputFile) ){
             qWarning() << "[warning]" << "File" << inputFile <<  "does not exist.";

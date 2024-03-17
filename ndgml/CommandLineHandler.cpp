@@ -45,7 +45,7 @@ void showTypes(){
     qInfo() << "[info] Supported file types:";
     qInfo() << "[info] nmap - standard scan";
     qInfo() << "[info] nmap - with the dns-zone-transfer.nse script";
-    qInfo() << "[info]  dns recon - use \'dnsrecon -d <domain> -n <nameserver> -t axfr -x <outputfile>.xml\'";
+    qInfo() << "[info] dns recon - use \'dnsrecon -d <domain> -n <nameserver> -t axfr -x <outputfile>.xml\'";
     qInfo() << "[info] nslookup (windows) - use \'ls -d discworld.io > nslookup_win_axfr.txt\'";
     qInfo() << "[info] nslookup (linux)";
     qInfo() << "[info] arp-scan - use\'arp-scan <address_range> > <outputfile>.txt\'";
@@ -54,6 +54,7 @@ void showTypes(){
 }
 
 void processFile(const QString& inputFile, const QString &outputFile, const QString &issuesFile, const QString &zoneFile, const QString &subnetFilters, bool labels){
+    qInfo() << "[info] Starting to process file:"<<inputFile;
     PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(inputFile);
     QString dgml;
     PtngDGMLBuilder builder;
@@ -62,7 +63,7 @@ void processFile(const QString& inputFile, const QString &outputFile, const QStr
         // qInfo() << "[info] Number of hosts (nmap):"<<hostBuilders.count();
         builder.createFromNmap(hostBuilders,issuesFile,zoneFile,subnetFilters,labels);
         dgml = builder.toString(4);
-        qInfo() << "[info] DGML:"<<dgml;
+        // qInfo() << "[info] DGML:"<<dgml;
     }
     else{
         QMap<QString,QString> hosts = PtngInputParser::parseZoneTransfer(inputFile);
@@ -82,4 +83,5 @@ void processFile(const QString& inputFile, const QString &outputFile, const QStr
         outStream << dgml;
         file.close();
     }
+    qInfo() << "[info] Completed processing file:"<<inputFile;
 }

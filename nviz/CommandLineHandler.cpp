@@ -29,16 +29,13 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QFontInfo>
 
 // Argument processing
-void showTypes(){
-
-}
 
 void processFile(const QString &dgmlSource,
                  const QString &conversionType,
                  const QString &outputFileStem,
                  const QString &command){
     QScopedPointer<QFile> file( new QFile(dgmlSource ) ) ;
-    qInfo() << "[info] Starting to process file";
+    qInfo() << "[info] Starting to process input";
     if( !file->open(QIODevice::ReadOnly)  ){
         qWarning() << "[warning] Could not open"<<dgmlSource<<"For reading";
         return;
@@ -68,8 +65,6 @@ void processFile(const QString &dgmlSource,
     QTextStream out(&oFile);
     out <<dotOutput;
     oFile.close();
-
-    qInfo() << "[info] Dot runcontrol:\n\n"<<dotOutput;
     file->close();
 
     // Execute the command if one is supplied
@@ -81,4 +76,5 @@ void processFile(const QString &dgmlSource,
     QProcess proc;
     proc.startCommand(procCmd);
     proc.waitForFinished();
+    qInfo() << "[info] Completed processing input";
 }

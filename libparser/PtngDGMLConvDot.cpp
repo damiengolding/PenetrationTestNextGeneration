@@ -99,16 +99,13 @@ QString PtngDGMLConv::toDot(const QString &dgml, bool &ok)
         QDomElement e = n.toElement();
         QString link = e.attribute("Label");
 
-        // Deal with emtpy Labels; will be present with -l/--labels off switch on ndgml
+        // Deal with empty Labels, which will be present with -l/--labels off switch on ndgml
         if( link.isEmpty() ){
             QString source = e.attribute("Source");
             QString target = e.attribute("Target");
             QString linkText = source % "->" % target;
-
             linkText = linkText.replace("attack_machine","0");
             linkText = linkText.replace("Attack Machine","0");
-
-            // QString dotEntry = linkText % " [color=\"Black\"];\n";
             for( auto [address,display] : nodeMap.asKeyValueRange() ){
                 if( linkText.contains(address) ){
                     linkText = linkText.replace(address,display);
@@ -121,14 +118,11 @@ QString PtngDGMLConv::toDot(const QString &dgml, bool &ok)
                     }
                 }
             }
-
             continue;
         }
 
         // Deal with the Attacker node
         if( link.contains("Attacker") ){
-            // link = link.replace("attack_machine","Attacker");
-            // link = link.replace("Attack Machine","Attacker");
             QString dotEntry = link % " [color=\"Black\"];\n";
             for( auto [address,display] : nodeMap.asKeyValueRange() ){
                 if( link.contains(address) ){
@@ -144,7 +138,7 @@ QString PtngDGMLConv::toDot(const QString &dgml, bool &ok)
             }
             continue;
         }
-        // Main
+        // Main replacement loop
         for( auto [address,display] : nodeMap.asKeyValueRange() ){
             if( link.contains(address) ){
                 QStringList parts = link.split("->");

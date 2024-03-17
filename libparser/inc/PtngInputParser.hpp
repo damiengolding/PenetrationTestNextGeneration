@@ -45,19 +45,22 @@ class LIBPARSER_EXPORT PtngInputParser : public QObject
     Q_OBJECT
 public:
     explicit PtngInputParser(QObject *parent = nullptr);
+
+    // AXFR
     /*!
        \brief parseZoneTransfer
        \param inputFile
        \return QMap<QString,QString>
      */
     static QMap<QString,QString> parseZoneTransfer(const QString &inputFile);
-
+    // Nmap
     /*!
        \brief parseNmap
        \param inputFile
        \return
      */
     static QList<PtngHostBuilder*> parseNmap(const QString &inputFile);
+    // Nessus
     /*!
        \brief parseNesusIssues
        \param inputFile

@@ -11,11 +11,16 @@ CONFIG += c++20 warn_off
 
 SOURCES += \
     PtngDGMLBuilder.cpp \
+    PtngDGMLBuilderNessus.cpp \
+    PtngDGMLBuilderNmap.cpp \
+    PtngDGMLBuilderSimple.cpp \
     PtngDGMLConvDot.cpp \
     PtngHostBuilder.cpp \
     PtngIP4Address.cpp \
     PtngIdent.cpp \
-    PtngInputParser.cpp \
+    PtngInputParserAxfr.cpp \
+    PtngInputParserNessus.cpp \
+    PtngInputParserNmap.cpp \
     PtngStyleSheet.cpp
 
 HEADERS += \

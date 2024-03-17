@@ -1,17 +1,20 @@
+ifident show-types
+ifident -f discworld_network_01_nessus.xml
+
 ndgml -f discworld_tcp_01.xml --output discworld_nmap_dgml.dgml -l on --issues discworld_network_01_nessus.xml
-
 ndgml -f discworld_tcp_01.xml --output discworld_nmap_dgml.dgml -l off --issues discworld_network_01_nessus.xml --zone discworld_nmap_axfr_01.xml
-
 ndgml -f sample_nmap_iplocation_ipforwarding.xml -o sample_nmap_iplocation_ipforwarding.dgml
-
 ndgml -f sample_nmap_iplocation_ipforwarding.xml -o sample_nmap_iplocation_ipforwarding.dgml --subnets 60.,59.100.
-
 ndgml -f discworld_nmap_axfr_01.xml -o discworld_nmap_axfr_simple_dgml.dgml --subnets 192.168.4.
 
 nviz -f sample_nmap_iplocation_ipforwarding.dgml
-
 nviz -f discworld_nmap_dgml.dgml --output discworld_nmap.dot
-
 nviz -f discworld_nmap_dgml.dgml --output discworld_nmap.dot --exec "dot %input_file% -Tpng -o discworld_nmap.png"
-
 nviz -f sample_nmap_iplocation_ipforwarding.dgml --output discworld_nmap.dot --exec "dot %input_file% -Tpng -o discworld_nmap.png"
+
+############################################################################################################################################
+
+ndgml -f discworld_nmap_axfr_01.xml --output discworld_nmap_axfr_01.dgml
+ndgml -f discworld_nmap_axfr_01.xml --output discworld_nmap_axfr_01.dgml --subnets 192.168.4.
+ndgml -f discworld_nmap_axfr_01.xml --output discworld_nmap_axfr_01.dgml --subnets 192.168.4.,192.168.56.
+nviz -f discworld_nmap_axfr_01.dgml --output discworld_nmap_axfr_01.dot --exec "dot %input_file% -Tpng -o discworld_nmap_axfr_01.png"

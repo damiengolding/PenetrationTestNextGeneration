@@ -23,11 +23,9 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#pragma once
 
-#include "GlobalIncludes.hpp"
+#include "inc/PtngDGMLBuilder.hpp"
+namespace ptng{
 
-void processFile(const QString &dgmlSource,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
+
+} // namespace ptng

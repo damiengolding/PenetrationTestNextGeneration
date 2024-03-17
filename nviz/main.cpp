@@ -75,7 +75,7 @@ void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
 void initArgumenviztions(QCoreApplication &app, QCommandLineParser &parser){
     // Options
     parser.addOption({{"f","file"},"[required] The DGML file to use.","file"});
-    parser.addOption({{"t","type"},"[required] The required conversion type. Currently supported switches are: dot, tcp, udp, vtxt, vvln, vplg","type"});
+    // parser.addOption({{"t","type"},"[required] The required conversion type. Currently supported switches are: dot, tcp, udp, vtxt, vvln, vplg","type"});
     parser.addOption({{"o","output"},"[optional] An output file name stem. This will be prefixed by a system date/time string. If it is omitted just the system date/time string will be used as the output file name(s)","stem"});
     //dot.exe <*****.dot> -Tpng -o <imagename.png>
     parser.addOption({{"e","exec"},"[optional] A command to call on the output file (name supplied with the -o/--output option). For instance, to obtain a dot network model enter: dot.exe %input_file% -Tpng -o <imagename.png> ","command"});
@@ -114,19 +114,19 @@ void processArgumenviztions(QCoreApplication &app, QCommandLineParser &parser){
     }
 
     // Converson type
-    if( parser.isSet("type")){
-        QString t = parser.value("type").toLower();
-        if( t != "dot" || t != "tcp" || t != "udp" || t != "vtxt" || t != "vvln" || t != "vplg"  ){
-            qWarning() << "[warning] The supplied conversion type is not recognised.";
-            parser.showHelp();
-            ret = 1;
-            return;
-        }
-        else{
-            qInfo() << "[info] Required argument type set to:" <<conversionType;
-            conversionType = t;
-        }
-    }
+    // if( parser.isSet("type")){
+    //     QString t = parser.value("type").toLower();
+    //     if( t != "dot" || t != "tcp" || t != "udp" || t != "vtxt" || t != "vvln" || t != "vplg"  ){
+    //         qWarning() << "[warning] The supplied conversion type is not recognised.";
+    //         parser.showHelp();
+    //         ret = 1;
+    //         return;
+    //     }
+    //     else{
+    //         qInfo() << "[info] Required argument type set to:" <<conversionType;
+    //         conversionType = t;
+    //     }
+    // }
 
     // Output file stem
     if( parser.isSet("output")  ){
