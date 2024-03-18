@@ -41,7 +41,8 @@ public:
     int portNumber = 0;
     int severity = 0;
     QString serviceName = "";
-    PtngEnums::Protocol protocol = PtngEnums::NUM_PROTOCOLS;
+    // PtngEnums::Protocol protocol = PtngEnums::NUM_PROTOCOLS;
+    QString protocol = "";
     QString pluginId = ""; // Report -> ReportHost -> ReportItem -> pluginID (attr)
     QString pluginName = ""; // Report -> ReportHost -> ReportItem -> pluginName (attr)
     QString pluginFamily = ""; // Report -> ReportHost -> ReportItem -> pluginFamily (attr)

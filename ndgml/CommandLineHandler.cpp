@@ -35,6 +35,7 @@ bool fileIsSupported(const QString &inputFile){
             ||PtngIdent::checkFile(inputFile) == PtngEnums::ARPSCAN
             ||PtngIdent::checkFile(inputFile) == PtngEnums::NBTSCAN
             ||PtngIdent::checkFile(inputFile) == PtngEnums::AXFR_HOST
+            ||PtngIdent::checkFile(inputFile) == PtngEnums::NESSUS
             ){
         return(true);
     }
@@ -45,6 +46,7 @@ void showTypes(){
     qInfo() << "[info] Supported file types:";
     qInfo() << "[info] nmap - standard scan";
     qInfo() << "[info] nmap - with the dns-zone-transfer.nse script";
+    qInfo() << "[info] nessus";
     qInfo() << "[info] dns recon - use \'dnsrecon -d <domain> -n <nameserver> -t axfr -x <outputfile>.xml\'";
     qInfo() << "[info] nslookup (windows) - use \'ls -d discworld.io > nslookup_win_axfr.txt\'";
     qInfo() << "[info] nslookup (linux)";
@@ -53,35 +55,4 @@ void showTypes(){
     qInfo() << "[info] host - use \'host -t axfr <domain> <nameserver> > host_axfr.txt\'";
 }
 
-void processFile(const QString& inputFile, const QString &outputFile, const QString &issuesFile, const QString &zoneFile, const QString &subnetFilters, bool labels){
-    qInfo() << "[info] Starting to process file:"<<inputFile;
-    PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(inputFile);
-    QString dgml;
-    PtngDGMLBuilder builder;
-    if( type == PtngEnums::NMAP ){
-        QList<PtngHostBuilder*> hostBuilders = PtngInputParser::parseNmap(inputFile);
-        // qInfo() << "[info] Number of hosts (nmap):"<<hostBuilders.count();
-        builder.createFromNmap(hostBuilders,issuesFile,zoneFile,subnetFilters,labels);
-        dgml = builder.toString(4);
-        // qInfo() << "[info] DGML:"<<dgml;
-    }
-    else{
-        QMap<QString,QString> hosts = PtngInputParser::parseZoneTransfer(inputFile);
-        // qInfo() << "[info] Number of hosts (simple):"<<hosts.count();
-        builder.createSimple(hosts, subnetFilters, labels);
-        dgml = builder.toString(4);
-        qInfo() << "[info] DGML:"<<dgml;
-    }
 
-    if( !outputFile.isEmpty() ){
-        QFile file(outputFile);
-        if( !file.open(QIODevice::WriteOnly) ){
-            qInfo() << "[info] Could not open"<<outputFile<<"for writing";
-            return;
-        }
-        QTextStream outStream(&file);
-        outStream << dgml;
-        file.close();
-    }
-    qInfo() << "[info] Completed processing file:"<<inputFile;
-}

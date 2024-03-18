@@ -31,7 +31,7 @@ namespace ptng {
 QList<PtngIssue> PtngInputParser::parseNesusIssues(const QString &inputFile)
 {
     QList<PtngIssue> issueList;
-    // qInfo() << "[info] Starting to process nessus file:"<<inputFile;
+    qInfo() << "[info] Starting to process nessus file:"<<inputFile;
     QStringList ipAddresses;
     QScopedPointer<QDomDocument> doc(new QDomDocument("input"));
     QScopedPointer<QFile> f(new QFile(inputFile));
@@ -39,7 +39,6 @@ QList<PtngIssue> PtngInputParser::parseNesusIssues(const QString &inputFile)
     doc->setContent(f.data());
     QDomElement rootElem = doc->documentElement();
     QDomNodeList hosts = rootElem.elementsByTagName("ReportHost");
-    // qInfo() << "[info] Number of ReportHosts:"<<hosts.count();
     QString ipAddress;
     for( int i = 0;i<hosts.count();++i ){
         QDomNode host = hosts.item(i);
@@ -49,9 +48,7 @@ QList<PtngIssue> PtngInputParser::parseNesusIssues(const QString &inputFile)
         }
         ipAddress = elem.attribute("name");
         ipAddresses.append(ipAddress);
-        // qInfo() << "[info] IP address:"<<ipAddress;
         QDomNodeList items = elem.elementsByTagName("ReportItem");
-        // qInfo() << "[info] Number of ReportItems:"<<items.count();
 
         for( int i = 0;i<items.count();++i){
             QDomNode item = items.at(i);
@@ -63,13 +60,14 @@ QList<PtngIssue> PtngInputParser::parseNesusIssues(const QString &inputFile)
             issue.ipAddress = ipAddress;
             issue.portNumber = elem.attribute("port").toInt();
             issue.serviceName = elem.attribute("svc_name");
-            QString prot =  elem.attribute("protocol");
-            if( prot.toLower() == "tcp"  ){
-                issue.protocol = PtngEnums::TCP;
-            }
-            else if( prot.toLower() == "udp" ){
-                issue.protocol = PtngEnums::UDP;
-            }
+            issue.protocol = elem.attribute("protocol").toUpper();
+            // QString prot =  elem.attribute("protocol");
+            // if( prot.toLower() == "tcp"  ){
+            //     issue.protocol = PtngEnums::TCP;
+            // }
+            // else if( prot.toLower() == "udp" ){
+            //     issue.protocol = PtngEnums::UDP;
+            // }
             int sev  = elem.attribute("severity").toInt();
             switch(sev){
             case 0:{
@@ -107,11 +105,10 @@ QList<PtngIssue> PtngInputParser::parseNesusIssues(const QString &inputFile)
             issue.solution = elem.firstChildElement("solution").text();
             issue.seeAlso = elem.firstChildElement("xref").text();
             issue.riskFactor = elem.firstChildElement("risk_factor").text();
-            // qInfo() << "[info] Risk factor:"<<elem.firstChildElement("risk_factor").text();
             issueList.append(issue);
         }
     }
-    qInfo() << "[info] Num issues ()"<<issueList.count();
+    qInfo() << "[info] Nessus issue count (full):"<<issueList.count();
     return(issueList);
 }
 

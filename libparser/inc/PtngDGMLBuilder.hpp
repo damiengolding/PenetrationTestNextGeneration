@@ -91,20 +91,25 @@ public:
     explicit PtngDGMLBuilder(QObject *parent = nullptr);
 
 public: // Creational - the user can create a DGML string from an arbitrary source;
-    PtngDGMLBuilder& addNode(const QString &id, const QString &label, const QMap<QString,QString> &attributes);
-    PtngDGMLBuilder& addLink(const QString &source, const QString &target, const QString &label, const QMap<QString,QString> &attributes);
+    PtngDGMLBuilder& addNode(const QString &id, const QString &label = "", const QMap<QString,QString> &attributes = QMap<QString,QString>());
+    PtngDGMLBuilder& addLink(const QString &source, const QString &target, const QString &label = "", const QMap<QString,QString> &attributes = QMap<QString,QString>());
     PtngDGMLBuilder& addCategory(const QString &id,  const QString &label, const QMap<QString,QString> &attributes);
     PtngDGMLBuilder& addProperty(const QString &id, const QString &dataType, const QString &label, const QMap<QString,QString> &attributes);
     PtngDGMLBuilder& addPath(const QString &id, const QString &label, const QString &dataType, bool isReference, const QMap<QString,QString> &attributes);
 
 public: // Creational - from known source types, e.g. nmap QList<PtngHostBuilder*> and QMap<QString,QString>
     PtngDGMLBuilder& createSimple(const QMap<QString,QString> &hosts, const QString &subnetFilters = "", bool addLabels = true);
-    PtngDGMLBuilder& createFromNmap(QList<PtngHostBuilder*> builders, const QString &issuesFile = "", const QString &zoneFile = "", const QString &subnetFilters = "", bool addLabels = true);
+    PtngDGMLBuilder& createFromNmap(QList<PtngHostBuilder*> builders, const QString &nessusFile = "", const QString &zoneFile = "", const QString &subnetFilters = "", bool addLabels = true);
+    PtngDGMLBuilder& createFromNessus(QList<PtngIssue> issues, const QString &severityFilters = "", const QString &subnetFilters = "");
+
+    PtngDGMLBuilder& addNessusSeverityCount(QList<PtngHostBuilder*> builders, QList<PtngIssue> issues);
 
 private: // Helper functions
     QMap<QString,QString> getAttributes(PtngHost *host);
     QList<PtngHostBuilder*> setHighestSeverity(QList<PtngHostBuilder*> builderList);
-    bool isInFilter(const QStringList &subnetFilters, const QString &testString);
+    bool isInSubnetFilter(const QStringList &subnetFilters, const QString &testString);
+    bool isInSeverityFilter(const QStringList &criticalityFilters, const QString &testString);
+    QMultiMap<QString,int> getSeverityCount( const QString &address,  QList<PtngIssue> issues);
 
 public: // Other accessors/mutators
     QString toString(int indent = 1);

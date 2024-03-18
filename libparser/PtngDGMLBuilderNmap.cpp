@@ -27,7 +27,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "inc/PtngDGMLBuilder.hpp"
 namespace ptng{
 
-PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builders, const QString &issuesFile, const QString &zoneFile, const QString &subnetFilters, bool addLabels)
+PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builders, const QString &nessusFile, const QString &zoneFile, const QString &subnetFilters, bool addLabels)
 {
     qInfo() << "[info] Creating from nmap";
     dgmlObject->root.setAttribute("Title","NmapDGML");
@@ -37,8 +37,10 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
         zoneAddesses = PtngInputParser::parseZoneTransfer(zoneFile);
     }
     QMap<QString,QString> severities;
-    if( !issuesFile.isEmpty()){
-        severities = PtngInputParser::parseNesusSeverities(issuesFile);
+    QList<PtngIssue> issues;
+    if( !nessusFile.isEmpty()){
+        severities = PtngInputParser::parseNesusSeverities(nessusFile);
+        issues = PtngInputParser::parseNesusIssues(nessusFile);
     }
     QStringList aClasses,bClasses,cClasses,leaves;
     QMap<QString,QString> map; // For attributes
@@ -61,12 +63,12 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
         // A Class
         tempStr = tempList.at(0) + ".*.*.*";
         testStr = tempList.at(0) + ".";
-        if( !aClasses.contains(tempStr) && isInFilter(subnetFilters.split(",",Qt::SkipEmptyParts), testStr)  ){
+        if( !aClasses.contains(tempStr) && isInSubnetFilter(subnetFilters.split(",",Qt::SkipEmptyParts), testStr)  ){
             aClasses.append(tempStr);
         }
         // B Class
         tempStr = tempList.at(0) + "." + tempList.at(1) + ".*.*";
-        if( !bClasses.contains(tempStr) && isInFilter(subnetFilters.split(",",Qt::SkipEmptyParts), tempStr)  ){
+        if( !bClasses.contains(tempStr) && isInSubnetFilter(subnetFilters.split(",",Qt::SkipEmptyParts), tempStr)  ){
 
             if( !aClasses.contains(tempStr) ){
                 aClasses.append(tempList.at(0) + ".*.*.*");
@@ -78,7 +80,7 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
         // C Class
         tempStr = tempList.at(0) + "." + tempList.at(1)  + "." + tempList.at(2) + ".*";
         testStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";
-        if( !cClasses.contains(tempStr) && isInFilter(subnetFilters.split(",",Qt::SkipEmptyParts),testStr)  ){
+        if( !cClasses.contains(tempStr) && isInSubnetFilter(subnetFilters.split(",",Qt::SkipEmptyParts),testStr)  ){
             cClasses.append(tempStr);
         }
 
@@ -124,12 +126,6 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
         QString tempStr = tempList.at(0) + "." + tempList.at(1) + ".";
         // qInfo() << "[info] tempStr for cClass:"<<tempStr;
         for( auto cc : cClasses){
-            // QString testStr = cc.split(".").at(0) + "." + cc.split(".").at(1) + "." + cc.split(".").at(2) + ".";
-            // qInfo() << "[info] cClass teststr:"<<testStr;
-            // if( !isInFilter(subnetFilters.split(","), testStr , 2 )){
-            //     continue;
-            // }
-            // qInfo() << "[info] cClass:"<<cc;
             if( cc.startsWith(tempStr)){
                 addNode(cc, cc, map);
                 if( addLabels ){
@@ -199,6 +195,13 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
 
         }
     }
+
+    // Add the nessus severity counts
+    if( !nessusFile.isEmpty() ){
+        qInfo() << "[info] About to add nessus severities after isEmpty() test:"<<issues.count();
+        addNessusSeverityCount(builders,issues);
+    }
+
     return(*this);
 }
 
@@ -229,25 +232,77 @@ QMap<QString,QString> PtngDGMLBuilder::getAttributes(PtngHost *host){
     return(attrs);
 }
 
+//  HPCOMP Both of the following functions require review
+PtngDGMLBuilder& PtngDGMLBuilder::addNessusSeverityCount(QList<PtngHostBuilder*> builders, QList<PtngIssue> issues){
+    for( auto builder : builders ){
+        QString address = builder->getHost()->getIpAddress();
+        QMultiMap<QString,int> severityCounts = getSeverityCount(address, issues);
+        if( severityCounts.count() != 5 ){
+            qWarning() << "[warning] Wrong number of severity counts:"<<severityCounts.count();
+            continue;
+        }
+        QDomNodeList nodes = dgmlObject->doc->elementsByTagName("Node");
+        for( int i = 0; i < nodes.count(); ++i ){
+            QDomNode n = nodes.at(i);
+            QDomElement e = n.toElement();
+            if( e.isNull()){
+                qWarning() << "[warning] Node to element == null";
+                continue;
+            }
+            if( e.hasAttribute("Label") ){
+                QString label = e.attribute("Label").remove("!");
+                if( label.startsWith(address) ){
+                    e.setAttribute("CriticalCount", severityCounts.value("critical") );
+                    e.setAttribute("HighCount", severityCounts.value("high") );
+                    e.setAttribute("MediumCount", severityCounts.value("medium") );
+                    e.setAttribute("LowCount", severityCounts.value("low") );
+                    e.setAttribute("NoneCount", severityCounts.value("none") );
+                }
+            }
+        }
+    }
+    return(*this);
+}
+
+QMultiMap<QString,int> PtngDGMLBuilder::getSeverityCount( const QString &address,  QList<PtngIssue> issues){
+    QMultiMap<QString,int> ret;
+    int criticalCount=0,highCount=0,mediumCount=0,lowCount=0,noneCount=0;
+
+    for( auto issue : issues ){
+        if( address != issue.ipAddress ){
+            continue;
+        }
+        if( issue.riskFactor.toLower() == "critical" ){
+            criticalCount++;
+        }
+        else if( issue.riskFactor.toLower() == "high" ){
+            highCount++;
+        }
+        else if( issue.riskFactor.toLower() == "medium" ){
+            mediumCount++;
+        }
+        else if( issue.riskFactor.toLower() == "low" ){
+            lowCount++;
+        }
+        else if( issue.riskFactor.toLower() == "none" ){
+            noneCount++;
+        }
+    }
+    ret.insert("critical",criticalCount);
+    ret.insert("high",highCount);
+    ret.insert("medium",mediumCount);
+    ret.insert("low",lowCount);
+    ret.insert("none",noneCount);
+    return(ret);
+}
+
+// QUERY This doesn't actually do anything
 QList<PtngHostBuilder*> PtngDGMLBuilder::setHighestSeverity(QList<PtngHostBuilder*> builders)
 {
     QList<PtngHostBuilder*> builderList = builders;
 
 
     return(builderList);
-}
-
-bool PtngDGMLBuilder::isInFilter(const QStringList &subnetFilters, const QString &testString)
-{
-    if( subnetFilters.isEmpty() ){
-        return(true);
-    }
-    for( auto subnetFilter : subnetFilters){
-        if( testString.startsWith(subnetFilter) ){
-            return(true);
-        }
-    }
-    return(false);
 }
 
 } // namespace ptng

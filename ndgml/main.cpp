@@ -39,12 +39,16 @@ QList<QCommandLineOption> commandLineOptions;
 int ret = 0;
 QString inputFile="";
 QString outputFile="";
-QString issuesFile="";
+QString nessusFile="";
 QString zoneFile="";
 QString subnetFilters="";
+QString criticalityFilters="";
 bool showLabels=false;
 
-void processFile(const QString& inputFile,const QString& outputFile,const QString& zoneFile, const QString &issuesFile, const QString &subnets, bool labels);
+// void processAxfrFile(const QString& inputFile,const QString& outputFile,const QString& zoneFile, const QString &nessusFile, const QString &subnets,bool labels);
+// void processNmapFile(const QString& inputFile,const QString& outputFile,const QString& zoneFile, const QString &nessusFile, const QString &subnets,bool labels);
+// void processNessusFile(const QString& inputFile,const QString& outputFile, const QString &subnets, const QString &criticalityFilters, bool labels);
+
 void showTypes();
 bool fileIsSupported(const QString &inputFile);
 
@@ -84,10 +88,14 @@ void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addOption({{"l","labels"},"[optional] Add labels to links; this is necessary for conversion to dot runcontrol (default is '\on\')","on|off"});
     parser.addOption({{"i","issues"},"[optional] Output from a vulneablilty scanner contining a list of issues; used for highest severity for each host. Currently nessus only","file"});
     parser.addOption({{"z","zone"},"[optional] Output from a zone transfer file.  Use \'ndgml types\' to list supported types.","file"});
-    parser.addOption({{"s","subnets"},"[optional] A comma delimited list of subnet filters in the form 192.168.1.,192.168.48. (use the trailing \'.\' to avoid including 192.168.10. and 192.168.100. etc)","subnet"});
+    parser.addOption({{"s","subnets"},"[optional] A comma delimited list of subnet filters in the form 192.168.1.,192.168.48. (use the trailing \'.\' to avoid including 192.168.10. and 192.168.100. etc)","subnets"});
+    parser.addOption({{"c","crits"},"[optional] A comma delimited list of criticality filters in the form \"critical,high,medium,low,none,all\"","criticalities"});
 }
 
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
+    /*
+       Options processing
+      */
     PtngEnums::SupportedInputTypes type;
     // Positional arguments
     for(QString pos : parser.positionalArguments()){
@@ -100,9 +108,9 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         ret = 0;
         return;
     }
-
+    qInfo() << "[info] Starting to process input files. This may take some time for large files.";
     if(!parser.isSet("file")){
-        qWarning() << "[fatal] No network map source file specified";
+        qWarning() << "[fatal] No source file specified";
         parser.showHelp();
         ret = 1;
         return;
@@ -116,14 +124,15 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
             return;
         }
         else{
-            type = PtngIdent::checkFile(inputFile);
+            // type = PtngIdent::checkFile(inputFile);
             if( !fileIsSupported(inputFile)){
-                qInfo() << "[info] Network source file" << inputFile << "is not supported by ndgml. Use ndgml types for a list.";
+                qInfo() << "[info] Source file" << inputFile << "is not supported by ndgml. Use ndgml types for a list.";
                 qInfo() << "[info] Supplied file is of type:" << type;
                 ret = 4;
                 return;
             }
             else{
+                type = PtngIdent::checkFile(inputFile);
                 qInfo() << "[info] Input file set to" << inputFile << "which is of type:" << type;
             }
         }
@@ -131,14 +140,14 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
 
     // Issues file
     if( parser.isSet("issues") ){
-        issuesFile = parser.value("issues");
-        type = PtngIdent::checkFile(issuesFile);
+        nessusFile = parser.value("issues");
+        type = PtngIdent::checkFile(nessusFile);
         if( type != PtngEnums::NESSUS ){
-            qInfo() << "[info] Issues file" << issuesFile << "is not supported by ndgml. Use ndgml types for a list.";
+            qInfo() << "[info] Issues file" << nessusFile << "is not supported by ndgml. Use ndgml types for a list.";
             qInfo() << "[info] Supplied file is of type:" << type;
         }
         else{
-            qInfo() << "[info] Issues file set to" << issuesFile << "which is of type:" << type;}
+            qInfo() << "[info] Issues file set to" << nessusFile << "which is of type:" << type;}
     }
 
     // Zone file
@@ -150,11 +159,11 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
                 || type == PtngEnums::AXFR_DIG
                 || type == PtngEnums::AXFR_DNS_RECON
                 || type == PtngEnums::AXFR_HOST
-                || type == PtngEnums::AXFR_NMAP
                 || type == PtngEnums::AXFR_NS_LIN
                 || type == PtngEnums::AXFR_NS_WIN
+                || type == PtngEnums::AXFR_NMAP
                 ){
-            qInfo() << "[info] Issues file set to" << issuesFile << "which is of type:" << type;
+            qInfo() << "[info] Issues file set to" << nessusFile << "which is of type:" << type;
         }
         else{
             qInfo() << "[info] Issues file" << zoneFile << "is not supported by ndgml. Use ndgml types for a list.";
@@ -189,6 +198,53 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         subnetFilters = parser.value("subnets");
     }
 
-    processFile(inputFile,outputFile,issuesFile, zoneFile, subnetFilters, showLabels);
+    // Criticality filters
+    if(  parser.isSet("crits")){
+        criticalityFilters = parser.value("crits");
+    }
+
+/*
+   Processing
+*/
+
+    qInfo() << "[info] Starting to process file:"<<inputFile;
+    type = PtngIdent::checkFile(inputFile);
+    QString dgml;
+    PtngDGMLBuilder builder;
+    if( type == PtngEnums::NMAP ){
+        qInfo() << "[info] NMAP file";
+        QList<PtngHostBuilder*> hostBuilders = PtngInputParser::parseNmap(inputFile);
+        builder.createFromNmap(hostBuilders,nessusFile,zoneFile,subnetFilters,showLabels);
+        dgml = builder.toString(4);
+    }
+    else if( type == PtngEnums::NESSUS ){
+        qInfo() << "[info] NESSUS file";
+        QList<PtngIssue> issues = PtngInputParser::parseNesusIssues(inputFile);
+        builder.createFromNessus(issues,criticalityFilters,subnetFilters);
+        dgml = builder.toString(4);
+    }
+    else{
+        QMap<QString,QString> hosts = PtngInputParser::parseZoneTransfer(inputFile);
+        // qInfo() << "[info] Number of hosts (simple):"<<hosts.count();
+        builder.createSimple(hosts, subnetFilters, showLabels);
+        dgml = builder.toString(4);
+    }
+
+    if( !outputFile.isEmpty() ){
+        QFile file(outputFile);
+        if( !file.open(QIODevice::WriteOnly) ){
+            qInfo() << "[info] Could not open"<<outputFile<<"for writing";
+            return;
+        }
+        QTextStream outStream(&file);
+        outStream << dgml;
+        file.close();
+        qInfo() << "[info] Completed processing file:"<<inputFile;
+    }
+
+    if( outputFile.isEmpty() ){
+        qInfo() << "[info] DGML:"<<dgml;
+    }
+
 }
 

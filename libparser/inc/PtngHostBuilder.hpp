@@ -66,6 +66,11 @@ public: // Accessors and mutators for Q_PROPERTY
     QString &getOsName(){ return( osName ); }
     QString &getHostState(){ return( hostState); }
     QString &getHostStateReason(){ return( hostStateReason); }
+    QString &getCriticalCount(){ return(criticalCount); }
+    QString &getHighCount(){ return(highCount); }
+    QString &getMediumCount(){ return(mediumCount); }
+    QString &getLowCount(){ return(lowCount); }
+    QString &getNoneCount(){ return(noneCount); }
     QStringList getHostCPE(){ return(hostCPE); }
     int getDistance(){ return( distance); }
 public: // Q_PROPERTY declarations
@@ -89,6 +94,12 @@ public: // Q_PROPERTY declarations
     Q_PROPERTY(QString hostStateReason READ getHostStateReason)
     Q_PROPERTY(int distance READ getDistance)
     Q_PROPERTY(QStringList hostCPE READ getHostCPE)
+    Q_PROPERTY(QString criticalCount READ getCriticalCount);
+    Q_PROPERTY(QString highCount READ getHighCount);
+    Q_PROPERTY(QString mediumCount READ getMediumCount);
+    Q_PROPERTY(QString lowCount READ getLowCount);
+    Q_PROPERTY(QString noneCount READ getNoneCount);
+
 protected: //Members
     bool gateway = false;
     bool geoLocation = false;
@@ -104,12 +115,18 @@ protected: //Members
     QString addrType = "";
     QString macAddress = "";
     QString macVendor = "";
+    // QUERY I don't think I'm using this anywhere
     QString recordType = "";
     QString hostName = "";
     QString osName = "";
     QString hostState = "";
     QString hostStateReason = "";
     QStringList hostCPE;
+    QString criticalCount = "";
+    QString highCount = "";
+    QString mediumCount = "";
+    QString lowCount = "";
+    QString noneCount = "";
     int distance = 0;
 };
 
@@ -172,7 +189,6 @@ public: // Builder methods
        \return PtngHostBuilder&
      */
     PtngHostBuilder& addScript( const QString &id, const QString &output );
-
     PtngHostBuilder& setHighestSeverity( PtngEnums::IssueSeverity severity );
     PtngHostBuilder& setIsInZoneFile( bool axfr );
 

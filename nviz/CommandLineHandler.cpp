@@ -77,4 +77,7 @@ void processFile(const QString &dgmlSource,
     proc.startCommand(procCmd);
     proc.waitForFinished();
     qInfo() << "[info] Completed processing input";
+    // if( outputFileStem.isEmpty() ){
+    //     qInfo() << "[info] dot runcontrol:"<<dotOutput;
+    // }
 }
