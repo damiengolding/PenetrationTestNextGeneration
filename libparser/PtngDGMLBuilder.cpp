@@ -312,7 +312,6 @@ QString PtngDGMLBuilder::toString(int indent)
     return(dgmlObject->doc->toString(indent));
 }
 
-
 // PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anPairs, const QString &subnetFilters, bool addLabels)
 // {
 //     // qInfo() << "[info] In fromSimple";
