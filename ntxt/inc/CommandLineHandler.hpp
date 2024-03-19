@@ -27,32 +27,5 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 
 #include "GlobalIncludes.hpp"
 
-void processFile(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
-
-void processNmap(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
-
-void processNessus(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
-
-void processNessusXml(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
-
-void processNessusVulns(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
-
-void processNessusPluginFamilies(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
+void processNmap(const QString &inputFile,const QString &outputFile);
+void processNessus(const QString &inputFile,const QString &outputFile);

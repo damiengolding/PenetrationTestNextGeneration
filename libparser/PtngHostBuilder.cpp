@@ -92,7 +92,6 @@ PtngHostBuilder& PtngHostBuilder::addNessusScanXmlNode(const QDomNode &node){
     }
     host->ipAddress = e.attribute("name");
     // qInfo() << "[info] IP address from ReportHost:"<<e.attribute("name");
-
     return(*this);
 }
 

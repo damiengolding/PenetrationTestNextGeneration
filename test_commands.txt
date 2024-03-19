@@ -1,4 +1,4 @@
-Generaltests
+General tests
 
 ifident show-types
 ifident -f discworld_network_01_nessus.xml
@@ -10,11 +10,17 @@ nviz -f discworld_nmap_dgml.dgml --output discworld_nmap.dot
 nviz -f discworld_nmap_dgml.dgml --output discworld_nmap.dot --exec "dot %input_file% -Tpng -o discworld_nmap.png"
 nviz -f sample_nmap_iplocation_ipforwarding.dgml --output discworld_nmap.dot --exec "dot %input_file% -Tpng -o discworld_nmap.png"
 
+ntxt -f discworld_inf_tcp_fast_01.xml -o discworld_inf_tcp_fast_01
+ntxt -f discworld_nessus_01.nessus --output discworld_nessus_01
+
 ############################################################################################################################################
 Nessus
 
 ndgml -f discworld_nessus_01.nessus -o discworld_nessus_01.dgml
 ndgml -f discworld_nessus_01.nessus -o discworld_nessus_01.dgml --crits critical --subnets 192.168.4.
+nviz -f discworld_nessus_01.dgml -o discworld_nessus_01.dot  --exec "dot %input_file% -Tpng -o discworld_nessus_01.png"
+nviz -f discworld_nessus_01.dgml -o discworld_nessus_01.dot  --exec "dot %input_file% -Tpng -o discworld_nessus_01.png" -c dot
+(fail) nviz -f discworld_nessus_01.nessus -o discworld_nessus_01 -c dot
 
 ############################################################################################################################################
 Nmap

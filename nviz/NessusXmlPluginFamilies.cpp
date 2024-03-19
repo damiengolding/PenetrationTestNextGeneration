@@ -23,36 +23,14 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
+
 #pragma once
-
-#include "GlobalIncludes.hpp"
-
-void processFile(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
-
-void processNmap(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
-
-void processNessus(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
-
-void processNessusXml(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
-
-void processNessusVulns(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
+#include "inc/CommandLineHandler.hpp"
 
 void processNessusPluginFamilies(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem="",
-                 const QString &command="");
+                                 const QString &conversionType,
+                                 const QString &outputFileStem,
+                                 const QString &command){
+    qInfo() << "[info] Processing Nessus native XML to plugin families - not yet implemented";
+
+}
