@@ -48,7 +48,6 @@ void processNmap(const QString &inputFile,const QString &outputFile){
     QString tsv = "IP Address\tProtocol\tPort Number\tService\tState\tID Method\n";
     QDomElement root = doc->documentElement();
     QDomNodeList hostList = root.elementsByTagName("host");
-    // qInfo() << "[info] Hosts:"<<hostList.count();
 
     for( int i = 0; i<hostList.count();++i ){
         QDomNode node = hostList.at(i);
@@ -118,24 +117,80 @@ void processNmap(const QString &inputFile,const QString &outputFile){
 
 }
 
-
-
-
-
-
 // Nessus
 void processNessus(const QString &inputFile,const QString &outputFile){
     qInfo() << "[info] Starting to process nessus file:"<<inputFile;
-    QScopedPointer<QFile> file( new QFile(inputFile) ) ;
+
     QScopedPointer<QDomDocument> doc(new QDomDocument());
-    if( !file->open(QIODevice::ReadOnly)  ){
-        qWarning() << "[warning] Could not open"<<inputFile<<"For reading";
-        return;
-    }
-    if( !doc->setContent(file.data()) ){
-        qWarning() << "[warning] Failed parsing"<<inputFile;
-        file->close();
+    // QScopedPointer<QFile> file( new QFile(inputFile) ) ;
+    // if( !file->open(QIODevice::ReadOnly)  ){
+    //     qWarning() << "[warning] Could not open"<<inputFile<<"For reading";
+    //     return;
+    // }
+    // if( !doc->setContent(file.data()) ){
+    //     qWarning() << "[warning] Failed parsing"<<inputFile;
+    //     file->close();
+    // }
+
+
+    QString csvOFName = outputFile % ".csv";
+    QString tsvOFName = outputFile % ".tsv";
+    QString csv = "IP Address,Highest,Critical Count,High Count,Medium Count,Low Count,None Count\n";
+    QString tsv = "IP Address\tHighest\tCritical Count\tHigh Count\tMedium Count\tLow Count\tNone Count\n";
+
+    PtngDGMLBuilder builder;
+    QList<PtngHostBuilder*> builders =  PtngInputParser::parseNessus(inputFile);
+    builder.createFromNessus(builders,inputFile);
+    if( !doc->setContent(builder.toString()) ){
+        qWarning() << "[warning] Failed parsing DGML";
     }
     QDomElement root = doc->documentElement();
+    QDomNodeList nodes = root.elementsByTagName("Node");
+
+    for( int i = 0;i<nodes.count();++i){
+        QDomNode node = nodes.at(i);
+        QDomElement elem = node.toElement();
+        QString address = elem.attribute("Id");
+        if( address.contains("*") || address.toLower() == "attack_machine"){
+            continue;
+        }
+        csv += address % ",";
+        csv += elem.attribute("Category").toUpper() % ",";
+        csv += elem.attribute("CriticalCount") % ",";
+        csv += elem.attribute("HighCount") % ",";
+        csv += elem.attribute("MediumCount") % ",";
+        csv += elem.attribute("LowCount") % ",";
+        csv += elem.attribute("NoneCount") % "\n";
+
+        tsv += address % "\t";
+        tsv += elem.attribute("Category").toUpper() % "\t";
+        tsv += elem.attribute("CriticalCount") % "\t";
+        tsv += elem.attribute("HighCount") % "\t";
+        tsv += elem.attribute("MediumCount") % "\t";
+        tsv += elem.attribute("LowCount") % "\t";
+        tsv += elem.attribute("NoneCount") % "\n";
+    }
+
+    QScopedPointer<QFile> csvFile( new QFile(csvOFName) ) ;
+    if( !csvFile->open(QIODevice::WriteOnly)  ){
+        qWarning() << "[warning] Could not open"<<csvOFName<<"For reading";
+    }
+    else{
+        QTextStream csvStream(csvFile.data());
+        csvStream << csv;
+        csvFile->close();
+    }
+
+    QScopedPointer<QFile> tsvFile( new QFile(tsvOFName) ) ;
+    if( !tsvFile->open(QIODevice::WriteOnly)  ){
+        qWarning() << "[warning] Could not open"<<tsvOFName<<"For reading";
+    }
+    else{
+        QTextStream tsvStream(tsvFile.data());
+        tsvStream << tsv;
+        tsvFile->close();
+    }
+
     qInfo() << "[info] Completed processing input";
 }
+
