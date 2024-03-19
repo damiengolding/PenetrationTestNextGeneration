@@ -27,6 +27,40 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "inc\PtngInputParser.hpp"
 namespace ptng {
 
+QList<PtngHostBuilder*> PtngInputParser::parseNessus(const QString &inputFile){
+    qInfo() << "[info] Starting to parse nessus file:"<<inputFile;
+    QList<PtngHostBuilder*> builderList;
+    PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(inputFile);
+    if( type != PtngEnums::NESSUS ){
+        qWarning() << "[warning] Input file"<<inputFile<<"is of incorrect type"<<type;
+        return(builderList);
+    }
+    QScopedPointer<QDomDocument> doc(new QDomDocument("mydocument"));
+    QScopedPointer<QFile> file(new QFile(inputFile));
+    if( !file->open(QIODevice::ReadOnly)){
+        qWarning() << "[warning] Failed opening file"<<inputFile;
+        return(builderList);
+    }
+
+    if( !doc->setContent(file.data()) ){
+        qWarning() << "[warning] Failed parsing"<<inputFile;
+        file->close();
+        return(builderList);
+    }
+    QDomNodeList nodes = doc->elementsByTagName("ReportHost");
+    qInfo() << "[info] Number of ReportHost nodes:"<<nodes.length();
+    for( int i = 0; i != nodes.length(); ++i ){
+        // qInfo() << "[info] Node number:"<<i;
+        QDomNode node = nodes.at(i);
+        PtngHostBuilder *hb = new PtngHostBuilder();
+        hb->addNessusScanXmlNode(node);
+        builderList.append(hb);
+    }
+    return(builderList);
+}
+
+
+
 // TODO this in conjunction with parseNesusSeverities REALLY needs at least developer testing
 QList<PtngIssue> PtngInputParser::parseNesusIssues(const QString &inputFile)
 {

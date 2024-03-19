@@ -29,9 +29,13 @@ namespace ptng {
 
 QList<PtngHostBuilder*> PtngInputParser::parseNmap(const QString &inputFile){
     QList<PtngHostBuilder*> builderList;
+    PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(inputFile);
+    if( type != PtngEnums::NMAP ){
+        qWarning() << "[warning] Input file"<<inputFile<<"is of incorrect type"<<type;
+        return(builderList);
+    }
     QScopedPointer<QDomDocument> doc(new QDomDocument("mydocument"));
     QScopedPointer<QFile> file(new QFile(inputFile));
-    PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(inputFile);
     if( !file->open(QIODevice::ReadOnly)){
         qWarning() << "[warning] Failed opening file"<<inputFile;
         return(builderList);
@@ -128,7 +132,5 @@ void PtngInputParser::addPorts(PtngHostBuilder* builder, const QDomNode &node){
         }
     }
 }
-
-
 
 } // namespace ptng

@@ -100,7 +100,7 @@ public: // Creational - the user can create a DGML string from an arbitrary sour
 public: // Creational - from known source types, e.g. nmap QList<PtngHostBuilder*> and QMap<QString,QString>
     PtngDGMLBuilder& createSimple(const QMap<QString,QString> &hosts, const QString &subnetFilters = "", bool addLabels = true);
     PtngDGMLBuilder& createFromNmap(QList<PtngHostBuilder*> builders, const QString &nessusFile = "", const QString &zoneFile = "", const QString &subnetFilters = "", bool addLabels = true);
-    PtngDGMLBuilder& createFromNessus(const QString &nessusFile, const QString &severityFilters = "", const QString &subnetFilters = "");
+    PtngDGMLBuilder& createFromNessus(QList<PtngHostBuilder*> builders, const QString &nessusFile, const QString &severityFilters = "", const QString &subnetFilters = "");
 
     PtngDGMLBuilder& addNessusSeverityCount(QList<PtngHostBuilder*> builders, QList<PtngIssue> issues);
 

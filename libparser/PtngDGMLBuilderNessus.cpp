@@ -27,18 +27,154 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "inc/PtngDGMLBuilder.hpp"
 namespace ptng{
 
-PtngDGMLBuilder& PtngDGMLBuilder::createFromNessus(const QString &nessusFile, const QString &severityFilters,const QString &subnetFilters){
+PtngDGMLBuilder& PtngDGMLBuilder::createFromNessus(QList<PtngHostBuilder*> builders, const QString &nessusFile, const QString &severityFilters,const QString &subnetFilters){
     dgmlObject->root.setAttribute("Title","NessusDGML");
-    QStringList severities = severityFilters.split(",", Qt::SkipEmptyParts);
+    QStringList sevFilters = severityFilters.split(",", Qt::SkipEmptyParts);
     QStringList subnets = subnetFilters.split(",", Qt::SkipEmptyParts);
-    QMap<QString,QString> emptyMap;
+    QMap<QString,QString> severities;
+    QList<PtngIssue> issues;
+    if( !nessusFile.isEmpty()){
+        severities = PtngInputParser::parseNesusSeverities(nessusFile);
+        issues = PtngInputParser::parseNesusIssues(nessusFile);
+    }
+    QStringList aClasses,bClasses,cClasses,leaves;
+    QMap<QString,QString> map; // For attributes
+    map.insert("Category","subnet");
+    QMap<QString,QString> emptyMap; // For empty attributes
+
     // Root node
-    addNode("0","Nessus scan",emptyMap);
+    addNode("attack_machine","Attack Machine",map);
 
-    return(*this);
+    QStringList ips;
+    PtngHost *host;
+
+    // Separate the entries into classes
+    // qInfo() << "[info] Builders:"<<builders.count();
+    for( auto builder : builders ){
+        // qInfo() << "[info] in builders loop";
+        host=builder->getHost();
+        // qInfo() << "[info] IP address:"<<host->getIpAddress();
+        QStringList tempList;
+        QString tempStr;
+        QString testStr;
+        QString address = host->getIpAddress();
+        tempList = address.split(".");
+        // A Class
+        tempStr = tempList.at(0) + ".*.*.*";
+        testStr = tempList.at(0) + ".";
+        if( !aClasses.contains(tempStr) && isInSubnetFilter(subnetFilters.split(",",Qt::SkipEmptyParts), testStr)  ){
+            aClasses.append(tempStr);
+        }
+        // B Class
+        tempStr = tempList.at(0) + "." + tempList.at(1) + ".*.*";
+        if( !bClasses.contains(tempStr) && isInSubnetFilter(subnetFilters.split(",",Qt::SkipEmptyParts), tempStr)  ){
+
+            if( !aClasses.contains(tempStr) ){
+                aClasses.append(tempList.at(0) + ".*.*.*");
+            }
+            // aClasses.append(tempList.at(0) + ".*.*.*");
+            bClasses.append(tempStr);
+        }
+
+        // C Class
+        tempStr = tempList.at(0) + "." + tempList.at(1)  + "." + tempList.at(2) + ".*";
+        testStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";
+        if( !cClasses.contains(tempStr) && isInSubnetFilter(subnetFilters.split(",",Qt::SkipEmptyParts),testStr)  ){
+            cClasses.append(tempStr);
+        }
+
+        // Leaf
+        if( !leaves.contains(address) ){
+            leaves.append(address);
+        }
+    }
+
+    // Add the A class nodes and link to the 'Attack Machine'
+    for( auto aClass : aClasses){
+        addNode(aClass, aClass, map);
+        addLink("attack_machine", aClass, "" ,emptyMap);
+    }
+
+    // Add the B class nodes and link to the C Class nodes
+    for( auto aClass : aClasses){
+        QStringList tempList = aClass.split(".");
+        QString tempStr = tempList.at(0);
+        for( auto bc : bClasses){
+            if( bc.startsWith(tempStr)){
+                addNode(bc, bc, map);
+                addLink(aClass, bc,"",emptyMap);
+            }
+        }
+    }
+
+    // Add the C class nodes and link to the B Class nodes
+    for( auto bClass : bClasses){
+        QStringList tempList = bClass.split(".");
+        QString tempStr = tempList.at(0) + "." + tempList.at(1) + ".";
+        // qInfo() << "[info] tempStr for cClass:"<<tempStr;
+        for( auto cc : cClasses){
+            if( cc.startsWith(tempStr)){
+                addNode(cc, cc, map);
+                addLink(bClass, cc,"",emptyMap);
+            }
+        }
+    }
+
+    // Add the leaf nodes and link to the C Class nodes
+    map.clear();
+    for(auto cClass : cClasses){
+        QStringList tempList = cClass.split(".");
+        QString tempStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";
+        for( auto builder : builders ) {
+            QString address = builder->getHost()->getIpAddress();
+            if( !leaves.contains(address)){
+                continue;
+            }
+
+            for( auto [ipAddress,sev] : severities.asKeyValueRange()){
+                // Add severity category and PtngEnums::IssueSeverities to nodes
+                if(address != ipAddress){
+                    continue;
+                }
+                QString severity = sev.toLower();
+                map.insert("Category",severity.toLower());
+                if( severity == "critical"){
+                    builder->setHighestSeverity( PtngEnums::CRITICAL);
+                }
+                else if( severity == "high"){
+                    builder->setHighestSeverity( PtngEnums::HIGH);
+                }
+                else if( severity == "medium"){
+                    builder->setHighestSeverity( PtngEnums::MEDIUM);
+                }
+                else if( severity == "low"){
+                    builder->setHighestSeverity( PtngEnums::LOW);
+                }
+                else if( severity == "none"){
+                    builder->setHighestSeverity( PtngEnums::NONE);
+                }
+                else{
+                    builder->setHighestSeverity(  PtngEnums::NUM_ISSUE_SEVERITIES);
+                }
+            }
+
+            if( address.startsWith(tempStr)){
+                // map.insert(getAttributes(builder->getHost()));
+                // QString zAddress = "!"+address+"\n"+builder->getHost()->getDnsName();
+                addNode(address, address, map);
+                addLink(cClass,address,"",emptyMap);
+            }
+        }
+
+        // Add the nessus severity counts
+        if( !nessusFile.isEmpty() ){
+            qInfo() << "[info] About to add nessus severities after isEmpty() test:"<<issues.count();
+            addNessusSeverityCount(builders,issues);
+        }
+        return(*this);
+    }
+
 }
-
-
 } // namespace ptng
 
 

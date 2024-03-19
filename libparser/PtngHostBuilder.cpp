@@ -83,9 +83,15 @@ PtngHostBuilder& PtngHostBuilder::addPortSpec(const PtngPort &portSpec ){
     host->portSpecs.append(portSpec);
     return(*this);
 }
-
-PtngHostBuilder &PtngHostBuilder::addNmapAXFRXmlNode(const QDomNode &node)
-{
+// QUERY Why is this empty?
+PtngHostBuilder& PtngHostBuilder::addNessusScanXmlNode(const QDomNode &node){
+    QDomElement e = node.toElement();
+    if( e.isNull() ){
+        qWarning() << "[warning] Cannot convert the supplied QDomNode to a QDomElement";
+        return(*this);
+    }
+    host->ipAddress = e.attribute("name");
+    // qInfo() << "[info] IP address from ReportHost:"<<e.attribute("name");
 
     return(*this);
 }
@@ -98,7 +104,6 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
         return(*this);
     }
     QDomNodeList nodes = e.childNodes();
-
     for( int i = 0;i<nodes.count();++i){
         QDomNode node = nodes.item(i);
         QDomElement elem = node.toElement();
@@ -123,7 +128,7 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
             host->hostStateReason = elem.attribute("reason");
         }
         else if( elem.tagName() == "hostnames" ){
-             QDomElement hn = elem.firstChildElement("hostname");
+            QDomElement hn = elem.firstChildElement("hostname");
             host->dnsName = hn.attribute("name");
             // qInfo() << "[info] Host name 2:"<<host->dnsName;
             // qInfo() << "[info] Host name 3:"<<host->getDnsName();
@@ -181,19 +186,19 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
                     // qInfo() << "[info] ip-geolocation-ipinfodb split:"<<results.length();
                     for(auto result : results ){
                         QString o = result.trimmed();
-                      if( o.toLower().startsWith("coordinates") ){
-                          QStringList coords = o.split(":");
-                          QString ll = coords.at(1).trimmed();
-                          QStringList lll = ll.split(",");
-                          host->latitude = lll.at(0);
-                          host->longitude = lll.at(1);
-                          // qInfo() << "[info] Latitude:"<<host->latitude<< "Longitude:"<< host->longitude;
-                      }
-                      else if( o.toLower().startsWith("city") ){
-                           QStringList cy = o.split(":");
-                           host->city = cy.at(1).trimmed();
-                           // qInfo() << "[info] City:"<<host->city;
-                      }
+                        if( o.toLower().startsWith("coordinates") ){
+                            QStringList coords = o.split(":");
+                            QString ll = coords.at(1).trimmed();
+                            QStringList lll = ll.split(",");
+                            host->latitude = lll.at(0);
+                            host->longitude = lll.at(1);
+                            // qInfo() << "[info] Latitude:"<<host->latitude<< "Longitude:"<< host->longitude;
+                        }
+                        else if( o.toLower().startsWith("city") ){
+                            QStringList cy = o.split(":");
+                            host->city = cy.at(1).trimmed();
+                            // qInfo() << "[info] City:"<<host->city;
+                        }
                     }
                 }
                 if( id == "ip-forwarding"  ){
@@ -202,6 +207,11 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
             }
         }
     }
+    return(*this);
+}
+
+PtngHostBuilder &PtngHostBuilder::addNmapAXFRXmlNode(const QDomNode &node)
+{
 
     return(*this);
 }

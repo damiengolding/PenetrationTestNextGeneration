@@ -107,7 +107,6 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
         QStringList tempList = aClass.split(".");
         QString tempStr = tempList.at(0);
         for( auto bc : bClasses){
-
             if( bc.startsWith(tempStr)){
                 addNode(bc, bc, map);
                 if( addLabels ){

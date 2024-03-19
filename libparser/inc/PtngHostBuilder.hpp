@@ -153,6 +153,12 @@ public: // Builder methods
      */
     PtngHostBuilder &createSimple(const QString &ipAddress,const QString &dnsName);
     /*!
+       \brief addNessusScanXmlNode
+       \param node
+       \return PtngHostBuilder
+     */
+    PtngHostBuilder& addNessusScanXmlNode(const QDomNode &node);
+    /*!
        \brief addNmapScanXmlNode
        \param node
        \return PtngHostBuilder&

@@ -62,6 +62,12 @@ public:
     static QList<PtngHostBuilder*> parseNmap(const QString &inputFile);
     // Nessus
     /*!
+       \brief parseNmap
+       \param inputFile
+       \return QList<PtngHostBuilder*>
+     */
+    static QList<PtngHostBuilder*> parseNessus(const QString &inputFile);
+    /*!
        \brief parseNesusIssues
        \param inputFile
        \return QList<PtngIssue*>

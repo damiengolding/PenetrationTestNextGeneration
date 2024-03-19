@@ -212,13 +212,15 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     QString dgml;
     PtngDGMLBuilder builder;
     if( type == PtngEnums::NMAP ){
+        qInfo() << "[info] NMAP";
         QList<PtngHostBuilder*> hostBuilders = PtngInputParser::parseNmap(inputFile);
         builder.createFromNmap(hostBuilders,nessusFile,zoneFile,subnetFilters,showLabels);
         dgml = builder.toString(4);
     }
     else if( type == PtngEnums::NESSUS ){
-        // QList<PtngIssue> issues = PtngInputParser::parseNesusIssues(inputFile);
-        builder.createFromNessus(nessusFile,criticalityFilters,subnetFilters);
+        qInfo() << "[info] NESSUS";
+        QList<PtngHostBuilder*> hostBuilders = PtngInputParser::parseNessus(inputFile);
+        builder.createFromNessus(hostBuilders,inputFile,criticalityFilters,subnetFilters);
         dgml = builder.toString(4);
     }
     else{
