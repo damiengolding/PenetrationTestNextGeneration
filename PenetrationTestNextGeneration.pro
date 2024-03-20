@@ -5,4 +5,5 @@ SUBDIRS += \
     ifident \
     ndgml \
     ntxt \
-    nviz
+    nviz \
+    workbench

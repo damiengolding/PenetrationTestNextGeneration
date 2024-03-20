@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="images">
+    <file>close_01.png</file>
+    <file>folder_open_01.png</file>
+    <file>copy_01.png</file>
+    <file>copy_all_01.png</file>
+    <file>clear_01.png</file>
+    <file>goldings_gym_core_00.png</file>
+    <file>goldings_gym_core_03.png</file>
+    <file>goldings_gym_wallpaper_05.png</file>
+  </qresource>
+</RCC>
