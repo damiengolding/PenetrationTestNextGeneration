@@ -42,6 +42,8 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QMainWindow>
 #include <QSettings>
 #include <QMessageBox>
+#include <QFileDialog>
+#include <QListWidgetItem>
 
 // STD
 #include <iostream>
@@ -84,6 +86,7 @@ private:
 private:
     void closeEvent(QCloseEvent *event);
     void restoreMainWindowState();
+    void initDefaults();
 
 public slots:
     void newProject();

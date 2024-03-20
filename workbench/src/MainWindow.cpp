@@ -35,6 +35,17 @@ MainWindow::MainWindow(QWidget *parent)
     QCoreApplication::setApplicationVersion("0.0.1");
     QCoreApplication::setOrganizationName("Golding's Gym");
     restoreMainWindowState();
+
+    // Defaults
+    initDefaults();
+}
+
+void MainWindow::initDefaults(){
+    currentProject = new PtngProject();
+
+    QSettings s;
+    QFont displayFont(s.value("displayFont","Open Sans").toString(), s.value("fontSize",12).toInt() );
+    this->setFont(displayFont);
 }
 
 MainWindow::~MainWindow()

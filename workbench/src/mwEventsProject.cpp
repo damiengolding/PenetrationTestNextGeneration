@@ -32,10 +32,6 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 void MainWindow::newProject(){
     QScopedPointer<NewProjectDialog> npd(new NewProjectDialog());
     if( npd->exec() == QDialog::Accepted ){
-        QMessageBox::information(this,windowTitle,"New project accepted");
         currentProject = npd->getProject();
-    }
-    else{
-        QMessageBox::information(this,windowTitle,"New project rejected");
     }
 }

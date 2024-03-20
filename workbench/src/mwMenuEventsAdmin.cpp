@@ -40,10 +40,6 @@ void MainWindow::showAbout(){
 void MainWindow::showPreferences()
 {
     QScopedPointer<PreferencesDialog> pd( new PreferencesDialog );
-    if( pd->exec() == QDialog::Accepted ){
-        QMessageBox::information(this,windowTitle,"Preferences accepted");
-    }
-    else{
-        QMessageBox::information(this,windowTitle,"Preferences rejected");
-    }
+    pd->setParentWindow(this);
+    pd->exec() == QDialog::Accepted;
 }

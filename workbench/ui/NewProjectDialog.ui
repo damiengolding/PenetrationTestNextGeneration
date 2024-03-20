@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>New PTNG Project</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../res/workbench.qrc">
+    <normaloff>:/images/goldings_gym_core_00.png</normaloff>:/images/goldings_gym_core_00.png</iconset>
+  </property>
   <property name="modal">
    <bool>false</bool>
   </property>

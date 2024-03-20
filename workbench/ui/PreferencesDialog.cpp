@@ -31,9 +31,69 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
     ui(new Ui::PreferencesDialog)
 {
     ui->setupUi(this);
+    QSettings s;
+    QFont displayFont(s.value("displayFont","Open Sans").toString(), s.value("fontSize",12).toInt() );
+    ui->fontComboBox->setCurrentFont(displayFont);
+    ui->fontSpinBox->setValue( s.value("fontSize",12).toInt());
+    ui->wdLineEdit->setText(s.value("defaultDirectory").toString());
+    connect(ui->wdPushButton,
+            SIGNAL( clicked() ),
+            this,
+            SLOT( setDefaultDirectory() )
+                );
 }
 
 PreferencesDialog::~PreferencesDialog()
 {
     delete ui;
+}
+
+void PreferencesDialog::done(int r)
+{
+    if( r == QDialog::Accepted ){
+        QString workingDirectory = ui->wdLineEdit->text();
+        if( !QFile::exists(workingDirectory) ){
+            QMessageBox::information(this,"PTNG Workbench", "An existing directory needs to be\nsupplied for the working directory.");
+            return;
+        }
+        else{
+            QSettings s;
+            s.setValue("displayFont", ui->fontComboBox->currentFont().family());
+            s.setValue("fontSize",ui->fontSpinBox->value());
+            s.setValue("defaultDirectory",ui->wdLineEdit->text());
+            QFont font( ui->fontComboBox->currentFont().family(), ui->fontSpinBox->value() );
+            if( parentWindow != nullptr ){
+                parentWindow->setFont(font);
+            }
+            QDialog::done(r);
+            return;
+        }
+    }
+    else{
+        QDialog::done(r);
+        return;
+    }
+    QDialog::done(r);
+}
+
+void PreferencesDialog::setDefaultDirectory()
+{
+    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench");
+    if( directory.isEmpty() ){
+        return;
+    }
+    ui->wdLineEdit->setText(directory);
+}
+
+QMainWindow *PreferencesDialog::getParentWindow() const
+{
+    return parentWindow;
+}
+
+void PreferencesDialog::setParentWindow(QMainWindow *newParentWindow)
+{
+    if (parentWindow == newParentWindow)
+        return;
+    parentWindow = newParentWindow;
+    emit parentWindowChanged();
 }

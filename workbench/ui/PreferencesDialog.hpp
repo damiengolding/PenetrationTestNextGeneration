@@ -26,6 +26,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #pragma once
 
 #include <QDialog>
+#include "../inc/MainWindow.hpp"
 
 namespace Ui {
 class PreferencesDialog;
@@ -34,12 +35,27 @@ class PreferencesDialog;
 class PreferencesDialog : public QDialog
 {
     Q_OBJECT
+    Q_PROPERTY(QMainWindow *parentWindow READ getParentWindow WRITE setParentWindow NOTIFY parentWindowChanged FINAL)
 
 public:
     explicit PreferencesDialog(QWidget *parent = nullptr);
     ~PreferencesDialog();
 
+    QMainWindow *getParentWindow() const;
+    void setParentWindow(QMainWindow *newParentWindow);
+
+public slots:
+    void done(int r);
+    void setDefaultDirectory();
+
+signals:
+    void parentWindowChanged();
+
+private: // Members
+    QMainWindow *parentWindow;
+
 private:
     Ui::PreferencesDialog *ui;
+
 };
 

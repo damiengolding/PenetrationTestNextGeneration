@@ -134,7 +134,7 @@ void PtngProject::removeWatchDirectory(const QString &directory)
     }
 }
 
-void PtngProject::addArtefact(const QString &sourceTool, const QString &sourceFile, const QString &outputFile, const QString &artefactId)
+void PtngProject::addArtefact(const QString &sourceTool, const QString &sourceFile, const QString &outputFile, const QString &displayName, const QString &artefactId)
 {
     QString id = artefactId;
     if( id.isEmpty() ){
@@ -148,6 +148,7 @@ void PtngProject::addArtefact(const QString &sourceTool, const QString &sourceFi
     newArtefact.setAttribute("SourceFile",sourceFile);
     newArtefact.setAttribute("OutputFile",outputFile);
     newArtefact.setAttribute("Id",id);
+    newArtefact.setAttribute("DisplayName",displayName);
     artefactsElem.appendChild(newArtefact);
 }
 
