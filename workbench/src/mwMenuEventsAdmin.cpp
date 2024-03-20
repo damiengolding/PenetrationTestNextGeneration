@@ -25,6 +25,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 
 #include "../inc/MainWindow.hpp"
+#include "../ui/PreferencesDialog.hpp"
 
 void MainWindow::showAboutQt(){
     QMessageBox::aboutQt(this,windowTitle);
@@ -34,4 +35,15 @@ void MainWindow::showAbout(){
     QMessageBox::information(this,windowTitle,"Version: 0.0.1\n"
                                                   "Author: Damien Golding\n"
                                                   "Copyright: MIT 2024");
+}
+
+void MainWindow::showPreferences()
+{
+    QScopedPointer<PreferencesDialog> pd( new PreferencesDialog );
+    if( pd->exec() == QDialog::Accepted ){
+        QMessageBox::information(this,windowTitle,"Preferences accepted");
+    }
+    else{
+        QMessageBox::information(this,windowTitle,"Preferences rejected");
+    }
 }

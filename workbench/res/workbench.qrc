@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>settings_01.png</file>
     <file>close_01.png</file>
     <file>folder_open_01.png</file>
     <file>copy_01.png</file>

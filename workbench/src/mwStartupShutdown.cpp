@@ -35,9 +35,28 @@ void MainWindow::restoreMainWindowState(){
     // MRU
     mostRecentlyUsed = s.value("mru").toString().split(";",Qt::SkipEmptyParts);
     // Menu
-    connect( ui->actionAboutQt, SIGNAL(triggered()),this, SLOT(showAboutQt()));
-    connect( ui->actionAboutWorkbench, SIGNAL(triggered()),this,SLOT(showAbout()));
-    connect( ui->actionNewProject, SIGNAL(triggered()),this, SLOT(newProject()));
+    connect(ui->actionAboutQt,
+            SIGNAL(triggered()),
+            this,
+            SLOT(showAboutQt())
+            );
+    connect(
+                ui->actionAboutWorkbench,
+                SIGNAL(triggered()),
+                this,
+                SLOT(showAbout())
+                );
+    connect(
+                ui->actionNewProject,
+                SIGNAL(triggered()),
+                this,
+                SLOT(newProject())
+                );
+    connect(ui->actionPreferences,
+            SIGNAL( triggered()),
+                this,
+            SLOT( showPreferences())
+                );
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){

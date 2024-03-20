@@ -23,19 +23,23 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
+#pragma once
 
-#include "../inc/MainWindow.hpp"
-#include "ui_MainWindow.h"
+#include <QDialog>
 
-#include "../ui/NewProjectDialog.hpp"
-
-void MainWindow::newProject(){
-    QScopedPointer<NewProjectDialog> npd(new NewProjectDialog());
-    if( npd->exec() == QDialog::Accepted ){
-        QMessageBox::information(this,windowTitle,"New project accepted");
-        currentProject = npd->getProject();
-    }
-    else{
-        QMessageBox::information(this,windowTitle,"New project rejected");
-    }
+namespace Ui {
+class PreferencesDialog;
 }
+
+class PreferencesDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit PreferencesDialog(QWidget *parent = nullptr);
+    ~PreferencesDialog();
+
+private:
+    Ui::PreferencesDialog *ui;
+};
+

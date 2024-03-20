@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<PtngProject CreatedDate="" CreatedBy="">
+<PtngProject CreatedDate="" Title="">
   <Artefacts>
-    <Artefact SourceTool="" SourceFile="" OutputFile="" />
+    <Artefact SourceTool="" SourceFile="" OutputFile="" Id="" />
   </Artefacts>
   <Project>
     <WorkingDirectory Value=""></WorkingDirectory>

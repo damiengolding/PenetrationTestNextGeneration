@@ -31,9 +31,116 @@ NewProjectDialog::NewProjectDialog(QWidget *parent) :
     ui(new Ui::NewProjectDialog)
 {
     ui->setupUi(this);
+    project = new PtngProject();
+    connect(ui->workingDirectoryPushButton,
+            SIGNAL( clicked() ),
+                this,
+            SLOT( setWorkingDirectory() )
+                );
+    connect(ui->addFileWatchPushButton,
+            SIGNAL( clicked() ),
+                this,
+            SLOT( addWatchDirectory() )
+                );
+    connect(ui->removeFileWatchPushButton,
+            SIGNAL( clicked() ),
+                this,
+            SLOT( removeWatchDirectory() )
+                );
+    connect(ui->nameLineEdit,
+            SIGNAL( textChanged(const QString&) ),
+                this,
+            SLOT( setProjectName(const QString&) )
+                );
+    connect(ui->fileWatchListWidget,
+            SIGNAL( itemSelectionChanged() ),
+                this,
+            SLOT( enableWatchRemoveButton() )
+                );
 }
 
 NewProjectDialog::~NewProjectDialog()
 {
     delete ui;
+}
+
+PtngProject *NewProjectDialog::getProject() const
+{
+    return project;
+}
+
+void NewProjectDialog::setProject(PtngProject *newProject)
+{
+    if (project == newProject)
+        return;
+    project = newProject;
+    emit projectChanged();
+}
+
+void NewProjectDialog::done(int r)
+{
+    if( r == QDialog::Accepted ){
+        QString projectName = ui->nameLineEdit->text();
+        QString workingDirectory = ui->workingDirectoryLineEdit->text();
+        if( projectName.isEmpty() ){
+            QMessageBox::information(this,"PTNG Workbench", "Project name needs to be completed.");
+            return;
+        }
+        if( !QFile::exists(workingDirectory) ){
+            QMessageBox::information(this,"PTNG Workbench", "An existing directory needs to be\nsupplied for the working directory.");
+            return;
+        }
+        else{
+            QDialog::done(r);
+            return;
+        }
+    }
+    else{
+        QDialog::done(r);
+        return;
+    }
+}
+
+void NewProjectDialog::setWorkingDirectory()
+{
+    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench");
+    if( directory.isEmpty() ){
+        return;
+    }
+    ui->workingDirectoryLineEdit->setText(directory);
+    project->setWorkingDirectory(directory);
+}
+
+void NewProjectDialog::setProjectName(const QString &projectName)
+{
+    project->setProjectName(projectName);
+}
+
+void NewProjectDialog::addWatchDirectory()
+{
+    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench");
+    if( directory.isEmpty() ){
+        return;
+    }
+    if( watchDirectories.contains(directory) ){
+        QMessageBox::information(this,"PTNG Workbench","Duplicate directory");
+        return;
+    }
+    ui->fileWatchListWidget->addItem(directory);
+    project->addWatchDirectory(directory);
+    watchDirectories.append(directory);
+}
+
+void NewProjectDialog::removeWatchDirectory()
+{
+    QListWidgetItem *item = ui->fileWatchListWidget->currentItem();
+    QString directory = item->text();
+    project->removeWatchDirectory(directory);
+    ui->fileWatchListWidget->takeItem(ui->fileWatchListWidget->currentRow());
+    watchDirectories.removeAll(directory);
+}
+
+void NewProjectDialog::enableWatchRemoveButton()
+{
+    ui->removeFileWatchPushButton->setEnabled(true);
 }

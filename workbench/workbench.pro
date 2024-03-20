@@ -15,16 +15,19 @@ SOURCES += \
     src/mwEventsProject.cpp \
     src/mwMenuEventsAdmin.cpp \
     src/mwStartupShutdown.cpp \
-    ui/NewProjectDialog.cpp
+    ui/NewProjectDialog.cpp \
+    ui/PreferencesDialog.cpp
 
 HEADERS += \
     inc/MainWindow.hpp \
     inc/PtngProject.hpp \
-    ui/NewProjectDialog.hpp
+    ui/NewProjectDialog.hpp \
+    ui/PreferencesDialog.hpp
 
 FORMS += \
     ui/MainWindow.ui \
-    ui/NewProjectDialog.ui
+    ui/NewProjectDialog.ui \
+    ui/PreferencesDialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

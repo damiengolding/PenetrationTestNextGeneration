@@ -78,6 +78,7 @@ private:
     Ui::MainWindow *ui;
     QString windowTitle = "PTNG Workbench";
     QStringList mostRecentlyUsed;
+    PtngProject *currentProject;
 
     // Lifecycle
 private:
@@ -86,6 +87,7 @@ private:
 
 public slots:
     void newProject();
+    void showPreferences();
     void showAboutQt();
     void showAbout();
 
