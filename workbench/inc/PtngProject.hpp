@@ -90,7 +90,7 @@ public:
     explicit PtngProject(QObject *parent = nullptr);
     void addWatchDirectory(const QString &directory);
     void removeWatchDirectory(const QString &directory);
-    void addArtefact(const QString &sourceTool, const QString &sourceFile, const QString &outputFile, const QString &artefactId = "");
+    void addArtefact(const QString &sourceTool, const QString &sourceFile, const QString &outputFile, const QString &displayName, const QString &artefactId = "");
     void removeArtefact(const QString &artefactId);
 
     QString getProjectName() const;
