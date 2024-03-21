@@ -91,7 +91,7 @@ void PtngProjectArtefact::setSourceTool(const QString &newSourceTool)
 PtngProject::PtngProject(QObject *parent)
     : QObject{parent}
 {
-
+    isDirty  = false;
     domDocument = new QDomDocument("");
     QDomElement root = domDocument->createElement("PtngProject");
     QDomElement artefacts = domDocument->createElement("Artefacts");
@@ -109,6 +109,7 @@ void PtngProject::addWatchDirectory(const QString &directory)
     if( watchDirectories.contains(directory) ){
         return;
     }
+    isDirty = true;
     watchDirectories.append(directory);
     QDomElement project = domDocument->documentElement().firstChildElement("Project");
     QDomElement wd = domDocument->createElement("WatchDirectory");
@@ -120,7 +121,7 @@ void PtngProject::removeWatchDirectory(const QString &directory)
 {
     if( !watchDirectories.contains(directory) ){
         return;
-    }
+    }isDirty = true;
     watchDirectories.removeAll(directory);
     QDomNode projectNode = domDocument->documentElement().firstChildElement("Project");
     QDomElement projectElem = projectNode.toElement();
@@ -140,7 +141,7 @@ void PtngProject::addArtefact(const QString &sourceTool, const QString &sourceFi
     if( id.isEmpty() ){
         id = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch());
     }
-
+    isDirty = true;
     QDomNode artefactsNode = domDocument->documentElement().firstChildElement("Artefacts");
     QDomElement artefactsElem = artefactsNode.toElement();
     QDomElement newArtefact = domDocument->createElement("Artefact");
@@ -172,6 +173,7 @@ void PtngProject::removeArtefact(const QString &artefactId)
             artefactsNode.removeChild(node);
         }
     }
+    isDirty = true;
 }
 
 QString PtngProject::getProjectName() const
@@ -186,6 +188,7 @@ void PtngProject::setProjectName(const QString &newProjectName)
     projectName = newProjectName;
     QDomElement root = domDocument->documentElement();
     root.setAttribute("Title",projectName);
+    isDirty = true;
     emit projectNameChanged();
 }
 
@@ -209,6 +212,7 @@ void PtngProject::setWorkingDirectory(const QString &newWorkingDirectory)
         return;
     }
     elem.setAttribute("Value",newWorkingDirectory);
+    isDirty = true;
     workingDirectory = newWorkingDirectory;
     emit workingDirectoryChanged();
 }
@@ -223,7 +227,21 @@ void PtngProject::setDomDocument(QDomDocument *newDomDocument)
     if (domDocument == newDomDocument)
         return;
     domDocument = newDomDocument;
+    isDirty = true;
     emit domDocumentChanged();
+}
+
+bool PtngProject::getIsDirty() const
+{
+    return isDirty;
+}
+
+void PtngProject::setIsDirty(bool newIsDirty)
+{
+    if (isDirty == newIsDirty)
+        return;
+    isDirty = newIsDirty;
+    emit isDirtyChanged();
 }
 
 } // namespace ptng

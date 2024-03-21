@@ -44,6 +44,8 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QListWidgetItem>
+#include <QToolBar>
+#include <QDirIterator>
 
 // STD
 #include <iostream>
@@ -81,6 +83,7 @@ private:
     QString windowTitle = "PTNG Workbench";
     QStringList mostRecentlyUsed;
     PtngProject *currentProject;
+    QToolBar *mainToolBar;
 
     // Lifecycle
 private:
@@ -90,8 +93,11 @@ private:
 
 public slots:
     void newProject();
+    void addFile();
+    void addFolder();
     void showPreferences();
     void showAboutQt();
     void showAbout();
-
+    void showExplorerDock(bool show);
+    void showOutputDock(bool show);
 };

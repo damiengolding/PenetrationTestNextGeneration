@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="images">
+    <file>folder_managed_01.png</file>
+    <file>auto_fix_high_01.png</file>
+    <file>dock_window_04.png</file>
     <file>settings_01.png</file>
     <file>close_01.png</file>
     <file>folder_open_01.png</file>

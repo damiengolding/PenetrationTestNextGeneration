@@ -103,7 +103,8 @@ void NewProjectDialog::done(int r)
 
 void NewProjectDialog::setWorkingDirectory()
 {
-    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench");
+    QSettings s;
+    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench",s.value("defaultDirectory").toString());
     if( directory.isEmpty() ){
         return;
     }
@@ -118,7 +119,8 @@ void NewProjectDialog::setProjectName(const QString &projectName)
 
 void NewProjectDialog::addWatchDirectory()
 {
-    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench");
+    QSettings s;
+    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench",s.value("defaultDirectory").toString());
     if( directory.isEmpty() ){
         return;
     }

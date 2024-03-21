@@ -57,6 +57,26 @@ void MainWindow::restoreMainWindowState(){
                 this,
             SLOT( showPreferences())
                 );
+    connect(ui->actionShowExplorer,
+            SIGNAL( triggered(bool) ),
+            this,
+            SLOT( showExplorerDock(bool) )
+                );
+    connect(ui->actionShowOutput,
+            SIGNAL( triggered(bool) ),
+            this,
+            SLOT( showOutputDock(bool) )
+                );
+    connect(ui->actionAddFile,
+            SIGNAL( triggered() ),
+            this,
+            SLOT( addFile() )
+                );
+    connect(ui->actionScanFolder,
+            SIGNAL( triggered() ),
+            this,
+            SLOT( addFolder() )
+                );
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){

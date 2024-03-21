@@ -23,14 +23,31 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-
 #pragma once
-#include "inc/CommandLineHandler.hpp"
 
-void processNessusVulns(const QString &sourceFile,
-                 const QString &conversionType,
-                 const QString &outputFileStem,
-                        const QString &command){
-    qInfo() << "[info] Processing Nessus native XML to host vulnerabilities - not yet implemented";
+#include "../inc/MainWindow.hpp"
+#include <QDialog>
 
+namespace Ui {
+class ScanFolderDialog;
 }
+
+class ScanFolderDialog : public QDialog
+{
+    Q_OBJECT
+
+public:
+    explicit ScanFolderDialog(QWidget *parent = nullptr);
+    ~ScanFolderDialog();
+
+private slots:
+    void toggleCopySources(bool checked);
+    void selectSourceDirectory();
+    void selectTargetDirectory();
+    void processFiles(const QString &sourceDirectory, const QString &targetDirectory, bool copySources = true, bool copyAll = false, bool keepStructure = true);
+
+private:
+    Ui::ScanFolderDialog *ui;
+    void done(int r);
+};
+

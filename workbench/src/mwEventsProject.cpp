@@ -28,10 +28,34 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "ui_MainWindow.h"
 
 #include "../ui/NewProjectDialog.hpp"
+#include "../ui/ScanFolderDialog.hpp"
 
 void MainWindow::newProject(){
     QScopedPointer<NewProjectDialog> npd(new NewProjectDialog());
     if( npd->exec() == QDialog::Accepted ){
         currentProject = npd->getProject();
     }
+}
+// TODO Need to figure out where to do file processing e.g. to DGML -> dot -> png etc
+void MainWindow::addFile(){
+    QSettings s;
+    QString sourceFile = QFileDialog::getOpenFileName(this,"PTNG Workbench - source file",s.value("defaultDirectory").toString());
+    if( sourceFile.isEmpty() ){
+        return;
+    }
+    else if( PtngIdent::checkFile(sourceFile) == PtngEnums::NUM_SUPPORTED_INPUT_TYPES ){
+        QMessageBox::warning(this,"PTNG Workbench","The file type is not supported.");
+        return;
+    }
+    QString targetFile = QFileDialog::getSaveFileName(this,"PTNG Workbench - target file",s.value("defaultDirectory").toString());
+    if( targetFile.isEmpty() ){
+        return;
+    }
+    QFile::copy(sourceFile,targetFile);
+}
+// TODO Need to figure out where to do file processing e.g. to DGML -> dot -> png etc
+void MainWindow::addFolder(){
+    QSettings s;
+    QScopedPointer<ScanFolderDialog> sfd( new ScanFolderDialog() );
+    sfd->exec();
 }

@@ -25,6 +25,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 
 #include "../inc/MainWindow.hpp"
+#include "ui_MainWindow.h"
 #include "../ui/PreferencesDialog.hpp"
 
 void MainWindow::showAboutQt(){
@@ -42,4 +43,12 @@ void MainWindow::showPreferences()
     QScopedPointer<PreferencesDialog> pd( new PreferencesDialog );
     pd->setParentWindow(this);
     pd->exec() == QDialog::Accepted;
+}
+
+void MainWindow::showExplorerDock(bool show){
+        ui->explorerDockWidget->setVisible(show);
+}
+
+void MainWindow::showOutputDock(bool show){
+    ui->outputDockWidget->setVisible(show);
 }

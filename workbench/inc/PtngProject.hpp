@@ -102,17 +102,24 @@ public:
     QDomDocument *getDomDocument() const;
     void setDomDocument(QDomDocument *newDomDocument);
 
+    bool getIsDirty() const;
+    void setIsDirty(bool newIsDirty);
+
 private:
     QString projectName;
     QString workingDirectory;
     QDomDocument *domDocument;
     QStringList watchDirectories;
     QList<PtngProjectArtefact*> artefacts;
+    bool isDirty;
+
+    Q_PROPERTY(bool isDirty READ getIsDirty WRITE setIsDirty NOTIFY isDirtyChanged FINAL)
 
 signals:
     void projectNameChanged();
     void workingDirectoryChanged();
     void domDocumentChanged();
+    void isDirtyChanged();
 };
 
 } // namespace ptng

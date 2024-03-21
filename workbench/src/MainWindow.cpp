@@ -41,11 +41,25 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::initDefaults(){
+    // Init any pointers
     currentProject = new PtngProject();
 
+    // Look and feel
     QSettings s;
     QFont displayFont(s.value("displayFont","Open Sans").toString(), s.value("fontSize",12).toInt() );
     this->setFont(displayFont);
+
+    // Toolbar
+    mainToolBar = this->addToolBar("Tools");
+    mainToolBar->setObjectName("Maintoolbar");
+    mainToolBar->addAction(ui->actionNewProject);
+    mainToolBar->addAction( ui->actionAddFile );
+    mainToolBar->addAction( ui->actionScanFolder );
+    mainToolBar->addSeparator();
+    mainToolBar->addAction( ui->actionPreferences );
+    mainToolBar->addAction(ui->actionShowExplorer);
+    mainToolBar->addAction(ui->actionShowOutput);
+
 }
 
 MainWindow::~MainWindow()
