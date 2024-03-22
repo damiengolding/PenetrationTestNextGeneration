@@ -59,9 +59,6 @@ QList<PtngHostBuilder*> PtngInputParser::parseNessus(const QString &inputFile){
     return(builderList);
 }
 
-
-
-// TODO this in conjunction with parseNesusSeverities REALLY needs at least developer testing
 QList<PtngIssue> PtngInputParser::parseNesusIssues(const QString &inputFile)
 {
     QList<PtngIssue> issueList;

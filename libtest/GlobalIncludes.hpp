@@ -25,6 +25,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
 
+// Qt
 #include <QtCore/qglobal.h>
 #include <QDomDocument>
 #include <QDomNode>
@@ -39,19 +40,14 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QDebug>
 #include <QDateTime>
 #include <QProcess>
-#include <QMainWindow>
-#include <QSettings>
-#include <QMessageBox>
-#include <QFileDialog>
-#include <QListWidgetItem>
-#include <QToolBar>
-#include <QDirIterator>
+#include <QTest>
+#include <QDebug>
 
 // STD
 #include <iostream>
 #include <string>
 
-// ptng - from libparser
+// ptng
 #include "PtngEnums.hpp"
 #include "PtngIdent.hpp"
 #include "PtngHostBuilder.hpp"
@@ -60,52 +56,4 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "PtngDGMLBuilder.hpp"
 #include "PtngIP4Address.hpp"
 #include "PtngDGMLConv.hpp"
-
-// ptng - from workbench
-#include "inc/PtngProject.hpp"
-
 using namespace ptng;
-
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
-
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
-
-public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
-
-    // Directories
-    QString defaultProjectDirectory;
-    QString defaultDirectory;
-    QString pluginDirectory;
-    QString scriptDirectory;
-
-    // Other objects/pointers
-    QString windowTitle = "PTNG Workbench";
-    QStringList mostRecentlyUsed;
-    PtngProject *currentProject;
-    QToolBar *mainToolBar;
-
-    // Lifecycle
-private:
-    void closeEvent(QCloseEvent *event);
-    void restoreMainWindowState();
-    void initDefaults();
-
-public slots:
-    void newProject();
-    void addFile();
-    void addFolder();
-    void showPreferences();
-    void showAboutQt();
-    void showAbout();
-    void showExplorerDock(bool show);
-    void showOutputDock(bool show);
-};

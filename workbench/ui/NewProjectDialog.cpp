@@ -91,6 +91,8 @@ void NewProjectDialog::done(int r)
             return;
         }
         else{
+            project->setProjectName(ui->nameLineEdit->text());
+            project->setWorkingDirectory(ui->workingDirectoryLineEdit->text());
             QDialog::done(r);
             return;
         }

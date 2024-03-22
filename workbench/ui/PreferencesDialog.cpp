@@ -35,7 +35,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
     QFont displayFont(s.value("displayFont","Open Sans").toString(), s.value("fontSize",12).toInt() );
     ui->fontComboBox->setCurrentFont(displayFont);
     ui->fontSpinBox->setValue( s.value("fontSize",12).toInt());
-    ui->wdLineEdit->setText(s.value("defaultDirectory").toString());
+    ui->wdLineEdit->setText(s.value("defaultProjectDirectory").toString());
     connect(ui->wdPushButton,
             SIGNAL( clicked() ),
             this,
@@ -60,7 +60,7 @@ void PreferencesDialog::done(int r)
             QSettings s;
             s.setValue("displayFont", ui->fontComboBox->currentFont().family());
             s.setValue("fontSize",ui->fontSpinBox->value());
-            s.setValue("defaultDirectory",ui->wdLineEdit->text());
+            s.setValue("defaultProjectDirectory",ui->wdLineEdit->text());
             QFont font( ui->fontComboBox->currentFont().family(), ui->fontSpinBox->value() );
             if( parentWindow != nullptr ){
                 parentWindow->setFont(font);

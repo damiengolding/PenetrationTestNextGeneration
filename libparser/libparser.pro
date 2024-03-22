@@ -1,4 +1,4 @@
-QT += gui xml
+QT += gui xml core
 
 TEMPLATE = lib
 DEFINES += LIBPARSER_LIBRARY

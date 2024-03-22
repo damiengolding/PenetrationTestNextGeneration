@@ -44,8 +44,27 @@ void MainWindow::initDefaults(){
     // Init any pointers
     currentProject = new PtngProject();
 
-    // Look and feel
     QSettings s;
+    // Default directories
+    if( !s.contains("defaultDirectory")){
+        s.setValue("defaultDirectory",QDir::homePath() + QDir::separator() + "Roaming/Golding's Gym/PTNG Workbench" );
+    }
+    defaultDirectory = s.value("defaultDirectory").toString();
+    if( !s.contains("defaultProjectDirectory") ){
+        s.setValue("defaultProjectDirectory",QDir::homePath() + QDir::separator() + "Roaming/Golding's Gym/PTNG Workbench" );
+    }
+    defaultProjectDirectory = s.value("defaultDirectory").toString();
+    if( !s.contains("pluginDirectory") ){
+        s.setValue("pluginDirectory",defaultDirectory + QDir::separator() + "plugins");
+    }
+    pluginDirectory = s.value("scriptDirectory").toString();
+    if( !s.contains("scriptDirectory")){
+        s.setValue("scriptDirectory", defaultDirectory + QDir::separator() + "scripts");
+    }
+    scriptDirectory  = s.value("scriptDirectory").toString();
+
+    // Look and feel
+
     QFont displayFont(s.value("displayFont","Open Sans").toString(), s.value("fontSize",12).toInt() );
     this->setFont(displayFont);
 

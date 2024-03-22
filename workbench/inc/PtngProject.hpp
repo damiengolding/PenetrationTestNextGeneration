@@ -85,6 +85,8 @@ class PtngProject : public QObject
     Q_PROPERTY(QString projectname READ getProjectName WRITE setProjectName NOTIFY projectNameChanged FINAL)
     Q_PROPERTY(QString workingDirectory READ getWorkingDirectory WRITE setWorkingDirectory NOTIFY workingDirectoryChanged FINAL)
     Q_PROPERTY(QDomDocument *domDocument READ getDomDocument WRITE setDomDocument NOTIFY domDocumentChanged FINAL)
+    Q_PROPERTY(bool isDirty READ getIsDirty WRITE setIsDirty NOTIFY isDirtyChanged FINAL)
+    Q_PROPERTY(QString fileName READ getFileName WRITE setFileName NOTIFY fileNameChanged FINAL)
 
 public:
     explicit PtngProject(QObject *parent = nullptr);
@@ -92,6 +94,9 @@ public:
     void removeWatchDirectory(const QString &directory);
     void addArtefact(const QString &sourceTool, const QString &sourceFile, const QString &outputFile, const QString &displayName, const QString &artefactId = "");
     void removeArtefact(const QString &artefactId);
+    bool loadFromFile(const QString &inputFile);
+    bool loadFromString(const QString &inputString);
+    bool saveToFile(const QString &outputFile = "");
 
     QString getProjectName() const;
     void setProjectName(const QString &newProjectname);
@@ -105,21 +110,26 @@ public:
     bool getIsDirty() const;
     void setIsDirty(bool newIsDirty);
 
+    QString getFileName() const;
+    void setFileName(const QString &newFileName);
+
 private:
     QString projectName;
     QString workingDirectory;
     QDomDocument *domDocument;
     QStringList watchDirectories;
     QList<PtngProjectArtefact*> artefacts;
+    QString fileName = "";
     bool isDirty;
-
-    Q_PROPERTY(bool isDirty READ getIsDirty WRITE setIsDirty NOTIFY isDirtyChanged FINAL)
 
 signals:
     void projectNameChanged();
     void workingDirectoryChanged();
     void domDocumentChanged();
     void isDirtyChanged();
+    void fileNameChanged();
+    void projectSaved();
+    void projectLoaded(const QString &fileName,const QString &projectName);
 };
 
 } // namespace ptng

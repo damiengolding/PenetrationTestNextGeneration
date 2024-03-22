@@ -176,6 +176,62 @@ void PtngProject::removeArtefact(const QString &artefactId)
     isDirty = true;
 }
 
+bool PtngProject::loadFromFile(const QString &inputFile)
+{
+    QScopedPointer<QFile> file(new QFile(inputFile));
+    if( !file->open(QIODevice::ReadOnly) ){
+        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading.";
+        return(false);
+    }
+    fileName = inputFile;
+    if( loadFromString(file->readAll()) ){
+        QDomElement root = domDocument->documentElement();
+        QString displayName = root.attribute("DisplayName","Not set");
+        emit projectLoaded(fileName,displayName);
+        file->close();
+    }
+
+    return(true);
+}
+
+bool PtngProject::loadFromString(const QString &inputString)
+{
+    if( !domDocument->setContent(inputString) ){
+        qWarning() << "[warning] Could not parse XML.";
+        return(false);
+    }
+    QDomElement root = domDocument->documentElement();
+    if( !root.hasAttribute("Title") || root.attribute("Title").toLower() != "ptng workbench project" ){
+        qWarning() << "[warning] XML does not appear to be a valid Ptng workbench project";
+        return(false);
+    }
+    return(true);
+}
+
+bool PtngProject::saveToFile(const QString &outputFile)
+{
+    if( outputFile.isEmpty() && fileName.isEmpty() ){
+        qWarning() << "[warning] An output file name must be supplied.";
+        return(false);
+    }
+    else if( outputFile.isEmpty() && !fileName.isEmpty() ){
+        QScopedPointer<QFile> file(new QFile(fileName));
+        QTextStream out(file.data());
+        out << domDocument->toString(4);
+    }
+    else if( !outputFile.isEmpty() && fileName.isEmpty() ){
+        QScopedPointer<QFile> file(new QFile(outputFile));
+        QTextStream out(file.data());
+        out << domDocument->toString(4);
+    }
+    else{ // Default - let the supplied fileName take precedence a la save as
+        QScopedPointer<QFile> file(new QFile(outputFile));
+        QTextStream out(file.data());
+        out << domDocument->toString(4);
+    }
+    return(true);
+}
+
 QString PtngProject::getProjectName() const
 {
     return projectName;
@@ -242,6 +298,19 @@ void PtngProject::setIsDirty(bool newIsDirty)
         return;
     isDirty = newIsDirty;
     emit isDirtyChanged();
+}
+
+QString PtngProject::getFileName() const
+{
+    return fileName;
+}
+
+void PtngProject::setFileName(const QString &newFileName)
+{
+    if (fileName == newFileName)
+        return;
+    fileName = newFileName;
+    emit fileNameChanged();
 }
 
 } // namespace ptng
