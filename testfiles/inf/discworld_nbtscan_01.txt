@@ -1,0 +1,9 @@
+192.168.4.23:GOLDINGSGYM03  :<server>:<unknown>:f8:59:71:85:3f:63
+192.168.4.36:METASPLOITABLE3:<server>:<unknown>:08:00:27:d6:f7:76
+192.168.4.42:DISCWORLDDCCS  :<server>:<unknown>:08:00:27:8e:d2:e7
+192.168.4.43:DISCWORLDROOTCA:<server>:<unknown>:08:00:27:5a:84:38
+192.168.4.45:WEBSP1         :<server>:<unknown>:08:00:27:ae:b2:84
+192.168.4.46:WIN2K3SP0      :<server>:<unknown>:08:00:27:f3:21:2c
+192.168.4.32:METASPLOITABLE :<server>:METASPLOITABLE :00:00:00:00:00:00
+192.168.4.29:WIN2K8DB       :<server>:<unknown>:08:00:27:89:3d:6d
+192.168.4.31:GOLDINGSGYM02  :<server>:<unknown>:c4:d9:87:14:f8:84

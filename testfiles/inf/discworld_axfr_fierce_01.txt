@@ -1,0 +1,106 @@
+NS: discworlddccs.discworld.io.
+SOA: discworlddccs.discworld.io. (192.168.4.42)
+Zone: success
+{<DNS name @>: '@ 3600 IN SOA discworlddccs hostmaster 269 900 600 86400 3600\n'
+               '@ 600 IN A 192.168.48.3\n'
+               '@ 600 IN A 192.168.4.42\n'
+               '@ 600 IN A 192.168.56.50\n'
+               '@ 3600 IN NS discworlddccs\n'
+               '@ 600 IN AAAA fdd2:1c66:7ea8:1:b046:8983:4080:af2f',
+ <DNS name _msdcs>: '_msdcs 3600 IN NS discworlddccs',
+ <DNS name _gc._tcp.Ankh-Morpork._sites>: '_gc._tcp.Ankh-Morpork._sites 600 IN '
+                                          'SRV 0 100 3268 discworlddccs',
+ <DNS name _kerberos._tcp.Ankh-Morpork._sites>: '_kerberos._tcp.Ankh-Morpork._sites '
+                                                '600 IN SRV 0 100 88 '
+                                                'discworlddccs',
+ <DNS name _ldap._tcp.Ankh-Morpork._sites>: '_ldap._tcp.Ankh-Morpork._sites '
+                                            '600 IN SRV 0 100 389 '
+                                            'discworlddccs',
+ <DNS name _gc._tcp.Bes-Pelargic._sites>: '_gc._tcp.Bes-Pelargic._sites 600 IN '
+                                          'SRV 0 100 3268 discworlddccs',
+ <DNS name _kerberos._tcp.Bes-Pelargic._sites>: '_kerberos._tcp.Bes-Pelargic._sites '
+                                                '600 IN SRV 0 100 88 '
+                                                'discworlddccs',
+ <DNS name _ldap._tcp.Bes-Pelargic._sites>: '_ldap._tcp.Bes-Pelargic._sites '
+                                            '600 IN SRV 0 100 389 '
+                                            'discworlddccs',
+ <DNS name _gc._tcp.Bonk._sites>: '_gc._tcp.Bonk._sites 600 IN SRV 0 100 3268 '
+                                  'discworlddccs',
+ <DNS name _kerberos._tcp.Bonk._sites>: '_kerberos._tcp.Bonk._sites 600 IN SRV '
+                                        '0 100 88 discworlddccs',
+ <DNS name _ldap._tcp.Bonk._sites>: '_ldap._tcp.Bonk._sites 600 IN SRV 0 100 '
+                                    '389 discworlddccs',
+ <DNS name _gc._tcp.Dunmanifestin._sites>: '_gc._tcp.Dunmanifestin._sites 600 '
+                                           'IN SRV 0 100 3268 discworlddccs',
+ <DNS name _kerberos._tcp.Dunmanifestin._sites>: '_kerberos._tcp.Dunmanifestin._sites '
+                                                 '600 IN SRV 0 100 88 '
+                                                 'discworlddccs',
+ <DNS name _ldap._tcp.Dunmanifestin._sites>: '_ldap._tcp.Dunmanifestin._sites '
+                                             '600 IN SRV 0 100 389 '
+                                             'discworlddccs',
+ <DNS name _gc._tcp.Genua._sites>: '_gc._tcp.Genua._sites 600 IN SRV 0 100 '
+                                   '3268 discworlddccs',
+ <DNS name _kerberos._tcp.Genua._sites>: '_kerberos._tcp.Genua._sites 600 IN '
+                                         'SRV 0 100 88 discworlddccs',
+ <DNS name _ldap._tcp.Genua._sites>: '_ldap._tcp.Genua._sites 600 IN SRV 0 100 '
+                                     '389 discworlddccs',
+ <DNS name _gc._tcp>: '_gc._tcp 600 IN SRV 0 100 3268 discworlddccs',
+ <DNS name _kerberos._tcp>: '_kerberos._tcp 600 IN SRV 0 100 88 discworlddccs',
+ <DNS name _kpasswd._tcp>: '_kpasswd._tcp 600 IN SRV 0 100 464 discworlddccs',
+ <DNS name _ldap._tcp>: '_ldap._tcp 600 IN SRV 0 100 389 discworlddccs',
+ <DNS name _kerberos._udp>: '_kerberos._udp 600 IN SRV 0 100 88 discworlddccs',
+ <DNS name _kpasswd._udp>: '_kpasswd._udp 600 IN SRV 0 100 464 discworlddccs',
+ <DNS name discworlddccs>: 'discworlddccs 3600 IN A 192.168.4.42\n'
+                           'discworlddccs 3600 IN A 192.168.56.50\n'
+                           'discworlddccs 3600 IN A 192.168.48.3\n'
+                           'discworlddccs 3600 IN AAAA '
+                           'fdd2:1c66:7ea8:1:b046:8983:4080:af2f',
+ <DNS name DISCWORLDROOTCA>: 'DISCWORLDROOTCA 1200 IN A 192.168.48.4',
+ <DNS name DomainDnsZones>: 'DomainDnsZones 600 IN A 192.168.48.3\n'
+                            'DomainDnsZones 600 IN A 192.168.56.50\n'
+                            'DomainDnsZones 600 IN A 192.168.4.42\n'
+                            'DomainDnsZones 600 IN AAAA '
+                            'fdd2:1c66:7ea8:1:b046:8983:4080:af2f',
+ <DNS name _ldap._tcp.Ankh-Morpork._sites.DomainDnsZones>: '_ldap._tcp.Ankh-Morpork._sites.DomainDnsZones '
+                                                           '600 IN SRV 0 100 '
+                                                           '389 discworlddccs',
+ <DNS name _ldap._tcp.Bes-Pelargic._sites.DomainDnsZones>: '_ldap._tcp.Bes-Pelargic._sites.DomainDnsZones '
+                                                           '600 IN SRV 0 100 '
+                                                           '389 discworlddccs',
+ <DNS name _ldap._tcp.Bonk._sites.DomainDnsZones>: '_ldap._tcp.Bonk._sites.DomainDnsZones '
+                                                   '600 IN SRV 0 100 389 '
+                                                   'discworlddccs',
+ <DNS name _ldap._tcp.Dunmanifestin._sites.DomainDnsZones>: '_ldap._tcp.Dunmanifestin._sites.DomainDnsZones '
+                                                            '600 IN SRV 0 100 '
+                                                            '389 discworlddccs',
+ <DNS name _ldap._tcp.Genua._sites.DomainDnsZones>: '_ldap._tcp.Genua._sites.DomainDnsZones '
+                                                    '600 IN SRV 0 100 389 '
+                                                    'discworlddccs',
+ <DNS name _ldap._tcp.DomainDnsZones>: '_ldap._tcp.DomainDnsZones 600 IN SRV 0 '
+                                       '100 389 discworlddccs',
+ <DNS name ForestDnsZones>: 'ForestDnsZones 600 IN A 192.168.48.3\n'
+                            'ForestDnsZones 600 IN A 192.168.56.50\n'
+                            'ForestDnsZones 600 IN A 192.168.4.42\n'
+                            'ForestDnsZones 600 IN AAAA '
+                            'fdd2:1c66:7ea8:1:b046:8983:4080:af2f',
+ <DNS name _ldap._tcp.Ankh-Morpork._sites.ForestDnsZones>: '_ldap._tcp.Ankh-Morpork._sites.ForestDnsZones '
+                                                           '600 IN SRV 0 100 '
+                                                           '389 discworlddccs',
+ <DNS name _ldap._tcp.Bes-Pelargic._sites.ForestDnsZones>: '_ldap._tcp.Bes-Pelargic._sites.ForestDnsZones '
+                                                           '600 IN SRV 0 100 '
+                                                           '389 discworlddccs',
+ <DNS name _ldap._tcp.Bonk._sites.ForestDnsZones>: '_ldap._tcp.Bonk._sites.ForestDnsZones '
+                                                   '600 IN SRV 0 100 389 '
+                                                   'discworlddccs',
+ <DNS name _ldap._tcp.Dunmanifestin._sites.ForestDnsZones>: '_ldap._tcp.Dunmanifestin._sites.ForestDnsZones '
+                                                            '600 IN SRV 0 100 '
+                                                            '389 discworlddccs',
+ <DNS name _ldap._tcp.Genua._sites.ForestDnsZones>: '_ldap._tcp.Genua._sites.ForestDnsZones '
+                                                    '600 IN SRV 0 100 389 '
+                                                    'discworlddccs',
+ <DNS name _ldap._tcp.ForestDnsZones>: '_ldap._tcp.ForestDnsZones 600 IN SRV 0 '
+                                       '100 389 discworlddccs',
+ <DNS name WEBSP1>: 'WEBSP1 1200 IN A 192.168.4.45',
+ <DNS name WIN10DT1>: 'WIN10DT1 1200 IN A 192.168.56.110',
+ <DNS name WIN2K8DB>: 'WIN2K8DB 1200 IN A 192.168.56.112',
+ <DNS name WIN7DT1>: 'WIN7DT1 1200 IN A 192.168.56.106'}

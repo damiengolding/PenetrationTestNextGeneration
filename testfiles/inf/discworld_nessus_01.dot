@@ -1,0 +1,26 @@
+strict digraph network_dgml{
+rankdir=TB;
+graph [fontname="Open Sans",fontsize="10"];
+compound=true;labelloc="t";label="Network DGML Model";
+2 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.*.*.*",style="solid"];
+4 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.168.*.*",style="solid"];
+5 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.168.4.*",style="solid"];
+12 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.168.4.29",style="solid"];
+11 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.168.4.32",style="solid"];
+10 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.168.4.36",style="solid"];
+9 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.168.4.42",style="solid"];
+8 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.168.4.43",style="solid"];
+7 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.168.4.45",style="solid"];
+6 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="192.168.4.46",style="solid"];
+0 [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="10",label="Attacker",style="solid"];
+0->2 [color="Black"];
+2->4 [color="Black"];
+4->5 [color="Black"];
+5->6 [color="Black"];
+5->7 [color="Black"];
+5->8 [color="Black"];
+5->9 [color="Black"];
+5->10 [color="Black"];
+5->11 [color="Black"];
+5->12 [color="Black"];
+}//End of digraph

@@ -1,0 +1,142 @@
+Server:		10.0.1.10
+Address:	10.0.1.10#53
+
+Non-authoritative answer:
+victim.strikeforce.net
+	origin = vnetdcpki.victim.strikeforce.net
+	mail addr = hostmaster.victim.strikeforce.net
+	serial = 424
+	refresh = 900
+	retry = 600
+	expire = 86400
+	minimum = 3600
+Name:	victim.strikeforce.net
+Address: 192.168.32.127
+Name:	victim.strikeforce.net
+Address: 10.0.1.10
+Name:	victim.strikeforce.net
+Address: 192.168.1.129
+Name:	victim.strikeforce.net
+Address: 192.168.33.124
+victim.strikeforce.net	nameserver = vnetdcpki.victim.strikeforce.net.
+Name:	victim.strikeforce.net
+Address: 2a00:23c7:9082:5200:3c6d:e877:7d0a:e543
+Name:	victim.strikeforce.net
+Address: fdaa:bbcc:ddee:0:3c6d:e877:7d0a:e543
+_msdcs.victim.strikeforce.net	nameserver = vnetdcpki.victim.strikeforce.net.
+_gc._tcp.Cambridge._sites.victim.strikeforce.net	service = 0 100 3268 vnetdcpki.victim.strikeforce.net.
+_kerberos._tcp.Cambridge._sites.victim.strikeforce.net	service = 0 100 88 vnetdcpki.victim.strikeforce.net.
+_ldap._tcp.Cambridge._sites.victim.strikeforce.net	service = 0 100 389 vnetdcpki.victim.strikeforce.net.
+_gc._tcp.Dursley._sites.victim.strikeforce.net	service = 0 100 3268 vnetdcpki.victim.strikeforce.net.
+_kerberos._tcp.Dursley._sites.victim.strikeforce.net	service = 0 100 88 vnetdcpki.victim.strikeforce.net.
+_ldap._tcp.Dursley._sites.victim.strikeforce.net	service = 0 100 389 vnetdcpki.victim.strikeforce.net.
+_gc._tcp.victim.strikeforce.net	service = 0 100 3268 vnetdcpki.victim.strikeforce.net.
+_kerberos._tcp.victim.strikeforce.net	service = 0 100 88 vnetdcpki.victim.strikeforce.net.
+_kpasswd._tcp.victim.strikeforce.net	service = 0 100 464 vnetdcpki.victim.strikeforce.net.
+_ldap._tcp.victim.strikeforce.net	service = 0 100 389 vnetdcpki.victim.strikeforce.net.
+_kerberos._udp.victim.strikeforce.net	service = 0 100 88 vnetdcpki.victim.strikeforce.net.
+_kpasswd._udp.victim.strikeforce.net	service = 0 100 464 vnetdcpki.victim.strikeforce.net.
+Name:	DomainDnsZones.victim.strikeforce.net
+Address: 10.0.1.10
+Name:	DomainDnsZones.victim.strikeforce.net
+Address: 192.168.33.124
+Name:	DomainDnsZones.victim.strikeforce.net
+Address: 192.168.32.127
+Name:	DomainDnsZones.victim.strikeforce.net
+Address: 192.168.1.129
+Name:	DomainDnsZones.victim.strikeforce.net
+Address: 2a00:23c7:9082:5200:3c6d:e877:7d0a:e543
+Name:	DomainDnsZones.victim.strikeforce.net
+Address: fdaa:bbcc:ddee:0:3c6d:e877:7d0a:e543
+_ldap._tcp.Cambridge._sites.DomainDnsZones.victim.strikeforce.net	service = 0 100 389 vnetdcpki.victim.strikeforce.net.
+_ldap._tcp.Dursley._sites.DomainDnsZones.victim.strikeforce.net	service = 0 100 389 vnetdcpki.victim.strikeforce.net.
+_ldap._tcp.DomainDnsZones.victim.strikeforce.net	service = 0 100 389 vnetdcpki.victim.strikeforce.net.
+Name:	ForestDnsZones.victim.strikeforce.net
+Address: 10.0.1.10
+Name:	ForestDnsZones.victim.strikeforce.net
+Address: 192.168.33.124
+Name:	ForestDnsZones.victim.strikeforce.net
+Address: 192.168.32.127
+Name:	ForestDnsZones.victim.strikeforce.net
+Address: 192.168.1.129
+Name:	ForestDnsZones.victim.strikeforce.net
+Address: 2a00:23c7:9082:5200:3c6d:e877:7d0a:e543
+Name:	ForestDnsZones.victim.strikeforce.net
+Address: fdaa:bbcc:ddee:0:3c6d:e877:7d0a:e543
+_ldap._tcp.Cambridge._sites.ForestDnsZones.victim.strikeforce.net	service = 0 100 389 vnetdcpki.victim.strikeforce.net.
+_ldap._tcp.Dursley._sites.ForestDnsZones.victim.strikeforce.net	service = 0 100 389 vnetdcpki.victim.strikeforce.net.
+_ldap._tcp.ForestDnsZones.victim.strikeforce.net	service = 0 100 389 vnetdcpki.victim.strikeforce.net.
+Name:	MSFBUBU1404.victim.strikeforce.net
+Address: 10.0.1.21
+Name:	MSFBWIN2K8R2.victim.strikeforce.net
+Address: 10.0.1.20
+Name:	SGDDTWIN8.victim.strikeforce.net
+Address: 10.0.1.22
+Name:	VNETCOMMS.victim.strikeforce.net
+Address: 10.0.0.11
+Name:	vnetdcpki.victim.strikeforce.net
+Address: 192.168.32.127
+Name:	vnetdcpki.victim.strikeforce.net
+Address: 192.168.33.124
+Name:	vnetdcpki.victim.strikeforce.net
+Address: 10.0.1.10
+Name:	vnetdcpki.victim.strikeforce.net
+Address: 192.168.1.129
+Name:	vnetdcpki.victim.strikeforce.net
+Address: fdaa:bbcc:ddee:0:3c6d:e877:7d0a:e543
+Name:	vnetdcpki.victim.strikeforce.net
+Address: 2a00:23c7:9082:5200:3c6d:e877:7d0a:e543
+Name:	VNETDTAA.victim.strikeforce.net
+Address: 10.0.2.100
+Name:	VNETDTBR.victim.strikeforce.net
+Address: 10.0.3.100
+Name:	VNETDTCC.victim.strikeforce.net
+Address: 10.0.4.100
+Name:	VNETDTCIRT.victim.strikeforce.net
+Address: 10.0.20.100
+Name:	VNETDTDD.victim.strikeforce.net
+Address: 10.0.1.101
+Name:	VNETDTFF.victim.strikeforce.net
+Address: 10.0.5.100
+Name:	VNETDTGG.victim.strikeforce.net
+Address: 10.0.5.101
+Name:	VNETDTHH.victim.strikeforce.net
+Address: 10.0.6.100
+Name:	VNETDTZZ.victim.strikeforce.net
+Address: 10.0.10.100
+Name:	VNETENG01.victim.strikeforce.net
+Address: 10.0.4.101
+Name:	VNETINET.victim.strikeforce.net
+Address: 10.0.0.14
+Name:	VNETKALI.victim.strikeforce.net
+Address: 10.0.1.100
+Name:	VNETLOGCAP.victim.strikeforce.net
+Address: 10.0.0.20
+Name:	VNETMARK01.victim.strikeforce.net
+Address: 10.0.3.101
+Name:	VNETMSDB.victim.strikeforce.net
+Address: 10.0.0.18
+Name:	VNETPFS.victim.strikeforce.net
+Address: 10.0.0.17
+Name:	VNETSCADA01.victim.strikeforce.net
+Address: 10.0.4.150
+Name:	VNETSCADA02.victim.strikeforce.net
+Address: 10.0.4.151
+Name:	VNETSHP.victim.strikeforce.net
+Address: 10.0.0.21
+Name:	VNETUBU01.victim.strikeforce.net
+Address: 10.0.0.15
+Name:	VNETUNIXDB.victim.strikeforce.net
+Address: 10.0.0.19
+Name:	VNETVOIP.victim.strikeforce.net
+Address: 10.0.0.12
+victim.strikeforce.net
+	origin = vnetdcpki.victim.strikeforce.net
+	mail addr = hostmaster.victim.strikeforce.net
+	serial = 424
+	refresh = 900
+	retry = 600
+	expire = 86400
+	minimum = 3600
+
+Authoritative answers can be found from:

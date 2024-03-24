@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.94SVN scan initiated Sun Mar 17 11:36:37 2024 as: nmap -v -Pn -sU -F -T5 -A -oA discworld_inf_udp_fast_01 -iL ../../b_input/inf_include.txt -->
+<nmaprun scanner="nmap" args="nmap -v -Pn -sU -F -T5 -A -oA discworld_inf_udp_fast_01 -iL ../../b_input/inf_include.txt" start="1710675397" startstr="Sun Mar 17 11:36:37 2024" version="7.94SVN" xmloutputversion="1.05">
+<scaninfo type="udp" protocol="udp" numservices="100" services="7,9,17,19,49,53,67-69,80,88,111,120,123,135-139,158,161-162,177,427,443,445,497,500,514-515,518,520,593,623,626,631,996-999,1022-1023,1025-1030,1433-1434,1645-1646,1701,1718-1719,1812-1813,1900,2000,2048-2049,2222-2223,3283,3456,3703,4444,4500,5000,5060,5353,5632,9200,10000,17185,20031,30718,31337,32768-32769,32771,32815,33281,49152-49154,49156,49181-49182,49185-49186,49188,49190-49194,49200-49201,65024"/>
+<verbose level="1"/>
+<debugging level="0"/>
+<taskbegin task="NSE" time="1710675398"/>
+<taskend task="NSE" time="1710675398"/>
+<taskbegin task="NSE" time="1710675398"/>
+<taskend task="NSE" time="1710675398"/>
+<taskbegin task="NSE" time="1710675398"/>
+<taskend task="NSE" time="1710675398"/>
+<taskbegin task="ARP Ping Scan" time="1710675398"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.32" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.42" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.36" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.43" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.29" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.46" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.45" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<taskend task="ARP Ping Scan" time="1710675398" extrainfo="7 total hosts"/>
+<taskbegin task="UDP Scan" time="1710675398"/>
+<taskend task="UDP Scan" time="1710675423" extrainfo="700 total ports"/>
+<taskbegin task="Service scan" time="1710675423"/>
+<taskprogress task="Service scan" time="1710675478" percent="4.90" remaining="1068" etc="1710676546"/>
+<taskprogress task="Service scan" time="1710675511" percent="7.20" remaining="1134" etc="1710676644"/>
+<taskprogress task="Service scan" time="1710675546" percent="17.00" remaining="601" etc="1710676146"/>
+<taskprogress task="Service scan" time="1710675584" percent="19.02" remaining="686" etc="1710676269"/>
+<taskprogress task="Service scan" time="1710675614" percent="25.65" remaining="554" etc="1710676168"/>
+<taskprogress task="Service scan" time="1710675712" percent="36.89" remaining="495" etc="1710676206"/>
+<taskprogress task="Service scan" time="1710675790" percent="44.67" remaining="455" etc="1710676245"/>
+<taskprogress task="Service scan" time="1710675820" percent="53.31" remaining="348" etc="1710676168"/>
+<taskprogress task="Service scan" time="1710675913" percent="62.82" remaining="290" etc="1710676203"/>
+<taskprogress task="Service scan" time="1710675973" percent="68.88" remaining="249" etc="1710676222"/>
+<taskprogress task="Service scan" time="1710676006" percent="74.35" remaining="202" etc="1710676207"/>
+<taskprogress task="Service scan" time="1710676053" percent="79.83" remaining="160" etc="1710676212"/>
+<taskprogress task="Service scan" time="1710676103" percent="86.74" remaining="104" etc="1710676207"/>
+<taskprogress task="Service scan" time="1710676133" percent="91.93" remaining="63" etc="1710676195"/>
+<taskend task="Service scan" time="1710676216" extrainfo="347 services on 7 hosts"/>
+<taskbegin task="NSE" time="1710676218"/>
+<taskend task="NSE" time="1710676818"/>
+<taskbegin task="NSE" time="1710676818"/>
+<taskend task="NSE" time="1710676827"/>
+<taskbegin task="NSE" time="1710676827"/>
+<taskend task="NSE" time="1710676827"/>
+<host starttime="1710675398" endtime="1710676827"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.29" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="DB" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="92">
+<extrareasons reason="port-unreach" count="92" proto="udp" ports="7,9,17,19,49,53,67-69,80,88,111,120,135,139,158,161-162,427,443,445,497,514-515,518,593,623,626,631,996-999,1022-1023,1025-1030,1433-1434,1645-1646,1701,1718-1719,1812-1813,1900,2000,2048-2049,2222-2223,3283,3456,3703,4444,5000,5060,5353,5632,9200,10000,17185,20031,30718,31337,32768-32769,32771,32815,33281,49152-49154,49156,49181-49182,49185-49186,49188,49190-49194,49200-49201,65024"/>
+</extraports>
+<port protocol="udp" portid="123"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="ntp" product="NTP" version="v3" method="probed" conf="10"/></port>
+<port protocol="udp" portid="136"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="profile" method="table" conf="3"/></port>
+<port protocol="udp" portid="137"><state state="open" reason="udp-response" reason_ttl="128"/><service name="netbios-ns" product="Microsoft Windows netbios-ns" extrainfo="workgroup: DISCWORLD" hostname="WIN2K8DB" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="nbns-interfaces" output="&#xa;  hostname: WIN2K8DB&#xa;  interfaces: &#xa;    192.168.4.29&#xa;    192.168.56.112"><elem key="hostname">WIN2K8DB</elem>
+<table key="interfaces">
+<elem>192.168.4.29</elem>
+<elem>192.168.56.112</elem>
+</table>
+</script></port>
+<port protocol="udp" portid="138"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="netbios-dgm" method="table" conf="3"/></port>
+<port protocol="udp" portid="177"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="xdmcp" method="table" conf="3"/></port>
+<port protocol="udp" portid="500"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="isakmp" method="table" conf="3"/></port>
+<port protocol="udp" portid="520"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="route" method="table" conf="3"/></port>
+<port protocol="udp" portid="4500"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="nat-t-ike" method="table" conf="3"/></port>
+</ports>
+<os><portused state="closed" proto="udp" portid="7"/>
+<osmatch name="Microsoft Windows 10 1507 - 1607" accuracy="95" line="69494">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="10" accuracy="95"><cpe>cpe:/o:microsoft:windows_10</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows 10 1703" accuracy="95" line="69894">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="10" accuracy="95"><cpe>cpe:/o:microsoft:windows_10:1703</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows Server 2008 R2 SP1" accuracy="95" line="75075">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2008" accuracy="95"><cpe>cpe:/o:microsoft:windows_server_2008:r2:sp1</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows Server 2008 SP2" accuracy="95" line="75389">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2008" accuracy="95"><cpe>cpe:/o:microsoft:windows_server_2008::sp2</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows Server 2012" accuracy="95" line="75576">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2012" accuracy="95"><cpe>cpe:/o:microsoft:windows_server_2012</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows 7 SP0 - SP1, Windows Server 2008 SP1, Windows Server 2008 R2, Windows 8, or Windows 8.1 Update 1" accuracy="95" line="77205">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="7" accuracy="95"><cpe>cpe:/o:microsoft:windows_7::-</cpe><cpe>cpe:/o:microsoft:windows_7::sp1</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2008" accuracy="95"><cpe>cpe:/o:microsoft:windows_server_2008::sp1</cpe><cpe>cpe:/o:microsoft:windows_server_2008:r2</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8" accuracy="95"><cpe>cpe:/o:microsoft:windows_8</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8.1" accuracy="95"><cpe>cpe:/o:microsoft:windows_8.1</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows 7 SP1 or Windows Server 2008 R2 SP1 or Windows 8.1 Update 1" accuracy="95" line="77717">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="7" accuracy="95"><cpe>cpe:/o:microsoft:windows_7::sp1</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2008" accuracy="95"><cpe>cpe:/o:microsoft:windows_server_2008:r2:sp1</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8.1" accuracy="95"><cpe>cpe:/o:microsoft:windows_8.1</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1" accuracy="95" line="77899">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="7" accuracy="95"><cpe>cpe:/o:microsoft:windows_7:::ultimate</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2012" accuracy="95"><cpe>cpe:/o:microsoft:windows_2012</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8.1" accuracy="95"><cpe>cpe:/o:microsoft:windows_8.1</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows 8" accuracy="95" line="78012">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8" accuracy="95"><cpe>cpe:/o:microsoft:windows_8</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows Server 2008 SP1" accuracy="95" line="75187">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2008" accuracy="95"><cpe>cpe:/o:microsoft:windows_server_2008::sp1</cpe></osclass>
+</osmatch>
+</os>
+<distance value="1"/>
+<hostscript><script id="nbstat" output="NetBIOS name: WIN2K8DB, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:89:3d:6d (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  WIN2K8DB&lt;00&gt;         Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  WIN2K8DB&lt;20&gt;         Flags: &lt;unique&gt;&lt;active&gt;"/></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.29" rtt="5.87" host="DB"/>
+</trace>
+<times srtt="5867" rttvar="709" to="50000"/>
+</host>
+<host starttime="1710675398" endtime="1710676827"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.32" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="MS2UBU" type="PTR"/>
+</hostnames>
+<ports><extraports state="open|filtered" count="76">
+<extrareasons reason="no-response" count="76" proto="udp" ports="7,17,19,49,68-69,80,88,120,123,136,138-139,161-162,177,427,445,497,500,514-515,518,520,593,623,626,631,996,999,1022-1023,1025-1030,1433-1434,1646,1701,1718-1719,1812-1813,1900,2000,2048,3283,3456,3703,5000,5060,5353,5632,20031,30718,31337,32768-32769,32771,32815,33281,49152-49153,49156,49182,49185-49186,49188,49191-49194,49200"/>
+</extraports>
+<port protocol="udp" portid="9"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="discard" method="table" conf="3"/></port>
+<port protocol="udp" portid="53"><state state="open" reason="udp-response" reason_ttl="64"/><service name="domain" product="ISC BIND" version="9.4.2" method="probed" conf="10"><cpe>cpe:/a:isc:bind:9.4.2</cpe></service><script id="dns-nsid" output="&#xa;  bind.version: 9.4.2"><elem key="bind.version">9.4.2</elem>
+</script><script id="dns-recursion" output="Recursion appears to be enabled"/></port>
+<port protocol="udp" portid="67"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="dhcps" method="table" conf="3"/></port>
+<port protocol="udp" portid="111"><state state="open" reason="udp-response" reason_ttl="64"/><service name="rpcbind" version="2" extrainfo="RPC #100000" method="probed" conf="10"/><script id="rpcinfo" output="&#xa;  program version    port/proto  service&#xa;  100000  2            111/tcp   rpcbind&#xa;  100000  2            111/udp   rpcbind&#xa;  100003  2,3,4       2049/tcp   nfs&#xa;  100003  2,3,4       2049/udp   nfs&#xa;  100005  1,2,3      42877/udp   mountd&#xa;  100005  1,2,3      56735/tcp   mountd&#xa;  100021  1,3,4      47750/tcp   nlockmgr&#xa;  100021  1,3,4      48892/udp   nlockmgr&#xa;  100024  1          43843/udp   status&#xa;  100024  1          49096/tcp   status&#xa;"><table key="100003">
+<table key="udp">
+<table key="version">
+<elem>2</elem>
+<elem>3</elem>
+<elem>4</elem>
+</table>
+<elem key="port">2049</elem>
+</table>
+<table key="tcp">
+<table key="version">
+<elem>2</elem>
+<elem>3</elem>
+<elem>4</elem>
+</table>
+<elem key="port">2049</elem>
+</table>
+</table>
+<table key="100000">
+<table key="tcp">
+<table key="version">
+<elem>2</elem>
+</table>
+<elem key="port">111</elem>
+</table>
+<table key="udp">
+<table key="version">
+<elem>2</elem>
+</table>
+<elem key="port">111</elem>
+</table>
+</table>
+<table key="100005">
+<table key="udp">
+<table key="version">
+<elem>1</elem>
+<elem>2</elem>
+<elem>3</elem>
+</table>
+<elem key="port">42877</elem>
+</table>
+<table key="tcp">
+<table key="version">
+<elem>1</elem>
+<elem>2</elem>
+<elem>3</elem>
+</table>
+<elem key="port">56735</elem>
+</table>
+</table>
+<table key="100021">
+<table key="udp">
+<table key="version">
+<elem>1</elem>
+<elem>3</elem>
+<elem>4</elem>
+</table>
+<elem key="port">48892</elem>
+</table>
+<table key="tcp">
+<table key="version">
+<elem>1</elem>
+<elem>3</elem>
+<elem>4</elem>
+</table>
+<elem key="port">47750</elem>
+</table>
+</table>
+<table key="100024">
+<table key="udp">
+<table key="version">
+<elem>1</elem>
+</table>
+<elem key="port">43843</elem>
+</table>
+<table key="tcp">
+<table key="version">
+<elem>1</elem>
+</table>
+<elem key="port">49096</elem>
+</table>
+</table>
+</script></port>
+<port protocol="udp" portid="135"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="msrpc" method="table" conf="3"/></port>
+<port protocol="udp" portid="137"><state state="open" reason="udp-response" reason_ttl="64"/><service name="netbios-ns" product="Microsoft Windows netbios-ns" extrainfo="workgroup: WORKGROUP" hostname="METASPLOITABLE" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="nbns-interfaces" output="&#xa;  hostname: METASPLOITABLE&#xa;  interfaces: &#xa;    192.168.4.32&#xa;    192.168.56.101"><elem key="hostname">METASPLOITABLE</elem>
+<table key="interfaces">
+<elem>192.168.4.32</elem>
+<elem>192.168.56.101</elem>
+</table>
+</script></port>
+<port protocol="udp" portid="158"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="pcmail-srv" method="table" conf="3"/></port>
+<port protocol="udp" portid="443"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="https" method="table" conf="3"/></port>
+<port protocol="udp" portid="997"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="maitrd" method="table" conf="3"/></port>
+<port protocol="udp" portid="998"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="puparp" method="table" conf="3"/></port>
+<port protocol="udp" portid="1645"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="radius" method="table" conf="3"/></port>
+<port protocol="udp" portid="2049"><state state="open" reason="udp-response" reason_ttl="64"/><service name="nfs" version="2-4" extrainfo="RPC #100003" method="probed" conf="10"/></port>
+<port protocol="udp" portid="2222"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="msantipiracy" method="table" conf="3"/></port>
+<port protocol="udp" portid="2223"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="rockwell-csp2" method="table" conf="3"/></port>
+<port protocol="udp" portid="4444"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="krb524" method="table" conf="3"/></port>
+<port protocol="udp" portid="4500"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="nat-t-ike" method="table" conf="3"/></port>
+<port protocol="udp" portid="9200"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="wap-wsp" method="table" conf="3"/></port>
+<port protocol="udp" portid="10000"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="ndmp" method="table" conf="3"/></port>
+<port protocol="udp" portid="17185"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="wdbrpc" method="table" conf="3"/></port>
+<port protocol="udp" portid="49154"><state state="closed" reason="port-unreach" reason_ttl="64"/></port>
+<port protocol="udp" portid="49181"><state state="closed" reason="port-unreach" reason_ttl="64"/></port>
+<port protocol="udp" portid="49190"><state state="closed" reason="port-unreach" reason_ttl="64"/></port>
+<port protocol="udp" portid="49201"><state state="closed" reason="port-unreach" reason_ttl="64"/></port>
+<port protocol="udp" portid="65024"><state state="closed" reason="port-unreach" reason_ttl="64"/></port>
+</ports>
+<os><portused state="closed" proto="udp" portid="9"/>
+</os>
+<distance value="1"/>
+<hostscript><script id="nbstat" output="NetBIOS name: METASPLOITABLE, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: &lt;unknown&gt; (unknown)&#xa;Names:&#xa;  METASPLOITABLE&lt;00&gt;   Flags: &lt;unique&gt;&lt;active&gt;&#xa;  METASPLOITABLE&lt;03&gt;   Flags: &lt;unique&gt;&lt;active&gt;&#xa;  METASPLOITABLE&lt;20&gt;   Flags: &lt;unique&gt;&lt;active&gt;&#xa;  \x01\x02__MSBROWSE__\x02&lt;01&gt;  Flags: &lt;group&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;1d&gt;        Flags: &lt;unique&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;1e&gt;        Flags: &lt;group&gt;&lt;active&gt;"/></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.32" rtt="7.93" host="MS2UBU"/>
+</trace>
+<times srtt="7934" rttvar="3782" to="50000"/>
+</host>
+<host starttime="1710675398" endtime="1710676827" timedout="true"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.36" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="MS3WIN" type="PTR"/>
+</hostnames>
+<times srtt="6785" rttvar="2311" to="50000"/>
+</host>
+<host starttime="1710675398" endtime="1710676827" timedout="true"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.42" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="DCCS" type="PTR"/>
+</hostnames>
+<times srtt="6639" rttvar="1450" to="50000"/>
+</host>
+<host starttime="1710675398" endtime="1710676827"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.43" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="CS" type="PTR"/>
+</hostnames>
+<ports><extraports state="open|filtered" count="74">
+<extrareasons reason="no-response" count="74" proto="udp" ports="7,17,19,49,53,67,80,88,111,123,135,138-139,177,427,443,445,500,514-515,518,520,623,626,631,996-999,1022,1025-1028,1433,1646,1701,1718-1719,1812-1813,1900,2000,2048-2049,2222-2223,3456,3703,4444,4500,5060,5353,5632,9200,10000,17185,20031,30718,32768,32771,32815,49154,49156,49181-49182,49185-49186,49191-49193,49200-49201,65024"/>
+</extraports>
+<port protocol="udp" portid="9"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="discard" method="table" conf="3"/></port>
+<port protocol="udp" portid="68"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="dhcpc" method="table" conf="3"/></port>
+<port protocol="udp" portid="69"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="tftp" method="table" conf="3"/></port>
+<port protocol="udp" portid="120"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="cfdptkt" method="table" conf="3"/></port>
+<port protocol="udp" portid="136"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="profile" method="table" conf="3"/></port>
+<port protocol="udp" portid="137"><state state="open" reason="udp-response" reason_ttl="128"/><service name="netbios-ns" product="Microsoft Windows netbios-ns" extrainfo="workgroup: DISCWORLD" hostname="DISCWORLDROOTCA" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="nbns-interfaces" output="&#xa;  hostname: DISCWORLDROOTCA&#xa;  interfaces: &#xa;    192.168.4.43&#xa;    192.168.48.4"><elem key="hostname">DISCWORLDROOTCA</elem>
+<table key="interfaces">
+<elem>192.168.4.43</elem>
+<elem>192.168.48.4</elem>
+</table>
+</script></port>
+<port protocol="udp" portid="158"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="pcmail-srv" method="table" conf="3"/></port>
+<port protocol="udp" portid="161"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="snmp" method="table" conf="3"/></port>
+<port protocol="udp" portid="162"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="snmptrap" method="table" conf="3"/></port>
+<port protocol="udp" portid="497"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="retrospect" method="table" conf="3"/></port>
+<port protocol="udp" portid="593"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="http-rpc-epmap" method="table" conf="3"/></port>
+<port protocol="udp" portid="1023"><state state="closed" reason="port-unreach" reason_ttl="128"/></port>
+<port protocol="udp" portid="1029"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="solid-mux" method="table" conf="3"/></port>
+<port protocol="udp" portid="1030"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="iad1" method="table" conf="3"/></port>
+<port protocol="udp" portid="1434"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="ms-sql-m" method="table" conf="3"/></port>
+<port protocol="udp" portid="1645"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="radius" method="table" conf="3"/></port>
+<port protocol="udp" portid="3283"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="netassistant" method="table" conf="3"/></port>
+<port protocol="udp" portid="5000"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="upnp" method="table" conf="3"/></port>
+<port protocol="udp" portid="31337"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="BackOrifice" method="table" conf="3"/></port>
+<port protocol="udp" portid="32769"><state state="closed" reason="port-unreach" reason_ttl="128"/><service name="filenet-rpc" method="table" conf="3"/></port>
+<port protocol="udp" portid="33281"><state state="closed" reason="port-unreach" reason_ttl="128"/></port>
+<port protocol="udp" portid="49152"><state state="closed" reason="port-unreach" reason_ttl="128"/></port>
+<port protocol="udp" portid="49153"><state state="closed" reason="port-unreach" reason_ttl="128"/></port>
+<port protocol="udp" portid="49188"><state state="closed" reason="port-unreach" reason_ttl="128"/></port>
+<port protocol="udp" portid="49190"><state state="closed" reason="port-unreach" reason_ttl="128"/></port>
+<port protocol="udp" portid="49194"><state state="closed" reason="port-unreach" reason_ttl="128"/></port>
+</ports>
+<os><portused state="closed" proto="udp" portid="9"/>
+</os>
+<distance value="1"/>
+<hostscript><script id="nbstat" output="NetBIOS name: DISCWORLDROOTCA, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:5a:84:38 (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  DISCWORLD&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  DISCWORLDROOTCA&lt;00&gt;  Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLDROOTCA&lt;20&gt;  Flags: &lt;unique&gt;&lt;active&gt;"/></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.43" rtt="6.38" host="CS"/>
+</trace>
+<times srtt="6381" rttvar="1253" to="50000"/>
+</host>
+<host starttime="1710675398" endtime="1710676827"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.45" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="WIN2K3SP1" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="91">
+<extrareasons reason="port-unreach" count="91" proto="udp" ports="7,9,17,19,49,53,67-69,80,88,111,120,135-136,139,158,161-162,177,427,443,497,514-515,518,520,593,623,626,631,996-999,1022-1023,1025,1028-1030,1433-1434,1645-1646,1701,1718-1719,1812-1813,1900,2000,2048-2049,2222-2223,3283,3703,4444,5000,5060,5353,5632,9200,10000,17185,20031,30718,31337,32768-32769,32771,32815,33281,49152-49154,49156,49181-49182,49185-49186,49188,49190-49194,49200-49201,65024"/>
+</extraports>
+<port protocol="udp" portid="123"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="ntp" method="table" conf="3"/></port>
+<port protocol="udp" portid="137"><state state="open" reason="udp-response" reason_ttl="128"/><service name="netbios-ns" product="Microsoft Windows netbios-ns" extrainfo="workgroup: DISCWORLD" hostname="WEBSP1" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="nbns-interfaces" output="&#xa;  hostname: WEBSP1&#xa;  interfaces: &#xa;    192.168.56.115&#xa;    192.168.4.45"><elem key="hostname">WEBSP1</elem>
+<table key="interfaces">
+<elem>192.168.56.115</elem>
+<elem>192.168.4.45</elem>
+</table>
+</script></port>
+<port protocol="udp" portid="138"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="netbios-dgm" method="table" conf="3"/></port>
+<port protocol="udp" portid="445"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="microsoft-ds" method="table" conf="3"/></port>
+<port protocol="udp" portid="500"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="isakmp" method="table" conf="3"/></port>
+<port protocol="udp" portid="1026"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="win-rpc" method="table" conf="3"/></port>
+<port protocol="udp" portid="1027"><state state="open|filtered" reason="no-response" reason_ttl="0"/></port>
+<port protocol="udp" portid="3456"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="IISrpc-or-vat" method="table" conf="3"/></port>
+<port protocol="udp" portid="4500"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="nat-t-ike" method="table" conf="3"/></port>
+</ports>
+<os><portused state="closed" proto="udp" portid="7"/>
+</os>
+<distance value="1"/>
+<hostscript><script id="nbstat" output="NetBIOS name: WEBSP1, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:ae:b2:84 (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  WEBSP1&lt;00&gt;           Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  WEBSP1&lt;20&gt;           Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;1e&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;1d&gt;        Flags: &lt;unique&gt;&lt;active&gt;&#xa;  \x01\x02__MSBROWSE__\x02&lt;01&gt;  Flags: &lt;group&gt;&lt;active&gt;"/></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.45" rtt="6.03" host="WIN2K3SP1"/>
+</trace>
+<times srtt="6031" rttvar="678" to="50000"/>
+</host>
+<host starttime="1710675398" endtime="1710676827"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.46" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="WIN2K3SP0" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="85">
+<extrareasons reason="port-unreach" count="85" proto="udp" ports="49,67-69,80,88,111,120,136,139,158,162,177,427,443,497,514-515,518,520,593,623,626,631,996-999,1022-1023,1025-1028,1030,1433-1434,1645-1646,1701,1718-1719,1812-1813,1900,2000,2048-2049,2222-2223,3283,3703,4444,5000,5060,5353,5632,9200,10000,17185,20031,30718,31337,32768-32769,32771,32815,33281,49152-49154,49156,49181-49182,49185-49186,49188,49190-49194,49200-49201,65024"/>
+</extraports>
+<port protocol="udp" portid="7"><state state="open" reason="udp-response" reason_ttl="128"/><service name="echo" method="probed" conf="10"/></port>
+<port protocol="udp" portid="9"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="discard" method="table" conf="3"/></port>
+<port protocol="udp" portid="17"><state state="open" reason="udp-response" reason_ttl="128"/><service name="qotd" product="Windows qotd" extrainfo="English" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:microsoft:qotd::::en</cpe><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="udp" portid="19"><state state="open" reason="udp-response" reason_ttl="128"/><service name="chargen" method="probed" conf="10"/></port>
+<port protocol="udp" portid="53"><state state="open" reason="udp-response" reason_ttl="128"/><service name="domain" product="Simple DNS Plus" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:jh_software:simple_dns_plus</cpe><cpe>cpe:/o:microsoft:windows</cpe></service><script id="dns-recursion" output="Recursion appears to be enabled"/></port>
+<port protocol="udp" portid="123"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="ntp" method="table" conf="3"/></port>
+<port protocol="udp" portid="135"><state state="open" reason="udp-response" reason_ttl="128"/><service name="msrpc" method="probed" conf="10"/></port>
+<port protocol="udp" portid="137"><state state="open" reason="udp-response" reason_ttl="128"/><service name="netbios-ns" product="Microsoft Windows netbios-ssn" extrainfo="workgroup: WORKGROUP" hostname="WIN2K3SP0" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="nbns-interfaces" output="&#xa;  hostname: WIN2K3SP0&#xa;  interfaces: &#xa;    192.168.4.46&#xa;    192.168.56.116"><elem key="hostname">WIN2K3SP0</elem>
+<table key="interfaces">
+<elem>192.168.4.46</elem>
+<elem>192.168.56.116</elem>
+</table>
+</script></port>
+<port protocol="udp" portid="138"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="netbios-dgm" method="table" conf="3"/></port>
+<port protocol="udp" portid="161"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="snmp" method="table" conf="3"/></port>
+<port protocol="udp" portid="445"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="microsoft-ds" method="table" conf="3"/></port>
+<port protocol="udp" portid="500"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="isakmp" method="table" conf="3"/></port>
+<port protocol="udp" portid="1029"><state state="open" reason="udp-response" reason_ttl="128"/><service name="domain" product="Simple DNS Plus" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:jh_software:simple_dns_plus</cpe><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="udp" portid="3456"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="IISrpc-or-vat" method="table" conf="3"/></port>
+<port protocol="udp" portid="4500"><state state="open|filtered" reason="no-response" reason_ttl="0"/><service name="nat-t-ike" method="table" conf="3"/></port>
+</ports>
+<os><portused state="closed" proto="udp" portid="49"/>
+</os>
+<distance value="1"/>
+<hostscript><script id="nbstat" output="NetBIOS name: WIN2K3SP0, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:f3:21:2c (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  WIN2K3SP0&lt;00&gt;        Flags: &lt;unique&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  WIN2K3SP0&lt;20&gt;        Flags: &lt;unique&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;1e&gt;        Flags: &lt;group&gt;&lt;active&gt;"/></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.46" rtt="6.43" host="WIN2K3SP0"/>
+</trace>
+<times srtt="6428" rttvar="1192" to="50000"/>
+</host>
+<taskbegin task="NSE" time="1710676828"/>
+<taskend task="NSE" time="1710676828"/>
+<taskbegin task="NSE" time="1710676828"/>
+<taskend task="NSE" time="1710676828"/>
+<taskbegin task="NSE" time="1710676828"/>
+<taskend task="NSE" time="1710676828"/>
+<runstats><finished time="1710676828" timestr="Sun Mar 17 12:00:28 2024" summary="Nmap done at Sun Mar 17 12:00:28 2024; 7 IP addresses (7 hosts up) scanned in 1430.87 seconds" elapsed="1430.87" exit="success"/><hosts up="7" down="0" total="7"/>
+</runstats>
+</nmaprun>

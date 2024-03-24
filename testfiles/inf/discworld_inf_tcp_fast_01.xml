@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.94SVN scan initiated Sun Mar 17 11:31:37 2024 as: nmap -v -Pn -sS -F -T5 -A -oA discworld_inf_tcp_fast_01 -iL ../../b_input/inf_include.txt -->
+<nmaprun scanner="nmap" args="nmap -v -Pn -sS -F -T5 -A -oA discworld_inf_tcp_fast_01 -iL ../../b_input/inf_include.txt" start="1710675097" startstr="Sun Mar 17 11:31:37 2024" version="7.94SVN" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="100" services="7,9,13,21-23,25-26,37,53,79-81,88,106,110-111,113,119,135,139,143-144,179,199,389,427,443-445,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768,49152-49157"/>
+<verbose level="1"/>
+<debugging level="0"/>
+<taskbegin task="NSE" time="1710675097"/>
+<taskend task="NSE" time="1710675097"/>
+<taskbegin task="NSE" time="1710675097"/>
+<taskend task="NSE" time="1710675097"/>
+<taskbegin task="NSE" time="1710675097"/>
+<taskend task="NSE" time="1710675097"/>
+<taskbegin task="ARP Ping Scan" time="1710675097"/>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.36" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.42" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.43" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.29" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.32" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.46" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<hosthint><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.45" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+</hostnames>
+</hosthint>
+<taskend task="ARP Ping Scan" time="1710675098" extrainfo="7 total hosts"/>
+<taskbegin task="SYN Stealth Scan" time="1710675098"/>
+<taskend task="SYN Stealth Scan" time="1710675099" extrainfo="700 total ports"/>
+<taskbegin task="Service scan" time="1710675099"/>
+<taskend task="Service scan" time="1710675247" extrainfo="82 services on 7 hosts"/>
+<taskbegin task="NSE" time="1710675254"/>
+<taskend task="NSE" time="1710675273"/>
+<taskbegin task="NSE" time="1710675273"/>
+<taskend task="NSE" time="1710675275"/>
+<taskbegin task="NSE" time="1710675275"/>
+<taskend task="NSE" time="1710675275"/>
+<host starttime="1710675098" endtime="1710675275"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.29" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="DB" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="94">
+<extrareasons reason="reset" count="94" proto="tcp" ports="7,9,13,21-23,25-26,37,53,79-81,88,106,110-111,113,119,143-144,179,199,389,427,443-444,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768,49155-49157"/>
+</extraports>
+<port protocol="tcp" portid="135"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" product="Microsoft Windows netbios-ssn" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Windows Server 2008 R2 Enterprise 7601 Service Pack 1 microsoft-ds" ostype="Windows Server 2008 R2 - 2012" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49152"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49153"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49154"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="135"/>
+<portused state="closed" proto="tcp" portid="7"/>
+<portused state="closed" proto="udp" portid="39588"/>
+<osmatch name="Microsoft Windows 7 SP0 - SP1, Windows Server 2008 SP1, Windows Server 2008 R2, Windows 8, or Windows 8.1 Update 1" accuracy="100" line="77205">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="7" accuracy="100"><cpe>cpe:/o:microsoft:windows_7::-</cpe><cpe>cpe:/o:microsoft:windows_7::sp1</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2008" accuracy="100"><cpe>cpe:/o:microsoft:windows_server_2008::sp1</cpe><cpe>cpe:/o:microsoft:windows_server_2008:r2</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8" accuracy="100"><cpe>cpe:/o:microsoft:windows_8</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8.1" accuracy="100"><cpe>cpe:/o:microsoft:windows_8.1</cpe></osclass>
+</osmatch>
+</os>
+<uptime seconds="1607" lastboot="Sun Mar 17 11:07:48 2024"/>
+<distance value="1"/>
+<tcpsequence index="262" difficulty="Good luck!" values="21098D80,19E90535,FB63DB4E,23AEE5E2,AE473837,B6BD94AC"/>
+<ipidsequence class="Incremental" values="3F0,3F1,3F2,3F3,3F4,3F5"/>
+<tcptssequence class="100HZ" values="26B4B,26B55,26B60,26B6A,26B75,26B7F"/>
+<hostscript><script id="smb-security-mode" output="&#xa;  account_used: guest&#xa;  authentication_level: user&#xa;  challenge_response: supported&#xa;  message_signing: disabled (dangerous, but default)"><elem key="account_used">guest</elem>
+<elem key="authentication_level">user</elem>
+<elem key="challenge_response">supported</elem>
+<elem key="message_signing">disabled</elem>
+</script><script id="nbstat" output="NetBIOS name: WIN2K8DB, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:89:3d:6d (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  WIN2K8DB&lt;00&gt;         Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  WIN2K8DB&lt;20&gt;         Flags: &lt;unique&gt;&lt;active&gt;"/><script id="smb2-security-mode" output="&#xa;  2:1:0: &#xa;    Message signing enabled but not required"><table key="2:1:0">
+<elem>Message signing enabled but not required</elem>
+</table>
+</script><script id="smb-os-discovery" output="&#xa;  OS: Windows Server 2008 R2 Enterprise 7601 Service Pack 1 (Windows Server 2008 R2 Enterprise 6.1)&#xa;  OS CPE: cpe:/o:microsoft:windows_server_2008::sp1&#xa;  Computer name: WIN2K8DB&#xa;  NetBIOS computer name: WIN2K8DB\x00&#xa;  Domain name: discworld.io&#xa;  Forest name: discworld.io&#xa;  FQDN: WIN2K8DB.discworld.io&#xa;  System time: 2024-03-17T11:34:31+00:00&#xa;"><elem key="os">Windows Server 2008 R2 Enterprise 7601 Service Pack 1</elem>
+<elem key="lanmanager">Windows Server 2008 R2 Enterprise 6.1</elem>
+<elem key="server">WIN2K8DB\x00</elem>
+<elem key="date">2024-03-17T11:34:31+00:00</elem>
+<elem key="fqdn">WIN2K8DB.discworld.io</elem>
+<elem key="domain_dns">discworld.io</elem>
+<elem key="forest_dns">discworld.io</elem>
+<elem key="workgroup">DISCWORLD\x00</elem>
+<elem key="cpe">cpe:/o:microsoft:windows_server_2008::sp1</elem>
+</script><script id="clock-skew" output="mean: 12s, deviation: 4s, median: 9s"><elem key="median">9</elem>
+<elem key="mean">12</elem>
+<elem key="stddev">4</elem>
+<elem key="count">3</elem>
+</script><script id="smb2-time" output="&#xa;  date: 2024-03-17T11:34:31&#xa;  start_date: 2024-03-17T11:08:26"><elem key="date">2024-03-17T11:34:31</elem>
+<elem key="start_date">2024-03-17T11:08:26</elem>
+</script></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.29" rtt="6.71" host="DB"/>
+</trace>
+<times srtt="6707" rttvar="1062" to="50000"/>
+</host>
+<host starttime="1710675098" endtime="1710675275"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.32" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="MS2UBU" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="82">
+<extrareasons reason="reset" count="82" proto="tcp" ports="7,9,13,26,37,79,81,88,106,110,113,119,135,143-144,179,199,389,427,443-444,465,515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2717,3000,3128,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5631,5666,5800,6001,6646,7070,8000,8008,8080-8081,8443,8888,9100,9999-10000,32768,49152-49157"/>
+</extraports>
+<port protocol="tcp" portid="21"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ftp" product="vsftpd" version="2.3.4" ostype="Unix" method="probed" conf="10"><cpe>cpe:/a:vsftpd:vsftpd:2.3.4</cpe></service><script id="ftp-anon" output="Anonymous FTP login allowed (FTP code 230)"/><script id="ftp-syst" output="&#xa;  STAT: &#xa;FTP server status:&#xa;     Connected to 192.168.4.25&#xa;     Logged in as ftp&#xa;     TYPE: ASCII&#xa;     No session bandwidth limit&#xa;     Session timeout in seconds is 300&#xa;     Control connection is plain text&#xa;     Data connections will be plain text&#xa;     vsFTPd 2.3.4 - secure, fast, stable&#xa;End of status"><elem key="STAT">&#xa;FTP server status:&#xa;     Connected to 192.168.4.25&#xa;     Logged in as ftp&#xa;     TYPE: ASCII&#xa;     No session bandwidth limit&#xa;     Session timeout in seconds is 300&#xa;     Control connection is plain text&#xa;     Data connections will be plain text&#xa;     vsFTPd 2.3.4 - secure, fast, stable&#xa;End of status</elem>
+</script></port>
+<port protocol="tcp" portid="22"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ssh" product="OpenSSH" version="4.7p1 Debian 8ubuntu1" extrainfo="protocol 2.0" ostype="Linux" method="probed" conf="10"><cpe>cpe:/a:openbsd:openssh:4.7p1</cpe><cpe>cpe:/o:linux:linux_kernel</cpe></service><script id="ssh-hostkey" output="&#xa;  1024 60:0f:cf:e1:c0:5f:6a:74:d6:90:24:fa:c4:d5:6c:cd (DSA)&#xa;  2048 56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3 (RSA)"><table>
+<elem key="fingerprint">600fcfe1c05f6a74d69024fac4d56ccd</elem>
+<elem key="key">AAAAB3NzaC1kc3MAAACBALz4hsc8a2Srq4nlW960qV8xwBG0JC+jI7fWxm5METIJH4tKr/xUTwsTYEYnaZLzcOiy21D3ZvOwYb6AA3765zdgCd2Tgand7F0YD5UtXG7b7fbz99chReivL0SIWEG/E96Ai+pqYMP2WD5KaOJwSIXSUajnU5oWmY5x85sBw+XDAAAAFQDFkMpmdFQTF+oRqaoSNVU7Z+hjSwAAAIBCQxNKzi1TyP+QJIFa3M0oLqCVWI0We/ARtXrzpBOJ/dt0hTJXCeYisKqcdwdtyIn8OUCOyrIjqNuA2QW217oQ6wXpbFh+5AQm8Hl3b6C6o8lX3Ptw+Y4dp0lzfWHwZ/jzHwtuaDQaok7u1f971lEazeJLqfiWrAzoklqSWyDQJAAAAIA1lAD3xWYkeIeHv/R3P9i+XaoI7imFkMuYXCDTq843YU6Td+0mWpllCqAWUV/CQamGgQLtYy5S0ueoks01MoKdOMMhKVwqdr08nvCBdNKjIEd3gH6oBk/YRnjzxlEAYBsvCmM4a0jmhz0oNiRWlc/F+bkUeFKrBx/D2fdfZmhrGg==</elem>
+<elem key="type">ssh-dss</elem>
+<elem key="bits">1024</elem>
+</table>
+<table>
+<elem key="fingerprint">5656240f211ddea72bae61b1243de8f3</elem>
+<elem key="key">AAAAB3NzaC1yc2EAAAABIwAAAQEAstqnuFMBOZvO3WTEjP4TUdjgWkIVNdTq6kboEDjteOfc65TlI7sRvQBwqAhQjeeyyIk8T55gMDkOD0akSlSXvLDcmcdYfxeIF0ZSuT+nkRhij7XSSA/Oc5QSk3sJ/SInfb78e3anbRHpmkJcVgETJ5WhKObUNf1AKZW++4Xlc63M4KI5cjvMMIPEVOyR3AKmI78Fo3HJjYucg87JjLeC66I7+dlEYX6zT8i1XYwa/L1vZ3qSJISGVu8kRPikMv/cNSvki4j+qDYyZ2E5497W87+Ed46/8P42LNGoOV8OcX/ro6pAcbEPUdUEfkJrqi2YXbhvwIJ0gFMb6wfe5cnQew==</elem>
+<elem key="type">ssh-rsa</elem>
+<elem key="bits">2048</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="23"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="telnet" product="Linux telnetd" ostype="Linux" method="probed" conf="10"><cpe>cpe:/o:linux:linux_kernel</cpe></service></port>
+<port protocol="tcp" portid="25"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="smtp" product="Postfix smtpd" hostname=" metasploitable.localdomain" method="probed" conf="10"><cpe>cpe:/a:postfix:postfix</cpe></service><script id="ssl-date" output="2024-03-17T11:34:45+00:00; +10s from scanner time."><elem key="date">2024-03-17T11:34:45+00:00</elem>
+<elem key="delta">10.0</elem>
+</script><script id="sslv2" output="&#xa;  SSLv2 supported&#xa;  ciphers: &#xa;    SSL2_RC4_128_EXPORT40_WITH_MD5&#xa;    SSL2_RC2_128_CBC_EXPORT40_WITH_MD5&#xa;    SSL2_DES_64_CBC_WITH_MD5&#xa;    SSL2_RC2_128_CBC_WITH_MD5&#xa;    SSL2_RC4_128_WITH_MD5&#xa;    SSL2_DES_192_EDE3_CBC_WITH_MD5"><elem>SSLv2 supported</elem>
+<table key="ciphers">
+<elem>SSL2_RC4_128_EXPORT40_WITH_MD5</elem>
+<elem>SSL2_RC2_128_CBC_EXPORT40_WITH_MD5</elem>
+<elem>SSL2_DES_64_CBC_WITH_MD5</elem>
+<elem>SSL2_RC2_128_CBC_WITH_MD5</elem>
+<elem>SSL2_RC4_128_WITH_MD5</elem>
+<elem>SSL2_DES_192_EDE3_CBC_WITH_MD5</elem>
+</table>
+</script><script id="ssl-cert" output="Subject: commonName=ubuntu804-base.localdomain/organizationName=OCOSA/stateOrProvinceName=There is no such thing outside US/countryName=XX&#xa;Issuer: commonName=ubuntu804-base.localdomain/organizationName=OCOSA/stateOrProvinceName=There is no such thing outside US/countryName=XX&#xa;Public Key type: rsa&#xa;Public Key bits: 1024&#xa;Signature Algorithm: sha1WithRSAEncryption&#xa;Not valid before: 2010-03-17T14:07:45&#xa;Not valid after:  2010-04-16T14:07:45&#xa;MD5:   dcd9:ad90:6c8f:2f73:74af:383b:2540:8828&#xa;SHA-1: ed09:3088:7066:03bf:d5dc:2373:99b4:98da:2d4d:31c6"><table key="subject">
+<elem key="commonName">ubuntu804-base.localdomain</elem>
+<elem key="countryName">XX</elem>
+<elem key="emailAddress">root@ubuntu804-base.localdomain</elem>
+<elem key="localityName">Everywhere</elem>
+<elem key="organizationName">OCOSA</elem>
+<elem key="organizationalUnitName">Office for Complication of Otherwise Simple Affairs</elem>
+<elem key="stateOrProvinceName">There is no such thing outside US</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">ubuntu804-base.localdomain</elem>
+<elem key="countryName">XX</elem>
+<elem key="emailAddress">root@ubuntu804-base.localdomain</elem>
+<elem key="localityName">Everywhere</elem>
+<elem key="organizationName">OCOSA</elem>
+<elem key="organizationalUnitName">Office for Complication of Otherwise Simple Affairs</elem>
+<elem key="stateOrProvinceName">There is no such thing outside US</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">1024</elem>
+<elem key="modulus">D6B41336339A95717B1BDE7C8375DA71B13CA97FFEAD641B77E94FAEBECAD4F8CBEFAEBB43792473FF3CE59E3B6DFCC8B1ACFA4C4D5E9B4C99540BD7A84A50BAA9DE1D1FF4E46B02A3F46B45CD4CAF8D8962338F65BB36619FC42C73C14E2EA0A8144E98704661BBD1B931DF8C99EE756B793C40A0AE9700909DDC990D33A4B5</elem>
+<elem key="exponent">65537</elem>
+</table>
+<elem key="sig_algo">sha1WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2010-03-17T14:07:45</elem>
+<elem key="notAfter">2010-04-16T14:07:45</elem>
+</table>
+<elem key="md5">dcd9ad906c8f2f7374af383b25408828</elem>
+<elem key="sha1">ed093088706603bfd5dc237399b498da2d4d31c6</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIDWzCCAsQCCQD6+TpMf7a5zDANBgkqhkiG9w0BAQUFADCB8TELMAkGA1UEBhMC&#xa;WFgxKjAoBgNVBAgTIVRoZXJlIGlzIG5vIHN1Y2ggdGhpbmcgb3V0c2lkZSBVUzET&#xa;MBEGA1UEBxMKRXZlcnl3aGVyZTEOMAwGA1UEChMFT0NPU0ExPDA6BgNVBAsTM09m&#xa;ZmljZSBmb3IgQ29tcGxpY2F0aW9uIG9mIE90aGVyd2lzZSBTaW1wbGUgQWZmYWly&#xa;czEjMCEGA1UEAxMadWJ1bnR1ODA0LWJhc2UubG9jYWxkb21haW4xLjAsBgkqhkiG&#xa;9w0BCQEWH3Jvb3RAdWJ1bnR1ODA0LWJhc2UubG9jYWxkb21haW4wHhcNMTAwMzE3&#xa;MTQwNzQ1WhcNMTAwNDE2MTQwNzQ1WjCB8TELMAkGA1UEBhMCWFgxKjAoBgNVBAgT&#xa;IVRoZXJlIGlzIG5vIHN1Y2ggdGhpbmcgb3V0c2lkZSBVUzETMBEGA1UEBxMKRXZl&#xa;cnl3aGVyZTEOMAwGA1UEChMFT0NPU0ExPDA6BgNVBAsTM09mZmljZSBmb3IgQ29t&#xa;cGxpY2F0aW9uIG9mIE90aGVyd2lzZSBTaW1wbGUgQWZmYWlyczEjMCEGA1UEAxMa&#xa;dWJ1bnR1ODA0LWJhc2UubG9jYWxkb21haW4xLjAsBgkqhkiG9w0BCQEWH3Jvb3RA&#xa;dWJ1bnR1ODA0LWJhc2UubG9jYWxkb21haW4wgZ8wDQYJKoZIhvcNAQEBBQADgY0A&#xa;MIGJAoGBANa0EzYzmpVxexvefIN12nGxPKl//q1kG3fpT66+ytT4y++uu0N5JHP/&#xa;POWeO238yLGs+kxNXptMmVQL16hKULqp3h0f9ORrAqP0a0XNTK+NiWIzj2W7NmGf&#xa;xCxzwU4uoKgUTphwRmG70bkx34yZ7nVreTxAoK6XAJCd3JkNM6S1AgMBAAEwDQYJ&#xa;KoZIhvcNAQEFBQADgYEAkqS0uBRVYyVRSgvDKiLPOvgXagzPZqqnZS9Ibc3jPlyf&#xa;d2zURFQfHoRPjtSN3awtiAkhqNpWLKkFPEloNRl1DNpTI4iIGS10JsEiZe4RaINq&#xa;U0qcJ8ugtOmNKQyyPBhcZ8xTph4w0Komex6uQLkpAWwuvKIZlHwVbo0wOPbKLnU=&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="smtp-commands" output="metasploitable.localdomain, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN"/></port>
+<port protocol="tcp" portid="53"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="domain" product="ISC BIND" version="9.4.2" method="probed" conf="10"><cpe>cpe:/a:isc:bind:9.4.2</cpe></service><script id="dns-nsid" output="&#xa;  bind.version: 9.4.2"><elem key="bind.version">9.4.2</elem>
+</script></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.2.8" extrainfo="(Ubuntu) DAV/2" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.2.8</cpe></service><script id="http-methods" output="&#xa;  Supported Methods: GET HEAD POST OPTIONS"><table key="Supported Methods">
+<elem>GET</elem>
+<elem>HEAD</elem>
+<elem>POST</elem>
+<elem>OPTIONS</elem>
+</table>
+</script><script id="http-server-header" output="Apache/2.2.8 (Ubuntu) DAV/2"><elem>Apache/2.2.8 (Ubuntu) DAV/2</elem>
+</script><script id="http-title" output="Metasploitable2 - Linux"><elem key="title">Metasploitable2 - Linux</elem>
+</script></port>
+<port protocol="tcp" portid="111"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="rpcbind" version="2" extrainfo="RPC #100000" method="probed" conf="10"/><script id="rpcinfo" output="&#xa;  program version    port/proto  service&#xa;  100000  2            111/tcp   rpcbind&#xa;  100000  2            111/udp   rpcbind&#xa;  100003  2,3,4       2049/tcp   nfs&#xa;  100003  2,3,4       2049/udp   nfs&#xa;  100005  1,2,3      42877/udp   mountd&#xa;  100005  1,2,3      56735/tcp   mountd&#xa;  100021  1,3,4      47750/tcp   nlockmgr&#xa;  100021  1,3,4      48892/udp   nlockmgr&#xa;  100024  1          43843/udp   status&#xa;  100024  1          49096/tcp   status&#xa;"><table key="100021">
+<table key="tcp">
+<table key="version">
+<elem>1</elem>
+<elem>3</elem>
+<elem>4</elem>
+</table>
+<elem key="port">47750</elem>
+</table>
+<table key="udp">
+<table key="version">
+<elem>1</elem>
+<elem>3</elem>
+<elem>4</elem>
+</table>
+<elem key="port">48892</elem>
+</table>
+</table>
+<table key="100005">
+<table key="tcp">
+<table key="version">
+<elem>1</elem>
+<elem>2</elem>
+<elem>3</elem>
+</table>
+<elem key="port">56735</elem>
+</table>
+<table key="udp">
+<table key="version">
+<elem>1</elem>
+<elem>2</elem>
+<elem>3</elem>
+</table>
+<elem key="port">42877</elem>
+</table>
+</table>
+<table key="100024">
+<table key="tcp">
+<table key="version">
+<elem>1</elem>
+</table>
+<elem key="port">49096</elem>
+</table>
+<table key="udp">
+<table key="version">
+<elem>1</elem>
+</table>
+<elem key="port">43843</elem>
+</table>
+</table>
+<table key="100000">
+<table key="udp">
+<table key="version">
+<elem>2</elem>
+</table>
+<elem key="port">111</elem>
+</table>
+<table key="tcp">
+<table key="version">
+<elem>2</elem>
+</table>
+<elem key="port">111</elem>
+</table>
+</table>
+<table key="100003">
+<table key="tcp">
+<table key="version">
+<elem>2</elem>
+<elem>3</elem>
+<elem>4</elem>
+</table>
+<elem key="port">2049</elem>
+</table>
+<table key="udp">
+<table key="version">
+<elem>2</elem>
+<elem>3</elem>
+<elem>4</elem>
+</table>
+<elem key="port">2049</elem>
+</table>
+</table>
+</script></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="netbios-ssn" product="Samba smbd" version="3.X - 4.X" extrainfo="workgroup: WORKGROUP" method="probed" conf="10"><cpe>cpe:/a:samba:samba</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="netbios-ssn" product="Samba smbd" version="3.0.20-Debian" extrainfo="workgroup: WORKGROUP" method="probed" conf="10"><cpe>cpe:/a:samba:samba</cpe></service></port>
+<port protocol="tcp" portid="513"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="login" method="table" conf="3"/></port>
+<port protocol="tcp" portid="514"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="tcpwrapped" method="probed" conf="8"/></port>
+<port protocol="tcp" portid="2049"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="nfs" version="2-4" extrainfo="RPC #100003" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="2121"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ftp" product="ProFTPD" version="1.3.1" ostype="Unix" method="probed" conf="10"><cpe>cpe:/a:proftpd:proftpd:1.3.1</cpe></service></port>
+<port protocol="tcp" portid="3306"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="mysql" product="MySQL" version="5.0.51a-3ubuntu5" method="probed" conf="10"><cpe>cpe:/a:mysql:mysql:5.0.51a-3ubuntu5</cpe></service><script id="mysql-info" output="&#xa;  Protocol: 10&#xa;  Version: 5.0.51a-3ubuntu5&#xa;  Thread ID: 26&#xa;  Capabilities flags: 43564&#xa;  Some Capabilities: Speaks41ProtocolNew, LongColumnFlag, SupportsTransactions, SwitchToSSLAfterHandshake, SupportsCompression, ConnectWithDatabase, Support41Auth&#xa;  Status: Autocommit&#xa;  Salt: ]D{_L&gt;0u~&lt;MO&amp;mt};JAH"><elem key="Protocol">10</elem>
+<elem key="Version">5.0.51a-3ubuntu5</elem>
+<elem key="Thread ID">26</elem>
+<elem key="Capabilities flags">43564</elem>
+<table key="Some Capabilities">
+<elem>Speaks41ProtocolNew</elem>
+<elem>LongColumnFlag</elem>
+<elem>SupportsTransactions</elem>
+<elem>SwitchToSSLAfterHandshake</elem>
+<elem>SupportsCompression</elem>
+<elem>ConnectWithDatabase</elem>
+<elem>Support41Auth</elem>
+</table>
+<elem key="Status">Autocommit</elem>
+<elem key="Salt">]D{_L&gt;0u~&lt;MO&amp;mt};JAH</elem>
+</script></port>
+<port protocol="tcp" portid="5432"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="postgresql" product="PostgreSQL DB" version="8.3.0 - 8.3.7" method="probed" conf="10"><cpe>cpe:/a:postgresql:postgresql:8.3</cpe></service><script id="ssl-cert" output="Subject: commonName=ubuntu804-base.localdomain/organizationName=OCOSA/stateOrProvinceName=There is no such thing outside US/countryName=XX&#xa;Issuer: commonName=ubuntu804-base.localdomain/organizationName=OCOSA/stateOrProvinceName=There is no such thing outside US/countryName=XX&#xa;Public Key type: rsa&#xa;Public Key bits: 1024&#xa;Signature Algorithm: sha1WithRSAEncryption&#xa;Not valid before: 2010-03-17T14:07:45&#xa;Not valid after:  2010-04-16T14:07:45&#xa;MD5:   dcd9:ad90:6c8f:2f73:74af:383b:2540:8828&#xa;SHA-1: ed09:3088:7066:03bf:d5dc:2373:99b4:98da:2d4d:31c6"><table key="subject">
+<elem key="commonName">ubuntu804-base.localdomain</elem>
+<elem key="countryName">XX</elem>
+<elem key="emailAddress">root@ubuntu804-base.localdomain</elem>
+<elem key="localityName">Everywhere</elem>
+<elem key="organizationName">OCOSA</elem>
+<elem key="organizationalUnitName">Office for Complication of Otherwise Simple Affairs</elem>
+<elem key="stateOrProvinceName">There is no such thing outside US</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">ubuntu804-base.localdomain</elem>
+<elem key="countryName">XX</elem>
+<elem key="emailAddress">root@ubuntu804-base.localdomain</elem>
+<elem key="localityName">Everywhere</elem>
+<elem key="organizationName">OCOSA</elem>
+<elem key="organizationalUnitName">Office for Complication of Otherwise Simple Affairs</elem>
+<elem key="stateOrProvinceName">There is no such thing outside US</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">1024</elem>
+<elem key="modulus">D6B41336339A95717B1BDE7C8375DA71B13CA97FFEAD641B77E94FAEBECAD4F8CBEFAEBB43792473FF3CE59E3B6DFCC8B1ACFA4C4D5E9B4C99540BD7A84A50BAA9DE1D1FF4E46B02A3F46B45CD4CAF8D8962338F65BB36619FC42C73C14E2EA0A8144E98704661BBD1B931DF8C99EE756B793C40A0AE9700909DDC990D33A4B5</elem>
+<elem key="exponent">65537</elem>
+</table>
+<elem key="sig_algo">sha1WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2010-03-17T14:07:45</elem>
+<elem key="notAfter">2010-04-16T14:07:45</elem>
+</table>
+<elem key="md5">dcd9ad906c8f2f7374af383b25408828</elem>
+<elem key="sha1">ed093088706603bfd5dc237399b498da2d4d31c6</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIDWzCCAsQCCQD6+TpMf7a5zDANBgkqhkiG9w0BAQUFADCB8TELMAkGA1UEBhMC&#xa;WFgxKjAoBgNVBAgTIVRoZXJlIGlzIG5vIHN1Y2ggdGhpbmcgb3V0c2lkZSBVUzET&#xa;MBEGA1UEBxMKRXZlcnl3aGVyZTEOMAwGA1UEChMFT0NPU0ExPDA6BgNVBAsTM09m&#xa;ZmljZSBmb3IgQ29tcGxpY2F0aW9uIG9mIE90aGVyd2lzZSBTaW1wbGUgQWZmYWly&#xa;czEjMCEGA1UEAxMadWJ1bnR1ODA0LWJhc2UubG9jYWxkb21haW4xLjAsBgkqhkiG&#xa;9w0BCQEWH3Jvb3RAdWJ1bnR1ODA0LWJhc2UubG9jYWxkb21haW4wHhcNMTAwMzE3&#xa;MTQwNzQ1WhcNMTAwNDE2MTQwNzQ1WjCB8TELMAkGA1UEBhMCWFgxKjAoBgNVBAgT&#xa;IVRoZXJlIGlzIG5vIHN1Y2ggdGhpbmcgb3V0c2lkZSBVUzETMBEGA1UEBxMKRXZl&#xa;cnl3aGVyZTEOMAwGA1UEChMFT0NPU0ExPDA6BgNVBAsTM09mZmljZSBmb3IgQ29t&#xa;cGxpY2F0aW9uIG9mIE90aGVyd2lzZSBTaW1wbGUgQWZmYWlyczEjMCEGA1UEAxMa&#xa;dWJ1bnR1ODA0LWJhc2UubG9jYWxkb21haW4xLjAsBgkqhkiG9w0BCQEWH3Jvb3RA&#xa;dWJ1bnR1ODA0LWJhc2UubG9jYWxkb21haW4wgZ8wDQYJKoZIhvcNAQEBBQADgY0A&#xa;MIGJAoGBANa0EzYzmpVxexvefIN12nGxPKl//q1kG3fpT66+ytT4y++uu0N5JHP/&#xa;POWeO238yLGs+kxNXptMmVQL16hKULqp3h0f9ORrAqP0a0XNTK+NiWIzj2W7NmGf&#xa;xCxzwU4uoKgUTphwRmG70bkx34yZ7nVreTxAoK6XAJCd3JkNM6S1AgMBAAEwDQYJ&#xa;KoZIhvcNAQEFBQADgYEAkqS0uBRVYyVRSgvDKiLPOvgXagzPZqqnZS9Ibc3jPlyf&#xa;d2zURFQfHoRPjtSN3awtiAkhqNpWLKkFPEloNRl1DNpTI4iIGS10JsEiZe4RaINq&#xa;U0qcJ8ugtOmNKQyyPBhcZ8xTph4w0Komex6uQLkpAWwuvKIZlHwVbo0wOPbKLnU=&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="ssl-date" output="2024-03-17T11:34:45+00:00; +10s from scanner time."><elem key="date">2024-03-17T11:34:45+00:00</elem>
+<elem key="delta">10.0</elem>
+</script></port>
+<port protocol="tcp" portid="5900"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="vnc" product="VNC" extrainfo="protocol 3.3" method="probed" conf="10"/><script id="vnc-info" output="&#xa;  Protocol version: 3.3&#xa;  Security types: &#xa;    VNC Authentication (2)"><elem key="Protocol version">3.3</elem>
+<table key="Security types">
+<table>
+<elem key="name">VNC Authentication</elem>
+<elem key="type">2</elem>
+</table>
+</table>
+</script></port>
+<port protocol="tcp" portid="6000"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="X11" extrainfo="access denied" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="8009"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="ajp13" product="Apache Jserv" extrainfo="Protocol v1.3" method="probed" conf="10"/><script id="ajp-methods" output="Failed to get a valid response for the OPTION request"/></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="21"/>
+<portused state="closed" proto="tcp" portid="7"/>
+<portused state="closed" proto="udp" portid="38129"/>
+<osmatch name="Linux 2.6.9 - 2.6.33" accuracy="100" line="59352">
+<osclass type="general purpose" vendor="Linux" osfamily="Linux" osgen="2.6.X" accuracy="100"><cpe>cpe:/o:linux:linux_kernel:2.6</cpe></osclass>
+</osmatch>
+</os>
+<uptime seconds="3639" lastboot="Sun Mar 17 10:33:56 2024"/>
+<distance value="1"/>
+<tcpsequence index="204" difficulty="Good luck!" values="63E24E3A,639B600D,639C2793,644EA3C9,63A27EF8,641CE521"/>
+<ipidsequence class="All zeros" values="0,0,0,0,0,0"/>
+<tcptssequence class="100HZ" values="582A7,582B3,582BE,582C9,582D3,582DE"/>
+<hostscript><script id="smb-security-mode" output="&#xa;  account_used: &lt;blank&gt;&#xa;  authentication_level: user&#xa;  challenge_response: supported&#xa;  message_signing: disabled (dangerous, but default)"><elem key="account_used">&lt;blank&gt;</elem>
+<elem key="authentication_level">user</elem>
+<elem key="challenge_response">supported</elem>
+<elem key="message_signing">disabled</elem>
+</script><script id="clock-skew" output="mean: 1h00m11s, deviation: 2h00m02s, median: 9s"><elem key="median">9</elem>
+<elem key="mean">3611</elem>
+<elem key="stddev">7202</elem>
+<elem key="count">4</elem>
+</script><script id="smb-os-discovery" output="&#xa;  OS: Unix (Samba 3.0.20-Debian)&#xa;  Computer name: metasploitable&#xa;  NetBIOS computer name: &#xa;  Domain name: localdomain&#xa;  FQDN: metasploitable.localdomain&#xa;  System time: 2024-03-17T07:34:29-04:00&#xa;"><elem key="os">Unix</elem>
+<elem key="lanmanager">Samba 3.0.20-Debian</elem>
+<elem key="server"></elem>
+<elem key="date">2024-03-17T07:34:29-04:00</elem>
+<elem key="fqdn">metasploitable.localdomain</elem>
+<elem key="domain_dns">localdomain</elem>
+<elem key="workgroup">WORKGROUP\x00</elem>
+</script><script id="nbstat" output="NetBIOS name: METASPLOITABLE, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: &lt;unknown&gt; (unknown)&#xa;Names:&#xa;  METASPLOITABLE&lt;00&gt;   Flags: &lt;unique&gt;&lt;active&gt;&#xa;  METASPLOITABLE&lt;03&gt;   Flags: &lt;unique&gt;&lt;active&gt;&#xa;  METASPLOITABLE&lt;20&gt;   Flags: &lt;unique&gt;&lt;active&gt;&#xa;  \x01\x02__MSBROWSE__\x02&lt;01&gt;  Flags: &lt;group&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;1d&gt;        Flags: &lt;unique&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;1e&gt;        Flags: &lt;group&gt;&lt;active&gt;"/><script id="smb2-time" output="Protocol negotiation failed (SMB2)"/></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.32" rtt="6.52" host="MS2UBU"/>
+</trace>
+<times srtt="6522" rttvar="1647" to="50000"/>
+</host>
+<host starttime="1710675098" endtime="1710675275"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.36" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="MS3WIN" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="86">
+<extrareasons reason="reset" count="86" proto="tcp" ports="7,9,13,22-23,25-26,37,53,79,81,88,106,110-111,113,119,143-144,179,199,389,427,443-444,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008,8081,8443,8888,9100,9999-10000,32768,49157"/>
+</extraports>
+<port protocol="tcp" portid="21"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="tcpwrapped" method="probed" conf="8"/></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="http" product="Microsoft HTTPAPI httpd" version="2.0" extrainfo="SSDP/UPnP" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="http-title" output="Service Unavailable"><elem key="title">Service Unavailable</elem>
+</script><script id="http-server-header" output="Microsoft-HTTPAPI/2.0"><elem>Microsoft-HTTPAPI/2.0</elem>
+</script></port>
+<port protocol="tcp" portid="135"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" product="Microsoft Windows netbios-ssn" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Microsoft Windows Server 2008 R2 - 2012 microsoft-ds" ostype="Windows Server 2008 R2 - 2012" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="3306"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="mysql" product="MySQL" version="5.5.20-log" method="probed" conf="10"><cpe>cpe:/a:mysql:mysql:5.5.20-log</cpe></service><script id="mysql-info" output="&#xa;  Protocol: 10&#xa;  Version: 5.5.20-log&#xa;  Thread ID: 14&#xa;  Capabilities flags: 63487&#xa;  Some Capabilities: Speaks41ProtocolNew, LongPassword, Speaks41ProtocolOld, LongColumnFlag, SupportsTransactions, IgnoreSpaceBeforeParenthesis, ODBCClient, DontAllowDatabaseTableColumn, FoundRows, SupportsCompression, IgnoreSigpipes, InteractiveClient, ConnectWithDatabase, Support41Auth, SupportsLoadDataLocal, SupportsMultipleStatments, SupportsMultipleResults, SupportsAuthPlugins&#xa;  Status: Autocommit&#xa;  Salt: $r8[BxW*hP7bihL&apos;yMWN&#xa;  Auth Plugin Name: mysql_native_password"><elem key="Protocol">10</elem>
+<elem key="Version">5.5.20-log</elem>
+<elem key="Thread ID">14</elem>
+<elem key="Capabilities flags">63487</elem>
+<table key="Some Capabilities">
+<elem>Speaks41ProtocolNew</elem>
+<elem>LongPassword</elem>
+<elem>Speaks41ProtocolOld</elem>
+<elem>LongColumnFlag</elem>
+<elem>SupportsTransactions</elem>
+<elem>IgnoreSpaceBeforeParenthesis</elem>
+<elem>ODBCClient</elem>
+<elem>DontAllowDatabaseTableColumn</elem>
+<elem>FoundRows</elem>
+<elem>SupportsCompression</elem>
+<elem>IgnoreSigpipes</elem>
+<elem>InteractiveClient</elem>
+<elem>ConnectWithDatabase</elem>
+<elem>Support41Auth</elem>
+<elem>SupportsLoadDataLocal</elem>
+<elem>SupportsMultipleStatments</elem>
+<elem>SupportsMultipleResults</elem>
+<elem>SupportsAuthPlugins</elem>
+</table>
+<elem key="Status">Autocommit</elem>
+<elem key="Salt">$r8[BxW*hP7bihL&apos;yMWN</elem>
+<elem key="Auth Plugin Name">mysql_native_password</elem>
+</script></port>
+<port protocol="tcp" portid="3389"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="ms-wbt-server" tunnel="ssl" method="table" conf="3"/><script id="ssl-date" output="2024-03-17T11:34:51+00:00; +17s from scanner time."><elem key="date">2024-03-17T11:34:51+00:00</elem>
+<elem key="delta">17.0</elem>
+</script><script id="ssl-cert" output="Subject: commonName=METASPLOITABLE3&#xa;Issuer: commonName=METASPLOITABLE3&#xa;Public Key type: rsa&#xa;Public Key bits: 2048&#xa;Signature Algorithm: sha1WithRSAEncryption&#xa;Not valid before: 2024-03-16T10:32:50&#xa;Not valid after:  2024-09-15T10:32:50&#xa;MD5:   6367:fa2c:3c98:076b:a8dc:bebd:cd07:32d0&#xa;SHA-1: 7d86:09f9:6c49:a1e7:734c:d178:15c9:1728:54aa:409b"><table key="subject">
+<elem key="commonName">METASPLOITABLE3</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">METASPLOITABLE3</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">2048</elem>
+<elem key="modulus">B15DF1B0A2F5390751D6B54E6287CBCC1331D5FC99BFD0AB20FA1C12EBD7553381A6BDD65DC93C3ABA678709379137AF689D185FB9F527274E451DBA98C58ECD6D8C25FF62B2D619DFFDBDD9B9C7DEB0DCD4091080DA8DC3D8081B4F65EDF725F91F40B265D9560B0B21222AE9139B88A7AF482D94D8F6C945B830A2F49409ABE5DB6F8AEE0EE343D8E59B2579180D88E8A9B8EFE03EF0953C059C36B5AE93EED17D719A044C58509D6EA17573D706040B0FABF3229A478AE2C7ACBC14A6DCF177EC2D2EBC54E8063D1142C0CAF18AF07C01282E8A74EF933E291A1FB6D129F231EA9457BBEAC8068FF39AD3FDE16D180BB3C414E95A8A0EB334619D6931A6E1</elem>
+<elem key="exponent">65537</elem>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">X509v3 Extended Key Usage</elem>
+<elem key="value">TLS Web Server Authentication</elem>
+</table>
+<table>
+<elem key="name">X509v3 Key Usage</elem>
+<elem key="value">Key Encipherment, Data Encipherment</elem>
+</table>
+</table>
+<elem key="sig_algo">sha1WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2024-03-16T10:32:50</elem>
+<elem key="notAfter">2024-09-15T10:32:50</elem>
+</table>
+<elem key="md5">6367fa2c3c98076ba8dcbebdcd0732d0</elem>
+<elem key="sha1">7d8609f96c49a1e7734cd17815c9172854aa409b</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIC4jCCAcqgAwIBAgIQY6Q9CjDmx7BMayVRD3phwzANBgkqhkiG9w0BAQUFADAa&#xa;MRgwFgYDVQQDEw9NRVRBU1BMT0lUQUJMRTMwHhcNMjQwMzE2MTAzMjUwWhcNMjQw&#xa;OTE1MTAzMjUwWjAaMRgwFgYDVQQDEw9NRVRBU1BMT0lUQUJMRTMwggEiMA0GCSqG&#xa;SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCxXfGwovU5B1HWtU5ih8vMEzHV/Jm/0Ksg&#xa;+hwS69dVM4GmvdZdyTw6umeHCTeRN69onRhfufUnJ05FHbqYxY7NbYwl/2Ky1hnf&#xa;/b3ZucfesNzUCRCA2o3D2AgbT2Xt9yX5H0CyZdlWCwshIirpE5uIp69ILZTY9slF&#xa;uDCi9JQJq+Xbb4ruDuND2OWbJXkYDYjoqbjv4D7wlTwFnDa1rpPu0X1xmgRMWFCd&#xa;bqF1c9cGBAsPq/MimkeK4sesvBSm3PF37C0uvFToBj0RQsDK8YrwfAEoLop075M+&#xa;KRofttEp8jHqlFe76sgGj/Oa0/3hbRgLs8QU6VqKDrM0YZ1pMabhAgMBAAGjJDAi&#xa;MBMGA1UdJQQMMAoGCCsGAQUFBwMBMAsGA1UdDwQEAwIEMDANBgkqhkiG9w0BAQUF&#xa;AAOCAQEAd563bdH4aCLVW6QpeD256e3zlELHTWtYK8XiNog66Y71Nd4oUOgrdoqL&#xa;Odbw6ffsN4FtWHWhoZqlMx9r6Z69hTyFQRZaCvqS85GwQN1vcP3D/u6tkEArGS/D&#xa;AiB99QeH5UjNhDKdJY4Q/YwU13ISGgVrwKjvD0iSN0C4wwnOpgTtbBdxVSw/C6PQ&#xa;NkSGI0++irpvDeP3obIqV/+INzyMdpPNZh8AHIy112c2yK65eftvdIQcbUkZlmZY&#xa;ccIsFlKd8/+A3o4ULsQaMH1yHcEmBvCmVjJrJ70TcvvgK4UQwDKhNuzQgkWa897g&#xa;M5s6SLpAT3UnpONPISNYjJUB9p+ypg==&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script><script id="rdp-ntlm-info" output="&#xa;  Target_Name: METASPLOITABLE3&#xa;  NetBIOS_Domain_Name: METASPLOITABLE3&#xa;  NetBIOS_Computer_Name: METASPLOITABLE3&#xa;  DNS_Domain_Name: METASPLOITABLE3&#xa;  DNS_Computer_Name: METASPLOITABLE3&#xa;  Product_Version: 6.3.9600&#xa;  System_Time: 2024-03-17T11:34:36+00:00"><elem key="Target_Name">METASPLOITABLE3</elem>
+<elem key="NetBIOS_Domain_Name">METASPLOITABLE3</elem>
+<elem key="NetBIOS_Computer_Name">METASPLOITABLE3</elem>
+<elem key="DNS_Domain_Name">METASPLOITABLE3</elem>
+<elem key="DNS_Computer_Name">METASPLOITABLE3</elem>
+<elem key="Product_Version">6.3.9600</elem>
+<elem key="System_Time">2024-03-17T11:34:36+00:00</elem>
+</script></port>
+<port protocol="tcp" portid="8009"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="ajp13" product="Apache Jserv" extrainfo="Protocol v1.3" method="probed" conf="10"/><script id="ajp-methods" output="Failed to get a valid response for the OPTION request"/></port>
+<port protocol="tcp" portid="8080"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="http" product="Apache Tomcat/Coyote JSP engine" version="1.1" method="probed" conf="10"><cpe>cpe:/a:apache:coyote_http_connector:1.1</cpe></service><script id="http-methods" output="&#xa;  Supported Methods: GET HEAD POST"><table key="Supported Methods">
+<elem>GET</elem>
+<elem>HEAD</elem>
+<elem>POST</elem>
+</table>
+</script><script id="http-server-header" output="Apache-Coyote/1.1"><elem>Apache-Coyote/1.1</elem>
+</script><script id="http-open-proxy" output="Proxy might be redirecting requests"/><script id="http-title" output="Apache Tomcat/8.0.33"><elem key="title">Apache Tomcat/8.0.33</elem>
+</script><script id="http-favicon" output="Apache Tomcat"/></port>
+<port protocol="tcp" portid="49152"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49153"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49154"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49155"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49156"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="80"/>
+<portused state="closed" proto="tcp" portid="7"/>
+<portused state="closed" proto="udp" portid="37451"/>
+<osmatch name="Microsoft Windows Server 2012 R2 Update 1" accuracy="100" line="76106">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2012" accuracy="100"><cpe>cpe:/o:microsoft:windows_server_2012:r2</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1" accuracy="100" line="77899">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="7" accuracy="100"><cpe>cpe:/o:microsoft:windows_7:::ultimate</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2012" accuracy="100"><cpe>cpe:/o:microsoft:windows_2012</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8.1" accuracy="100"><cpe>cpe:/o:microsoft:windows_8.1</cpe></osclass>
+</osmatch>
+</os>
+<uptime seconds="1393" lastboot="Sun Mar 17 11:11:22 2024"/>
+<distance value="1"/>
+<tcpsequence index="261" difficulty="Good luck!" values="197C56A3,DF7BCB23,D77843D5,E38BE15F,51E19A8B,84B11C98"/>
+<ipidsequence class="Incremental" values="6EB8,6EB9,6EBA,6EBB,6EBC,6EBD"/>
+<tcptssequence class="100HZ" values="21559,21566,21570,2157B,21586,21590"/>
+<hostscript><script id="smb2-security-mode" output="&#xa;  3:0:2: &#xa;    Message signing enabled but not required"><table key="3:0:2">
+<elem>Message signing enabled but not required</elem>
+</table>
+</script><script id="smb-security-mode" output="&#xa;  authentication_level: user&#xa;  challenge_response: supported&#xa;  message_signing: disabled (dangerous, but default)"><elem key="authentication_level">user</elem>
+<elem key="challenge_response">supported</elem>
+<elem key="message_signing">disabled</elem>
+</script><script id="smb2-time" output="&#xa;  date: 2024-03-17T11:34:41&#xa;  start_date: 2024-03-17T11:12:16"><elem key="date">2024-03-17T11:34:41</elem>
+<elem key="start_date">2024-03-17T11:12:16</elem>
+</script><script id="nbstat" output="NetBIOS name: METASPLOITABLE3, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:d6:f7:76 (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  METASPLOITABLE3&lt;00&gt;  Flags: &lt;unique&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  METASPLOITABLE3&lt;20&gt;  Flags: &lt;unique&gt;&lt;active&gt;"/><script id="clock-skew" output="mean: 18s, deviation: 1s, median: 18s"><elem key="median">18</elem>
+<elem key="mean">18</elem>
+<elem key="stddev">1</elem>
+<elem key="count">4</elem>
+</script></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.36" rtt="7.00" host="MS3WIN"/>
+</trace>
+<times srtt="6998" rttvar="1723" to="50000"/>
+</host>
+<host starttime="1710675098" endtime="1710675275"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.42" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="DCCS" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="88">
+<extrareasons reason="reset" count="88" proto="tcp" ports="7,9,13,21-23,25-26,37,79,81,106,110-111,113,119,143-144,179,199,427,443-444,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768,49155"/>
+</extraports>
+<port protocol="tcp" portid="53"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="domain" product="Simple DNS Plus" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:jh_software:simple_dns_plus</cpe><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="http" product="Microsoft IIS httpd" version="8.5" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:microsoft:internet_information_services:8.5</cpe><cpe>cpe:/o:microsoft:windows</cpe></service><script id="http-methods" output="&#xa;  Supported Methods: OPTIONS TRACE GET HEAD POST&#xa;  Potentially risky methods: TRACE"><table key="Supported Methods">
+<elem>OPTIONS</elem>
+<elem>TRACE</elem>
+<elem>GET</elem>
+<elem>HEAD</elem>
+<elem>POST</elem>
+</table>
+<table key="Potentially risky methods">
+<elem>TRACE</elem>
+</table>
+</script><script id="http-title" output="IIS Windows Server"><elem key="title">IIS Windows Server</elem>
+</script><script id="http-server-header" output="Microsoft-IIS/8.5"><elem>Microsoft-IIS/8.5</elem>
+</script></port>
+<port protocol="tcp" portid="88"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="kerberos-sec" product="Microsoft Windows Kerberos" extrainfo="server time: 2024-03-17 11:31:56Z" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:microsoft:kerberos</cpe><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="135"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" product="Microsoft Windows netbios-ssn" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="389"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="ldap" product="Microsoft Windows Active Directory LDAP" extrainfo="Domain: discworld.io, Site: Bes-Pelargic" hostname="DISCWORLDDCCS" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="ssl-date" output="2024-03-17T11:34:44+00:00; +10s from scanner time."><elem key="date">2024-03-17T11:34:44+00:00</elem>
+<elem key="delta">10.0</elem>
+</script><script id="ssl-cert" output="Subject: commonName=DISCWORLDDCCS.discworld.io&#xa;Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:DISCWORLDDCCS.discworld.io&#xa;Issuer: commonName=DISCWORLD-DISCWORLDROOTCA-CA&#xa;Public Key type: rsa&#xa;Public Key bits: 2048&#xa;Signature Algorithm: sha256WithRSAEncryption&#xa;Not valid before: 2023-09-05T09:42:20&#xa;Not valid after:  2024-09-04T09:42:20&#xa;MD5:   b820:e6a3:cb57:ef5e:e0ed:a90d:ca30:6a98&#xa;SHA-1: 7159:70c9:ceb7:e1ed:1e5b:f0cb:5595:fa63:5db8:3de0"><table key="subject">
+<elem key="commonName">DISCWORLDDCCS.discworld.io</elem>
+</table>
+<table key="issuer">
+<elem key="commonName">DISCWORLD-DISCWORLDROOTCA-CA</elem>
+<elem key="domainComponent">discworld</elem>
+</table>
+<table key="pubkey">
+<elem key="type">rsa</elem>
+<elem key="bits">2048</elem>
+<elem key="modulus">D789FADFA7D85E864A56F240083D0254778FB486F7C6910E9037A0A900B6B022DEBCB2B5B6DD26B62455585408B0A05AEBBD366D93587845FF99CD8CDBA9C321B5A0A2DA607D27A82870BE29FF05E1C94AB8A2AE94D7280D21A182CBE63EC9DDBF483441F08F37553C21731968738A008BE944A87C2E6E3303311FEC49D6314DF8D097B099A7E3D3DE96A7AD641A9375EC8700C56E641B81AF886102E5A1918FEED80526EA2EF6657BEB1CD7DD24FC3CECAD04197C8FDBC57928DF43D425F70C58F4FD1E83475B433CD8E129298EC368B5A60FB153F1DF176C6B884F95CED67D34DDD16AC1618799DFDD84C0F90BA7B1405D9A54114B2204F47BE3AB29B3A38F</elem>
+<elem key="exponent">65537</elem>
+</table>
+<table key="extensions">
+<table>
+<elem key="name">1.3.6.1.4.1.311.20.2</elem>
+</table>
+<table>
+<elem key="name">X509v3 Extended Key Usage</elem>
+<elem key="value">TLS Web Client Authentication, TLS Web Server Authentication</elem>
+</table>
+<table>
+<elem key="name">X509v3 Key Usage</elem>
+<elem key="value">Digital Signature, Key Encipherment</elem>
+<elem key="critical">true</elem>
+</table>
+<table>
+<elem key="name">S/MIME Capabilities</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Key Identifier</elem>
+<elem key="value">01:2D:D5:CB:61:B4:86:5B:8D:F3:4E:46:A4:15:88:81:A8:CF:64:AC</elem>
+</table>
+<table>
+<elem key="name">X509v3 Authority Key Identifier</elem>
+<elem key="value">22:D0:EF:0C:B9:73:F5:F5:43:88:3E:99:EB:EA:11:C2:21:4E:D3:76</elem>
+</table>
+<table>
+<elem key="name">X509v3 CRL Distribution Points</elem>
+<elem key="value">Full Name:&#xa;  URI:ldap:///CN=DISCWORLD-DISCWORLDROOTCA-CA,CN=DISCWORLDROOTCA,CN=CDP,CN=Public%20Key%20Services,CN=Services,CN=Configuration,DC=discworld,DC=io?certificateRevocationList?base?objectClass=cRLDistributionPoint</elem>
+</table>
+<table>
+<elem key="name">Authority Information Access</elem>
+<elem key="value">CA Issuers - URI:ldap:///CN=DISCWORLD-DISCWORLDROOTCA-CA,CN=AIA,CN=Public%20Key%20Services,CN=Services,CN=Configuration,DC=discworld,DC=io?cACertificate?base?objectClass=certificationAuthority</elem>
+</table>
+<table>
+<elem key="name">X509v3 Subject Alternative Name</elem>
+<elem key="value">othername: 1.3.6.1.4.1.311.25.1::&lt;unsupported&gt;, DNS:DISCWORLDDCCS.discworld.io</elem>
+</table>
+</table>
+<elem key="sig_algo">sha256WithRSAEncryption</elem>
+<table key="validity">
+<elem key="notBefore">2023-09-05T09:42:20</elem>
+<elem key="notAfter">2024-09-04T09:42:20</elem>
+</table>
+<elem key="md5">b820e6a3cb57ef5ee0eda90dca306a98</elem>
+<elem key="sha1">715970c9ceb7e1ed1e5bf0cb5595fa635db83de0</elem>
+<elem key="pem">-&#45;&#45;&#45;&#45;BEGIN CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;MIIHKDCCBRCgAwIBAgITWAAAAATYuvqMMs3MxwAAAAAABDANBgkqhkiG9w0BAQsF&#xa;ADBWMRIwEAYKCZImiZPyLGQBGRYCaW8xGTAXBgoJkiaJk/IsZAEZFglkaXNjd29y&#xa;bGQxJTAjBgNVBAMTHERJU0NXT1JMRC1ESVNDV09STERST09UQ0EtQ0EwHhcNMjMw&#xa;OTA1MDk0MjIwWhcNMjQwOTA0MDk0MjIwWjAlMSMwIQYDVQQDExpESVNDV09STERE&#xa;Q0NTLmRpc2N3b3JsZC5pbzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB&#xa;ANeJ+t+n2F6GSlbyQAg9AlR3j7SG98aRDpA3oKkAtrAi3ryytbbdJrYkVVhUCLCg&#xa;Wuu9Nm2TWHhF/5nNjNupwyG1oKLaYH0nqChwvin/BeHJSriirpTXKA0hoYLL5j7J&#xa;3b9INEHwjzdVPCFzGWhzigCL6USofC5uMwMxH+xJ1jFN+NCXsJmn49PelqetZBqT&#xa;deyHAMVuZBuBr4hhAuWhkY/u2AUm6i72ZXvrHNfdJPw87K0EGXyP28V5KN9D1CX3&#xa;DFj0/R6DR1tDPNjhKSmOw2i1pg+xU/HfF2xriE+VztZ9NN3RasFhh5nf3YTA+Qun&#xa;sUBdmlQRSyIE9Hvjqymzo48CAwEAAaOCAx4wggMaMC8GCSsGAQQBgjcUAgQiHiAA&#xa;RABvAG0AYQBpAG4AQwBvAG4AdAByAG8AbABsAGUAcjAdBgNVHSUEFjAUBggrBgEF&#xa;BQcDAgYIKwYBBQUHAwEwDgYDVR0PAQH/BAQDAgWgMHgGCSqGSIb3DQEJDwRrMGkw&#xa;DgYIKoZIhvcNAwICAgCAMA4GCCqGSIb3DQMEAgIAgDALBglghkgBZQMEASowCwYJ&#xa;YIZIAWUDBAEtMAsGCWCGSAFlAwQBAjALBglghkgBZQMEAQUwBwYFKw4DAgcwCgYI&#xa;KoZIhvcNAwcwHQYDVR0OBBYEFAEt1cthtIZbjfNORqQViIGoz2SsMB8GA1UdIwQY&#xa;MBaAFCLQ7wy5c/X1Q4g+mevqEcIhTtN2MIHjBgNVHR8EgdswgdgwgdWggdKggc+G&#xa;gcxsZGFwOi8vL0NOPURJU0NXT1JMRC1ESVNDV09STERST09UQ0EtQ0EsQ049RElT&#xa;Q1dPUkxEUk9PVENBLENOPUNEUCxDTj1QdWJsaWMlMjBLZXklMjBTZXJ2aWNlcyxD&#xa;Tj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPWRpc2N3b3JsZCxEQz1pbz9j&#xa;ZXJ0aWZpY2F0ZVJldm9jYXRpb25MaXN0P2Jhc2U/b2JqZWN0Q2xhc3M9Y1JMRGlz&#xa;dHJpYnV0aW9uUG9pbnQwgc8GCCsGAQUFBwEBBIHCMIG/MIG8BggrBgEFBQcwAoaB&#xa;r2xkYXA6Ly8vQ049RElTQ1dPUkxELURJU0NXT1JMRFJPT1RDQS1DQSxDTj1BSUEs&#xa;Q049UHVibGljJTIwS2V5JTIwU2VydmljZXMsQ049U2VydmljZXMsQ049Q29uZmln&#xa;dXJhdGlvbixEQz1kaXNjd29ybGQsREM9aW8/Y0FDZXJ0aWZpY2F0ZT9iYXNlP29i&#xa;amVjdENsYXNzPWNlcnRpZmljYXRpb25BdXRob3JpdHkwRgYDVR0RBD8wPaAfBgkr&#xa;BgEEAYI3GQGgEgQQfhxqAnzcIUuJT0YrWmzaN4IaRElTQ1dPUkxERENDUy5kaXNj&#xa;d29ybGQuaW8wDQYJKoZIhvcNAQELBQADggIBAL10BoyXBrz4XZv/OiVyExnYt0Br&#xa;oW0GuhXwSaMKoSxNVvfTy6IDz8ylrORoZLGKm1V2OGrvSBmNqOea77Kh93sv2BOs&#xa;FY2qpsSDkF7rIYQsenbO4wUeNAT4permaFi/jBWdXWzI6vETbLGPFIpw81SZXzm2&#xa;ttbyvc66Q99t70zqt85V4ntIYbk335R0ilxshi5ryxMedgKS7xIRZMYspPaCCJp7&#xa;DTo9InG14SilkBD+vcPDSmmD+YPCbeQFmqV2iU/eMpyCQIp2SONC6en4EtEppY1p&#xa;qPD++CY6sQlsDJ9eOI3Y5lje+zD81GLBtq+fb4AU8jqegMB/FcEJpqgMrT80gEjx&#xa;DGsT40LvFQr30HtgV4hkYrOHtdkwkjaImdPmIeDKteukdZolbBSv+j7eTT69jahQ&#xa;qQC2QdlHWs24RLMb3pinfveoR14SmIFSqotyFzrEsgGHcwfWr4ac0PGYnS+MBwhZ&#xa;YddXlZ+WxJzgJih07ANEhNSXIXkj3qpz2dm5fsXsxhoef4HKMOy1bl5OySDN0BM9&#xa;/CWd7BeLLjolurbL8ggLm1Yv7C3LCEzZdH+/fCo08f+jvK+5HD1WwLItfxQAHJnq&#xa;v9lVaibHjTTM436aaGfni58Z8KRn/pkedJ0gc3eNTIwiTeCzYgTZnweO6mFNGPuj&#xa;/qyUfer/DqzuQ7dI&#xa;-&#45;&#45;&#45;&#45;END CERTIFICATE-&#45;&#45;&#45;&#45;&#xa;</elem>
+</script></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Windows Server 2012 R2 Datacenter 9600 microsoft-ds" extrainfo="workgroup: DISCWORLD" hostname="DISCWORLDDCCS" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49152"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49153"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49154"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49156"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49157"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="ncacn_http" product="Microsoft Windows RPC over HTTP" version="1.0" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="53"/>
+<portused state="closed" proto="tcp" portid="7"/>
+<portused state="closed" proto="udp" portid="32433"/>
+<osmatch name="Microsoft Windows Server 2012 R2 Update 1" accuracy="100" line="76106">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2012" accuracy="100"><cpe>cpe:/o:microsoft:windows_server_2012:r2</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1" accuracy="100" line="77899">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="7" accuracy="100"><cpe>cpe:/o:microsoft:windows_7:::ultimate</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2012" accuracy="100"><cpe>cpe:/o:microsoft:windows_2012</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8.1" accuracy="100"><cpe>cpe:/o:microsoft:windows_8.1</cpe></osclass>
+</osmatch>
+</os>
+<uptime seconds="3928" lastboot="Sun Mar 17 10:29:07 2024"/>
+<distance value="1"/>
+<tcpsequence index="256" difficulty="Good luck!" values="635FE7EC,EB6003BC,5B9516E7,EFA56F70,918B227B,587A8780"/>
+<ipidsequence class="Incremental" values="5CF0,5CF1,5CF2,5CF3,5CF4,5CF5"/>
+<tcptssequence class="100HZ" values="5F5F2,5F5FC,5F607,5F611,5F61C,5F626"/>
+<hostscript><script id="clock-skew" output="mean: 11s, deviation: 3s, median: 9s"><elem key="median">9</elem>
+<elem key="mean">11</elem>
+<elem key="stddev">3</elem>
+<elem key="count">4</elem>
+</script><script id="smb-os-discovery" output="&#xa;  OS: Windows Server 2012 R2 Datacenter 9600 (Windows Server 2012 R2 Datacenter 6.3)&#xa;  OS CPE: cpe:/o:microsoft:windows_server_2012::-&#xa;  Computer name: DISCWORLDDCCS&#xa;  NetBIOS computer name: DISCWORLDDCCS\x00&#xa;  Domain name: discworld.io&#xa;  Forest name: discworld.io&#xa;  FQDN: DISCWORLDDCCS.discworld.io&#xa;  System time: 2024-03-17T11:34:32+00:00&#xa;"><elem key="os">Windows Server 2012 R2 Datacenter 9600</elem>
+<elem key="lanmanager">Windows Server 2012 R2 Datacenter 6.3</elem>
+<elem key="server">DISCWORLDDCCS\x00</elem>
+<elem key="date">2024-03-17T11:34:32+00:00</elem>
+<elem key="fqdn">DISCWORLDDCCS.discworld.io</elem>
+<elem key="domain_dns">discworld.io</elem>
+<elem key="forest_dns">discworld.io</elem>
+<elem key="workgroup">DISCWORLD\x00</elem>
+<elem key="cpe">cpe:/o:microsoft:windows_server_2012::-</elem>
+</script><script id="smb2-security-mode" output="&#xa;  3:0:2: &#xa;    Message signing enabled and required"><table key="3:0:2">
+<elem>Message signing enabled and required</elem>
+</table>
+</script><script id="nbstat" output="NetBIOS name: DISCWORLDDCCS, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:8e:d2:e7 (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  DISCWORLD&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  DISCWORLDDCCS&lt;00&gt;    Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;1c&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  DISCWORLDDCCS&lt;20&gt;    Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;1b&gt;        Flags: &lt;unique&gt;&lt;active&gt;"/><script id="smb2-time" output="&#xa;  date: 2024-03-17T11:34:32&#xa;  start_date: 2024-03-17T10:31:31"><elem key="date">2024-03-17T11:34:32</elem>
+<elem key="start_date">2024-03-17T10:31:31</elem>
+</script><script id="smb-security-mode" output="&#xa;  account_used: guest&#xa;  authentication_level: user&#xa;  challenge_response: supported&#xa;  message_signing: required"><elem key="account_used">guest</elem>
+<elem key="authentication_level">user</elem>
+<elem key="challenge_response">supported</elem>
+<elem key="message_signing">required</elem>
+</script></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.42" rtt="6.26" host="DCCS"/>
+</trace>
+<times srtt="6255" rttvar="1228" to="50000"/>
+</host>
+<host starttime="1710675098" endtime="1710675275"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.43" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="CS" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="90">
+<extrareasons reason="reset" count="90" proto="tcp" ports="7,9,13,21-23,25-26,37,53,79,81,88,106,110-111,113,119,143-144,179,199,389,427,443-444,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1025-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768"/>
+</extraports>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="http" product="Microsoft IIS httpd" version="8.5" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:microsoft:internet_information_services:8.5</cpe><cpe>cpe:/o:microsoft:windows</cpe></service><script id="http-methods" output="&#xa;  Supported Methods: OPTIONS TRACE GET HEAD POST&#xa;  Potentially risky methods: TRACE"><table key="Supported Methods">
+<elem>OPTIONS</elem>
+<elem>TRACE</elem>
+<elem>GET</elem>
+<elem>HEAD</elem>
+<elem>POST</elem>
+</table>
+<table key="Potentially risky methods">
+<elem>TRACE</elem>
+</table>
+</script><script id="http-server-header" output="Microsoft-IIS/8.5"><elem>Microsoft-IIS/8.5</elem>
+</script><script id="http-title" output="IIS Windows Server"><elem key="title">IIS Windows Server</elem>
+</script></port>
+<port protocol="tcp" portid="135"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" product="Microsoft Windows netbios-ssn" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Microsoft Windows Server 2008 R2 - 2012 microsoft-ds" ostype="Windows Server 2008 R2 - 2012" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49152"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49153"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49154"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49155"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49156"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="49157"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="80"/>
+<portused state="closed" proto="tcp" portid="7"/>
+<portused state="closed" proto="udp" portid="42165"/>
+<osmatch name="Microsoft Windows Server 2012 R2 Update 1" accuracy="100" line="76106">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2012" accuracy="100"><cpe>cpe:/o:microsoft:windows_server_2012:r2</cpe></osclass>
+</osmatch>
+<osmatch name="Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1" accuracy="100" line="77899">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="7" accuracy="100"><cpe>cpe:/o:microsoft:windows_7:::ultimate</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2012" accuracy="100"><cpe>cpe:/o:microsoft:windows_2012</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="8.1" accuracy="100"><cpe>cpe:/o:microsoft:windows_8.1</cpe></osclass>
+</osmatch>
+</os>
+<uptime seconds="3923" lastboot="Sun Mar 17 10:29:13 2024"/>
+<distance value="1"/>
+<tcpsequence index="261" difficulty="Good luck!" values="70FCC090,7A14465E,5E0561D8,2C680213,8B936F49,16DE0C25"/>
+<ipidsequence class="Incremental" values="2B25,2B26,2B27,2B28,2B29,2B2A"/>
+<tcptssequence class="100HZ" values="5F3BD,5F3C8,5F3D3,5F3DD,5F3E9,5F3F4"/>
+<hostscript><script id="nbstat" output="NetBIOS name: DISCWORLDROOTCA, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:5a:84:38 (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  DISCWORLD&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  DISCWORLDROOTCA&lt;00&gt;  Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLDROOTCA&lt;20&gt;  Flags: &lt;unique&gt;&lt;active&gt;"/><script id="smb2-time" output="&#xa;  date: 2024-03-17T11:34:32&#xa;  start_date: 2024-03-17T10:31:45"><elem key="date">2024-03-17T11:34:32</elem>
+<elem key="start_date">2024-03-17T10:31:45</elem>
+</script><script id="smb2-security-mode" output="&#xa;  3:0:2: &#xa;    Message signing enabled but not required"><table key="3:0:2">
+<elem>Message signing enabled but not required</elem>
+</table>
+</script><script id="clock-skew" output="mean: 9s, deviation: 0s, median: 8s"><elem key="median">8</elem>
+<elem key="mean">9</elem>
+<elem key="stddev">0</elem>
+<elem key="count">2</elem>
+</script><script id="smb-security-mode" output="&#xa;  account_used: guest&#xa;  authentication_level: user&#xa;  challenge_response: supported&#xa;  message_signing: disabled (dangerous, but default)"><elem key="account_used">guest</elem>
+<elem key="authentication_level">user</elem>
+<elem key="challenge_response">supported</elem>
+<elem key="message_signing">disabled</elem>
+</script></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.43" rtt="6.85" host="CS"/>
+</trace>
+<times srtt="6851" rttvar="805" to="50000"/>
+</host>
+<host starttime="1710675098" endtime="1710675275"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.45" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="WIN2K3SP1" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="92">
+<extrareasons reason="reset" count="92" proto="tcp" ports="7,9,13,21-23,26,37,53,79,81,88,106,110-111,113,119,143-144,179,199,389,427,443-444,465,513-515,543-544,548,554,587,631,646,873,990,993,995,1026-1027,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768,49152-49157"/>
+</extraports>
+<port protocol="tcp" portid="25"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="smtp" product="Microsoft ESMTP" version="6.0.3790.1830" hostname="WEBSP1.discworld.io" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="smtp-commands" output="WEBSP1.discworld.io Hello [192.168.4.25], TURN, SIZE 2097152, ETRN, PIPELINING, DSN, ENHANCEDSTATUSCODES, 8bitmime, BINARYMIME, CHUNKING, VRFY, OK&#xa; This server supports the following commands: HELO EHLO STARTTLS RCPT DATA RSET MAIL QUIT HELP AUTH TURN ETRN BDAT VRFY"/></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="http" product="Microsoft IIS httpd" version="6.0" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:microsoft:internet_information_services:6.0</cpe><cpe>cpe:/o:microsoft:windows</cpe></service><script id="http-server-header" output="Microsoft-IIS/6.0"><elem>Microsoft-IIS/6.0</elem>
+</script><script id="http-title" output="Under Construction"><elem key="title">Under Construction</elem>
+</script><script id="http-methods" output="&#xa;  Supported Methods: OPTIONS TRACE GET HEAD POST&#xa;  Potentially risky methods: TRACE"><table key="Supported Methods">
+<elem>OPTIONS</elem>
+<elem>TRACE</elem>
+<elem>GET</elem>
+<elem>HEAD</elem>
+<elem>POST</elem>
+</table>
+<table key="Potentially risky methods">
+<elem>TRACE</elem>
+</table>
+</script></port>
+<port protocol="tcp" portid="135"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" product="Microsoft Windows netbios-ssn" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Windows Server 2003 3790 Service Pack 1 microsoft-ds" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows_server_2003</cpe></service></port>
+<port protocol="tcp" portid="1025"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="1028"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="1029"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="25"/>
+<portused state="closed" proto="tcp" portid="7"/>
+<portused state="closed" proto="udp" portid="40701"/>
+<osmatch name="Microsoft Windows Server 2003 SP1 or SP2" accuracy="100" line="72961">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2003" accuracy="100"><cpe>cpe:/o:microsoft:windows_server_2003::sp1</cpe><cpe>cpe:/o:microsoft:windows_server_2003::sp2</cpe></osclass>
+</osmatch>
+</os>
+<distance value="1"/>
+<tcpsequence index="255" difficulty="Good luck!" values="BECE333D,26353438,F0EE282D,A2FACB7D,F910821F,14FDC709"/>
+<ipidsequence class="Incremental" values="83B,83C,83D,83E,83F,840"/>
+<tcptssequence class="zero timestamp" values="0,0,0,0,0,0"/>
+<hostscript><script id="smb-os-discovery" output="&#xa;  OS: Windows Server 2003 3790 Service Pack 1 (Windows Server 2003 5.2)&#xa;  OS CPE: cpe:/o:microsoft:windows_server_2003::sp1&#xa;  Computer name: WEBSP1&#xa;  NetBIOS computer name: WEBSP1\x00&#xa;  Domain name: discworld.io&#xa;  Forest name: discworld.io&#xa;  FQDN: WEBSP1.discworld.io&#xa;  System time: 2024-03-17T11:34:33+00:00&#xa;"><elem key="os">Windows Server 2003 3790 Service Pack 1</elem>
+<elem key="lanmanager">Windows Server 2003 5.2</elem>
+<elem key="server">WEBSP1\x00</elem>
+<elem key="date">2024-03-17T11:34:33+00:00</elem>
+<elem key="fqdn">WEBSP1.discworld.io</elem>
+<elem key="domain_dns">discworld.io</elem>
+<elem key="forest_dns">discworld.io</elem>
+<elem key="workgroup">DISCWORLD\x00</elem>
+<elem key="cpe">cpe:/o:microsoft:windows_server_2003::sp1</elem>
+</script><script id="clock-skew" output="mean: 13s, deviation: 4s, median: 9s"><elem key="median">9</elem>
+<elem key="mean">13</elem>
+<elem key="stddev">4</elem>
+<elem key="count">2</elem>
+</script><script id="nbstat" output="NetBIOS name: WEBSP1, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:ae:b2:84 (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  WEBSP1&lt;00&gt;           Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  WEBSP1&lt;20&gt;           Flags: &lt;unique&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;1e&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  DISCWORLD&lt;1d&gt;        Flags: &lt;unique&gt;&lt;active&gt;&#xa;  \x01\x02__MSBROWSE__\x02&lt;01&gt;  Flags: &lt;group&gt;&lt;active&gt;"/><script id="smb-security-mode" output="&#xa;  account_used: guest&#xa;  authentication_level: user&#xa;  challenge_response: supported&#xa;  message_signing: disabled (dangerous, but default)"><elem key="account_used">guest</elem>
+<elem key="authentication_level">user</elem>
+<elem key="challenge_response">supported</elem>
+<elem key="message_signing">disabled</elem>
+</script><script id="smb2-time" output="Protocol negotiation failed (SMB2)"/></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.45" rtt="7.46" host="WIN2K3SP1"/>
+</trace>
+<times srtt="7456" rttvar="1874" to="50000"/>
+</host>
+<host starttime="1710675098" endtime="1710675275"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.4.46" addrtype="ipv4"/>
+<address addr="C4:D9:87:14:F8:84" addrtype="mac" vendor="Intel Corporate"/>
+<hostnames>
+<hostname name="WIN2K3SP0" type="PTR"/>
+</hostnames>
+<ports><extraports state="closed" count="86">
+<extrareasons reason="reset" count="86" proto="tcp" ports="22-23,26,37,79,81,88,106,110-111,113,119,143-144,179,199,389,427,443-444,465,513-514,543-544,548,554,587,631,646,873,990,993,995,1028-1029,1110,1433,1720,1723,1755,1900,2000-2001,2049,2121,2717,3000,3128,3306,3389,3986,4899,5000,5009,5051,5060,5101,5190,5357,5432,5631,5666,5800,5900,6000-6001,6646,7070,8000,8008-8009,8080-8081,8443,8888,9100,9999-10000,32768,49152-49157"/>
+</extraports>
+<port protocol="tcp" portid="7"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="echo" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="9"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="discard" method="table" conf="3"/></port>
+<port protocol="tcp" portid="13"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="daytime" product="Microsoft Windows USA daytime" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="21"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="ftp" product="Microsoft ftpd" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:microsoft:ftp_service</cpe><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="25"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="smtp" product="Microsoft ESMTP" version="6.0.3790.0" hostname="WIN2K3SP0" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service><script id="smtp-commands" output="WIN2K3SP0 Hello [192.168.4.25], TURN, SIZE 2097152, ETRN, PIPELINING, DSN, ENHANCEDSTATUSCODES, 8bitmime, BINARYMIME, CHUNKING, VRFY, OK&#xa; This server supports the following commands: HELO EHLO STARTTLS RCPT DATA RSET MAIL QUIT HELP AUTH TURN ETRN BDAT VRFY"/></port>
+<port protocol="tcp" portid="53"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="domain" product="Simple DNS Plus" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:jh_software:simple_dns_plus</cpe><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="http" product="Microsoft IIS httpd" version="6.0" ostype="Windows" method="probed" conf="10"><cpe>cpe:/a:microsoft:internet_information_services:6.0</cpe><cpe>cpe:/o:microsoft:windows</cpe></service><script id="http-server-header" output="Microsoft-IIS/6.0"><elem>Microsoft-IIS/6.0</elem>
+</script><script id="http-methods" output="&#xa;  Supported Methods: OPTIONS TRACE GET HEAD POST&#xa;  Potentially risky methods: TRACE"><table key="Supported Methods">
+<elem>OPTIONS</elem>
+<elem>TRACE</elem>
+<elem>GET</elem>
+<elem>HEAD</elem>
+<elem>POST</elem>
+</table>
+<table key="Potentially risky methods">
+<elem>TRACE</elem>
+</table>
+</script><script id="http-title" output="Under Construction"><elem key="title">Under Construction</elem>
+</script></port>
+<port protocol="tcp" portid="135"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" product="Microsoft Windows netbios-ssn" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Windows Server 2003 3790 microsoft-ds" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows_server_2003</cpe></service></port>
+<port protocol="tcp" portid="515"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="printer" product="Microsoft lpd" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="1025"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="1026"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+<port protocol="tcp" portid="1027"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="msrpc" product="Microsoft Windows RPC" ostype="Windows" method="probed" conf="10"><cpe>cpe:/o:microsoft:windows</cpe></service></port>
+</ports>
+<os><portused state="open" proto="tcp" portid="7"/>
+<portused state="closed" proto="tcp" portid="22"/>
+<portused state="closed" proto="udp" portid="32967"/>
+<osmatch name="Microsoft Windows XP Professional SP2 or Windows Server 2003" accuracy="100" line="81248">
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="XP" accuracy="100"><cpe>cpe:/o:microsoft:windows_xp::sp2:professional</cpe></osclass>
+<osclass type="general purpose" vendor="Microsoft" osfamily="Windows" osgen="2003" accuracy="100"><cpe>cpe:/o:microsoft:windows_server_2003</cpe></osclass>
+</osmatch>
+</os>
+<distance value="1"/>
+<tcpsequence index="250" difficulty="Good luck!" values="9C353911,CBD69A9E,A08C2DE5,DCC71614,C758D6B4"/>
+<ipidsequence class="Incremental" values="1C3,1C4,1C5,1C6,1C7"/>
+<tcptssequence class="zero timestamp" values="0,0,0,0,0"/>
+<hostscript><script id="smb2-time" output="Protocol negotiation failed (SMB2)"/><script id="nbstat" output="NetBIOS name: WIN2K3SP0, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 08:00:27:f3:21:2c (Oracle VirtualBox virtual NIC)&#xa;Names:&#xa;  WIN2K3SP0&lt;00&gt;        Flags: &lt;unique&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;00&gt;        Flags: &lt;group&gt;&lt;active&gt;&#xa;  WIN2K3SP0&lt;20&gt;        Flags: &lt;unique&gt;&lt;active&gt;&#xa;  WORKGROUP&lt;1e&gt;        Flags: &lt;group&gt;&lt;active&gt;"/><script id="smb-os-discovery" output="&#xa;  OS: Windows Server 2003 3790 (Windows Server 2003 5.2)&#xa;  OS CPE: cpe:/o:microsoft:windows_server_2003::-&#xa;  Computer name: WIN2K3SP0&#xa;  NetBIOS computer name: WIN2K3SP0\x00&#xa;  Workgroup: WORKGROUP\x00&#xa;  System time: 2024-03-17T11:34:28+00:00&#xa;"><elem key="os">Windows Server 2003 3790</elem>
+<elem key="lanmanager">Windows Server 2003 5.2</elem>
+<elem key="server">WIN2K3SP0\x00</elem>
+<elem key="date">2024-03-17T11:34:28+00:00</elem>
+<elem key="fqdn">WIN2K3SP0</elem>
+<elem key="domain_dns">WIN2K3SP0</elem>
+<elem key="workgroup">WORKGROUP\x00</elem>
+<elem key="cpe">cpe:/o:microsoft:windows_server_2003::-</elem>
+</script><script id="clock-skew" output="mean: 8s, deviation: 4s, median: 4s"><elem key="median">4</elem>
+<elem key="mean">8</elem>
+<elem key="stddev">4</elem>
+<elem key="count">2</elem>
+</script><script id="smb-security-mode" output="&#xa;  account_used: guest&#xa;  authentication_level: user&#xa;  challenge_response: supported&#xa;  message_signing: disabled (dangerous, but default)"><elem key="account_used">guest</elem>
+<elem key="authentication_level">user</elem>
+<elem key="challenge_response">supported</elem>
+<elem key="message_signing">disabled</elem>
+</script></hostscript><trace>
+<hop ttl="1" ipaddr="192.168.4.46" rtt="7.21" host="WIN2K3SP0"/>
+</trace>
+<times srtt="7211" rttvar="874" to="50000"/>
+</host>
+<taskbegin task="NSE" time="1710675276"/>
+<taskend task="NSE" time="1710675276"/>
+<taskbegin task="NSE" time="1710675276"/>
+<taskend task="NSE" time="1710675276"/>
+<taskbegin task="NSE" time="1710675276"/>
+<taskend task="NSE" time="1710675276"/>
+<postscript><script id="clock-skew" output="&#xa;  12s: &#xa;    192.168.4.29 (DB)&#xa;    192.168.4.32 (MS2UBU)&#xa;    192.168.4.42 (DCCS)&#xa;    192.168.4.45 (WIN2K3SP1)"><table key="12s">
+<elem>192.168.4.29 (DB)</elem>
+<elem>192.168.4.32 (MS2UBU)</elem>
+<elem>192.168.4.42 (DCCS)</elem>
+<elem>192.168.4.45 (WIN2K3SP1)</elem>
+</table>
+</script></postscript><runstats><finished time="1710675276" timestr="Sun Mar 17 11:34:36 2024" summary="Nmap done at Sun Mar 17 11:34:36 2024; 7 IP addresses (7 hosts up) scanned in 179.08 seconds" elapsed="179.08" exit="success"/><hosts up="7" down="0" total="7"/>
+</runstats>
+</nmaprun>

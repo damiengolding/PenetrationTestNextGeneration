@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<records>
+    <record type="info" zone_transfer="failed" ns_server="192.168.56.50"/>
+    <record type="info" zone_transfer="failed" ns_server="fdd2:1c66:7ea8:1:b046:8983:4080:af2f"/>
+    <record type="info" zone_transfer="success" ns_server="192.168.4.42"/>
+    <record zone_server="192.168.4.42" type="NS" target="discworlddccs.discworld.io" address="192.168.4.42"/>
+    <record zone_server="192.168.4.42" type="NS" target="discworlddccs.discworld.io" address="192.168.48.3"/>
+    <record zone_server="192.168.4.42" type="NS" target="discworlddccs.discworld.io" address="192.168.56.50"/>
+    <record zone_server="192.168.4.42" type="NS" target="discworlddccs.discworld.io" address="fdd2:1c66:7ea8:1:b046:8983:4080:af2f"/>
+    <record zone_server="192.168.4.42" type="NS" target="discworlddccs.discworld.io" address="192.168.4.42"/>
+    <record zone_server="192.168.4.42" type="NS" target="discworlddccs.discworld.io" address="192.168.48.3"/>
+    <record zone_server="192.168.4.42" type="NS" target="discworlddccs.discworld.io" address="192.168.56.50"/>
+    <record zone_server="192.168.4.42" type="NS" target="discworlddccs.discworld.io" address="fdd2:1c66:7ea8:1:b046:8983:4080:af2f"/>
+    <record zone_server="192.168.4.42" type="AAAA" name="@.discworld.io" address="fdd2:1c66:7ea8:1:b046:8983:4080:af2f"/>
+    <record zone_server="192.168.4.42" type="AAAA" name="discworlddccs.discworld.io" address="fdd2:1c66:7ea8:1:b046:8983:4080:af2f"/>
+    <record zone_server="192.168.4.42" type="AAAA" name="DomainDnsZones.discworld.io" address="fdd2:1c66:7ea8:1:b046:8983:4080:af2f"/>
+    <record zone_server="192.168.4.42" type="AAAA" name="ForestDnsZones.discworld.io" address="fdd2:1c66:7ea8:1:b046:8983:4080:af2f"/>
+    <record zone_server="192.168.4.42" type="A" name="@.discworld.io" address="192.168.48.3"/>
+    <record zone_server="192.168.4.42" type="A" name="@.discworld.io" address="192.168.4.42"/>
+    <record zone_server="192.168.4.42" type="A" name="@.discworld.io" address="192.168.56.50"/>
+    <record zone_server="192.168.4.42" type="A" name="discworlddccs.discworld.io" address="192.168.56.50"/>
+    <record zone_server="192.168.4.42" type="A" name="discworlddccs.discworld.io" address="192.168.48.3"/>
+    <record zone_server="192.168.4.42" type="A" name="discworlddccs.discworld.io" address="192.168.4.42"/>
+    <record zone_server="192.168.4.42" type="A" name="DISCWORLDROOTCA.discworld.io" address="192.168.48.4"/>
+    <record zone_server="192.168.4.42" type="A" name="DomainDnsZones.discworld.io" address="192.168.48.3"/>
+    <record zone_server="192.168.4.42" type="A" name="DomainDnsZones.discworld.io" address="192.168.56.50"/>
+    <record zone_server="192.168.4.42" type="A" name="DomainDnsZones.discworld.io" address="192.168.4.42"/>
+    <record zone_server="192.168.4.42" type="A" name="ForestDnsZones.discworld.io" address="192.168.48.3"/>
+    <record zone_server="192.168.4.42" type="A" name="ForestDnsZones.discworld.io" address="192.168.56.50"/>
+    <record zone_server="192.168.4.42" type="A" name="ForestDnsZones.discworld.io" address="192.168.4.42"/>
+    <record zone_server="192.168.4.42" type="A" name="WEBSP1.discworld.io" address="192.168.4.45"/>
+    <record zone_server="192.168.4.42" type="A" name="WIN10DT1.discworld.io" address="192.168.56.110"/>
+    <record zone_server="192.168.4.42" type="A" name="WIN2K8DB.discworld.io" address="192.168.56.112"/>
+    <record zone_server="192.168.4.42" type="A" name="WIN7DT1.discworld.io" address="192.168.56.106"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_gc._tcp.Ankh-Morpork._sites.discworld.io" target="discworlddccs" address="no_ip" port="3268" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_kerberos._tcp.Ankh-Morpork._sites.discworld.io" target="discworlddccs" address="no_ip" port="88" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Ankh-Morpork._sites.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_gc._tcp.Bes-Pelargic._sites.discworld.io" target="discworlddccs" address="no_ip" port="3268" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_kerberos._tcp.Bes-Pelargic._sites.discworld.io" target="discworlddccs" address="no_ip" port="88" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Bes-Pelargic._sites.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_gc._tcp.Bonk._sites.discworld.io" target="discworlddccs" address="no_ip" port="3268" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_kerberos._tcp.Bonk._sites.discworld.io" target="discworlddccs" address="no_ip" port="88" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Bonk._sites.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_gc._tcp.Dunmanifestin._sites.discworld.io" target="discworlddccs" address="no_ip" port="3268" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_kerberos._tcp.Dunmanifestin._sites.discworld.io" target="discworlddccs" address="no_ip" port="88" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Dunmanifestin._sites.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_gc._tcp.Genua._sites.discworld.io" target="discworlddccs" address="no_ip" port="3268" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_kerberos._tcp.Genua._sites.discworld.io" target="discworlddccs" address="no_ip" port="88" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Genua._sites.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_gc._tcp.discworld.io" target="discworlddccs" address="no_ip" port="3268" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_kerberos._tcp.discworld.io" target="discworlddccs" address="no_ip" port="88" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_kpasswd._tcp.discworld.io" target="discworlddccs" address="no_ip" port="464" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_kerberos._udp.discworld.io" target="discworlddccs" address="no_ip" port="88" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_kpasswd._udp.discworld.io" target="discworlddccs" address="no_ip" port="464" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Ankh-Morpork._sites.DomainDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Bes-Pelargic._sites.DomainDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Bonk._sites.DomainDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Dunmanifestin._sites.DomainDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Genua._sites.DomainDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.DomainDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Ankh-Morpork._sites.ForestDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Bes-Pelargic._sites.ForestDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Bonk._sites.ForestDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Dunmanifestin._sites.ForestDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.Genua._sites.ForestDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record zone_server="192.168.4.42" type="SRV" name="_ldap._tcp.ForestDnsZones.discworld.io" target="discworlddccs" address="no_ip" port="389" weight="100"/>
+    <record type="info" zone_transfer="failed" ns_server="192.168.48.3"/>
+    <scaninfo arguments="/usr/bin/dnsrecon -d discworld.io -n 192.168.4.42 -t axfr -x discworld_axfr_dnsrecon_01.xml" time="2024-03-17 12:12:33.469829"/>
+    <domain domain_name="discworld.io"/>
+</records>

@@ -1,0 +1,17 @@
+Interface: eth0, type: EN10MB, MAC: 08:00:27:b1:9d:67, IPv4: 192.168.4.25
+Starting arp-scan 1.9.8 with 256 hosts (https://github.com/royhills/arp-scan)
+192.168.4.1	c0:36:53:e9:90:8d	eero inc.
+192.168.4.23	f8:59:71:85:3f:63	Intel Corporate
+192.168.4.20	7a:c3:59:0f:7c:67	(Unknown: locally administered)
+192.168.4.21	46:75:ff:a7:f6:0d	(Unknown: locally administered)
+192.168.4.29	c4:d9:87:14:f8:84	Intel Corporate
+192.168.4.31	c4:d9:87:14:f8:84	Intel Corporate
+192.168.4.32	c4:d9:87:14:f8:84	Intel Corporate
+192.168.4.36	c4:d9:87:14:f8:84	Intel Corporate
+192.168.4.42	c4:d9:87:14:f8:84	Intel Corporate
+192.168.4.43	c4:d9:87:14:f8:84	Intel Corporate
+192.168.4.45	c4:d9:87:14:f8:84	Intel Corporate
+192.168.4.46	c4:d9:87:14:f8:84	Intel Corporate
+
+17 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.9.8: 256 hosts scanned in 10.558 seconds (24.25 hosts/sec). 12 responded

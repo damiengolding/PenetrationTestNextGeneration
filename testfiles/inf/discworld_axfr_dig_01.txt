@@ -1,0 +1,66 @@
+
+; <<>> DiG 9.19.19-1-Debian <<>> discworld.io @192.168.4.42 axfr
+;; global options: +cmd
+discworld.io.		3600	IN	SOA	discworlddccs.discworld.io. hostmaster.discworld.io. 269 900 600 86400 3600
+discworld.io.		600	IN	A	192.168.48.3
+discworld.io.		600	IN	A	192.168.4.42
+discworld.io.		600	IN	A	192.168.56.50
+discworld.io.		3600	IN	NS	discworlddccs.discworld.io.
+discworld.io.		600	IN	AAAA	fdd2:1c66:7ea8:1:b046:8983:4080:af2f
+_msdcs.discworld.io.	3600	IN	NS	discworlddccs.discworld.io.
+_gc._tcp.Ankh-Morpork._sites.discworld.io. 600 IN SRV 0 100 3268 discworlddccs.discworld.io.
+_kerberos._tcp.Ankh-Morpork._sites.discworld.io. 600 IN	SRV 0 100 88 discworlddccs.discworld.io.
+_ldap._tcp.Ankh-Morpork._sites.discworld.io. 600 IN SRV	0 100 389 discworlddccs.discworld.io.
+_gc._tcp.Bes-Pelargic._sites.discworld.io. 600 IN SRV 0 100 3268 discworlddccs.discworld.io.
+_kerberos._tcp.Bes-Pelargic._sites.discworld.io. 600 IN	SRV 0 100 88 discworlddccs.discworld.io.
+_ldap._tcp.Bes-Pelargic._sites.discworld.io. 600 IN SRV	0 100 389 discworlddccs.discworld.io.
+_gc._tcp.Bonk._sites.discworld.io. 600 IN SRV	0 100 3268 discworlddccs.discworld.io.
+_kerberos._tcp.Bonk._sites.discworld.io. 600 IN	SRV 0 100 88 discworlddccs.discworld.io.
+_ldap._tcp.Bonk._sites.discworld.io. 600 IN SRV	0 100 389 discworlddccs.discworld.io.
+_gc._tcp.Dunmanifestin._sites.discworld.io. 600	IN SRV 0 100 3268 discworlddccs.discworld.io.
+_kerberos._tcp.Dunmanifestin._sites.discworld.io. 600 IN SRV 0 100 88 discworlddccs.discworld.io.
+_ldap._tcp.Dunmanifestin._sites.discworld.io. 600 IN SRV 0 100 389 discworlddccs.discworld.io.
+_gc._tcp.Genua._sites.discworld.io. 600	IN SRV	0 100 3268 discworlddccs.discworld.io.
+_kerberos._tcp.Genua._sites.discworld.io. 600 IN SRV 0 100 88 discworlddccs.discworld.io.
+_ldap._tcp.Genua._sites.discworld.io. 600 IN SRV 0 100 389 discworlddccs.discworld.io.
+_gc._tcp.discworld.io.	600	IN	SRV	0 100 3268 discworlddccs.discworld.io.
+_kerberos._tcp.discworld.io. 600 IN	SRV	0 100 88 discworlddccs.discworld.io.
+_kpasswd._tcp.discworld.io. 600	IN	SRV	0 100 464 discworlddccs.discworld.io.
+_ldap._tcp.discworld.io. 600	IN	SRV	0 100 389 discworlddccs.discworld.io.
+_kerberos._udp.discworld.io. 600 IN	SRV	0 100 88 discworlddccs.discworld.io.
+_kpasswd._udp.discworld.io. 600	IN	SRV	0 100 464 discworlddccs.discworld.io.
+discworlddccs.discworld.io. 3600 IN	A	192.168.4.42
+discworlddccs.discworld.io. 3600 IN	A	192.168.56.50
+discworlddccs.discworld.io. 3600 IN	A	192.168.48.3
+discworlddccs.discworld.io. 3600 IN	AAAA	fdd2:1c66:7ea8:1:b046:8983:4080:af2f
+DISCWORLDROOTCA.discworld.io. 1200 IN	A	192.168.48.4
+DomainDnsZones.discworld.io. 600 IN	A	192.168.48.3
+DomainDnsZones.discworld.io. 600 IN	A	192.168.56.50
+DomainDnsZones.discworld.io. 600 IN	A	192.168.4.42
+DomainDnsZones.discworld.io. 600 IN	AAAA	fdd2:1c66:7ea8:1:b046:8983:4080:af2f
+_ldap._tcp.Ankh-Morpork._sites.DomainDnsZones.discworld.io. 600	IN SRV 0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.Bes-Pelargic._sites.DomainDnsZones.discworld.io. 600	IN SRV 0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.Bonk._sites.DomainDnsZones.discworld.io. 600	IN SRV 0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.Dunmanifestin._sites.DomainDnsZones.discworld.io. 600 IN SRV	0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.Genua._sites.DomainDnsZones.discworld.io. 600 IN SRV	0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.DomainDnsZones.discworld.io.	600 IN SRV 0 100 389 discworlddccs.discworld.io.
+ForestDnsZones.discworld.io. 600 IN	A	192.168.48.3
+ForestDnsZones.discworld.io. 600 IN	A	192.168.56.50
+ForestDnsZones.discworld.io. 600 IN	A	192.168.4.42
+ForestDnsZones.discworld.io. 600 IN	AAAA	fdd2:1c66:7ea8:1:b046:8983:4080:af2f
+_ldap._tcp.Ankh-Morpork._sites.ForestDnsZones.discworld.io. 600	IN SRV 0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.Bes-Pelargic._sites.ForestDnsZones.discworld.io. 600	IN SRV 0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.Bonk._sites.ForestDnsZones.discworld.io. 600	IN SRV 0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.Dunmanifestin._sites.ForestDnsZones.discworld.io. 600 IN SRV	0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.Genua._sites.ForestDnsZones.discworld.io. 600 IN SRV	0 100 389 discworlddccs.discworld.io.
+_ldap._tcp.ForestDnsZones.discworld.io.	600 IN SRV 0 100 389 discworlddccs.discworld.io.
+WEBSP1.discworld.io.	1200	IN	A	192.168.4.45
+WIN10DT1.discworld.io.	1200	IN	A	192.168.56.110
+WIN2K8DB.discworld.io.	1200	IN	A	192.168.56.112
+WIN7DT1.discworld.io.	1200	IN	A	192.168.56.106
+discworld.io.		3600	IN	SOA	discworlddccs.discworld.io. hostmaster.discworld.io. 269 900 600 86400 3600
+;; Query time: 7 msec
+;; SERVER: 192.168.4.42#53(192.168.4.42) (TCP)
+;; WHEN: Sun Mar 17 12:14:44 GMT 2024
+;; XFR size: 58 records (messages 1, bytes 3228)
+

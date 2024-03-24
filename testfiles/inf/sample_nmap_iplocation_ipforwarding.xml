@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nmaprun []>
+<?xml-stylesheet href="file:///C:/Program Files (x86)/Nmap/nmap.xsl" type="text/xsl"?>
+<nmaprun scanner="nmap" args="&quot;C:\\Program Files (x86)\\Nmap\\nmap.exe&quot; -sS -iL ..\\test_input\\ip.txt --script ip-forwarding --script ip-geolocation-ipinfodb --script-args=ip-forwarding.target=www.google.com --script-args=ip-geolocation-ipinfodb.apikey=bcf6b1779c2a4fc2e2edd3744eaf0c03655684cfd19fd4c28af99ebc99fd1701 -oA ip-forward-geo" start="1475675057" startstr="Wed Oct 05 14:44:17 2016" version="7.12" xmloutputversion="1.04">
+  <scaninfo type="syn" protocol="tcp" numservices="1000" services="" />
+  <verbose level="0" />
+  <debugging level="0" />
+  <host starttime="1475675058" endtime="1475675077">
+    <status state="up" reason="echo-reply" reason_ttl="240" />
+    <address addr="59.100.100.1" addrtype="ipv4" />
+    <hostnames>
+      <hostname name="59-100-100-1.cust.static-ipl.aapt.com.au" type="PTR" />
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="996">
+        <extrareasons reason="resets" count="996" />
+      </extraports>
+      <port protocol="tcp" portid="2002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="globe" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="4002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="mlchat-proxy" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="6002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="X11:2" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="9002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="dynamid" method="table" conf="3" />
+      </port>
+    </ports>
+    <hostscript>
+      <script id="ip-geolocation-ipinfodb" output="&#xD;&#xA;59.100.100.1&#xD;&#xA;  coordinates (lat,lon): -33.7588,150.993&#xD;&#xA;  city: Baulkham Hills, New South Wales, Australia&#xD;&#xA;" />
+    </hostscript>
+    <hostscript>
+      <script id="ip-forwarding" output="&#xA;  The host has ip forwarding enabled, tried ping against (www.google.com)" />
+    </hostscript>
+    <times srtt="8160" rttvar="6343" to="100000" />
+    <times srtt="330613" rttvar="1280" to="335733" />
+  </host>
+  <host starttime="1475675058" endtime="1475675077">
+    <status state="up" reason="echo-reply" reason_ttl="240" />
+    <address addr="59.101.100.1" addrtype="ipv4" />
+    <hostnames>
+      <hostname name="59-101-100-1.cust.static-ipl.aapt.com.au" type="PTR" />
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="996">
+        <extrareasons reason="resets" count="996" />
+      </extraports>
+      <port protocol="tcp" portid="2002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="globe" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="4002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="mlchat-proxy" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="6002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="X11:2" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="9002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="dynamid" method="table" conf="3" />
+      </port>
+    </ports>
+    <hostscript>
+      <script id="ip-geolocation-ipinfodb" output="&#xD;&#xA;59.100.100.1&#xD;&#xA;  coordinates (lat,lon): -33.7588,150.993&#xD;&#xA;  city: Baulkham Hills, New South Wales, Australia&#xD;&#xA;" />
+    </hostscript>
+    <hostscript>
+      <script id="ip-forwarding" output="&#xA;  The host has ip forwarding enabled, tried ping against (www.google.com)" />
+    </hostscript>
+    <times srtt="8160" rttvar="6343" to="100000" />
+    <times srtt="330613" rttvar="1280" to="335733" />
+  </host>
+  <host starttime="1475675058" endtime="1475675077">
+    <status state="up" reason="echo-reply" reason_ttl="240" />
+    <address addr="59.100.100.2" addrtype="ipv4" />
+    <hostnames>
+      <hostname name="59-100-100-2.cust.static-ipl.aapt.com.au" type="PTR" />
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="996">
+        <extrareasons reason="resets" count="996" />
+      </extraports>
+      <port protocol="tcp" portid="2002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="globe" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="4002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="mlchat-proxy" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="6002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="X11:2" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="9002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="dynamid" method="table" conf="3" />
+      </port>
+    </ports>
+    <hostscript>
+      <script id="ip-geolocation-ipinfodb" output="&#xA;59.100.100.2&#xA;  coordinates (lat,lon): -33.7588,150.993&#xA;  city: Baulkham Hills, New South Wales, Australia&#xA;" />
+    </hostscript>
+    <hostscript>
+      <script id="ip-forwarding" output="&#xA;  The host has ip forwarding enabled, tried ping against (www.google.com)" />
+    </hostscript>
+    <times srtt="8160" rttvar="6343" to="100000" />
+    <times srtt="330613" rttvar="1280" to="335733" />
+  </host>
+  <host starttime="1475675058" endtime="1475675077">
+    <status state="up" reason="echo-reply" reason_ttl="240" />
+    <address addr="60.100.100.1" addrtype="ipv4" />
+    <hostnames>
+      <hostname name="60-100-100-1.cust.static-ipl.aapt.com.au" type="PTR" />
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="996">
+        <extrareasons reason="resets" count="996" />
+      </extraports>
+      <port protocol="tcp" portid="2002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="globe" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="4002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="mlchat-proxy" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="6002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="X11:2" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="9002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="dynamid" method="table" conf="3" />
+      </port>
+    </ports>
+    <hostscript>
+      <script id="ip-geolocation-ipinfodb" output="&#xD;&#xA;60.100.100.1&#xD;&#xA;  coordinates (lat,lon): -33.7588,150.993&#xD;&#xA;  city: Baulkham Hills, New South Wales, Australia&#xD;&#xA;" />
+    </hostscript>
+    <hostscript>
+      <script id="ip-forwarding" output="&#xA;  The host has ip forwarding enabled, tried ping against (www.google.com)" />
+    </hostscript>
+    <times srtt="8160" rttvar="6343" to="100000" />
+    <times srtt="330613" rttvar="1280" to="335733" />
+  </host>
+  <host starttime="1475675058" endtime="1475675077">
+    <status state="up" reason="echo-reply" reason_ttl="240" />
+    <address addr="61.100.100.1" addrtype="ipv4" />
+    <hostnames>
+      <hostname name="61-100-100-1.cust.static-ipl.aapt.com.au" type="PTR" />
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="996">
+        <extrareasons reason="resets" count="996" />
+      </extraports>
+      <port protocol="tcp" portid="2002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="globe" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="4002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="mlchat-proxy" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="6002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="X11:2" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="9002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="dynamid" method="table" conf="3" />
+      </port>
+    </ports>
+    <hostscript>
+      <script id="ip-geolocation-ipinfodb" output="&#xA;61.100.100.1&#xA;  coordinates (lat,lon): -33.7588,150.993&#xA;  city: Baulkham Hills, New South Wales, Australia&#xA;" />
+    </hostscript>
+    <hostscript>
+      <script id="ip-forwarding" output="&#xA;  The host has ip forwarding enabled, tried ping against (www.google.com)" />
+    </hostscript>
+    <times srtt="8160" rttvar="6343" to="100000" />
+    <times srtt="330613" rttvar="1280" to="335733" />
+  </host>
+  <host starttime="1475675058" endtime="1475675077">
+    <status state="up" reason="echo-reply" reason_ttl="240" />
+    <address addr="61.101.100.1" addrtype="ipv4" />
+    <hostnames>
+      <hostname name="61-101-100-1.cust.static-ipl.aapt.com.au" type="PTR" />
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="996">
+        <extrareasons reason="resets" count="996" />
+      </extraports>
+      <port protocol="tcp" portid="2002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="globe" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="4002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="mlchat-proxy" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="6002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="X11:2" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="9002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="dynamid" method="table" conf="3" />
+      </port>
+    </ports>
+    <hostscript>
+      <script id="ip-geolocation-ipinfodb" output="&#xA;61.100.100.1&#xA;  coordinates (lat,lon): -33.7588,150.993&#xA;  city: Baulkham Hills, New South Wales, Australia&#xA;" />
+    </hostscript>
+    <hostscript>
+      <script id="ip-forwarding" output="&#xA;  The host has ip forwarding enabled, tried ping against (www.google.com)" />
+    </hostscript>
+    <times srtt="8160" rttvar="6343" to="100000" />
+    <times srtt="330613" rttvar="1280" to="335733" />
+  </host>
+  <host starttime="1475675058" endtime="1475675077">
+    <status state="up" reason="echo-reply" reason_ttl="240" />
+    <address addr="61.102.100.1" addrtype="ipv4" />
+    <hostnames>
+      <hostname name="61-102-100-1.cust.static-ipl.aapt.com.au" type="PTR" />
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="996">
+        <extrareasons reason="resets" count="996" />
+      </extraports>
+      <port protocol="tcp" portid="2002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="globe" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="4002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="mlchat-proxy" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="6002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="X11:2" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="9002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="dynamid" method="table" conf="3" />
+      </port>
+    </ports>
+    <hostscript>
+      <script id="ip-geolocation-ipinfodb" output="&#xA;61.100.100.1&#xA;  coordinates (lat,lon): -33.7588,150.993&#xA;  city: Baulkham Hills, New South Wales, Australia&#xA;" />
+    </hostscript>
+    <hostscript>
+      <script id="ip-forwarding" output="&#xA;  The host has ip forwarding enabled, tried ping against (www.google.com)" />
+    </hostscript>
+    <times srtt="8160" rttvar="6343" to="100000" />
+    <times srtt="330613" rttvar="1280" to="335733" />
+  </host>
+  <host starttime="1475675058" endtime="1475675077">
+    <status state="up" reason="echo-reply" reason_ttl="240" />
+    <address addr="61.102.101.1" addrtype="ipv4" />
+    <hostnames>
+      <hostname name="61-102-100-1.cust.static-ipl.aapt.com.au" type="PTR" />
+    </hostnames>
+    <ports>
+      <extraports state="closed" count="996">
+        <extrareasons reason="resets" count="996" />
+      </extraports>
+      <port protocol="tcp" portid="2002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="globe" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="4002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="mlchat-proxy" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="6002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="X11:2" method="table" conf="3" />
+      </port>
+      <port protocol="tcp" portid="9002">
+        <state state="open" reason="syn-ack" reason_ttl="240" />
+        <service name="dynamid" method="table" conf="3" />
+      </port>
+    </ports>
+    <hostscript>
+      <script id="ip-geolocation-ipinfodb" output="&#xA;61.100.100.1&#xA;  coordinates (lat,lon): -33.7588,150.993&#xA;  city: Baulkham Hills, New South Wales, Australia&#xA;" />
+    </hostscript>
+    <hostscript>
+      <script id="ip-forwarding" output="&#xA;  The host has ip forwarding enabled, tried ping against (www.google.com)" />
+    </hostscript>
+    <times srtt="8160" rttvar="6343" to="100000" />
+    <times srtt="330613" rttvar="1280" to="335733" />
+  </host>
+  <runstats>
+    <finished time="1475675077" timestr="Wed Oct 05 14:44:37 2016" elapsed="19.76" summary="Nmap done at Wed Oct 05 14:44:37 2016; 4 IP addresses (1 host up) scanned in 19.76 seconds" exit="success" />
+    <hosts up="1" down="3" total="4" />
+  </runstats>
+</nmaprun>

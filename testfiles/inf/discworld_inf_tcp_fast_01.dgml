@@ -1,0 +1,42 @@
+<DirectedGraph Title="NmapDGML" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+    <Nodes>
+        <Node Category="subnet" Id="attack_machine" Label="Attack Machine"/>
+        <Node Category="subnet" Id="192.*.*.*" Label="192.*.*.*"/>
+        <Node Category="subnet" Id="192.*.*.*" Label="192.*.*.*"/>
+        <Node Category="subnet" Id="192.168.*.*" Label="192.168.*.*"/>
+        <Node Category="subnet" Id="192.168.*.*" Label="192.168.*.*"/>
+        <Node Category="subnet" Id="192.168.4.*" Label="192.168.4.*"/>
+        <Node Category="critical" CriticalCount="54" DnsName="DB" Gateway="False" GeoLocation="False" HighCount="303" HighestSeverity="CRITICAL" HostCPE="cpe:/o:microsoft:windows_7::-#:cpe:/o:microsoft:windows_7::sp1#:cpe:/o:microsoft:windows_server_2008::sp1#:cpe:/o:microsoft:windows_server_2008:r2#:cpe:/o:microsoft:windows_8#:cpe:/o:microsoft:windows_8.1#" HostHops="1" HostReason="arp-response" HostRecordType="" HostState="up" Id="192.168.4.29" InAxfr="False" Label="!192.168.4.29&#xa;DB" LowCount="9" MacAddress="C4:D9:87:14:F8:84" MacVendor="Intel Corporate" MediumCount="75" NoneCount="152" OsName="Microsoft Windows 7 SP0 - SP1, Windows Server 2008 SP1, Windows Server 2008 R2, Windows 8, or Windows 8.1 Update 1"/>
+        <Node Category="critical" CriticalCount="10" DnsName="MS2UBU" Gateway="False" GeoLocation="False" HighCount="3" HighestSeverity="CRITICAL" HostCPE="cpe:/o:linux:linux_kernel:2.6#" HostHops="1" HostReason="arp-response" HostRecordType="" HostState="up" Id="192.168.4.32" InAxfr="False" Label="!192.168.4.32&#xa;MS2UBU" LowCount="7" MacAddress="C4:D9:87:14:F8:84" MacVendor="Intel Corporate" MediumCount="31" NoneCount="139" OsName="Linux 2.6.9 - 2.6.33"/>
+        <Node Category="critical" CriticalCount="48" DnsName="MS3WIN" Gateway="False" GeoLocation="False" HighCount="267" HighestSeverity="CRITICAL" HostCPE="cpe:/o:microsoft:windows_server_2012:r2#:cpe:/o:microsoft:windows_7:::ultimate#:cpe:/o:microsoft:windows_2012#:cpe:/o:microsoft:windows_8.1#" HostHops="1" HostReason="arp-response" HostRecordType="" HostState="up" Id="192.168.4.36" InAxfr="False" Label="!192.168.4.36&#xa;MS3WIN" LowCount="18" MacAddress="C4:D9:87:14:F8:84" MacVendor="Intel Corporate" MediumCount="140" NoneCount="275" OsName="Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1"/>
+        <Node Category="critical" CriticalCount="41" DnsName="DCCS" Gateway="False" GeoLocation="False" HighCount="228" HighestSeverity="CRITICAL" HostCPE="cpe:/o:microsoft:windows_server_2012:r2#:cpe:/o:microsoft:windows_7:::ultimate#:cpe:/o:microsoft:windows_2012#:cpe:/o:microsoft:windows_8.1#" HostHops="1" HostReason="arp-response" HostRecordType="" HostState="up" Id="192.168.4.42" InAxfr="False" Label="192.168.4.42&#xa;DCCS" LowCount="13" MacAddress="C4:D9:87:14:F8:84" MacVendor="Intel Corporate" MediumCount="74" NoneCount="254" OsName="Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1"/>
+        <Node Category="critical" CriticalCount="37" DnsName="CS" Gateway="False" GeoLocation="False" HighCount="225" HighestSeverity="CRITICAL" HostCPE="cpe:/o:microsoft:windows_server_2012:r2#:cpe:/o:microsoft:windows_7:::ultimate#:cpe:/o:microsoft:windows_2012#:cpe:/o:microsoft:windows_8.1#" HostHops="1" HostReason="arp-response" HostRecordType="" HostState="up" Id="192.168.4.43" InAxfr="False" Label="!192.168.4.43&#xa;CS" LowCount="12" MacAddress="C4:D9:87:14:F8:84" MacVendor="Intel Corporate" MediumCount="55" NoneCount="181" OsName="Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1"/>
+        <Node Category="critical" CriticalCount="25" DnsName="WIN2K3SP1" Gateway="False" GeoLocation="False" HighCount="100" HighestSeverity="CRITICAL" HostCPE="cpe:/o:microsoft:windows_server_2003::sp1#:cpe:/o:microsoft:windows_server_2003::sp2#" HostHops="1" HostReason="arp-response" HostRecordType="" HostState="up" Id="192.168.4.45" InAxfr="False" Label="192.168.4.45&#xa;WIN2K3SP1" LowCount="3" MacAddress="C4:D9:87:14:F8:84" MacVendor="Intel Corporate" MediumCount="48" NoneCount="167" OsName="Microsoft Windows Server 2003 SP1 or SP2"/>
+        <Node Category="critical" CriticalCount="15" DnsName="WIN2K3SP0" Gateway="False" GeoLocation="False" HighCount="6" HighestSeverity="CRITICAL" HostCPE="cpe:/o:microsoft:windows_xp::sp2:professional#:cpe:/o:microsoft:windows_server_2003#" HostHops="1" HostReason="arp-response" HostRecordType="" HostState="up" Id="192.168.4.46" InAxfr="False" Label="!192.168.4.46&#xa;WIN2K3SP0" LowCount="2" MacAddress="C4:D9:87:14:F8:84" MacVendor="Intel Corporate" MediumCount="17" NoneCount="92" OsName="Microsoft Windows XP Professional SP2 or Windows Server 2003"/>
+    </Nodes>
+    <Links>
+        <Link Label="" Source="attack_machine" Target="192.*.*.*"/>
+        <Link Label="" Source="attack_machine" Target="192.*.*.*"/>
+        <Link Label="" Source="192.*.*.*" Target="192.168.*.*"/>
+        <Link Label="" Source="192.*.*.*" Target="192.168.*.*"/>
+        <Link Label="" Source="192.168.*.*" Target="192.168.4.*"/>
+        <Link Label="" Source="192.168.4.*" Target="192.168.4.29"/>
+        <Link Label="" Source="192.168.4.*" Target="192.168.4.32"/>
+        <Link Label="" Source="192.168.4.*" Target="192.168.4.36"/>
+        <Link Label="" Source="192.168.4.*" Target="192.168.4.42"/>
+        <Link Label="" Source="192.168.4.*" Target="192.168.4.43"/>
+        <Link Label="" Source="192.168.4.*" Target="192.168.4.45"/>
+        <Link Label="" Source="192.168.4.*" Target="192.168.4.46"/>
+    </Links>
+    <Categories>
+        <Category Background="#FFFFFF" FontFamily="Open Sans" FontSize="10" FontStyle="&lt;Style>" Foreground="#000000" Id="critical" Label="Critical" Stroke="#B22222" StrokeThickness="2" Style="Plain"/>
+        <Category Background="#FFFFFF" FontFamily="Open Sans" FontSize="10" FontStyle="&lt;Style>" Foreground="#000000" Id="high" Label="High" Stroke="#FF4500" StrokeThickness="2" Style="Plain"/>
+        <Category Background="#FFFFFF" FontFamily="Open Sans" FontSize="10" FontStyle="&lt;Style>" Foreground="#000000" Id="medium" Label="Medium" Stroke="#E9967A" StrokeThickness="2" Style="Plain"/>
+        <Category Background="#FFFFFF" FontFamily="Open Sans" FontSize="10" FontStyle="&lt;Style>" Foreground="#000000" Id="low" Label="Low" Stroke="#006400" StrokeThickness="2" Style="Plain"/>
+        <Category Background="#FFFFFF" FontFamily="Open Sans" FontSize="10" FontStyle="&lt;Style>" Foreground="#000000" Id="none" Label="None" Stroke="#000080" StrokeThickness="2" Style="Plain"/>
+        <Category Background="#FFD700" FontFamily="Open Sans" FontSize="10" FontStyle="&lt;Style>" Foreground="#000000" Id="comment" Label="Comment" Stroke="#000000" StrokeThickness="2" Style="Plain"/>
+        <Category Background="#FFFFFF" FontFamily="Open Sans" FontSize="10" FontStyle="&lt;Style>" Foreground="#000000" Id="subnet" Label="Subnet" Stroke="#000000" StrokeThickness="2" Style="Plain"/>
+    </Categories>
+    <Properties/>
+    <Paths/>
+</DirectedGraph>

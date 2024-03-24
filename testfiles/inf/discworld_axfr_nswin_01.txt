@@ -1,0 +1,60 @@
+> ls -d discworld.io 
+[[192.168.4.42]]
+ discworld.io.                  SOA    discworlddccs.discworld.io hostmaster.discworld.io. (269 900 600 86400 3600)
+ discworld.io.                  A      192.168.48.3
+ discworld.io.                  A      192.168.4.42
+ discworld.io.                  A      192.168.56.50
+ discworld.io.                  NS     discworlddccs.discworld.io    
+ discworld.io.                  AAAA   fdd2:1c66:7ea8:1:b046:8983:4080:af2f
+ _msdcs                         NS     discworlddccs.discworld.io    
+ _gc._tcp.Ankh-Morpork._sites   SRV    priority=0, weight=100, port=3268, discworlddccs.discworld.io
+ _kerberos._tcp.Ankh-Morpork._sites SRV    priority=0, weight=100, port=88, discworlddccs.discworld.io
+ _ldap._tcp.Ankh-Morpork._sites SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _gc._tcp.Bes-Pelargic._sites   SRV    priority=0, weight=100, port=3268, discworlddccs.discworld.io
+ _kerberos._tcp.Bes-Pelargic._sites SRV    priority=0, weight=100, port=88, discworlddccs.discworld.io
+ _ldap._tcp.Bes-Pelargic._sites SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _gc._tcp.Bonk._sites           SRV    priority=0, weight=100, port=3268, discworlddccs.discworld.io
+ _kerberos._tcp.Bonk._sites     SRV    priority=0, weight=100, port=88, discworlddccs.discworld.io
+ _ldap._tcp.Bonk._sites         SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _gc._tcp.Dunmanifestin._sites  SRV    priority=0, weight=100, port=3268, discworlddccs.discworld.io
+ _kerberos._tcp.Dunmanifestin._sites SRV    priority=0, weight=100, port=88, discworlddccs.discworld.io
+ _ldap._tcp.Dunmanifestin._sites SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _gc._tcp.Genua._sites          SRV    priority=0, weight=100, port=3268, discworlddccs.discworld.io
+ _kerberos._tcp.Genua._sites    SRV    priority=0, weight=100, port=88, discworlddccs.discworld.io
+ _ldap._tcp.Genua._sites        SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _gc._tcp                       SRV    priority=0, weight=100, port=3268, discworlddccs.discworld.io
+ _kerberos._tcp                 SRV    priority=0, weight=100, port=88, discworlddccs.discworld.io
+ _kpasswd._tcp                  SRV    priority=0, weight=100, port=464, discworlddccs.discworld.io
+ _ldap._tcp                     SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _kerberos._udp                 SRV    priority=0, weight=100, port=88, discworlddccs.discworld.io
+ _kpasswd._udp                  SRV    priority=0, weight=100, port=464, discworlddccs.discworld.io
+ discworlddccs                  A      192.168.4.42
+ discworlddccs                  A      192.168.56.50
+ discworlddccs                  A      192.168.48.3
+ discworlddccs                  AAAA   fdd2:1c66:7ea8:1:b046:8983:4080:af2f
+ DISCWORLDROOTCA                A      192.168.48.4
+ DomainDnsZones                 A      192.168.48.3
+ DomainDnsZones                 A      192.168.56.50
+ DomainDnsZones                 A      192.168.4.42
+ DomainDnsZones                 AAAA   fdd2:1c66:7ea8:1:b046:8983:4080:af2f
+ _ldap._tcp.Ankh-Morpork._sites.DomainDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.Bes-Pelargic._sites.DomainDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.Bonk._sites.DomainDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.Dunmanifestin._sites.DomainDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.Genua._sites.DomainDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.DomainDnsZones      SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ ForestDnsZones                 A      192.168.48.3
+ ForestDnsZones                 A      192.168.56.50
+ ForestDnsZones                 A      192.168.4.42
+ ForestDnsZones                 AAAA   fdd2:1c66:7ea8:1:b046:8983:4080:af2f
+ _ldap._tcp.Ankh-Morpork._sites.ForestDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.Bes-Pelargic._sites.ForestDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.Bonk._sites.ForestDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.Dunmanifestin._sites.ForestDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.Genua._sites.ForestDnsZones SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ _ldap._tcp.ForestDnsZones      SRV    priority=0, weight=100, port=389, discworlddccs.discworld.io
+ WEBSP1                         A      192.168.4.45
+ WIN10DT1                       A      192.168.56.110
+ WIN2K8DB                       A      192.168.56.112
+ WIN7DT1                        A      192.168.56.106
+ discworld.io.                  SOA    discworlddccs.discworld.io hostmaster.discworld.io. (269 900 600 86400 3600)

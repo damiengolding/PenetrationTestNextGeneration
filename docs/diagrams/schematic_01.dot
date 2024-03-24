@@ -1,6 +1,6 @@
 strict digraph schematic_01{
 	rankdir=LR;
-	graph [fontname="Open Sans",fontsize="12"];
+	graph [fontname="Consolas",fontsize="12"];
 	compound=true;labelloc="t";label="Schematic 01 - executables";
 
 	subgraph ancillary{
@@ -9,40 +9,40 @@ strict digraph schematic_01{
 		shape=folder;
 		compound=true;labelloc="t";label="Schematic 01a - ancilliary executables";
 		
-		ifident [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="ifident.exe - Identify source tool",style="solid"];
-		workbench [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="workbench.exe - GUI for central management of input and output files",style="solid"];
+		ifident [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="ifident.exe - Identify source tool",style="solid"];
+		workbench [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="workbench.exe - GUI for central management of input and output files",style="solid"];
 	}
 
 	// Nodes
-	ndgml [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="ndgml.exe",style="solid"];
-	nviz [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="nviz.exe",style="solid"];
-	ntxt [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="ntxt.exe",style="solid"];
-	goutput [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="Graphical output (.dot,.png etc)",style="solid"];
-	toutput [shape=box,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="Textual output (.csv,.tsv etc)",style="solid"];
-	input_01 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="nmap (standard scan)",style="solid"];
-	input_02 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="nmap (dns-zone-transfer.nse)",style="solid"];
-	input_03 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="Nessus",style="solid"];
-	input_04 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="dnsrecon",style="solid"];
-	input_05 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="nslookup (windows)",style="solid"];
-	input_06 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="nslookup (linux)",style="solid"];
-	input_07 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="host",style="solid"];
-	input_08 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="dig",style="solid"];
-	input_09 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="arp-scan",style="solid"];
-	input_10 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="nbtscan",style="solid"];
-	input_11 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="nikto",style="solid"];
-	input_12 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="wapiti",style="solid"];
-	input_13 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="sslscan",style="solid"];
-	input_14 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="hashes",style="solid"];
-	input_15 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="Metasploit XML",style="solid"];
-	input_16 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="OWASP ZAP",style="solid"];
-	input_17 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="masscan",style="solid"];
-	input_18 [shape=note,fontcolor="Black",color="#000000",fontname="Open Sans",fontsize="12",label="OpenVAS",style="solid"];
+	ndgml [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="ndgml.exe",style="solid"];
+	nviz [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="nviz.exe",style="solid"];
+	ntxt [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="ntxt.exe",style="solid"];
+	goutput [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Graphical output (.dot,.png etc)",style="solid"];
+	toutput [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Textual output (.csv,.tsv etc)",style="solid"];
+	input_01 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="nmap (standard scan)",style="solid"];
+	input_02 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="nmap (dns-zone-transfer.nse)",style="solid"];
+	input_03 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Nessus",style="solid"];
+	input_04 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="dnsrecon",style="solid"];
+	input_05 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="nslookup (windows)",style="solid"];
+	input_06 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="nslookup (linux)",style="solid"];
+	input_07 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="host",style="solid"];
+	input_08 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="dig",style="solid"];
+	input_09 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="arp-scan",style="solid"];
+	input_10 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="nbtscan",style="solid"];
+	input_11 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="nikto",style="solid"];
+	input_12 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="wapiti",style="solid"];
+	input_13 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="sslscan",style="solid"];
+	input_14 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="hashes",style="solid"];
+	input_15 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Metasploit XML",style="solid"];
+	input_16 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="OWASP ZAP",style="solid"];
+	input_17 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="masscan",style="solid"];
+	input_18 [shape=note,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="OpenVAS",style="solid"];
 	
 	// Edges
-	ndgml->nviz [color="Black",label="Create DGML from source file",fontname="Open Sans",fontsize="12"];
-	ndgml->ntxt [color="Black",label="Create DGML from source file",fontname="Open Sans",fontsize="12"];
-	nviz->goutput [color="Black",label="Create graphical output from DGML",fontname="Open Sans",fontsize="12"];
-	ntxt->toutput [color="Black",label="Create textual output from DGML",fontname="Open Sans",fontsize="12"];
+	ndgml->nviz [color="Black",label="Create DGML from source file",fontname="Consolas",fontsize="12"];
+	ndgml->ntxt [color="Black",label="Create DGML from source file",fontname="Consolas",fontsize="12"];
+	nviz->goutput [color="Black",label="Create graphical output from DGML",fontname="Consolas",fontsize="12"];
+	ntxt->toutput [color="Black",label="Create textual output from DGML",fontname="Consolas",fontsize="12"];
 	
 	input_01->ndgml [color="Black",label=""];
 	input_02->ndgml [color="Black",label=""];

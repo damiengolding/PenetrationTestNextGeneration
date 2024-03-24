@@ -1,0 +1,33 @@
+strict digraph schematic_01{
+	rankdir=TB;
+	graph [fontname="Consolas",fontsize="12"];
+	compound=true;labelloc="t";label="Schematic 02 - workbench state machine";
+	
+	// Nodes
+	main [shape=circle,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Entry",style="solid"];
+	loaded [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Loaded an existing project",style="solid"];
+	created [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Created a new project",style="solid"];
+	idling [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Waiting for input",style="solid"];
+	dirty [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Added/removed artefact",style="solid"];
+	clean [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Project: clean",style="solid"];
+	
+	exit [shape=doublecircle,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Exit",style="solid"];
+	exiting_dirty [shape=box,fontcolor="Black",color="#000000",fontname="Consolas",fontsize="12",label="Project: dirty",style="solid"];
+	
+	// Edges
+	main->loaded [color="Black",label="Loading",fontname="Consolas",fontsize="12"];
+	main->created [color="Black",label="Creating",fontname="Consolas",fontsize="12"];
+	
+	loaded->idling [color="Black",label="Loaded",fontname="Consolas",fontsize="12"];
+	created->idling [color="Black",label="Created",fontname="Consolas",fontsize="12"];
+	
+	idling->dirty [color="Black",label="Adding/removing artefact",fontname="Consolas",fontsize="12"];
+	dirty->clean [color="Black",label="Saving modified project",fontname="Consolas",fontsize="12"];
+	clean->idling [color="Black",label="Saved modified project",fontname="Consolas",fontsize="12"];
+	
+	dirty->exiting_dirty [color="Black",label="Exiting with unsaved modifications",fontname="Consolas",fontsize="12"];
+	clean->exit [color="Black",label="Exiting with saved modifications",fontname="Consolas",fontsize="12"];
+	
+	exiting_dirty->clean [color="Black",dir=both,label="Prompt to save modifications",fontname="Consolas",fontsize="12"];
+	exiting_dirty->exit [color="Black",label="Exiting with unsaved modifications",fontname="Consolas",fontsize="12"];
+}

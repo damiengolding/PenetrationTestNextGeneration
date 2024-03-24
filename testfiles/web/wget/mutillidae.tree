@@ -1,0 +1,66 @@
+bwa/mutillidae
+├── documentation
+│   └── mutillidae-installation-on-xampp-win7.pdf
+├── framer.html
+├── images
+│   ├── coykillericon-50-38.png
+│   ├── favicon.ico
+│   ├── help-easy-button-48-48.png
+│   ├── help-icon-48-48.png
+│   ├── installation-icon-48-48.png
+│   ├── like-icon-48-48.png
+│   ├── mail-icon-48-48.png
+│   ├── new-icon-48-48.png
+│   ├── owasp-logo-120-90.png
+│   ├── pdf-icon-48-48.png
+│   ├── phpmyadmin-logo-48-48.png
+│   ├── question-mark-40-61.png
+│   ├── siren-48-48.png
+│   ├── technical-support-48-48.png
+│   ├── tools-icon-48-48.png
+│   ├── twitter-bird-48-48.png
+│   ├── worm-gear-48-48.png
+│   └── youtube-48-48.png
+├── includes
+├── index.html
+├── javascript
+│   ├── bookmark-site.js
+│   ├── ddsmoothmenu
+│   │   ├── ddsmoothmenu.js
+│   │   └── jquery.min.js
+│   └── jQuery
+│       ├── colorbox
+│       │   ├── colorbox.css
+│       │   ├── images
+│       │   │   ├── border.png
+│       │   │   ├── controls.png
+│       │   │   ├── ie6
+│       │   │   │   ├── borderBottomCenter.png
+│       │   │   │   ├── borderBottomLeft.png
+│       │   │   │   ├── borderBottomRight.png
+│       │   │   │   ├── borderMiddleLeft.png
+│       │   │   │   ├── borderMiddleRight.png
+│       │   │   │   ├── borderTopCenter.png
+│       │   │   │   ├── borderTopLeft.png
+│       │   │   │   └── borderTopRight.png
+│       │   │   ├── loading_background.png
+│       │   │   ├── loading.gif
+│       │   │   └── overlay.png
+│       │   └── jquery.colorbox-min.js
+│       ├── jquery.balloon.js
+│       └── jquery.js
+├── set-up-database.php
+├── styles
+│   ├── ddsmoothmenu
+│   │   ├── ddsmoothmenu.css
+│   │   └── ddsmoothmenu-v.css
+│   └── global-styles.css
+└── webservices
+    ├── rest
+    │   └── ws-user-account.php
+    └── soap
+        ├── ws-hello-world.php
+        ├── ws-lookup-dns-record.php
+        └── ws-user-account.php
+
+15 directories, 49 files

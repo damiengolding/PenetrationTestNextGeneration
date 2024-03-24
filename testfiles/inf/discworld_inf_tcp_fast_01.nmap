@@ -1,0 +1,576 @@
+# Nmap 7.94SVN scan initiated Sun Mar 17 11:31:37 2024 as: nmap -v -Pn -sS -F -T5 -A -oA discworld_inf_tcp_fast_01 -iL ../../b_input/inf_include.txt
+adjust_timeouts2: packet supposedly had rtt of -256083 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -256083 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -256350 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -256350 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -256086 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -256086 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -283653 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -283653 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -284351 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -284351 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -290256 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -290256 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -287377 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -287377 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -337311 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -337311 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -302063 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -302063 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -305293 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -305293 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -284931 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -284931 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -330341 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -330341 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -356339 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -356339 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -353862 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -353862 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -331263 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -331263 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -381239 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -381239 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -433641 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -433641 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -471557 microseconds.  Ignoring time.
+adjust_timeouts2: packet supposedly had rtt of -471557 microseconds.  Ignoring time.
+Nmap scan report for DB (192.168.4.29)
+Host is up (0.0067s latency).
+Not shown: 94 closed tcp ports (reset)
+PORT      STATE SERVICE      VERSION
+135/tcp   open  msrpc        Microsoft Windows RPC
+139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds Windows Server 2008 R2 Enterprise 7601 Service Pack 1 microsoft-ds
+49152/tcp open  msrpc        Microsoft Windows RPC
+49153/tcp open  msrpc        Microsoft Windows RPC
+49154/tcp open  msrpc        Microsoft Windows RPC
+MAC Address: C4:D9:87:14:F8:84 (Intel Corporate)
+Device type: general purpose
+Running: Microsoft Windows 7|2008|8.1
+OS CPE: cpe:/o:microsoft:windows_7::- cpe:/o:microsoft:windows_7::sp1 cpe:/o:microsoft:windows_server_2008::sp1 cpe:/o:microsoft:windows_server_2008:r2 cpe:/o:microsoft:windows_8 cpe:/o:microsoft:windows_8.1
+OS details: Microsoft Windows 7 SP0 - SP1, Windows Server 2008 SP1, Windows Server 2008 R2, Windows 8, or Windows 8.1 Update 1
+Uptime guess: 0.019 days (since Sun Mar 17 11:07:48 2024)
+Network Distance: 1 hop
+TCP Sequence Prediction: Difficulty=262 (Good luck!)
+IP ID Sequence Generation: Incremental
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| nbstat: NetBIOS name: WIN2K8DB, NetBIOS user: <unknown>, NetBIOS MAC: 08:00:27:89:3d:6d (Oracle VirtualBox virtual NIC)
+| Names:
+|   WIN2K8DB<00>         Flags: <unique><active>
+|   DISCWORLD<00>        Flags: <group><active>
+|_  WIN2K8DB<20>         Flags: <unique><active>
+| smb2-security-mode: 
+|   2:1:0: 
+|_    Message signing enabled but not required
+| smb-os-discovery: 
+|   OS: Windows Server 2008 R2 Enterprise 7601 Service Pack 1 (Windows Server 2008 R2 Enterprise 6.1)
+|   OS CPE: cpe:/o:microsoft:windows_server_2008::sp1
+|   Computer name: WIN2K8DB
+|   NetBIOS computer name: WIN2K8DB\x00
+|   Domain name: discworld.io
+|   Forest name: discworld.io
+|   FQDN: WIN2K8DB.discworld.io
+|_  System time: 2024-03-17T11:34:31+00:00
+|_clock-skew: mean: 12s, deviation: 4s, median: 9s
+| smb2-time: 
+|   date: 2024-03-17T11:34:31
+|_  start_date: 2024-03-17T11:08:26
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   6.71 ms DB (192.168.4.29)
+
+Nmap scan report for MS2UBU (192.168.4.32)
+Host is up (0.0065s latency).
+Not shown: 82 closed tcp ports (reset)
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         vsftpd 2.3.4
+|_ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to 192.168.4.25
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      vsFTPd 2.3.4 - secure, fast, stable
+|_End of status
+22/tcp   open  ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 60:0f:cf:e1:c0:5f:6a:74:d6:90:24:fa:c4:d5:6c:cd (DSA)
+|_  2048 56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3 (RSA)
+23/tcp   open  telnet      Linux telnetd
+25/tcp   open  smtp        Postfix smtpd
+|_ssl-date: 2024-03-17T11:34:45+00:00; +10s from scanner time.
+| sslv2: 
+|   SSLv2 supported
+|   ciphers: 
+|     SSL2_RC4_128_EXPORT40_WITH_MD5
+|     SSL2_RC2_128_CBC_EXPORT40_WITH_MD5
+|     SSL2_DES_64_CBC_WITH_MD5
+|     SSL2_RC2_128_CBC_WITH_MD5
+|     SSL2_RC4_128_WITH_MD5
+|_    SSL2_DES_192_EDE3_CBC_WITH_MD5
+| ssl-cert: Subject: commonName=ubuntu804-base.localdomain/organizationName=OCOSA/stateOrProvinceName=There is no such thing outside US/countryName=XX
+| Issuer: commonName=ubuntu804-base.localdomain/organizationName=OCOSA/stateOrProvinceName=There is no such thing outside US/countryName=XX
+| Public Key type: rsa
+| Public Key bits: 1024
+| Signature Algorithm: sha1WithRSAEncryption
+| Not valid before: 2010-03-17T14:07:45
+| Not valid after:  2010-04-16T14:07:45
+| MD5:   dcd9:ad90:6c8f:2f73:74af:383b:2540:8828
+|_SHA-1: ed09:3088:7066:03bf:d5dc:2373:99b4:98da:2d4d:31c6
+|_smtp-commands: metasploitable.localdomain, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN
+53/tcp   open  domain      ISC BIND 9.4.2
+| dns-nsid: 
+|_  bind.version: 9.4.2
+80/tcp   open  http        Apache httpd 2.2.8 ((Ubuntu) DAV/2)
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache/2.2.8 (Ubuntu) DAV/2
+|_http-title: Metasploitable2 - Linux
+111/tcp  open  rpcbind     2 (RPC #100000)
+| rpcinfo: 
+|   program version    port/proto  service
+|   100000  2            111/tcp   rpcbind
+|   100000  2            111/udp   rpcbind
+|   100003  2,3,4       2049/tcp   nfs
+|   100003  2,3,4       2049/udp   nfs
+|   100005  1,2,3      42877/udp   mountd
+|   100005  1,2,3      56735/tcp   mountd
+|   100021  1,3,4      47750/tcp   nlockmgr
+|   100021  1,3,4      48892/udp   nlockmgr
+|   100024  1          43843/udp   status
+|_  100024  1          49096/tcp   status
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 3.0.20-Debian (workgroup: WORKGROUP)
+513/tcp  open  login?
+514/tcp  open  tcpwrapped
+2049/tcp open  nfs         2-4 (RPC #100003)
+2121/tcp open  ftp         ProFTPD 1.3.1
+3306/tcp open  mysql       MySQL 5.0.51a-3ubuntu5
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.0.51a-3ubuntu5
+|   Thread ID: 26
+|   Capabilities flags: 43564
+|   Some Capabilities: Speaks41ProtocolNew, LongColumnFlag, SupportsTransactions, SwitchToSSLAfterHandshake, SupportsCompression, ConnectWithDatabase, Support41Auth
+|   Status: Autocommit
+|_  Salt: ]D{_L>0u~<MO&mt};JAH
+5432/tcp open  postgresql  PostgreSQL DB 8.3.0 - 8.3.7
+| ssl-cert: Subject: commonName=ubuntu804-base.localdomain/organizationName=OCOSA/stateOrProvinceName=There is no such thing outside US/countryName=XX
+| Issuer: commonName=ubuntu804-base.localdomain/organizationName=OCOSA/stateOrProvinceName=There is no such thing outside US/countryName=XX
+| Public Key type: rsa
+| Public Key bits: 1024
+| Signature Algorithm: sha1WithRSAEncryption
+| Not valid before: 2010-03-17T14:07:45
+| Not valid after:  2010-04-16T14:07:45
+| MD5:   dcd9:ad90:6c8f:2f73:74af:383b:2540:8828
+|_SHA-1: ed09:3088:7066:03bf:d5dc:2373:99b4:98da:2d4d:31c6
+|_ssl-date: 2024-03-17T11:34:45+00:00; +10s from scanner time.
+5900/tcp open  vnc         VNC (protocol 3.3)
+| vnc-info: 
+|   Protocol version: 3.3
+|   Security types: 
+|_    VNC Authentication (2)
+6000/tcp open  X11         (access denied)
+8009/tcp open  ajp13       Apache Jserv (Protocol v1.3)
+|_ajp-methods: Failed to get a valid response for the OPTION request
+MAC Address: C4:D9:87:14:F8:84 (Intel Corporate)
+Device type: general purpose
+Running: Linux 2.6.X
+OS CPE: cpe:/o:linux:linux_kernel:2.6
+OS details: Linux 2.6.9 - 2.6.33
+Uptime guess: 0.042 days (since Sun Mar 17 10:33:56 2024)
+Network Distance: 1 hop
+TCP Sequence Prediction: Difficulty=204 (Good luck!)
+IP ID Sequence Generation: All zeros
+Service Info: Host:  metasploitable.localdomain; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+| smb-security-mode: 
+|   account_used: <blank>
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_clock-skew: mean: 1h00m11s, deviation: 2h00m02s, median: 9s
+| smb-os-discovery: 
+|   OS: Unix (Samba 3.0.20-Debian)
+|   Computer name: metasploitable
+|   NetBIOS computer name: 
+|   Domain name: localdomain
+|   FQDN: metasploitable.localdomain
+|_  System time: 2024-03-17T07:34:29-04:00
+| nbstat: NetBIOS name: METASPLOITABLE, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| Names:
+|   METASPLOITABLE<00>   Flags: <unique><active>
+|   METASPLOITABLE<03>   Flags: <unique><active>
+|   METASPLOITABLE<20>   Flags: <unique><active>
+|   \x01\x02__MSBROWSE__\x02<01>  Flags: <group><active>
+|   WORKGROUP<00>        Flags: <group><active>
+|   WORKGROUP<1d>        Flags: <unique><active>
+|_  WORKGROUP<1e>        Flags: <group><active>
+|_smb2-time: Protocol negotiation failed (SMB2)
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   6.52 ms MS2UBU (192.168.4.32)
+
+Nmap scan report for MS3WIN (192.168.4.36)
+Host is up (0.0070s latency).
+Not shown: 86 closed tcp ports (reset)
+PORT      STATE SERVICE            VERSION
+21/tcp    open  tcpwrapped
+80/tcp    open  http               Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Service Unavailable
+|_http-server-header: Microsoft-HTTPAPI/2.0
+135/tcp   open  msrpc              Microsoft Windows RPC
+139/tcp   open  netbios-ssn        Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds       Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+3306/tcp  open  mysql              MySQL 5.5.20-log
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.5.20-log
+|   Thread ID: 14
+|   Capabilities flags: 63487
+|   Some Capabilities: Speaks41ProtocolNew, LongPassword, Speaks41ProtocolOld, LongColumnFlag, SupportsTransactions, IgnoreSpaceBeforeParenthesis, ODBCClient, DontAllowDatabaseTableColumn, FoundRows, SupportsCompression, IgnoreSigpipes, InteractiveClient, ConnectWithDatabase, Support41Auth, SupportsLoadDataLocal, SupportsMultipleStatments, SupportsMultipleResults, SupportsAuthPlugins
+|   Status: Autocommit
+|   Salt: $r8[BxW*hP7bihL'yMWN
+|_  Auth Plugin Name: mysql_native_password
+3389/tcp  open  ssl/ms-wbt-server?
+|_ssl-date: 2024-03-17T11:34:51+00:00; +17s from scanner time.
+| ssl-cert: Subject: commonName=METASPLOITABLE3
+| Issuer: commonName=METASPLOITABLE3
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha1WithRSAEncryption
+| Not valid before: 2024-03-16T10:32:50
+| Not valid after:  2024-09-15T10:32:50
+| MD5:   6367:fa2c:3c98:076b:a8dc:bebd:cd07:32d0
+|_SHA-1: 7d86:09f9:6c49:a1e7:734c:d178:15c9:1728:54aa:409b
+| rdp-ntlm-info: 
+|   Target_Name: METASPLOITABLE3
+|   NetBIOS_Domain_Name: METASPLOITABLE3
+|   NetBIOS_Computer_Name: METASPLOITABLE3
+|   DNS_Domain_Name: METASPLOITABLE3
+|   DNS_Computer_Name: METASPLOITABLE3
+|   Product_Version: 6.3.9600
+|_  System_Time: 2024-03-17T11:34:36+00:00
+8009/tcp  open  ajp13              Apache Jserv (Protocol v1.3)
+|_ajp-methods: Failed to get a valid response for the OPTION request
+8080/tcp  open  http               Apache Tomcat/Coyote JSP engine 1.1
+| http-methods: 
+|_  Supported Methods: GET HEAD POST
+|_http-server-header: Apache-Coyote/1.1
+|_http-open-proxy: Proxy might be redirecting requests
+|_http-title: Apache Tomcat/8.0.33
+|_http-favicon: Apache Tomcat
+49152/tcp open  msrpc              Microsoft Windows RPC
+49153/tcp open  msrpc              Microsoft Windows RPC
+49154/tcp open  msrpc              Microsoft Windows RPC
+49155/tcp open  msrpc              Microsoft Windows RPC
+49156/tcp open  msrpc              Microsoft Windows RPC
+MAC Address: C4:D9:87:14:F8:84 (Intel Corporate)
+Device type: general purpose
+Running: Microsoft Windows 2012|7|8.1
+OS CPE: cpe:/o:microsoft:windows_server_2012:r2 cpe:/o:microsoft:windows_7:::ultimate cpe:/o:microsoft:windows_8.1
+OS details: Microsoft Windows Server 2012 R2 Update 1, Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1
+Uptime guess: 0.016 days (since Sun Mar 17 11:11:22 2024)
+Network Distance: 1 hop
+TCP Sequence Prediction: Difficulty=261 (Good luck!)
+IP ID Sequence Generation: Incremental
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-security-mode: 
+|   3:0:2: 
+|_    Message signing enabled but not required
+| smb-security-mode: 
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-time: 
+|   date: 2024-03-17T11:34:41
+|_  start_date: 2024-03-17T11:12:16
+| nbstat: NetBIOS name: METASPLOITABLE3, NetBIOS user: <unknown>, NetBIOS MAC: 08:00:27:d6:f7:76 (Oracle VirtualBox virtual NIC)
+| Names:
+|   METASPLOITABLE3<00>  Flags: <unique><active>
+|   WORKGROUP<00>        Flags: <group><active>
+|_  METASPLOITABLE3<20>  Flags: <unique><active>
+|_clock-skew: mean: 18s, deviation: 1s, median: 18s
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   7.00 ms MS3WIN (192.168.4.36)
+
+Nmap scan report for DCCS (192.168.4.42)
+Host is up (0.0063s latency).
+Not shown: 88 closed tcp ports (reset)
+PORT      STATE SERVICE      VERSION
+53/tcp    open  domain       Simple DNS Plus
+80/tcp    open  http         Microsoft IIS httpd 8.5
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-title: IIS Windows Server
+|_http-server-header: Microsoft-IIS/8.5
+88/tcp    open  kerberos-sec Microsoft Windows Kerberos (server time: 2024-03-17 11:31:56Z)
+135/tcp   open  msrpc        Microsoft Windows RPC
+139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+389/tcp   open  ldap         Microsoft Windows Active Directory LDAP (Domain: discworld.io, Site: Bes-Pelargic)
+|_ssl-date: 2024-03-17T11:34:44+00:00; +10s from scanner time.
+| ssl-cert: Subject: commonName=DISCWORLDDCCS.discworld.io
+| Subject Alternative Name: othername: 1.3.6.1.4.1.311.25.1::<unsupported>, DNS:DISCWORLDDCCS.discworld.io
+| Issuer: commonName=DISCWORLD-DISCWORLDROOTCA-CA
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2023-09-05T09:42:20
+| Not valid after:  2024-09-04T09:42:20
+| MD5:   b820:e6a3:cb57:ef5e:e0ed:a90d:ca30:6a98
+|_SHA-1: 7159:70c9:ceb7:e1ed:1e5b:f0cb:5595:fa63:5db8:3de0
+445/tcp   open  microsoft-ds Windows Server 2012 R2 Datacenter 9600 microsoft-ds (workgroup: DISCWORLD)
+49152/tcp open  msrpc        Microsoft Windows RPC
+49153/tcp open  msrpc        Microsoft Windows RPC
+49154/tcp open  msrpc        Microsoft Windows RPC
+49156/tcp open  msrpc        Microsoft Windows RPC
+49157/tcp open  ncacn_http   Microsoft Windows RPC over HTTP 1.0
+MAC Address: C4:D9:87:14:F8:84 (Intel Corporate)
+Device type: general purpose
+Running: Microsoft Windows 2012|7|8.1
+OS CPE: cpe:/o:microsoft:windows_server_2012:r2 cpe:/o:microsoft:windows_7:::ultimate cpe:/o:microsoft:windows_8.1
+OS details: Microsoft Windows Server 2012 R2 Update 1, Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1
+Uptime guess: 0.045 days (since Sun Mar 17 10:29:07 2024)
+Network Distance: 1 hop
+TCP Sequence Prediction: Difficulty=256 (Good luck!)
+IP ID Sequence Generation: Incremental
+Service Info: Host: DISCWORLDDCCS; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 11s, deviation: 3s, median: 9s
+| smb-os-discovery: 
+|   OS: Windows Server 2012 R2 Datacenter 9600 (Windows Server 2012 R2 Datacenter 6.3)
+|   OS CPE: cpe:/o:microsoft:windows_server_2012::-
+|   Computer name: DISCWORLDDCCS
+|   NetBIOS computer name: DISCWORLDDCCS\x00
+|   Domain name: discworld.io
+|   Forest name: discworld.io
+|   FQDN: DISCWORLDDCCS.discworld.io
+|_  System time: 2024-03-17T11:34:32+00:00
+| smb2-security-mode: 
+|   3:0:2: 
+|_    Message signing enabled and required
+| nbstat: NetBIOS name: DISCWORLDDCCS, NetBIOS user: <unknown>, NetBIOS MAC: 08:00:27:8e:d2:e7 (Oracle VirtualBox virtual NIC)
+| Names:
+|   DISCWORLD<00>        Flags: <group><active>
+|   DISCWORLDDCCS<00>    Flags: <unique><active>
+|   DISCWORLD<1c>        Flags: <group><active>
+|   DISCWORLDDCCS<20>    Flags: <unique><active>
+|_  DISCWORLD<1b>        Flags: <unique><active>
+| smb2-time: 
+|   date: 2024-03-17T11:34:32
+|_  start_date: 2024-03-17T10:31:31
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: required
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   6.26 ms DCCS (192.168.4.42)
+
+Nmap scan report for CS (192.168.4.43)
+Host is up (0.0069s latency).
+Not shown: 90 closed tcp ports (reset)
+PORT      STATE SERVICE      VERSION
+80/tcp    open  http         Microsoft IIS httpd 8.5
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/8.5
+|_http-title: IIS Windows Server
+135/tcp   open  msrpc        Microsoft Windows RPC
+139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+49152/tcp open  msrpc        Microsoft Windows RPC
+49153/tcp open  msrpc        Microsoft Windows RPC
+49154/tcp open  msrpc        Microsoft Windows RPC
+49155/tcp open  msrpc        Microsoft Windows RPC
+49156/tcp open  msrpc        Microsoft Windows RPC
+49157/tcp open  msrpc        Microsoft Windows RPC
+MAC Address: C4:D9:87:14:F8:84 (Intel Corporate)
+Device type: general purpose
+Running: Microsoft Windows 2012|7|8.1
+OS CPE: cpe:/o:microsoft:windows_server_2012:r2 cpe:/o:microsoft:windows_7:::ultimate cpe:/o:microsoft:windows_8.1
+OS details: Microsoft Windows Server 2012 R2 Update 1, Microsoft Windows 7, Windows Server 2012, or Windows 8.1 Update 1
+Uptime guess: 0.045 days (since Sun Mar 17 10:29:13 2024)
+Network Distance: 1 hop
+TCP Sequence Prediction: Difficulty=261 (Good luck!)
+IP ID Sequence Generation: Incremental
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| nbstat: NetBIOS name: DISCWORLDROOTCA, NetBIOS user: <unknown>, NetBIOS MAC: 08:00:27:5a:84:38 (Oracle VirtualBox virtual NIC)
+| Names:
+|   DISCWORLD<00>        Flags: <group><active>
+|   DISCWORLDROOTCA<00>  Flags: <unique><active>
+|_  DISCWORLDROOTCA<20>  Flags: <unique><active>
+| smb2-time: 
+|   date: 2024-03-17T11:34:32
+|_  start_date: 2024-03-17T10:31:45
+| smb2-security-mode: 
+|   3:0:2: 
+|_    Message signing enabled but not required
+|_clock-skew: mean: 9s, deviation: 0s, median: 8s
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   6.85 ms CS (192.168.4.43)
+
+Nmap scan report for WIN2K3SP1 (192.168.4.45)
+Host is up (0.0075s latency).
+Not shown: 92 closed tcp ports (reset)
+PORT     STATE SERVICE      VERSION
+25/tcp   open  smtp         Microsoft ESMTP 6.0.3790.1830
+| smtp-commands: WEBSP1.discworld.io Hello [192.168.4.25], TURN, SIZE 2097152, ETRN, PIPELINING, DSN, ENHANCEDSTATUSCODES, 8bitmime, BINARYMIME, CHUNKING, VRFY, OK
+|_ This server supports the following commands: HELO EHLO STARTTLS RCPT DATA RSET MAIL QUIT HELP AUTH TURN ETRN BDAT VRFY
+80/tcp   open  http         Microsoft IIS httpd 6.0
+|_http-server-header: Microsoft-IIS/6.0
+|_http-title: Under Construction
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+135/tcp  open  msrpc        Microsoft Windows RPC
+139/tcp  open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds Windows Server 2003 3790 Service Pack 1 microsoft-ds
+1025/tcp open  msrpc        Microsoft Windows RPC
+1028/tcp open  msrpc        Microsoft Windows RPC
+1029/tcp open  msrpc        Microsoft Windows RPC
+MAC Address: C4:D9:87:14:F8:84 (Intel Corporate)
+Device type: general purpose
+Running: Microsoft Windows 2003
+OS CPE: cpe:/o:microsoft:windows_server_2003::sp1 cpe:/o:microsoft:windows_server_2003::sp2
+OS details: Microsoft Windows Server 2003 SP1 or SP2
+Network Distance: 1 hop
+TCP Sequence Prediction: Difficulty=255 (Good luck!)
+IP ID Sequence Generation: Incremental
+Service Info: Host: WEBSP1.discworld.io; OS: Windows; CPE: cpe:/o:microsoft:windows, cpe:/o:microsoft:windows_server_2003
+
+Host script results:
+| smb-os-discovery: 
+|   OS: Windows Server 2003 3790 Service Pack 1 (Windows Server 2003 5.2)
+|   OS CPE: cpe:/o:microsoft:windows_server_2003::sp1
+|   Computer name: WEBSP1
+|   NetBIOS computer name: WEBSP1\x00
+|   Domain name: discworld.io
+|   Forest name: discworld.io
+|   FQDN: WEBSP1.discworld.io
+|_  System time: 2024-03-17T11:34:33+00:00
+|_clock-skew: mean: 13s, deviation: 4s, median: 9s
+| nbstat: NetBIOS name: WEBSP1, NetBIOS user: <unknown>, NetBIOS MAC: 08:00:27:ae:b2:84 (Oracle VirtualBox virtual NIC)
+| Names:
+|   WEBSP1<00>           Flags: <unique><active>
+|   DISCWORLD<00>        Flags: <group><active>
+|   WEBSP1<20>           Flags: <unique><active>
+|   DISCWORLD<1e>        Flags: <group><active>
+|   DISCWORLD<1d>        Flags: <unique><active>
+|_  \x01\x02__MSBROWSE__\x02<01>  Flags: <group><active>
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_smb2-time: Protocol negotiation failed (SMB2)
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   7.46 ms WIN2K3SP1 (192.168.4.45)
+
+Nmap scan report for WIN2K3SP0 (192.168.4.46)
+Host is up (0.0072s latency).
+Not shown: 86 closed tcp ports (reset)
+PORT     STATE SERVICE      VERSION
+7/tcp    open  echo
+9/tcp    open  discard?
+13/tcp   open  daytime      Microsoft Windows USA daytime
+21/tcp   open  ftp          Microsoft ftpd
+25/tcp   open  smtp         Microsoft ESMTP 6.0.3790.0
+| smtp-commands: WIN2K3SP0 Hello [192.168.4.25], TURN, SIZE 2097152, ETRN, PIPELINING, DSN, ENHANCEDSTATUSCODES, 8bitmime, BINARYMIME, CHUNKING, VRFY, OK
+|_ This server supports the following commands: HELO EHLO STARTTLS RCPT DATA RSET MAIL QUIT HELP AUTH TURN ETRN BDAT VRFY
+53/tcp   open  domain       Simple DNS Plus
+80/tcp   open  http         Microsoft IIS httpd 6.0
+|_http-server-header: Microsoft-IIS/6.0
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-title: Under Construction
+135/tcp  open  msrpc        Microsoft Windows RPC
+139/tcp  open  netbios-ssn  Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds Windows Server 2003 3790 microsoft-ds
+515/tcp  open  printer      Microsoft lpd
+1025/tcp open  msrpc        Microsoft Windows RPC
+1026/tcp open  msrpc        Microsoft Windows RPC
+1027/tcp open  msrpc        Microsoft Windows RPC
+MAC Address: C4:D9:87:14:F8:84 (Intel Corporate)
+Device type: general purpose
+Running: Microsoft Windows XP|2003
+OS CPE: cpe:/o:microsoft:windows_xp::sp2:professional cpe:/o:microsoft:windows_server_2003
+OS details: Microsoft Windows XP Professional SP2 or Windows Server 2003
+Network Distance: 1 hop
+TCP Sequence Prediction: Difficulty=250 (Good luck!)
+IP ID Sequence Generation: Incremental
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows, cpe:/o:microsoft:windows_server_2003
+
+Host script results:
+|_smb2-time: Protocol negotiation failed (SMB2)
+| nbstat: NetBIOS name: WIN2K3SP0, NetBIOS user: <unknown>, NetBIOS MAC: 08:00:27:f3:21:2c (Oracle VirtualBox virtual NIC)
+| Names:
+|   WIN2K3SP0<00>        Flags: <unique><active>
+|   WORKGROUP<00>        Flags: <group><active>
+|   WIN2K3SP0<20>        Flags: <unique><active>
+|_  WORKGROUP<1e>        Flags: <group><active>
+| smb-os-discovery: 
+|   OS: Windows Server 2003 3790 (Windows Server 2003 5.2)
+|   OS CPE: cpe:/o:microsoft:windows_server_2003::-
+|   Computer name: WIN2K3SP0
+|   NetBIOS computer name: WIN2K3SP0\x00
+|   Workgroup: WORKGROUP\x00
+|_  System time: 2024-03-17T11:34:28+00:00
+|_clock-skew: mean: 8s, deviation: 4s, median: 4s
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   7.21 ms WIN2K3SP0 (192.168.4.46)
+
+Post-scan script results:
+| clock-skew: 
+|   12s: 
+|     192.168.4.29 (DB)
+|     192.168.4.32 (MS2UBU)
+|     192.168.4.42 (DCCS)
+|_    192.168.4.45 (WIN2K3SP1)
+Read data files from: /usr/bin/../share/nmap
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Sun Mar 17 11:34:36 2024 -- 7 IP addresses (7 hosts up) scanned in 179.08 seconds
