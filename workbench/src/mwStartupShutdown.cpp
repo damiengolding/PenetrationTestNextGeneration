@@ -79,6 +79,127 @@ void MainWindow::restoreMainWindowState(){
                 );
 }
 
+void MainWindow::initAdminDirectories(){
+    QDir defaultDir(defaultDirectory);
+    if( !defaultDir.exists() ){
+        defaultDir.mkpath(defaultDirectory);
+    }
+    QDir scriptDir(scriptDirectory);
+    if( !scriptDir.exists() ){
+        scriptDir.mkpath(scriptDirectory);
+    }
+    QDir pluginDir(pluginDirectory);
+    if( !pluginDir.exists() ){
+        pluginDir.mkpath(pluginDirectory);
+    }
+    QDir configDir(configDirectory);
+    if( !configDir.exists() ){
+        configDir.mkpath(configDirectory);
+    }
+}
+
+void MainWindow::initDefaults(){
+    // Init any pointers
+    currentProject = new PtngProject();
+
+    QSettings s;
+    // Default directories
+    if( !s.contains("defaultDirectory")){
+        s.setValue("defaultDirectory",QDir::homePath() + "/AppData/Local/Golding's Gym/PTNG Workbench" );
+    }
+    defaultDirectory = s.value("defaultDirectory").toString();
+    if( !s.contains("defaultProjectDirectory") ){
+        s.setValue("defaultProjectDirectory",QDir::homePath() +  "/AppData/Local/Golding's Gym/PTNG Workbench" );
+    }
+    defaultProjectDirectory = s.value("defaultProjectDirectory").toString();
+    if( !s.contains("pluginDirectory") ){
+        s.setValue("pluginDirectory",defaultDirectory + "/plugins");
+    }
+    pluginDirectory = s.value("pluginDirectory").toString();
+    if( !s.contains("scriptDirectory")){
+        s.setValue("scriptDirectory", defaultDirectory + "/scripts");
+    }
+    scriptDirectory  = s.value("scriptDirectory").toString();
+    if( !s.contains("configDirectory")){
+        s.setValue("configDirectory", defaultDirectory + "/config");
+    }
+    configDirectory  = s.value("configDirectory").toString();
+
+    // Look and feel
+    QFont displayFont(s.value("displayFont","Open Sans").toString(), s.value("fontSize",12).toInt() );
+    this->setFont(displayFont);
+
+    // Toolbar
+    mainToolBar = this->addToolBar("Tools");
+    mainToolBar->setObjectName("Maintoolbar");
+    mainToolBar->addAction(ui->actionNewProject);
+    mainToolBar->addAction( ui->actionAddFile );
+    mainToolBar->addAction( ui->actionScanFolder );
+    mainToolBar->addSeparator();
+    mainToolBar->addAction( ui->actionPreferences );
+    mainToolBar->addAction(ui->actionShowExplorer);
+    mainToolBar->addAction(ui->actionShowOutput);
+}
+
+void MainWindow::initStateMachine(){
+    // StateLoaded,
+    // StateCreated,
+    // StateIdling,
+    // StateDirty,
+    // StateClean,
+    // StateExitingDirty,
+    // StateExitingClean,
+    // stateMachine.
+}
+
+void MainWindow::initConnections(){
+    // Menu
+    connect(ui->actionAboutQt,
+            &QAction::triggered,
+            this,
+            &MainWindow::showAboutQt
+            );
+    connect(
+                ui->actionAboutWorkbench,
+                &QAction::triggered,
+                this,
+                &MainWindow::showAbout
+                );
+    connect(
+                ui->actionNewProject,
+                &QAction::triggered,
+                this,
+                &MainWindow::newProject
+                );
+    connect(ui->actionPreferences,
+            &QAction::triggered,
+                this,
+            &MainWindow::showPreferences
+                );
+    connect(ui->actionShowExplorer,
+            &QAction::triggered,
+            this,
+            &MainWindow::showExplorerDock
+                );
+    connect(ui->actionShowOutput,
+            &QAction::triggered,
+            this,
+            &MainWindow::showOutputDock
+                );
+    connect(ui->actionAddFile,
+            &QAction::triggered,
+            this,
+            &MainWindow::addFile
+                );
+    connect(ui->actionScanFolder,
+            &QAction::triggered,
+            this,
+            &MainWindow::addFolder
+                );
+}
+
+
+
 void MainWindow::closeEvent(QCloseEvent *event){
     QSettings s;
     // State
@@ -89,3 +210,4 @@ void MainWindow::closeEvent(QCloseEvent *event){
 
     QMainWindow::closeEvent(event);
 }
+

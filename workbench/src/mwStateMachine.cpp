@@ -23,28 +23,18 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "../inc/MainWindow.hpp"
-#include "ui_MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+#include "../inc/mwStateMachine.hpp"
+
+MainWindow::WorkbenchState MainWindow::getCurrentState() const
 {
-    ui->setupUi(this);
-    QCoreApplication::setApplicationName("PTNG Workbench");
-    QCoreApplication::setApplicationVersion("0.0.1");
-    QCoreApplication::setOrganizationName("Golding's Gym");
-    restoreMainWindowState();
-
-    // Defaults
-    initDefaults();
-    initAdminDirectories();
-    initStateMachine();
-    initConnections();
+    return currentState;
 }
 
-MainWindow::~MainWindow()
+void MainWindow::setCurrentState(WorkbenchState newCurrentState)
 {
-    delete ui;
+    if (currentState == newCurrentState)
+        return;
+    currentState = newCurrentState;
+    emit currentStateChanged();
 }
-

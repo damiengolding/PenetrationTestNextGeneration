@@ -46,24 +46,21 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QListWidgetItem>
 #include <QToolBar>
 #include <QDirIterator>
+#include <QtStateMachine>
+#include <QState>
+#include <QFinalState>
 
-// STD
-#include <iostream>
-#include <string>
-
-// ptng - from libparser
-#include "PtngEnums.hpp"
-#include "PtngIdent.hpp"
-#include "PtngHostBuilder.hpp"
-#include "PtngSpecifications.hpp"
-#include "PtngInputParser.hpp"
+// Ptng - from libparser
 #include "PtngDGMLBuilder.hpp"
-#include "PtngIP4Address.hpp"
 #include "PtngDGMLConv.hpp"
+#include "PtngHostBuilder.hpp"
+#include "PtngEnums.hpp"
+#include "PtngIP4Address.hpp"
+#include "PtngIdent.hpp"
+#include "PtngSpecifications.hpp"
 
-// ptng - from workbench
+// Ptng - from workbench
 #include "inc/PtngProject.hpp"
-
 using namespace ptng;
 
 QT_BEGIN_NAMESPACE
@@ -74,9 +71,27 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+public: // Property system
+    enum WorkbenchState{
+        StateLoaded,
+        StateCreated,
+        StateIdling,
+        StateDirty,
+        StateClean,
+        StateExitingDirty,
+        StateExitingClean,
+        StateError
+    };
+    Q_ENUM(WorkbenchState)
+    Q_PROPERTY(WorkbenchState currentState READ getCurrentState WRITE setCurrentState NOTIFY currentStateChanged FINAL)
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+public: // Accessors and mutators
+    WorkbenchState getCurrentState() const;
+    void setCurrentState(WorkbenchState newCurrentState);
 
 private:
     Ui::MainWindow *ui;
@@ -86,18 +101,27 @@ private:
     QString defaultDirectory;
     QString pluginDirectory;
     QString scriptDirectory;
+    QString configDirectory;
 
-    // Other objects/pointers
+    // General objects/pointers
     QString windowTitle = "PTNG Workbench";
     QStringList mostRecentlyUsed;
     PtngProject *currentProject;
     QToolBar *mainToolBar;
+
+    // State machine objects/pointers
+    QState rootState;
+    QStateMachine stateMachine;
+    WorkbenchState currentState;
 
     // Lifecycle
 private:
     void closeEvent(QCloseEvent *event);
     void restoreMainWindowState();
     void initDefaults();
+    void initConnections();
+    void initAdminDirectories();
+    void initStateMachine();
 
 public slots:
     void newProject();
@@ -108,4 +132,7 @@ public slots:
     void showAbout();
     void showExplorerDock(bool show);
     void showOutputDock(bool show);
+
+signals:
+    void currentStateChanged();
 };

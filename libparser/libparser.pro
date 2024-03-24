@@ -33,7 +33,7 @@ HEADERS += \
     inc/PtngInputParser.hpp \
     inc/PtngSpecifications.hpp \
     inc/PtngStyleSheet.hpp \
-    inc/ConsoleSupport.hpp \
+    inc/assist.hpp \
     inc/libparser_global.hpp \
 
 # Default rules for deployment.

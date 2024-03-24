@@ -1,4 +1,4 @@
-QT       += core gui xml charts concurrent
+QT       += core gui xml charts sql statemachine
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,6 +15,7 @@ SOURCES += \
     src/mwEventsProject.cpp \
     src/mwMenuEventsAdmin.cpp \
     src/mwStartupShutdown.cpp \
+    src/mwStateMachine.cpp \
     ui/NewProjectDialog.cpp \
     ui/PreferencesDialog.cpp \
     ui/ScanFolderDialog.cpp
@@ -22,6 +23,7 @@ SOURCES += \
 HEADERS += \
     inc/MainWindow.hpp \
     inc/PtngProject.hpp \
+    inc/mwStateMachine.hpp \
     ui/NewProjectDialog.hpp \
     ui/PreferencesDialog.hpp \
     ui/ScanFolderDialog.hpp
@@ -37,12 +39,12 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-# libparser
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../PTNG_Output/libparser/release/ -llibparser
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../PTNG_Output/libparser/debug/ -llibparser
-
-INCLUDEPATH += $$PWD/../../PTNG_Output/libparser/inc
-DEPENDPATH += $$PWD/../../PTNG_Output/libparser/inc
-
 RESOURCES += \
     res/workbench.qrc
+
+# libparser
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../PtngOutput/libparser/release/ -llibparser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../PtngOutput/libparser/debug/ -llibparser
+
+INCLUDEPATH += $$PWD/../../PtngOutput/libparser/inc
+DEPENDPATH += $$PWD/../../PtngOutput/libparser/inc

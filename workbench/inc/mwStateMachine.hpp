@@ -25,44 +25,8 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
 
-#include <QTextStream>
+#include <QtStateMachine>
+#include <QState>
+#include <QFinalState>
 
-// Colors in console output
-
-#ifdef WIN32
-//#include "ConsoleApi2.h"
-#include "WinCon.h"
-#include "Windows.h"
-void OutInfo(const QString &message){
-    HANDLE hO = GetStdHandle(STD_OUTPUT_HANDLE);
-    QTextStream out(stdout);
-    SetConsoleTextAttribute(hO, 0x09);
-    out <<"[*] " << qPrintable(message) << endl;
-}
-
-void OutSuccess(const QString &message){
-    HANDLE hO = GetStdHandle(STD_OUTPUT_HANDLE);
-    QTextStream out(stdout);
-    SetConsoleTextAttribute(hO, 0x02);
-    out <<"[+] " << qPrintable(message) << endl;
-}
-
-void OutWarning(const QString &message){
-    HANDLE hO = GetStdHandle(STD_OUTPUT_HANDLE);
-    QTextStream out(stdout);
-    SetConsoleTextAttribute(hO, 0x0E);
-    out <<"[!] " << qPrintable(message) << endl;
-}
-
-void OutFail(const QString &message){
-    HANDLE hO = GetStdHandle(STD_OUTPUT_HANDLE);
-    QTextStream out(stdout);
-    SetConsoleTextAttribute(hO, 0x0C);
-    out <<"[-] " << qPrintable(message) << endl;
-}
-
-#else // Linux
-
-
-#endif
-
+#include "MainWindow.hpp"

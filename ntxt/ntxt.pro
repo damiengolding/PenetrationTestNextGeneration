@@ -19,8 +19,8 @@ HEADERS += \
     inc/CommandLineHandler.hpp \
     inc/GlobalIncludes.hpp
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../PTNG_Output/libparser/release/ -llibparser
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../PTNG_Output/libparser/debug/ -llibparser
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../PtngOutput/libparser/release/ -llibparser
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../PtngOutput/libparser/debug/ -llibparser
 
-INCLUDEPATH += $$PWD/../../PTNG_Output/libparser/inc
-DEPENDPATH += $$PWD/../../PTNG_Output/libparser/inc
+INCLUDEPATH += $$PWD/../../PtngOutput/libparser/inc
+DEPENDPATH += $$PWD/../../PtngOutput/libparser/inc
