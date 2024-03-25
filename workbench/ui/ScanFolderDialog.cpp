@@ -35,22 +35,20 @@ ScanFolderDialog::ScanFolderDialog(QWidget *parent) :
             &QRadioButton::toggled,
             this,
             &ScanFolderDialog::toggleCopySources
+            ,Qt::UniqueConnection
             );
     connect(ui->sdPushButton,
             &QPushButton::clicked,
             this,
             &ScanFolderDialog::selectSourceDirectory
+            ,Qt::UniqueConnection
             );
     connect(ui->tdPushButton,
             &QPushButton::clicked,
             this,
             &ScanFolderDialog::selectTargetDirectory
+            ,Qt::UniqueConnection
             );
-}
-
-ScanFolderDialog::~ScanFolderDialog()
-{
-    delete ui;
 }
 
 void ScanFolderDialog::toggleCopySources(bool checked)
@@ -139,4 +137,9 @@ void ScanFolderDialog::processFiles(const QString &sourceDirectory, const QStrin
             }
         }
     }
+}
+
+ScanFolderDialog::~ScanFolderDialog()
+{
+    delete ui;
 }

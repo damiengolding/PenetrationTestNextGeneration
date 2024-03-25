@@ -31,9 +31,10 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "../ui/ScanFolderDialog.hpp"
 
 void MainWindow::newProject(){
-    QScopedPointer<NewProjectDialog> npd(new NewProjectDialog());
+    QScopedPointer<NewProjectDialog> npd(new NewProjectDialog(this));
     if( npd->exec() == QDialog::Accepted ){
         currentProject = npd->getProject();
+        // currentProject->create();
     }
 }
 // TODO Need to figure out where to do file processing e.g. to DGML -> dot -> png etc

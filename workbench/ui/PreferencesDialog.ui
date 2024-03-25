@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>325</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>400</width>
-    <height>300</height>
+    <height>325</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>400</width>
-    <height>300</height>
+    <height>325</height>
    </size>
   </property>
   <property name="font">
@@ -38,10 +38,10 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>240</y>
-     <width>341</width>
-     <height>32</height>
+     <x>230</x>
+     <y>280</y>
+     <width>156</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="orientation">
@@ -54,27 +54,27 @@
   <widget class="QGroupBox" name="lafGroupBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>371</width>
-     <height>70</height>
+     <x>9</x>
+     <y>9</y>
+     <width>382</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="title">
     <string>Look-and-feel</string>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
      <widget class="QLabel" name="fontLabel">
       <property name="text">
        <string>Font:</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
+    <item>
      <widget class="QFontComboBox" name="fontComboBox"/>
     </item>
-    <item row="0" column="2">
+    <item>
      <widget class="QSpinBox" name="fontSpinBox">
       <property name="value">
        <number>12</number>
@@ -88,48 +88,117 @@
     <rect>
      <x>10</x>
      <y>110</y>
-     <width>371</width>
-     <height>102</height>
+     <width>382</width>
+     <height>160</height>
     </rect>
    </property>
    <property name="title">
     <string>Project preferences</string>
    </property>
-   <layout class="QGridLayout" name="ppGridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="wdLabel">
-      <property name="text">
-       <string>Default working directory:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLineEdit" name="wdLineEdit"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="wdPushButton">
-      <property name="minimumSize">
-       <size>
-        <width>32</width>
-        <height>32</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>32</width>
-        <height>32</height>
-       </size>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset resource="../res/workbench.qrc">
-        <normaloff>:/images/folder_open_01.png</normaloff>:/images/folder_open_01.png</iconset>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <widget class="QLabel" name="wdLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>32</y>
+      <width>196</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Default working directory:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="wdLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>62</y>
+      <width>321</width>
+      <height>28</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="wdPushButton">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>60</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="../res/workbench.qrc">
+      <normaloff>:/images/folder_open_01.png</normaloff>:/images/folder_open_01.png</iconset>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="pdLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>128</y>
+      <width>321</width>
+      <height>28</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="pdLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>98</y>
+      <width>190</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Default project directory:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pdPushButton">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>126</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="../res/workbench.qrc">
+      <normaloff>:/images/folder_open_01.png</normaloff>:/images/folder_open_01.png</iconset>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources>

@@ -88,20 +88,10 @@ void PtngProjectArtefact::setSourceTool(const QString &newSourceTool)
 }
 
 // PtngProject
-PtngProject::PtngProject(QObject *parent)
-    : QObject{parent}
+PtngProject::PtngProject(const QString &inputFileName, QObject *parent)
+    : fileName(inputFileName), QObject{parent}
 {
     isDirty  = false;
-    domDocument = new QDomDocument("");
-    QDomElement root = domDocument->createElement("PtngProject");
-    QDomElement artefacts = domDocument->createElement("Artefacts");
-    QDomElement project = domDocument->createElement("Project");
-    root.setAttribute("Title","Ptng Workbench Project");
-    root.setAttribute("CreatedTime",QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch()));
-    root.appendChild(artefacts);
-    root.appendChild(project);
-    domDocument->appendChild(root);
-    // qInfo() << "[info] Project XML:"<<domDocument->toString();
 }
 
 void PtngProject::addWatchDirectory(const QString &directory)
@@ -111,28 +101,14 @@ void PtngProject::addWatchDirectory(const QString &directory)
     }
     isDirty = true;
     watchDirectories.append(directory);
-    QDomElement project = domDocument->documentElement().firstChildElement("Project");
-    QDomElement wd = domDocument->createElement("WatchDirectory");
-    wd.setAttribute("Value",directory);
-    project.appendChild(wd);
 }
 
 void PtngProject::removeWatchDirectory(const QString &directory)
 {
-    if( !watchDirectories.contains(directory) ){
+    if( !watchDirectories.contains(directory) )
         return;
-    }isDirty = true;
+    isDirty = true;
     watchDirectories.removeAll(directory);
-    QDomNode projectNode = domDocument->documentElement().firstChildElement("Project");
-    QDomElement projectElem = projectNode.toElement();
-    QDomNodeList nl = projectElem.elementsByTagName("WatchDirectory");
-    for( int i=0; i<nl.count();++i ){
-        QDomNode node = nl.at(i);
-        QDomElement elem = node.toElement();
-        if( elem.attribute("Value") == directory ){
-            projectNode.removeChild(node);
-        }
-    }
 }
 
 void PtngProject::addArtefact(const QString &sourceTool, const QString &sourceFile, const QString &outputFile, const QString &displayName, const QString &artefactId)
@@ -142,15 +118,6 @@ void PtngProject::addArtefact(const QString &sourceTool, const QString &sourceFi
         id = QString::number(QDateTime::currentDateTime().toMSecsSinceEpoch());
     }
     isDirty = true;
-    QDomNode artefactsNode = domDocument->documentElement().firstChildElement("Artefacts");
-    QDomElement artefactsElem = artefactsNode.toElement();
-    QDomElement newArtefact = domDocument->createElement("Artefact");
-    newArtefact.setAttribute("SourceTool",sourceTool);
-    newArtefact.setAttribute("SourceFile",sourceFile);
-    newArtefact.setAttribute("OutputFile",outputFile);
-    newArtefact.setAttribute("Id",id);
-    newArtefact.setAttribute("DisplayName",displayName);
-    artefactsElem.appendChild(newArtefact);
 }
 
 void PtngProject::removeArtefact(const QString &artefactId)
@@ -163,73 +130,66 @@ void PtngProject::removeArtefact(const QString &artefactId)
             break;
         }
     }
-    QDomNode artefactsNode = domDocument->documentElement().firstChildElement("Artefacts");
-    QDomElement artefactsElem = artefactsNode.toElement();
-    QDomNodeList nl = artefactsElem.elementsByTagName("Artefact");
-    for( int i = 0;i<nl.count();++i ){
-        QDomNode node = nl.at(i);
-        QDomElement elem = node.toElement();
-        if( elem.attribute("Id") == artefactId ){
-            artefactsNode.removeChild(node);
-        }
-    }
     isDirty = true;
 }
 
-bool PtngProject::loadFromFile(const QString &inputFile)
+bool PtngProject::load()
 {
-    QScopedPointer<QFile> file(new QFile(inputFile));
-    if( !file->open(QIODevice::ReadOnly) ){
-        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading.";
-        return(false);
-    }
-    fileName = inputFile;
-    if( loadFromString(file->readAll()) ){
-        QDomElement root = domDocument->documentElement();
-        QString displayName = root.attribute("DisplayName","Not set");
-        emit projectLoaded(fileName,displayName);
-        file->close();
-    }
-
-    return(true);
-}
-
-bool PtngProject::loadFromString(const QString &inputString)
-{
-    if( !domDocument->setContent(inputString) ){
-        qWarning() << "[warning] Could not parse XML.";
-        return(false);
-    }
-    QDomElement root = domDocument->documentElement();
-    if( !root.hasAttribute("Title") || root.attribute("Title").toLower() != "ptng workbench project" ){
-        qWarning() << "[warning] XML does not appear to be a valid Ptng workbench project";
+    if( !QFile::exists(fileName)){
+        qWarning() << "[warning] Database file"<<fileName<<"does not exist";
         return(false);
     }
     return(true);
 }
 
-bool PtngProject::saveToFile(const QString &outputFile)
+bool PtngProject::create()
 {
-    if( outputFile.isEmpty() && fileName.isEmpty() ){
-        qWarning() << "[warning] An output file name must be supplied.";
+    qInfo() << "[info] Creating project at:"<<fileName;
+    if( QFile::exists(fileName)){
+        qWarning() << "[warning] Database file"<<fileName<<"already exists";
         return(false);
     }
-    else if( outputFile.isEmpty() && !fileName.isEmpty() ){
-        QScopedPointer<QFile> file(new QFile(fileName));
-        QTextStream out(file.data());
-        out << domDocument->toString(4);
+    // Get the table create sql
+    QSettings s;
+    QString createScript = s.value("configDirectory").toString() % QDir::separator() % "new_project.txt";
+    QScopedPointer<QFile> file(new QFile(createScript));
+    QStringList commands;
+    if( file->open(QIODevice::ReadOnly) ){
+        while(!file->atEnd())
+            commands<<file->readLine();
     }
-    else if( !outputFile.isEmpty() && fileName.isEmpty() ){
-        QScopedPointer<QFile> file(new QFile(outputFile));
-        QTextStream out(file.data());
-        out << domDocument->toString(4);
+    else{
+            commands<<artefactsTableSql<<projectTableSql;
     }
-    else{ // Default - let the supplied fileName take precedence a la save as
-        QScopedPointer<QFile> file(new QFile(outputFile));
-        QTextStream out(file.data());
-        out << domDocument->toString(4);
+
+    // Create the database and run the table sql
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(fileName);
+    if( !db.open() ){
+        qWarning() << "[warning] Could not open database"<<fileName<< "Error:\n"<<db.lastError().databaseText();
+        return(false);
     }
+
+    for( auto command : commands ){
+        QSqlQuery query(command);
+        if( !query.exec() ){
+            qWarning() << "[warning] Create table query failed:"<<query.lastError().databaseText();
+        }
+    }
+    database = db;
     return(true);
+}
+
+QSqlTableModel *PtngProject::getProjectTable()
+{
+
+    return(nullptr);
+}
+
+QSqlTableModel *PtngProject::getArtefactsTable()
+{
+
+    return(nullptr);
 }
 
 QString PtngProject::getProjectName() const
@@ -242,8 +202,6 @@ void PtngProject::setProjectName(const QString &newProjectName)
     if (projectName == newProjectName)
         return;
     projectName = newProjectName;
-    QDomElement root = domDocument->documentElement();
-    root.setAttribute("Title",projectName);
     isDirty = true;
     emit projectNameChanged();
 }
@@ -257,34 +215,9 @@ void PtngProject::setWorkingDirectory(const QString &newWorkingDirectory)
 {
     if (workingDirectory == newWorkingDirectory)
         return;
-    QDomNodeList nl = domDocument->elementsByTagName("WorkingDirectory");
-    if( nl.count() != 1 ){
-        qInfo() << "[info] I'm confused - there should only be one WorkingDirectory node:"<<nl.count();
-        return;
-    }
-    QDomElement elem = nl.at(0).toElement();
-    if( elem.isNull() ){
-        qWarning() << "[warning] Cannot convert WorkingDirectory node to element";
-        return;
-    }
-    elem.setAttribute("Value",newWorkingDirectory);
     isDirty = true;
     workingDirectory = newWorkingDirectory;
     emit workingDirectoryChanged();
-}
-
-QDomDocument *PtngProject::getDomDocument() const
-{
-    return domDocument;
-}
-
-void PtngProject::setDomDocument(QDomDocument *newDomDocument)
-{
-    if (domDocument == newDomDocument)
-        return;
-    domDocument = newDomDocument;
-    isDirty = true;
-    emit domDocumentChanged();
 }
 
 bool PtngProject::getIsDirty() const
@@ -311,6 +244,19 @@ void PtngProject::setFileName(const QString &newFileName)
         return;
     fileName = newFileName;
     emit fileNameChanged();
+}
+
+QSqlDatabase PtngProject::getDatabase() const
+{
+    return database;
+}
+
+void PtngProject::setDatabase(const QSqlDatabase &newDatabase)
+{
+    if (database.databaseName() == newDatabase.databaseName())
+        return;
+    database = newDatabase;
+    emit databaseChanged();
 }
 
 } // namespace ptng

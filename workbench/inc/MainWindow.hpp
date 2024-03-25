@@ -111,6 +111,10 @@ private:
     QStringList mostRecentlyUsed;
     PtngProject *currentProject;
     QToolBar *mainToolBar;
+    QMenu* exportMenu;
+    QAction *exportNamicsoft;
+    QAction *exportXml;
+    QAction *exportCsv;
 
     // State machine objects/pointers
     QState rootState;

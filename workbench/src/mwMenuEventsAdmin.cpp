@@ -40,9 +40,12 @@ void MainWindow::showAbout(){
 
 void MainWindow::showPreferences()
 {
-    QScopedPointer<PreferencesDialog> pd( new PreferencesDialog );
+    QScopedPointer<PreferencesDialog> pd( new PreferencesDialog(this) );
     pd->setParentWindow(this);
-    pd->exec() == QDialog::Accepted;
+    if( pd->exec() == QDialog::Accepted){
+        QSettings s;
+        defaultProjectDirectory = s.value("defaultProjectDirectory").toString();
+    }
 }
 
 void MainWindow::showExplorerDock(bool show){

@@ -97,6 +97,7 @@
     </property>
     <addaction name="actionAddFile"/>
     <addaction name="actionScanFolder"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -310,6 +311,19 @@
    </property>
    <property name="text">
     <string>Scan folder for files</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="actionNamicsoft">
+   <property name="text">
+    <string>Namicsoft</string>
    </property>
   </action>
  </widget>

@@ -47,12 +47,13 @@ public:
 public slots:
     void done(int r);
     void setDefaultDirectory();
+    void setProjectDirectory();
 
 signals:
     void parentWindowChanged();
 
 private: // Members
-    QMainWindow *parentWindow;
+    QMainWindow *parentWindow = nullptr;
 
 private:
     Ui::PreferencesDialog *ui;

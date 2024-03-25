@@ -104,10 +104,9 @@ void MainWindow::initAdminDirectories(){
 
 void MainWindow::initDefaults(){
     // Init any pointers
-    currentProject = new PtngProject();
 
-    QSettings s;
     // Default directories
+    QSettings s;
     if( !s.contains("defaultDirectory")){
         s.setValue("defaultDirectory",QDir::homePath() + "/AppData/Local/Golding's Gym/PTNG Workbench" );
     }
@@ -143,6 +142,16 @@ void MainWindow::initDefaults(){
     mainToolBar->addAction( ui->actionPreferences );
     mainToolBar->addAction(ui->actionShowExplorer);
     mainToolBar->addAction(ui->actionShowOutput);
+
+    // Main menu
+    exportMenu = ui->menuProject->addMenu("Export");
+    exportNamicsoft = new QAction("Namicsoft");
+    exportXml = new QAction("XML");
+    exportCsv = new QAction("CSV");
+
+    exportMenu->addAction(exportNamicsoft);
+    exportMenu->addAction(exportXml);
+    exportMenu->addAction(exportCsv);
 
     // Default project DB sql
     QString projectTable = "CREATE TABLE 'project' ('display_name' TEXT NOT NULL,'project_id' TEXT,'created_date' TEXT,'project_title' TEXT NOT NULL,'working_directory' TEXT NOT NULL,'watch_directories' TEXT)";
@@ -202,43 +211,51 @@ void MainWindow::initConnections(){
             &QAction::triggered,
             this,
             &MainWindow::showAboutQt
+            ,Qt::UniqueConnection
             );
     connect(
                 ui->actionAboutWorkbench,
                 &QAction::triggered,
                 this,
                 &MainWindow::showAbout
+                ,Qt::UniqueConnection
                 );
     connect(
                 ui->actionNewProject,
                 &QAction::triggered,
                 this,
                 &MainWindow::newProject
+                ,Qt::UniqueConnection
                 );
     connect(ui->actionPreferences,
             &QAction::triggered,
             this,
             &MainWindow::showPreferences
+            ,Qt::UniqueConnection
             );
     connect(ui->actionShowExplorer,
             &QAction::triggered,
             this,
             &MainWindow::showExplorerDock
+            ,Qt::UniqueConnection
             );
     connect(ui->actionShowOutput,
             &QAction::triggered,
             this,
             &MainWindow::showOutputDock
+            ,Qt::UniqueConnection
             );
     connect(ui->actionAddFile,
             &QAction::triggered,
             this,
             &MainWindow::addFile
+            ,Qt::UniqueConnection
             );
     connect(ui->actionScanFolder,
             &QAction::triggered,
             this,
             &MainWindow::addFolder
+            ,Qt::UniqueConnection
             );
 }
 

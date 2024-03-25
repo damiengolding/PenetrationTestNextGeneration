@@ -35,11 +35,19 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
     QFont displayFont(s.value("displayFont","Open Sans").toString(), s.value("fontSize",12).toInt() );
     ui->fontComboBox->setCurrentFont(displayFont);
     ui->fontSpinBox->setValue( s.value("fontSize",12).toInt());
-    ui->wdLineEdit->setText(s.value("defaultProjectDirectory").toString());
+    ui->wdLineEdit->setText(s.value("defaultDirectory").toString());
+    ui->pdLineEdit->setText(s.value("defaultProjectDirectory").toString());
     connect(ui->wdPushButton,
             &QPushButton::clicked,
             this,
             &PreferencesDialog::setDefaultDirectory
+            ,Qt::UniqueConnection
+                );
+    connect(ui->pdPushButton,
+            &QPushButton::clicked,
+            this,
+            &PreferencesDialog::setProjectDirectory
+            ,Qt::UniqueConnection
                 );
 }
 
@@ -52,15 +60,21 @@ void PreferencesDialog::done(int r)
 {
     if( r == QDialog::Accepted ){
         QString workingDirectory = ui->wdLineEdit->text();
+        QString projectDirectory = ui->pdLineEdit->text();
         if( !QFile::exists(workingDirectory) ){
             QMessageBox::information(this,"PTNG Workbench", "An existing directory needs to be\nsupplied for the working directory.");
+            return;
+        }
+        else if( !QFile::exists(projectDirectory) ){
+            QMessageBox::information(this,"PTNG Workbench", "An existing directory needs to be\nsupplied for the project directory.");
             return;
         }
         else{
             QSettings s;
             s.setValue("displayFont", ui->fontComboBox->currentFont().family());
             s.setValue("fontSize",ui->fontSpinBox->value());
-            s.setValue("defaultProjectDirectory",ui->wdLineEdit->text());
+            s.setValue("defaultDirectory",ui->wdLineEdit->text());
+            s.setValue("defaultProjectDirectory",ui->pdLineEdit->text());
             QFont font( ui->fontComboBox->currentFont().family(), ui->fontSpinBox->value() );
             if( parentWindow != nullptr ){
                 parentWindow->setFont(font);
@@ -83,6 +97,15 @@ void PreferencesDialog::setDefaultDirectory()
         return;
     }
     ui->wdLineEdit->setText(directory);
+}
+
+void PreferencesDialog::setProjectDirectory()
+{
+    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench");
+    if( directory.isEmpty() ){
+        return;
+    }
+    ui->pdLineEdit->setText(directory);
 }
 
 QMainWindow *PreferencesDialog::getParentWindow() const

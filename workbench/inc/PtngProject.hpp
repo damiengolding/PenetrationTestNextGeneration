@@ -27,18 +27,18 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 
 #include <QObject>
 #include <QtCore/qglobal.h>
-#include <QDomDocument>
-#include <QDomNode>
-#include <QDomNodeList>
-#include <QDomElement>
-#include <QDomText>
-#include <QDomAttr>
 #include <QFile>
 #include <QTextStream>
-#include <QMap>
+#include <QMap>.
 #include <QList>
 #include <QDebug>
 #include <QDateTime>
+#include <QSqlTableModel>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSettings>
+#include <QDir>
 
 namespace ptng {
 
@@ -63,6 +63,7 @@ public:
     QString getId() const;
     void setId(const QString &newId);
 
+
 signals:
     void sourceToolChanged();
     void sourceFileChanged();
@@ -82,21 +83,22 @@ private:
 class PtngProject : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString projectname READ getProjectName WRITE setProjectName NOTIFY projectNameChanged FINAL)
+    Q_PROPERTY(QString projectName READ getProjectName WRITE setProjectName NOTIFY projectNameChanged FINAL)
     Q_PROPERTY(QString workingDirectory READ getWorkingDirectory WRITE setWorkingDirectory NOTIFY workingDirectoryChanged FINAL)
-    Q_PROPERTY(QDomDocument *domDocument READ getDomDocument WRITE setDomDocument NOTIFY domDocumentChanged FINAL)
     Q_PROPERTY(bool isDirty READ getIsDirty WRITE setIsDirty NOTIFY isDirtyChanged FINAL)
     Q_PROPERTY(QString fileName READ getFileName WRITE setFileName NOTIFY fileNameChanged FINAL)
+    Q_PROPERTY(QSqlDatabase database READ getDatabase WRITE setDatabase NOTIFY databaseChanged FINAL)
 
 public:
-    explicit PtngProject(QObject *parent = nullptr);
+    explicit PtngProject(const QString &inputFileName, QObject *parent = nullptr);
     void addWatchDirectory(const QString &directory);
     void removeWatchDirectory(const QString &directory);
     void addArtefact(const QString &sourceTool, const QString &sourceFile, const QString &outputFile, const QString &displayName, const QString &artefactId = "");
     void removeArtefact(const QString &artefactId);
-    bool loadFromFile(const QString &inputFile);
-    bool loadFromString(const QString &inputString);
-    bool saveToFile(const QString &outputFile = "");
+    bool load();
+    bool create();
+    QSqlTableModel* getProjectTable();
+    QSqlTableModel* getArtefactsTable();
 
     QString getProjectName() const;
     void setProjectName(const QString &newProjectname);
@@ -104,23 +106,25 @@ public:
     QString getWorkingDirectory() const;
     void setWorkingDirectory(const QString &newWorkingDirectory);
 
-    QDomDocument *getDomDocument() const;
-    void setDomDocument(QDomDocument *newDomDocument);
-
     bool getIsDirty() const;
     void setIsDirty(bool newIsDirty);
 
     QString getFileName() const;
     void setFileName(const QString &newFileName);
 
+    QSqlDatabase getDatabase() const;
+    void setDatabase(const QSqlDatabase &newDatabase);
+
 private:
     QString projectName;
     QString workingDirectory;
-    QDomDocument *domDocument;
     QStringList watchDirectories;
+    QSqlDatabase database;
     QList<PtngProjectArtefact*> artefacts;
     QString fileName = "";
     bool isDirty;
+    QString projectTableSql = "CREATE TABLE 'project' ('display_name' TEXT NOT NULL,'project_id' TEXT,'created_date' TEXT,'project_title' TEXT NOT NULL,'working_directory' TEXT NOT NULL,'watch_directories' TEXT)";
+    QString artefactsTableSql = "CREATE TABLE 'artefacts' ('display_name' TEXT NOT NULL UNIQUE,'artefact_id' INTEGER NOT NULL UNIQUE,'source_tool' TEXT NOT NULL,'source_file' TEXT NOT NULL,'output_file' TEXT,PRIMARY KEY('artefact_id' AUTOINCREMENT))";
 
 signals:
     void projectNameChanged();
@@ -130,6 +134,7 @@ signals:
     void fileNameChanged();
     void projectSaved();
     void projectLoaded(const QString &fileName,const QString &projectName);
+    void databaseChanged();
 };
 
 } // namespace ptng

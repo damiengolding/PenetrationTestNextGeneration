@@ -31,37 +31,32 @@ NewProjectDialog::NewProjectDialog(QWidget *parent) :
     ui(new Ui::NewProjectDialog)
 {
     ui->setupUi(this);
-    project = new PtngProject();
+    QSettings s;
+    ui->workingDirectoryLineEdit->setText(s.value("defaultProjectDirectory").toString());
     connect(ui->workingDirectoryPushButton,
             &QPushButton::clicked,
                 this,
             &NewProjectDialog::setWorkingDirectory
+            ,Qt::UniqueConnection
                 );
     connect(ui->addFileWatchPushButton,
             &QPushButton::clicked,
                 this,
             &NewProjectDialog::addWatchDirectory
+            ,Qt::UniqueConnection
                 );
     connect(ui->removeFileWatchPushButton,
             &QPushButton::clicked,
                 this,
             &NewProjectDialog::removeWatchDirectory
-                );
-    connect(ui->nameLineEdit,
-            &QLineEdit::textChanged,
-                this,
-            &NewProjectDialog::setProjectName
+            ,Qt::UniqueConnection
                 );
     connect(ui->fileWatchListWidget,
              &QListWidget::itemSelectionChanged,
                 this,
             &NewProjectDialog::enableWatchRemoveButton
+            ,Qt::UniqueConnection
                 );
-}
-
-NewProjectDialog::~NewProjectDialog()
-{
-    delete ui;
 }
 
 PtngProject *NewProjectDialog::getProject() const
@@ -91,8 +86,10 @@ void NewProjectDialog::done(int r)
             return;
         }
         else{
+            project = new PtngProject(workingDirectory % QDir::separator() % projectName %".db");
             project->setProjectName(ui->nameLineEdit->text());
             project->setWorkingDirectory(ui->workingDirectoryLineEdit->text());
+            project->create();
             QDialog::done(r);
             return;
         }
@@ -106,12 +103,12 @@ void NewProjectDialog::done(int r)
 void NewProjectDialog::setWorkingDirectory()
 {
     QSettings s;
-    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench",s.value("defaultDirectory").toString());
+    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench",s.value("defaultProjectDirectory").toString());
     if( directory.isEmpty() ){
         return;
     }
     ui->workingDirectoryLineEdit->setText(directory);
-    project->setWorkingDirectory(directory);
+    // project->setWorkingDirectory(directory);
 }
 
 void NewProjectDialog::setProjectName(const QString &projectName)
@@ -122,7 +119,7 @@ void NewProjectDialog::setProjectName(const QString &projectName)
 void NewProjectDialog::addWatchDirectory()
 {
     QSettings s;
-    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench",s.value("defaultDirectory").toString());
+    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench",s.value("defaultProjectDirectory").toString());
     if( directory.isEmpty() ){
         return;
     }
@@ -147,4 +144,9 @@ void NewProjectDialog::removeWatchDirectory()
 void NewProjectDialog::enableWatchRemoveButton()
 {
     ui->removeFileWatchPushButton->setEnabled(true);
+}
+
+NewProjectDialog::~NewProjectDialog()
+{
+    delete ui;
 }
