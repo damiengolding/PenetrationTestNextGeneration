@@ -1,3 +1,6 @@
+# ZAP session files
+*.session.data
+
 # C++ objects and libs
 *.slo
 *.lo
