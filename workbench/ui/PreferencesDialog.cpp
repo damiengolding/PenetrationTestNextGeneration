@@ -37,9 +37,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
     ui->fontSpinBox->setValue( s.value("fontSize",12).toInt());
     ui->wdLineEdit->setText(s.value("defaultProjectDirectory").toString());
     connect(ui->wdPushButton,
-            SIGNAL( clicked() ),
+            &QPushButton::clicked,
             this,
-            SLOT( setDefaultDirectory() )
+            &PreferencesDialog::setDefaultDirectory
                 );
 }
 

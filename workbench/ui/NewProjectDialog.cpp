@@ -33,29 +33,29 @@ NewProjectDialog::NewProjectDialog(QWidget *parent) :
     ui->setupUi(this);
     project = new PtngProject();
     connect(ui->workingDirectoryPushButton,
-            SIGNAL( clicked() ),
+            &QPushButton::clicked,
                 this,
-            SLOT( setWorkingDirectory() )
+            &NewProjectDialog::setWorkingDirectory
                 );
     connect(ui->addFileWatchPushButton,
-            SIGNAL( clicked() ),
+            &QPushButton::clicked,
                 this,
-            SLOT( addWatchDirectory() )
+            &NewProjectDialog::addWatchDirectory
                 );
     connect(ui->removeFileWatchPushButton,
-            SIGNAL( clicked() ),
+            &QPushButton::clicked,
                 this,
-            SLOT( removeWatchDirectory() )
+            &NewProjectDialog::removeWatchDirectory
                 );
     connect(ui->nameLineEdit,
-            SIGNAL( textChanged(const QString&) ),
+            &QLineEdit::textChanged,
                 this,
-            SLOT( setProjectName(const QString&) )
+            &NewProjectDialog::setProjectName
                 );
     connect(ui->fileWatchListWidget,
-            SIGNAL( itemSelectionChanged() ),
+             &QListWidget::itemSelectionChanged,
                 this,
-            SLOT( enableWatchRemoveButton() )
+            &NewProjectDialog::enableWatchRemoveButton
                 );
 }
 

@@ -23,7 +23,6 @@ SOURCES += \
 HEADERS += \
     inc/MainWindow.hpp \
     inc/PtngProject.hpp \
-    inc/mwStateMachine.hpp \
     ui/NewProjectDialog.hpp \
     ui/PreferencesDialog.hpp \
     ui/ScanFolderDialog.hpp

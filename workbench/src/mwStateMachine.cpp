@@ -24,17 +24,21 @@ SOFTWARE.
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 
-#include "../inc/mwStateMachine.hpp"
+#include <QtStateMachine>
+#include <QState>
+#include <QFinalState>
 
-MainWindow::WorkbenchState MainWindow::getCurrentState() const
+#include "../inc/MainWindow.hpp"
+
+MainWindow::WorkbenchState MainWindow::getCurrentStateEnum() const
 {
-    return currentState;
+    return currentStateEnum;
 }
 
-void MainWindow::setCurrentState(WorkbenchState newCurrentState)
+void MainWindow::setCurrentStateEnum(WorkbenchState newCurrentStateEnum)
 {
-    if (currentState == newCurrentState)
+    if (currentStateEnum == newCurrentStateEnum)
         return;
-    currentState = newCurrentState;
-    emit currentStateChanged();
+    currentStateEnum = newCurrentStateEnum;
+    emit currentStateEnumChanged();
 }

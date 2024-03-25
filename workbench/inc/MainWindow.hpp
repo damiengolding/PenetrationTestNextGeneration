@@ -70,12 +70,13 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    Q_PROPERTY(WorkbenchState currentStateEnum READ getCurrentStateEnum WRITE setCurrentStateEnum NOTIFY currentStateEnumChanged FINAL)
 
 public: // Property system
     enum WorkbenchState{
+        StateIdling,
         StateLoaded,
         StateCreated,
-        StateIdling,
         StateDirty,
         StateClean,
         StateExitingDirty,
@@ -83,7 +84,6 @@ public: // Property system
         StateError
     };
     Q_ENUM(WorkbenchState)
-    Q_PROPERTY(WorkbenchState currentState READ getCurrentState WRITE setCurrentState NOTIFY currentStateChanged FINAL)
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -92,6 +92,9 @@ public:
 public: // Accessors and mutators
     WorkbenchState getCurrentState() const;
     void setCurrentState(WorkbenchState newCurrentState);
+
+    WorkbenchState getCurrentStateEnum() const;
+    void setCurrentStateEnum(WorkbenchState newCurrentStateEnum);
 
 private:
     Ui::MainWindow *ui;
@@ -112,7 +115,9 @@ private:
     // State machine objects/pointers
     QState rootState;
     QStateMachine stateMachine;
-    WorkbenchState currentState;
+    QList<QState*> states;
+    WorkbenchState currentStateEnum = StateIdling;
+    QState *currentState;
 
     // Lifecycle
 private:
@@ -134,5 +139,5 @@ public slots:
     void showOutputDock(bool show);
 
 signals:
-    void currentStateChanged();
+    void currentStateEnumChanged();
 };

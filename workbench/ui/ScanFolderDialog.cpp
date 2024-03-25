@@ -32,19 +32,19 @@ ScanFolderDialog::ScanFolderDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->copyRadioButton,
-            SIGNAL( toggled(bool) ),
+            &QRadioButton::toggled,
             this,
-            SLOT( toggleCopySources(bool) )
+            &ScanFolderDialog::toggleCopySources
             );
     connect(ui->sdPushButton,
-            SIGNAL( clicked() ),
+            &QPushButton::clicked,
             this,
-            SLOT( selectSourceDirectory())
+            &ScanFolderDialog::selectSourceDirectory
             );
     connect(ui->tdPushButton,
-            SIGNAL( clicked() ),
+            &QPushButton::clicked,
             this,
-            SLOT( selectTargetDirectory())
+            &ScanFolderDialog::selectTargetDirectory
             );
 }
 

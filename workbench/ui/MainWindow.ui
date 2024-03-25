@@ -289,6 +289,9 @@
    </property>
   </action>
   <action name="actionAddFile">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../res/workbench.qrc">
      <normaloff>:/images/folder_open_01.png</normaloff>:/images/folder_open_01.png</iconset>
@@ -298,6 +301,9 @@
    </property>
   </action>
   <action name="actionScanFolder">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../res/workbench.qrc">
      <normaloff>:/images/folder_managed_01.png</normaloff>:/images/folder_managed_01.png</iconset>

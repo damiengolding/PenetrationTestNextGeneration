@@ -27,6 +27,10 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "../inc/MainWindow.hpp"
 #include "ui_MainWindow.h"
 
+/*
+   Start up
+  */
+
 void MainWindow::restoreMainWindowState(){
     QSettings s;
     // State
@@ -54,29 +58,29 @@ void MainWindow::restoreMainWindowState(){
                 );
     connect(ui->actionPreferences,
             SIGNAL( triggered()),
-                this,
+            this,
             SLOT( showPreferences())
-                );
+            );
     connect(ui->actionShowExplorer,
             SIGNAL( triggered(bool) ),
             this,
             SLOT( showExplorerDock(bool) )
-                );
+            );
     connect(ui->actionShowOutput,
             SIGNAL( triggered(bool) ),
             this,
             SLOT( showOutputDock(bool) )
-                );
+            );
     connect(ui->actionAddFile,
             SIGNAL( triggered() ),
             this,
             SLOT( addFile() )
-                );
+            );
     connect(ui->actionScanFolder,
             SIGNAL( triggered() ),
             this,
             SLOT( addFolder() )
-                );
+            );
 }
 
 void MainWindow::initAdminDirectories(){
@@ -139,17 +143,57 @@ void MainWindow::initDefaults(){
     mainToolBar->addAction( ui->actionPreferences );
     mainToolBar->addAction(ui->actionShowExplorer);
     mainToolBar->addAction(ui->actionShowOutput);
+
+    // Default project DB sql
+    QString projectTable = "CREATE TABLE 'project' ('display_name' TEXT NOT NULL,'project_id' TEXT,'created_date' TEXT,'project_title' TEXT NOT NULL,'working_directory' TEXT NOT NULL,'watch_directories' TEXT)";
+    QString artefactsTable = "CREATE TABLE 'artefacts' ('display_name' TEXT NOT NULL,'artefact_id' INTEGER NOT NULL UNIQUE,'source_tool' TEXT NOT NULL,'source_file' TEXT NOT NULL,'output_file' TEXT,PRIMARY KEY('artefact_id' AUTOINCREMENT))";
+    QString newProjectFile = configDirectory % QDir::separator() % "new_project.txt";
+    if( !QFile::exists(newProjectFile) ){
+        QFile npSql(newProjectFile);
+        if( !npSql.open(QIODevice::WriteOnly) ){
+            qWarning() << "[warning] Could not open"<<newProjectFile<<"for writing";
+            return;
+        }
+        QTextStream outFile(&npSql);
+        outFile << projectTable << "\r\n" << artefactsTable;
+        npSql.close();
+    }
 }
 
 void MainWindow::initStateMachine(){
-    // StateLoaded,
-    // StateCreated,
-    // StateIdling,
-    // StateDirty,
-    // StateClean,
-    // StateExitingDirty,
-    // StateExitingClean,
-    // stateMachine.
+    // Create states
+    QState *stateIdling = new QState();
+    // stateMachine.addState(stateIdling);
+    stateMachine.setInitialState(stateIdling);
+    states.append(stateIdling);
+
+    QState *stateLoaded = new QState();
+    stateMachine.addState(stateLoaded);
+    states.append(stateLoaded);
+
+    QState *stateCreated = new QState();
+    stateMachine.addState(stateCreated);
+    states.append(stateCreated);
+
+    QState *stateDirty = new QState();
+    stateMachine.addState(stateDirty);
+    states.append(stateDirty);
+
+    QState *stateClean = new QState();
+    stateMachine.addState(stateClean);
+    states.append(stateClean);
+
+    QState *stateExitingDirty = new QState();
+    stateMachine.addState(stateExitingDirty);
+    states.append(stateExitingDirty);
+
+    QState *stateExitingClean = new QState();
+    stateMachine.addState(stateExitingClean);
+    states.append(stateExitingClean);
+
+    QFinalState *stateExit = new QFinalState();
+    stateMachine.addState(stateExit);
+
 }
 
 void MainWindow::initConnections(){
@@ -173,32 +217,34 @@ void MainWindow::initConnections(){
                 );
     connect(ui->actionPreferences,
             &QAction::triggered,
-                this,
+            this,
             &MainWindow::showPreferences
-                );
+            );
     connect(ui->actionShowExplorer,
             &QAction::triggered,
             this,
             &MainWindow::showExplorerDock
-                );
+            );
     connect(ui->actionShowOutput,
             &QAction::triggered,
             this,
             &MainWindow::showOutputDock
-                );
+            );
     connect(ui->actionAddFile,
             &QAction::triggered,
             this,
             &MainWindow::addFile
-                );
+            );
     connect(ui->actionScanFolder,
             &QAction::triggered,
             this,
             &MainWindow::addFolder
-                );
+            );
 }
 
-
+/*
+   Shut down
+  */
 
 void MainWindow::closeEvent(QCloseEvent *event){
     QSettings s;
