@@ -1,5 +1,6 @@
-# ZAP session files
-*.session.data
+# ZAP session files - generally too large
+*.session
+*.session.*
 
 # C++ objects and libs
 *.slo
