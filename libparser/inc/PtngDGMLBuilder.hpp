@@ -26,6 +26,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #pragma once
 
 #include "libparser_global.hpp"
+#include "libparser_local.hpp"
 #include "PtngHostBuilder.hpp"
 #include "PtngInputParser.hpp"
 #include "PtngIP4Address.hpp"

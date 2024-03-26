@@ -87,11 +87,10 @@ PtngHostBuilder& PtngHostBuilder::addPortSpec(const PtngPort &portSpec ){
 PtngHostBuilder& PtngHostBuilder::addNessusScanXmlNode(const QDomNode &node){
     QDomElement e = node.toElement();
     if( e.isNull() ){
-        qWarning() << "[warning] Cannot convert the supplied QDomNode to a QDomElement";
+        qCritical() << "Cannot convert the supplied QDomNode to a QDomElement";
         return(*this);
     }
     host->ipAddress = e.attribute("name");
-    // qInfo() << "[info] IP address from ReportHost:"<<e.attribute("name");
     return(*this);
 }
 
@@ -99,7 +98,7 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
 {
     QDomElement e = node.toElement();
     if( e.isNull() ){
-        qWarning() << "[warning] Cannot convert the supplied QDomNode to a QDomElement";
+        qCritical() << "Cannot convert the supplied QDomNode to a QDomElement";
         return(*this);
     }
     QDomNodeList nodes = e.childNodes();
@@ -129,13 +128,9 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
         else if( elem.tagName() == "hostnames" ){
             QDomElement hn = elem.firstChildElement("hostname");
             host->dnsName = hn.attribute("name");
-            // qInfo() << "[info] Host name 2:"<<host->dnsName;
-            // qInfo() << "[info] Host name 3:"<<host->getDnsName();
         }
         else if( elem.tagName() == "os" ){
-            // qInfo() << "[info] in the os node for:"<<host->getIpAddress();
             QDomNodeList osmatch = elem.elementsByTagName("osmatch");
-            // qInfo() << "[info] osmatch:"<<osmatch.length();
             if( osmatch.length() > 0){
                 for( int i = 0;i<osmatch.count();++i ){
                     QDomNode match = osmatch.item(i);
@@ -143,7 +138,6 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
                     host->osName = e.attribute("name");
                     if( !e.isNull()){
                         QDomNodeList osclasses = e.elementsByTagName("osclass");
-                        // qInfo() << "[info] osclasses:"<<osclasses.length();
                         if( osclasses.isEmpty() ){
                             continue;
                         }
@@ -179,10 +173,8 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
                 host->hostScripts.insert( id,  output);
 
                 if( id == "ip-geolocation-ipinfodb"  ){
-                    // qInfo() << "[info] ip-geolocation-ipinfodb";
                     host->geoLocation = true;
                     QStringList results = output.split("\n",Qt::SkipEmptyParts);
-                    // qInfo() << "[info] ip-geolocation-ipinfodb split:"<<results.length();
                     for(auto result : results ){
                         QString o = result.trimmed();
                         if( o.toLower().startsWith("coordinates") ){
@@ -191,12 +183,10 @@ PtngHostBuilder &PtngHostBuilder::addNmapScanXmlNode(const QDomNode &node)
                             QStringList lll = ll.split(",");
                             host->latitude = lll.at(0);
                             host->longitude = lll.at(1);
-                            // qInfo() << "[info] Latitude:"<<host->latitude<< "Longitude:"<< host->longitude;
                         }
                         else if( o.toLower().startsWith("city") ){
                             QStringList cy = o.split(":");
                             host->city = cy.at(1).trimmed();
-                            // qInfo() << "[info] City:"<<host->city;
                         }
                     }
                 }

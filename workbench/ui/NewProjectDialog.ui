@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>360</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>400</width>
-    <height>300</height>
+    <height>360</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>400</width>
-    <height>300</height>
+    <height>360</height>
    </size>
   </property>
   <property name="font">
@@ -38,7 +38,7 @@
   <property name="modal">
    <bool>false</bool>
   </property>
-  <widget class="QLabel" name="nameLabel">
+  <widget class="QLabel" name="labelName">
    <property name="geometry">
     <rect>
      <x>9</x>
@@ -48,47 +48,47 @@
     </rect>
    </property>
    <property name="text">
-    <string>Project name:</string>
+    <string>Display name:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="nameLineEdit">
+  <widget class="QLineEdit" name="lineEditName">
    <property name="geometry">
     <rect>
      <x>125</x>
      <y>9</y>
-     <width>271</width>
+     <width>261</width>
      <height>28</height>
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="directoryLabel">
+  <widget class="QLabel" name="labelFileName">
    <property name="geometry">
     <rect>
-     <x>9</x>
-     <y>43</y>
-     <width>75</width>
+     <x>10</x>
+     <y>90</y>
+     <width>101</width>
      <height>22</height>
     </rect>
    </property>
    <property name="text">
-    <string>Directory:</string>
+    <string>Project file:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="workingDirectoryLineEdit">
+  <widget class="QLineEdit" name="lineEditFile">
    <property name="geometry">
     <rect>
-     <x>125</x>
-     <y>45</y>
+     <x>126</x>
+     <y>85</y>
      <width>221</width>
      <height>28</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="workingDirectoryPushButton">
+  <widget class="QPushButton" name="pushButtonFile">
    <property name="geometry">
     <rect>
-     <x>359</x>
-     <y>43</y>
+     <x>360</x>
+     <y>83</y>
      <width>32</width>
      <height>32</height>
     </rect>
@@ -106,7 +106,7 @@
     </size>
    </property>
    <property name="toolTip">
-    <string>Select project home directory</string>
+    <string>Select project file name</string>
    </property>
    <property name="text">
     <string/>
@@ -119,8 +119,8 @@
   <widget class="QLabel" name="fileWatchLabel">
    <property name="geometry">
     <rect>
-     <x>9</x>
-     <y>81</y>
+     <x>10</x>
+     <y>132</y>
      <width>164</width>
      <height>22</height>
     </rect>
@@ -132,8 +132,8 @@
   <widget class="QPushButton" name="addFileWatchPushButton">
    <property name="geometry">
     <rect>
-     <x>321</x>
-     <y>81</y>
+     <x>322</x>
+     <y>132</y>
      <width>32</width>
      <height>32</height>
     </rect>
@@ -167,8 +167,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>359</x>
-     <y>81</y>
+     <x>360</x>
+     <y>132</y>
      <width>32</width>
      <height>32</height>
     </rect>
@@ -199,8 +199,8 @@
   <widget class="QListWidget" name="fileWatchListWidget">
    <property name="geometry">
     <rect>
-     <x>9</x>
-     <y>119</y>
+     <x>10</x>
+     <y>170</y>
      <width>382</width>
      <height>136</height>
     </rect>
@@ -209,8 +209,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>260</y>
+     <x>230</x>
+     <y>320</y>
      <width>156</width>
      <height>30</height>
     </rect>
@@ -222,7 +222,39 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
+  <widget class="QLineEdit" name="lineEditId">
+   <property name="geometry">
+    <rect>
+     <x>126</x>
+     <y>45</y>
+     <width>261</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelId">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>101</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Project Id:</string>
+   </property>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>lineEditName</tabstop>
+  <tabstop>lineEditId</tabstop>
+  <tabstop>lineEditFile</tabstop>
+  <tabstop>pushButtonFile</tabstop>
+  <tabstop>addFileWatchPushButton</tabstop>
+  <tabstop>removeFileWatchPushButton</tabstop>
+  <tabstop>fileWatchListWidget</tabstop>
+ </tabstops>
  <resources>
   <include location="../res/workbench.qrc"/>
  </resources>

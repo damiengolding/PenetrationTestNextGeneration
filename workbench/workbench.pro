@@ -1,4 +1,4 @@
-QT       += core gui xml charts sql statemachine
+QT       += core gui xml charts sql statemachine testlib
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -11,7 +11,7 @@ CONFIG += c++20 warn_off
 SOURCES += \
     main.cpp \
     src/MainWindow.cpp \
-    src/PtngProject.cpp \
+    src/Project.cpp \
     src/mwEventsProject.cpp \
     src/mwMenuEventsAdmin.cpp \
     src/mwStartupShutdown.cpp \
@@ -22,7 +22,7 @@ SOURCES += \
 
 HEADERS += \
     inc/MainWindow.hpp \
-    inc/PtngProject.hpp \
+    inc/Project.hpp \
     ui/NewProjectDialog.hpp \
     ui/PreferencesDialog.hpp \
     ui/ScanFolderDialog.hpp

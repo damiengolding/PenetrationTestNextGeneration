@@ -23,30 +23,41 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "../inc/MainWindow.hpp"
-#include "ui_MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-    QCoreApplication::setApplicationName("PTNG Workbench");
-    QCoreApplication::setApplicationVersion("0.0.1");
-    QCoreApplication::setOrganizationName("Golding's Gym");
-    restoreMainWindowState();
+#include "inc/PtngInputParser.hpp"
 
-    // Defaults
-    initDefaults();
-    initAdminDirectories();
-    initStateMachine();
-    initToolbar();
-    initConnections();
+using namespace ptng;
+
+#ifdef QT_DEBUG
+void PtngInputParser::nmapTest_data(){
+
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
+void PtngInputParser::nmapTest(){
+
 }
 
+void PtngInputParser::nessusTest_data(){
 
+}
+
+void PtngInputParser::nessusTest(){
+
+}
+
+void PtngInputParser::nessusIssuesTest_data(){
+
+}
+
+void PtngInputParser::nessusIssuesTest(){
+
+}
+
+void PtngInputParser::nessusSeveritiesTest_data(){
+
+}
+
+void PtngInputParser::nessusSeveritiesTest(){
+
+}
+#endif

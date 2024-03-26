@@ -49,11 +49,8 @@ PtngDGMLBuilder& PtngDGMLBuilder::createFromNessus(QList<PtngHostBuilder*> build
     PtngHost *host;
 
     // Separate the entries into classes
-    // qInfo() << "[info] Builders:"<<builders.count();
     for( auto builder : builders ){
-        // qInfo() << "[info] in builders loop";
         host=builder->getHost();
-        // qInfo() << "[info] IP address:"<<host->getIpAddress();
         QStringList tempList;
         QString tempStr;
         QString testStr;
@@ -111,7 +108,6 @@ PtngDGMLBuilder& PtngDGMLBuilder::createFromNessus(QList<PtngHostBuilder*> build
     for( auto bClass : bClasses){
         QStringList tempList = bClass.split(".");
         QString tempStr = tempList.at(0) + "." + tempList.at(1) + ".";
-        // qInfo() << "[info] tempStr for cClass:"<<tempStr;
         for( auto cc : cClasses){
             if( cc.startsWith(tempStr)){
                 addNode(cc, cc, map);
@@ -159,8 +155,6 @@ PtngDGMLBuilder& PtngDGMLBuilder::createFromNessus(QList<PtngHostBuilder*> build
             }
 
             if( address.startsWith(tempStr)){
-                // map.insert(getAttributes(builder->getHost()));
-                // QString zAddress = "!"+address+"\n"+builder->getHost()->getDnsName();
                 addNode(address, address, map);
                 addLink(cClass,address,"",emptyMap);
             }
@@ -168,7 +162,6 @@ PtngDGMLBuilder& PtngDGMLBuilder::createFromNessus(QList<PtngHostBuilder*> build
 
         // Add the nessus severity counts
         if( !nessusFile.isEmpty() ){
-            qInfo() << "[info] About to add nessus severities after isEmpty() test:"<<issues.count();
             addNessusSeverityCount(builders,issues);
         }
         return(*this);

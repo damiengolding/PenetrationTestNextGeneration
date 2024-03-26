@@ -146,9 +146,7 @@ PtngDGMLBuilder& PtngDGMLBuilder::createSimple(const QMap<QString, QString> &anP
         for( auto cClass : cClasses){
             QStringList tempList = cClass.split(".");
             QString tempStr = tempList.at(0) + "." + tempList.at(1) + "." + tempList.at(2) + ".";
-            // qInfo() << "[info] tempStr for leaf:"<<tempStr;
             for( auto leaf : leaves){
-                // qInfo() << "[info] leaf:"<<leaf;
                 if( leaf.startsWith(tempStr)){
                     addNode(leaf, leaf, map);
                     if( addLabels ){

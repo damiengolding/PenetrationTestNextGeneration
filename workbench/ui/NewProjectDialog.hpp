@@ -30,7 +30,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QListWidgetItem>
 
 #include "../inc/MainWindow.hpp"
-#include "../inc/PtngProject.hpp"
+#include "../inc/Project.hpp"
 using namespace ptng;
 
 namespace Ui {
@@ -40,29 +40,35 @@ class NewProjectDialog;
 class NewProjectDialog : public QDialog
 {
     Q_OBJECT
-    Q_PROPERTY(PtngProject *project READ getProject WRITE setProject NOTIFY projectChanged FINAL)
+    Q_PROPERTY(Project *project READ getProject WRITE setProject NOTIFY projectChanged FINAL)
+
 public:
     explicit NewProjectDialog(QWidget *parent = nullptr);
     ~NewProjectDialog();
 
-    PtngProject *getProject() const;
-    void setProject(PtngProject *newProject);
+    Project *getProject() const;
+    void setProject(Project *newProject);
 
 public slots:
     void done(int r);
 
-private slots:
-    void setWorkingDirectory();
+signals:
+    void projectChanged();
+
+protected slots:
+    void setProjectFile();
     void setProjectName(const QString &projectName);
     void addWatchDirectory();
     void removeWatchDirectory();
     void enableWatchRemoveButton();
-signals:
-    void projectChanged();
 
 private:
     Ui::NewProjectDialog *ui;
-    PtngProject *project;
+    Project* project;
     QStringList watchDirectories; // To keep an eye on duplicates
+    QString projectName;
+    QString projectFile;
+    QString projectId;
+    QString projectDescription;
 };
 

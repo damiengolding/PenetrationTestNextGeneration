@@ -38,59 +38,50 @@ QMap<QString, QString> PtngInputParser::parseZoneTransfer(const QString &inputFi
 {
     QMap<QString, QString> addresses;
     if( !QFile::exists(inputFile) ){
-        qWarning() << "[warning] The supplied file"<<inputFile<< "does not exist:";
+        qCritical() << "The supplied file"<<inputFile<< "does not exist:";
         return(addresses);
     }
     QScopedPointer<QFile> file(new QFile(inputFile));
 
     if( !file->open(QIODevice::ReadOnly) ){
-        qWarning() << "[warning] The supplied file"<<inputFile<<"could not be opened for reading.";
+        qCritical() << "The supplied file"<<inputFile<<"could not be opened for reading.";
         return(addresses);
     }
     PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(inputFile);
 
     switch(type){
     case PtngEnums::AXFR_DNS_RECON:{
-        // qInfo() << "[info] AXFR_DNS_RECON:"<<inputFile;
         addresses = parseAxfrDnsRecon(inputFile);
         break;
     }
     case PtngEnums::AXFR_NS_WIN:{
-        // qInfo() << "[info] AXFR_NS_WIN:"<<inputFile;
         addresses = parseAxfrNslookupWin(inputFile);
         break;
     }
     case PtngEnums::AXFR_NS_LIN:{
-        // qInfo() << "[info] AXFR_NS_LIN:"<<inputFile;
         addresses = parseAxfrNslookupLin(inputFile);
         break;
     }
     case PtngEnums::ARPSCAN:{
-        // qInfo() << "[info] ARPSCAN :"<<inputFile;
         addresses = parseAxfrArpscan(inputFile);
         break;
     }
     case PtngEnums::NBTSCAN:{
-        // qInfo() << "[info] NBTSCAN:"<<inputFile;
         addresses = parseAxfrNbtscan(inputFile);
         break;
     }
     case PtngEnums::AXFR_HOST:{
-        // qInfo() << "[info] AXFR_HOST:"<<inputFile;
         addresses = parseAxfrHostScan(inputFile);
         break;
     }
     case PtngEnums::AXFR_NMAP:{
-        // qInfo() << "[info] AXFR_NMAP:"<<inputFile;
         addresses = parseAxfrNmap(inputFile);
         break;
     }
     case PtngEnums::NMAP:{
-        // qInfo() << "[info] The standard nmap scan output is not supported by this function. Call  parseNmap(const QString &inputFile) instead:"<<inputFile;
         break;
     }
     default:{
-        // qInfo() << "[info] Supplied AXFR file"<<inputFile<<"is not supported";
         break;
     }
     }
@@ -102,7 +93,7 @@ QMap<QString, QString> PtngInputParser::parseAxfrNslookupWin(const QString &inpu
     QMap<QString, QString> addresses;
     QScopedPointer<QFile> file(new QFile(inputFile));
     if( !file->open(QIODevice::ReadOnly)){
-        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading";
+        qCritical() << "Unable to open"<<inputFile<<"for reading";
         return(addresses);
     }
     QTextStream stream(file.data());
@@ -127,10 +118,8 @@ QMap<QString, QString> PtngInputParser::parseAxfrNslookupWin(const QString &inpu
             dnsName= "Not resolved";
         }
         QString address =  entries.at(2).trimmed();
-        // qInfo() << "[info] ns_win Name:"<<dnsName<<"Address:"<<address;
         addresses.insert(address,dnsName);
     }
-    // qInfo() << "[info] Number of addresses:"<<addresses.count();
     return(addresses);
 }
 
@@ -139,7 +128,7 @@ QMap<QString, QString> PtngInputParser::parseAxfrNslookupLin(const QString &inpu
     QMap<QString, QString> addresses;
     QScopedPointer<QFile> file(new QFile(inputFile));
     if( !file->open(QIODevice::ReadOnly)){
-        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading";
+        qCritical() << "Unable to open"<<inputFile<<"for reading";
         return(addresses);
     }
     QStringList lines;
@@ -162,14 +151,12 @@ QMap<QString, QString> PtngInputParser::parseAxfrNslookupLin(const QString &inpu
                 continue;
             }
             address = lineSplit.at(1).trimmed();
-            // qInfo() << "[info] ns_linux Name:"<<dnsName<<"Address:"<<address;
             if(dnsName.isEmpty()){
                 dnsName= "Not resolved";
             }
             addresses.insert(address,dnsName);
         }
     }
-    // qInfo() << "[info] Number of addresses:"<<addresses.count();
     return(addresses);
 }
 
@@ -178,15 +165,13 @@ QMap<QString, QString> PtngInputParser::parseAxfrArpscan(const QString &inputFil
     QMap<QString, QString> addresses;
     QScopedPointer<QFile> file(new QFile(inputFile));
     if( !file->open(QIODevice::ReadOnly)){
-        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading";
+        qCritical() << "Unable to open"<<inputFile<<"for reading";
         return(addresses);
     }
     QStringList lines;
     QTextStream stream(file.data());
-    qInfo() << "[info] Reading arp-scan file";
     while( !stream.atEnd() ){
         QString line = stream.readLine().simplified();
-        // qInfo() << "[info] arp-scan line:"<<line;
         lines.append(line);
     }
     for(int i = 0;i<lines.length();++i){
@@ -200,10 +185,8 @@ QMap<QString, QString> PtngInputParser::parseAxfrArpscan(const QString &inputFil
         }
         QStringList lineSplit = line.split(" ");
         QString address = lineSplit.at(0);
-        // qInfo() << "[info] address from arpscan:"<<address;
         addresses.insert(address,"Not resolved");
     }
-    // qInfo() << "[info] Number of addresses:"<<addresses.count();
     return(addresses);
 }
 
@@ -212,7 +195,7 @@ QMap<QString, QString> PtngInputParser::parseAxfrNbtscan(const QString &inputFil
     QMap<QString, QString> addresses;
     QScopedPointer<QFile> file(new QFile(inputFile));
     if( !file->open(QIODevice::ReadOnly)){
-        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading";
+        qCritical() << "Unable to open"<<inputFile<<"for reading";
         return(addresses);
     }
     QStringList lines;
@@ -226,7 +209,6 @@ QMap<QString, QString> PtngInputParser::parseAxfrNbtscan(const QString &inputFil
         if( line.toLower().startsWith("ip") || line.toLower().startsWith("-") || line.toLower().contains("sendto failed") ){
             continue;
         }
-        qInfo() << "[info] Line from nbtscan:"<<line;
         QStringList lineSplit = line.split(" ");
         if( lineSplit.count()<2 ){
             continue;
@@ -236,10 +218,8 @@ QMap<QString, QString> PtngInputParser::parseAxfrNbtscan(const QString &inputFil
         if(dnsName.isEmpty()){
             dnsName= "Not resolved";
         }
-        // qInfo() << "[info] From nbtscan - name:"<<dnsName<<"Address:"<<address;
         addresses.insert(address,dnsName);
     }
-    // qInfo() << "[info] Number of addresses:"<<addresses.count();
     return(addresses);
 }
 
@@ -248,7 +228,7 @@ QMap<QString, QString> PtngInputParser::parseAxfrHostScan(const QString &inputFi
     QMap<QString, QString> addresses;
     QScopedPointer<QFile> file(new QFile(inputFile));
     if( !file->open(QIODevice::ReadOnly)){
-        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading";
+        qCritical() << "Unable to open"<<inputFile<<"for reading";
         return(addresses);
     }
     QStringList lines;
@@ -269,16 +249,13 @@ QMap<QString, QString> PtngInputParser::parseAxfrHostScan(const QString &inputFi
         if( lineSplit.at(3) != "A" ){
             continue;
         }
-        // qInfo() << "[info] Line from host scan:"<<line;
         QString dnsName = lineSplit.at(0);
         if(dnsName.isEmpty()){
             dnsName= "Not resolved";
         }
         QString address = lineSplit.at(4);
-        // qInfo() << "[info] Name:"<<dnsName<<"Address:"<<address;
         addresses.insert(address,dnsName);
     }
-    // qInfo() << "[info] Number of addresses:"<<addresses.count();
     return(addresses);
 }
 
@@ -288,11 +265,11 @@ QMap<QString, QString> PtngInputParser::parseAxfrDnsRecon(const QString &inputFi
     QScopedPointer<QFile> file(new QFile(inputFile));
     QScopedPointer<QDomDocument> doc(new QDomDocument);
     if( !file->open(QIODevice::ReadOnly)){
-        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading";
+        qCritical() << "Unable to open"<<inputFile<<"for reading";
         return(addresses);
     }
     if( !doc->setContent(file.data())){
-        qWarning() << "[warning] Unable to parse"<< inputFile;
+        qCritical() << "Unable to parse"<< inputFile;
         file->close();
         return(addresses);
     }
@@ -330,20 +307,19 @@ QMap<QString, QString> PtngInputParser::parseAxfrNmap(const QString &inputFile)
     QScopedPointer<QFile> file(new QFile(inputFile));
     QScopedPointer<QDomDocument> doc(new QDomDocument);
     if( !file->open(QIODevice::ReadOnly)){
-        qWarning() << "[warning] Unable to open"<<inputFile<<"for reading";
+        qCritical() << "Unable to open"<<inputFile<<"for reading";
         return(addresses);
     }
     if( !doc->setContent(file.data())){
-        qWarning() << "[warning] Unable to parse"<< inputFile;
+        qCritical() << "Unable to parse"<< inputFile;
         file->close();
         return(addresses);
     }
     QStringList ipAddresses;
     QDomElement root = doc->documentElement();
     QDomNodeList scripts = root.elementsByTagName("script");
-    // qInfo() << "[info] Scripts:"<<scripts.count();
     if( scripts.count() != 1 ){
-        qWarning() << "[warning] Incorrect number of script nodes in source nmap xml"<<inputFile;
+        qCritical() << "Incorrect number of script nodes in source nmap xml"<<inputFile;
         return(addresses);
     }
 
@@ -353,7 +329,6 @@ QMap<QString, QString> PtngInputParser::parseAxfrNmap(const QString &inputFile)
     }
 
     QStringList lines = elem.attribute("output").split("\n", Qt::SkipEmptyParts);
-    // qInfo() << "[info] number of lines:"<<lines.count();
     for(QString line : lines){
         if( line.startsWith("_") || line.toLower().startsWith("domaindnszones") || line.toLower().startsWith("forestdnszones") ){
             continue;
@@ -371,10 +346,8 @@ QMap<QString, QString> PtngInputParser::parseAxfrNmap(const QString &inputFile)
             dnsName = "Not resolved";
         }
         QString address = lineSplit.at(2);
-        // qInfo() << "[info] name:"<<dnsName<<"address:"<<address;
         addresses.insert(address,dnsName);
     }
-    // qInfo() << "[info] addresses count:"<<addresses.count();
     return(addresses);
 }
 

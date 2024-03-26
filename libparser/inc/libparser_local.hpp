@@ -23,30 +23,23 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "../inc/MainWindow.hpp"
-#include "ui_MainWindow.h"
+#pragma once
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-    QCoreApplication::setApplicationName("PTNG Workbench");
-    QCoreApplication::setApplicationVersion("0.0.1");
-    QCoreApplication::setOrganizationName("Golding's Gym");
-    restoreMainWindowState();
-
-    // Defaults
-    initDefaults();
-    initAdminDirectories();
-    initStateMachine();
-    initToolbar();
-    initConnections();
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-
+#include <QtCore/qglobal.h>
+#include <QDomDocument>
+#include <QDomNode>
+#include <QDomNodeList>
+#include <QDomElement>
+#include <QDomText>
+#include <QDomAttr>
+#include <QFile>
+#include <QTextStream>
+#include <QMap>
+#include <QList>
+#include <QDebug>
+#include <QScopedPointer>
+#include <QStringBuilder>
+#include <QColor>
+#include <QFont>
+#include <QFontInfo>
+#include <QTest>

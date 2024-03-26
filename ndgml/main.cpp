@@ -108,9 +108,9 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         ret = 0;
         return;
     }
-    qInfo() << "[info] Starting to process input files. This may take some time for large files.";
+    qInfo() << "Starting to process input files. This may take some time for large files.";
     if(!parser.isSet("file")){
-        qWarning() << "[fatal] No source file specified";
+        qCritical() << "[fatal] No source file specified";
         parser.showHelp();
         ret = 1;
         return;
@@ -126,14 +126,14 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         else{
             // type = PtngIdent::checkFile(inputFile);
             if( !fileIsSupported(inputFile)){
-                qInfo() << "[info] Source file" << inputFile << "is not supported by ndgml. Use ndgml types for a list.";
-                qInfo() << "[info] Supplied file is of type:" << type;
+                qInfo() << "Source file" << inputFile << "is not supported by ndgml. Use ndgml types for a list.";
+                qInfo() << "Supplied file is of type:" << type;
                 ret = 4;
                 return;
             }
             else{
                 type = PtngIdent::checkFile(inputFile);
-                qInfo() << "[info] Input file set to" << inputFile << "which is of type:" << type;
+                qInfo() << "Input file set to" << inputFile << "which is of type:" << type;
             }
         }
     }
@@ -143,11 +143,11 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         nessusFile = parser.value("issues");
         type = PtngIdent::checkFile(nessusFile);
         if( type != PtngEnums::NESSUS ){
-            qInfo() << "[info] Issues file" << nessusFile << "is not supported by ndgml. Use ndgml types for a list.";
-            qInfo() << "[info] Supplied file is of type:" << type;
+            qInfo() << "Issues file" << nessusFile << "is not supported by ndgml. Use ndgml types for a list.";
+            qInfo() << "Supplied file is of type:" << type;
         }
         else{
-            qInfo() << "[info] Issues file set to" << nessusFile << "which is of type:" << type;}
+            qInfo() << "Issues file set to" << nessusFile << "which is of type:" << type;}
     }
 
     // Zone file
@@ -163,34 +163,40 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
                 || type == PtngEnums::AXFR_NS_WIN
                 || type == PtngEnums::AXFR_NMAP
                 ){
-            qInfo() << "[info] Issues file set to" << nessusFile << "which is of type:" << type;
+            qInfo() << "Issues file set to" << nessusFile << "which is of type:" << type;
         }
         else{
-            qInfo() << "[info] Issues file" << zoneFile << "is not supported by ndgml. Use ndgml types for a list.";
-            qInfo() << "[info] Supplied file is of type:" << type;
+            qInfo() << "Issues file" << zoneFile << "is not supported by ndgml. Use ndgml types for a list.";
+            qInfo() << "Supplied file is of type:" << type;
         }
     }
 
     // Output file
     if( parser.isSet("output") ){
         outputFile = parser.value("output");
-        qInfo() << "[info] Output file set to" << inputFile;
+        qInfo() << "Output file set to" << inputFile;
     }
 
     // Show labels
     if( parser.isSet("labels") ){
         if( parser.value("labels").toLower() == "on"){
             showLabels = true;
-            qInfo() << "[info] Show labels set to: True";
+#ifdef QT_DEBUG
+            qDebug() << "Show labels set to: True";
+#endif
         }
         else if(parser.value("labels").toLower() == "off"){
             showLabels = false;
-            qInfo() << "[info] Show labels set to: False";
+#ifdef QT_DEBUG
+            qDebug() << "Show labels set to: False";
+#endif
         }
     }
     else{
         showLabels = false;
-        qInfo() << "[info] Show labels set to: False";
+#ifdef QT_DEBUG
+        qDebug() << "Show labels set to: False";
+#endif
     }
 
     // Subnet filters
@@ -203,29 +209,32 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         criticalityFilters = parser.value("crits");
     }
 
-/*
+    /*
    Processing
 */
 
-    qInfo() << "[info] Starting to process file:"<<inputFile;
+    qInfo() << "Starting to process file:"<<inputFile;
     type = PtngIdent::checkFile(inputFile);
     QString dgml;
     PtngDGMLBuilder builder;
     if( type == PtngEnums::NMAP ){
-        // qInfo() << "[info] NMAP";
+#ifdef QT_DEBUG
+        qDebug() << "NMAP";
+#endif
         QList<PtngHostBuilder*> hostBuilders = PtngInputParser::parseNmap(inputFile);
         builder.createFromNmap(hostBuilders,nessusFile,zoneFile,subnetFilters,showLabels);
         dgml = builder.toString(4);
     }
     else if( type == PtngEnums::NESSUS ){
-        // qInfo() << "[info] NESSUS";
+#ifdef QT_DEBUG
+        qDebug() << "NESSUS";
+#endif
         QList<PtngHostBuilder*> hostBuilders = PtngInputParser::parseNessus(inputFile);
         builder.createFromNessus(hostBuilders,inputFile,criticalityFilters,subnetFilters);
         dgml = builder.toString(4);
     }
     else{
         QMap<QString,QString> hosts = PtngInputParser::parseZoneTransfer(inputFile);
-        // qInfo() << "[info] Number of hosts (simple):"<<hosts.count();
         builder.createSimple(hosts, subnetFilters, showLabels);
         dgml = builder.toString(4);
     }
@@ -233,17 +242,19 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     if( !outputFile.isEmpty() ){
         QFile file(outputFile);
         if( !file.open(QIODevice::WriteOnly) ){
-            qInfo() << "[info] Could not open"<<outputFile<<"for writing";
+            qInfo() << "Could not open"<<outputFile<<"for writing";
             return;
         }
         QTextStream outStream(&file);
         outStream << dgml;
         file.close();
-        qInfo() << "[info] Completed processing file:"<<inputFile;
+        qInfo() << "Completed processing file:"<<inputFile;
     }
 
     if( outputFile.isEmpty() ){
-        qInfo() << "[info] DGML:"<<dgml;
+#ifdef QT_DEBUG
+        qDebug() << "DGML:"<<dgml;
+#endif
     }
 
 }

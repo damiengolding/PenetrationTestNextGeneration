@@ -1,4 +1,4 @@
-QT += gui xml core
+QT += gui xml core testlib
 
 TEMPLATE = lib
 DEFINES += LIBPARSER_LIBRARY
@@ -21,7 +21,7 @@ SOURCES += \
     PtngInputParserAxfr.cpp \
     PtngInputParserNessus.cpp \
     PtngInputParserNmap.cpp \
-    PtngStyleSheet.cpp
+    PtngInputParserTest.cpp
 
 HEADERS += \
     inc/PtngDGMLBuilder.hpp \
@@ -32,12 +32,24 @@ HEADERS += \
     inc/PtngIP4Address.hpp \
     inc/PtngInputParser.hpp \
     inc/PtngSpecifications.hpp \
-    inc/PtngStyleSheet.hpp \
     inc/assist.hpp \
-    inc/libparser_global.hpp \
+    inc/libparser_global.hpp
 
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+
+# OpenMP
+unix:CONFIG{
+    QMAKE_CXXFLAGS += -fopenmp
+    QMAKE_LFLAGS += -fopenmp
+    LIBS += -lopenmp
+}
+
+# Boost
+#    INCLUDEPATH += "C:\Boost_1_81_0"
+# Add one path at a time, then add individual library, e.g.
+#    LIBS += -L"C:\Boost_1_81_0lib64-msvc-14.3" -lboost_program_options-vc143-mt-gd-x64-1_81.lib
+

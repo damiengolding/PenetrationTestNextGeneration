@@ -31,25 +31,25 @@ QList<PtngHostBuilder*> PtngInputParser::parseNmap(const QString &inputFile){
     QList<PtngHostBuilder*> builderList;
     PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(inputFile);
     if( type != PtngEnums::NMAP ){
-        qWarning() << "[warning] Input file"<<inputFile<<"is of incorrect type"<<type;
+        qCritical() << "Input file"<<inputFile<<"is of incorrect type"<<type;
         return(builderList);
     }
     QScopedPointer<QDomDocument> doc(new QDomDocument("mydocument"));
     QScopedPointer<QFile> file(new QFile(inputFile));
     if( !file->open(QIODevice::ReadOnly)){
-        qWarning() << "[warning] Failed opening file"<<inputFile;
+        qCritical() << "Failed opening file"<<inputFile;
         return(builderList);
     }
 
     if( !doc->setContent(file.data()) ){
-        qWarning() << "[warning] Failed parsing"<<inputFile;
+        qCritical() << "Failed parsing"<<inputFile;
         file->close();
         return(builderList);
     }
     QDomNodeList nodes = doc->elementsByTagName("host");
-    // qInfo() << "[info] Number of host nodes:"<<nodes.length();
+    // qInfo() << "Number of host nodes:"<<nodes.length();
     for( int i = 0; i != nodes.length(); ++i ){
-        // qInfo() << "[info] Node number:"<<i;
+        // qInfo() << "Node number:"<<i;
         QDomNode node = nodes.at(i);
         PtngHostBuilder *hb = new PtngHostBuilder();
         hb->addNmapScanXmlNode(node);
@@ -60,7 +60,7 @@ QList<PtngHostBuilder*> PtngInputParser::parseNmap(const QString &inputFile){
 }
 
 void PtngInputParser::addPorts(PtngHostBuilder* builder, const QDomNode &node){
-    // qInfo() << "[info] addPorts";
+    // qInfo() << "addPorts";
     PtngHost *host = builder->getHost();
     QDomElement elem = node.toElement();
     if( elem.isNull() ){
@@ -68,18 +68,18 @@ void PtngInputParser::addPorts(PtngHostBuilder* builder, const QDomNode &node){
     }
     QDomNodeList portList = elem.elementsByTagName("ports");
     if( portList.length() == 0 ){
-        // qInfo() << "[info] No open ports found on"<<host->getIpAddress();
+        // qInfo() << "No open ports found on"<<host->getIpAddress();
         return;
     }
     else{
-        // qInfo() << "[info] Found"<< portList.length() <<"ports open on"<<host->getIpAddress();
+        // qInfo() << "Found"<< portList.length() <<"ports open on"<<host->getIpAddress();
         QDomElement portListElem = portList.at(0).toElement();
         if( portListElem.isNull() ){
             return;
         }
 
         QDomNodeList ports = portListElem.elementsByTagName("port");
-        // qInfo() << "[info] Found"<< ports.length() <<"ports open on"<<host->getIpAddress();
+        // qInfo() << "Found"<< ports.length() <<"ports open on"<<host->getIpAddress();
 
         for( int i = 0;i< ports.length();++i){
             QDomNode node = ports.at(i);

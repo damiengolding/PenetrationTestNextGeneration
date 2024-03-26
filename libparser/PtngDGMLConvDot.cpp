@@ -38,7 +38,7 @@ QString PtngDGMLConv::toDot(const QString &dgml, bool &ok)
     setCategories(dgml);
     QScopedPointer<QDomDocument> doc(new QDomDocument(""));
     if( !doc->setContent(dgml) ){
-        qWarning() << "[warning] Unable to parse input string";
+        qCritical() << "Unable to parse input string";
         return("");
     }
     // Header
@@ -173,14 +173,16 @@ void PtngDGMLConv::setCategories(const QString &dgml)
 {
     QScopedPointer<QDomDocument> doc(new QDomDocument(""));
     if( !doc->setContent(dgml) ){
-        qWarning() << "[warning] Unable to parse input string";
+        qCritical() << "Unable to parse input string";
         return;
     }
     // Properties
     // Get some properties for use later
     QDomNodeList categories = doc->elementsByTagName("Category");
     if( categories.isEmpty() ){
-        qInfo() << "[info] There are no categories in the supplied DGML";
+#ifdef QT_DEBUG
+        qDebug() << "There are no categories in the supplied DGML";
+#endif
     }
     for( int i = 0; i<categories.count();++i){
         QDomNode n = categories.at(i);

@@ -32,83 +32,49 @@ NewProjectDialog::NewProjectDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     QSettings s;
-    ui->workingDirectoryLineEdit->setText(s.value("defaultProjectDirectory").toString());
-    connect(ui->workingDirectoryPushButton,
-            &QPushButton::clicked,
+    // ui->lineEditFile->setText(s.value("defaultProjectDirectory").toString());
+    connect(ui->pushButtonFile,
+            SIGNAL(clicked()),
                 this,
-            &NewProjectDialog::setWorkingDirectory
+            SLOT(setProjectFile())
             ,Qt::UniqueConnection
                 );
     connect(ui->addFileWatchPushButton,
-            &QPushButton::clicked,
+            SIGNAL(clicked()),
                 this,
-            &NewProjectDialog::addWatchDirectory
+            SLOT(addWatchDirectory())
             ,Qt::UniqueConnection
                 );
     connect(ui->removeFileWatchPushButton,
-            &QPushButton::clicked,
+            SIGNAL(clicked()),
                 this,
-            &NewProjectDialog::removeWatchDirectory
+            SLOT(removeWatchDirectory())
             ,Qt::UniqueConnection
                 );
     connect(ui->fileWatchListWidget,
-             &QListWidget::itemSelectionChanged,
+             SIGNAL(itemSelectionChanged()),
                 this,
-            &NewProjectDialog::enableWatchRemoveButton
+            SLOT(enableWatchRemoveButton())
             ,Qt::UniqueConnection
                 );
 }
 
-PtngProject *NewProjectDialog::getProject() const
+NewProjectDialog::~NewProjectDialog()
 {
-    return project;
+    delete ui;
 }
 
-void NewProjectDialog::setProject(PtngProject *newProject)
-{
-    if (project == newProject)
-        return;
-    project = newProject;
-    emit projectChanged();
-}
-
-void NewProjectDialog::done(int r)
-{
-    if( r == QDialog::Accepted ){
-        QString projectName = ui->nameLineEdit->text();
-        QString workingDirectory = ui->workingDirectoryLineEdit->text();
-        if( projectName.isEmpty() ){
-            QMessageBox::information(this,"PTNG Workbench", "Project name needs to be completed.");
-            return;
-        }
-        if( !QFile::exists(workingDirectory) ){
-            QMessageBox::information(this,"PTNG Workbench", "An existing directory needs to be\nsupplied for the working directory.");
-            return;
-        }
-        else{
-            project = new PtngProject(workingDirectory % QDir::separator() % projectName %".db");
-            project->setProjectName(ui->nameLineEdit->text());
-            project->setWorkingDirectory(ui->workingDirectoryLineEdit->text());
-            project->create();
-            QDialog::done(r);
-            return;
-        }
-    }
-    else{
-        QDialog::done(r);
-        return;
-    }
-}
-
-void NewProjectDialog::setWorkingDirectory()
+void NewProjectDialog::setProjectFile()
 {
     QSettings s;
-    QString directory = QFileDialog::getExistingDirectory(this,"PTNG Workbench",s.value("defaultProjectDirectory").toString());
-    if( directory.isEmpty() ){
-        return;
+    QString file = QFileDialog::getSaveFileName(this,
+                                                "PTNG Workbench",
+                                                s.value("defaultProjectDirectory").toString(),
+                                                "SQlLite database files (*.db)"
+                                                );
+    if( !file.isEmpty() ){
+        ui->lineEditFile->setText(file);
     }
-    ui->workingDirectoryLineEdit->setText(directory);
-    // project->setWorkingDirectory(directory);
 }
 
 void NewProjectDialog::setProjectName(const QString &projectName)
@@ -128,7 +94,6 @@ void NewProjectDialog::addWatchDirectory()
         return;
     }
     ui->fileWatchListWidget->addItem(directory);
-    project->addWatchDirectory(directory);
     watchDirectories.append(directory);
 }
 
@@ -136,7 +101,6 @@ void NewProjectDialog::removeWatchDirectory()
 {
     QListWidgetItem *item = ui->fileWatchListWidget->currentItem();
     QString directory = item->text();
-    project->removeWatchDirectory(directory);
     ui->fileWatchListWidget->takeItem(ui->fileWatchListWidget->currentRow());
     watchDirectories.removeAll(directory);
 }
@@ -146,7 +110,53 @@ void NewProjectDialog::enableWatchRemoveButton()
     ui->removeFileWatchPushButton->setEnabled(true);
 }
 
-NewProjectDialog::~NewProjectDialog()
+Project *NewProjectDialog::getProject() const
 {
-    delete ui;
+    return project;
+}
+
+void NewProjectDialog::setProject(Project *newProject)
+{
+    if (project == newProject)
+        return;
+    project = newProject;
+    emit projectChanged();
+}
+
+void NewProjectDialog::done(int r)
+{
+    if( r == QDialog::Accepted ){
+        projectName = ui->lineEditName->text();
+        projectDescription = projectName;
+        projectFile = ui->lineEditFile->text();
+        projectId = ui->lineEditId->text();
+        if( projectName.isEmpty() ){
+            QMessageBox::information(this,"PTNG Workbench", "Display name needs to be completed.");
+            return;
+        }
+        if( projectId.isEmpty() ){
+            QMessageBox::information(this,"PTNG Workbench", "Project Id needs to be completed.");
+            return;
+        }
+        if( projectFile.isEmpty() ){
+            QMessageBox::information(this,"PTNG Workbench", "Project file needs to be completed.");
+            return;
+        }
+
+        else{
+            project = new Project();
+            project->setProjectFile(projectFile);
+            project->setProjectName(ui->lineEditName->text());
+            project->setWatchDirectories(watchDirectories);
+            project->setProjectDescription(projectDescription);
+            project->setProjectId(ui->lineEditId->text());
+            project->create();
+            QDialog::done(r);
+            return;
+        }
+    }
+    else{
+        QDialog::done(r);
+        return;
+    }
 }

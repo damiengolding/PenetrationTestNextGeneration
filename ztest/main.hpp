@@ -23,30 +23,22 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "../inc/MainWindow.hpp"
-#include "ui_MainWindow.h"
+#pragma once
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-    QCoreApplication::setApplicationName("PTNG Workbench");
-    QCoreApplication::setApplicationVersion("0.0.1");
-    QCoreApplication::setOrganizationName("Golding's Gym");
-    restoreMainWindowState();
+// Internal
+#include "assist.hpp"
+#include "tests.hpp"
+#include "Logger.hpp"
 
-    // Defaults
-    initDefaults();
-    initAdminDirectories();
-    initStateMachine();
-    initToolbar();
-    initConnections();
-}
+// Qt
+#include <QCoreApplication>
+#include <QCommandLineOption>
+#include <QCommandLineParser>
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser);
+void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
+void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
+void listTypes();
 
-
+QList<QCommandLineOption> commandLineOptions;
+QStringList testTypes;

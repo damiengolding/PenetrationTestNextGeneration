@@ -100,11 +100,42 @@ void MainWindow::initAdminDirectories(){
     if( !configDir.exists() ){
         configDir.mkpath(configDirectory);
     }
+    QDir logDir(logDirectory);
+    if( !logDir.exists() ){
+        logDir.mkpath(logDirectory);
+    }
+}
+
+void MainWindow::initToolbar(){
+    // Toolbar
+    mainToolBar = this->addToolBar("Tools");
+    mainToolBar->setObjectName("Maintoolbar");
+    mainToolBar->addAction(ui->actionOpen);
+    mainToolBar->addAction(ui->actionSave);
+    mainToolBar->addAction(ui->actionSaveAs);
+    mainToolBar->addAction(ui->actionNewProject);
+    mainToolBar->addSeparator();
+    mainToolBar->addAction( ui->actionAddFile );
+    mainToolBar->addAction( ui->actionScanFolder );
+    mainToolBar->addSeparator();
+    mainToolBar->addAction( ui->actionPreferences );
+    mainToolBar->addAction(ui->actionShowExplorer);
+    mainToolBar->addAction(ui->actionShowOutput);
+
+    // Main menu
+    exportMenu = ui->menuProject->addMenu("Export");
+    exportNamicsoft = new QAction("Namicsoft");
+    exportXml = new QAction("XML");
+    exportCsv = new QAction("CSV");
+
+    exportMenu->addAction(exportNamicsoft);
+    exportMenu->addAction(exportXml);
+    exportMenu->addAction(exportCsv);
 }
 
 void MainWindow::initDefaults(){
     // Init any pointers
-
+    currentProject = new Project();
     // Default directories
     QSettings s;
     if( !s.contains("defaultDirectory")){
@@ -127,31 +158,14 @@ void MainWindow::initDefaults(){
         s.setValue("configDirectory", defaultDirectory + "/config");
     }
     configDirectory  = s.value("configDirectory").toString();
+    if( !s.contains("logDirectory")){
+        s.setValue("logDirectory", defaultDirectory + "/logs");
+    }
+    logDirectory  = s.value("logDirectory").toString();
 
     // Look and feel
     QFont displayFont(s.value("displayFont","Open Sans").toString(), s.value("fontSize",12).toInt() );
     this->setFont(displayFont);
-
-    // Toolbar
-    mainToolBar = this->addToolBar("Tools");
-    mainToolBar->setObjectName("Maintoolbar");
-    mainToolBar->addAction(ui->actionNewProject);
-    mainToolBar->addAction( ui->actionAddFile );
-    mainToolBar->addAction( ui->actionScanFolder );
-    mainToolBar->addSeparator();
-    mainToolBar->addAction( ui->actionPreferences );
-    mainToolBar->addAction(ui->actionShowExplorer);
-    mainToolBar->addAction(ui->actionShowOutput);
-
-    // Main menu
-    exportMenu = ui->menuProject->addMenu("Export");
-    exportNamicsoft = new QAction("Namicsoft");
-    exportXml = new QAction("XML");
-    exportCsv = new QAction("CSV");
-
-    exportMenu->addAction(exportNamicsoft);
-    exportMenu->addAction(exportXml);
-    exportMenu->addAction(exportCsv);
 
     // Default project DB sql
     QString projectTable = "CREATE TABLE 'project' ('display_name' TEXT NOT NULL,'project_id' TEXT,'created_date' TEXT,'project_title' TEXT NOT NULL,'working_directory' TEXT NOT NULL,'watch_directories' TEXT)";
@@ -160,7 +174,7 @@ void MainWindow::initDefaults(){
     if( !QFile::exists(newProjectFile) ){
         QFile npSql(newProjectFile);
         if( !npSql.open(QIODevice::WriteOnly) ){
-            qWarning() << "[warning] Could not open"<<newProjectFile<<"for writing";
+            qCritical() << "Could not open"<<newProjectFile<<"for writing";
             return;
         }
         QTextStream outFile(&npSql);
@@ -206,57 +220,79 @@ void MainWindow::initStateMachine(){
 }
 
 void MainWindow::initConnections(){
-    // Menu
+
+#pragma Menu {
     connect(ui->actionAboutQt,
-            &QAction::triggered,
+            SIGNAL(triggered()),
             this,
-            &MainWindow::showAboutQt
+            SLOT(showAboutQt())
             ,Qt::UniqueConnection
             );
     connect(
                 ui->actionAboutWorkbench,
-                &QAction::triggered,
+                SIGNAL(triggered()),
                 this,
-                &MainWindow::showAbout
+                SLOT(showAbout())
                 ,Qt::UniqueConnection
                 );
     connect(
                 ui->actionNewProject,
-                &QAction::triggered,
+                SIGNAL(triggered()),
                 this,
-                &MainWindow::newProject
+                SLOT(newProject())
                 ,Qt::UniqueConnection
                 );
-    connect(ui->actionPreferences,
-            &QAction::triggered,
+    connect(ui->actionOpen,
+            SIGNAL( triggered()),
             this,
-            &MainWindow::showPreferences
+            SLOT( openProject()),
+            Qt::UniqueConnection
+            );
+    connect(ui->actionPreferences,
+            SIGNAL(triggered()),
+            this,
+            SLOT( showPreferences())
             ,Qt::UniqueConnection
             );
     connect(ui->actionShowExplorer,
-            &QAction::triggered,
+            SIGNAL(triggered(bool)),
             this,
-            &MainWindow::showExplorerDock
+            SLOT(showExplorerDock(bool))
             ,Qt::UniqueConnection
             );
     connect(ui->actionShowOutput,
-            &QAction::triggered,
+            SIGNAL(triggered(bool)),
             this,
-            &MainWindow::showOutputDock
+            SLOT(showOutputDock(bool))
             ,Qt::UniqueConnection
             );
     connect(ui->actionAddFile,
-            &QAction::triggered,
+            SIGNAL(triggered()),
             this,
-            &MainWindow::addFile
+            SLOT(addFile())
             ,Qt::UniqueConnection
             );
     connect(ui->actionScanFolder,
-            &QAction::triggered,
+            SIGNAL(triggered()),
             this,
-            &MainWindow::addFolder
+            SLOT(addFolder())
             ,Qt::UniqueConnection
             );
+#pragma Menu }
+
+#pragma Other Gui Slots {
+    connect(ui->pushButtonClear,
+            SIGNAL( clicked() ),
+            this,
+            SLOT( clearOutput() ),
+            Qt::UniqueConnection
+            );
+#pragma Other Gui Slots }
+
+#pragma Context menus {
+
+#pragma Context menus }
+
 }
 
 /*

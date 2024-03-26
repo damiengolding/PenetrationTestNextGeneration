@@ -32,21 +32,21 @@ ScanFolderDialog::ScanFolderDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->copyRadioButton,
-            &QRadioButton::toggled,
+            SLOT(toggled()),
             this,
-            &ScanFolderDialog::toggleCopySources
+            SLOT(toggleCopySources())
             ,Qt::UniqueConnection
             );
     connect(ui->sdPushButton,
-            &QPushButton::clicked,
+            SLOT(clicked()),
             this,
-            &ScanFolderDialog::selectSourceDirectory
+            SLOT(selectSourceDirectory())
             ,Qt::UniqueConnection
             );
     connect(ui->tdPushButton,
-            &QPushButton::clicked,
+            SLOT(clicked()),
             this,
-            &ScanFolderDialog::selectTargetDirectory
+            SLOT(selectTargetDirectory())
             ,Qt::UniqueConnection
             );
 }
@@ -104,7 +104,9 @@ void ScanFolderDialog::done(int r)
 // TODO Need to figure out where to do file processing e.g. to DGML -> dot -> png etc
 void ScanFolderDialog::processFiles(const QString &sourceDirectory, const QString &targetDirectory, bool copySources, bool copyAll, bool keepStructure)
 {
-    qInfo() << "[info] Processing files - source dir:"<<sourceDirectory<<"Target dir:"<<targetDirectory;
+#ifdef QT_DEBUG
+    qDebug() << "Processing files - source dir:"<<sourceDirectory<<"Target dir:"<<targetDirectory;
+#endif
     QDir src(sourceDirectory);
     QDir tgt(targetDirectory);
     QDirIterator copyIterator(sourceDirectory, QDir::NoDotAndDotDot | QDir::AllEntries, QDirIterator::Subdirectories);
@@ -128,7 +130,9 @@ void ScanFolderDialog::processFiles(const QString &sourceDirectory, const QStrin
                 QFile::remove(target);
             }
             if( !QFile::copy(sourceInfo.absoluteFilePath(),target) ){
-                qInfo() << "[info] Failed to copy file:"<<sourceInfo.absoluteFilePath()<<"to"<<target;
+#ifdef QT_DEBUG
+                qDebug() << "Failed to copy file:"<<sourceInfo.absoluteFilePath()<<"to"<<target;
+#endif
             }
         }
         else{

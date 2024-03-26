@@ -46,7 +46,9 @@ void showTypes();
 
 int main(int argc, char *argv[])
 {
-    qInfo() << "[info] Starting ifident";
+    #ifdef QT_DEBUG
+        qDebug() << "Starting ifident";
+    #endif
     QCoreApplication a(argc, argv);
     QCommandLineParser p;
     initArgumentParser(a,p);
@@ -55,15 +57,15 @@ int main(int argc, char *argv[])
 }
 
 void showTypes(){
-    qInfo() << "[info] Supported file types:";
-    qInfo() << "[info] nmap - standard scan";
-    qInfo() << "[info] nmap - with the dns-zone-transfer.nse script";
-    qInfo() << "[info] dns recon - use \'dnsrecon -d <domain> -n <nameserver> -t axfr -x <outputfile>.xml\'";
-    qInfo() << "[info] nslookup (windows) - use \'ls -d discworld.io > nslookup_win_axfr.txt\'";
-    qInfo() << "[info] nslookup (linux)";
-    qInfo() << "[info] arp-scan - use\'arp-scan <address_range> > <outputfile>.txt\'";
-    qInfo() << "[info] nbtscan - use \'nbtscan -s : <address_range> <outputfile>.txt\' (the \'s : '\ is required as it is the separator used on each entry)";
-    qInfo() << "[info] host - use \'host -t axfr <domain> <nameserver> > host_axfr.txt\'";
+    qInfo() << "Supported file types:";
+    qInfo() << "nmap - standard scan";
+    qInfo() << "nmap - with the dns-zone-transfer.nse script";
+    qInfo() << "dns recon - use \'dnsrecon -d <domain> -n <nameserver> -t axfr -x <outputfile>.xml\'";
+    qInfo() << "nslookup (windows) - use \'ls -d discworld.io > nslookup_win_axfr.txt\'";
+    qInfo() << "nslookup (linux)";
+    qInfo() << "arp-scan - use\'arp-scan <address_range> > <outputfile>.txt\'";
+    qInfo() << "nbtscan - use \'nbtscan -s : <address_range> <outputfile>.txt\' (the \'s : '\ is required as it is the separator used on each entry)";
+    qInfo() << "host - use \'host -t axfr <domain> <nameserver> > host_axfr.txt\'";
 }
 
 void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser){
@@ -102,9 +104,11 @@ void processArgumentOptions(QCommandLineParser &parser){
 
     if(parser.isSet("file")){
         QString inputFile = parser.value("f");
-        qInfo() << "[info]"<< "Input file:" << qPrintable(inputFile);
+        #ifdef QT_DEBUG
+            qDebug() << ""<< "Input file:" << qPrintable(inputFile);
+        #endif
         if( !QFile::exists(inputFile) ){
-            qWarning() << "[warning]" << "File" << inputFile <<  "does not exist.";
+            qCritical() << "[warning]" << "File" << inputFile <<  "does not exist.";
             return;
         }
         else{
@@ -113,7 +117,7 @@ void processArgumentOptions(QCommandLineParser &parser){
         }
     }
     else{
-        qWarning() << "[warning] No input file specified - use -h or --help for options";
+        qCritical() << "No input file specified - use -h or --help for options";
         return;
     }
 }

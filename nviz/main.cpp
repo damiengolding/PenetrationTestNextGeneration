@@ -87,7 +87,7 @@ void processArguments(QCoreApplication &app, QCommandLineParser &parser){
      // Options
     // dgml source file - mandatory
     if(!parser.isSet("file")){
-        qWarning() << "[fatal] No dgml source file specified";
+        qCritical() << "[fatal] No dgml source file specified";
         parser.showHelp();
         ret = 1;
         return;
@@ -95,7 +95,7 @@ void processArguments(QCoreApplication &app, QCommandLineParser &parser){
     else{
         sourceFile = parser.value("file");
         if( !QFile::exists(sourceFile) ){
-            qWarning() << "[warning] Specified dgml source file"<<sourceFile<<"does not exist.";
+            qCritical() << "Specified dgml source file"<<sourceFile<<"does not exist.";
             parser.showHelp();
             ret = 2;
             return;
@@ -103,11 +103,11 @@ void processArguments(QCoreApplication &app, QCommandLineParser &parser){
         else{
             type = PtngIdent::checkFile(sourceFile);
             if( type  == PtngEnums::DGML || type == PtngEnums::NESSUS){
-                qInfo() << "[info] Processing" << sourceFile << "which is of type:" << type;
+                qInfo() << "Processing" << sourceFile << "which is of type:" << type;
             }
             else{
-                qInfo() << "[info] File" << sourceFile << "is not supported by nviz.";
-                qInfo() << "[info] Supplied file is of type:" << type;
+                qInfo() << "File" << sourceFile << "is not supported by nviz.";
+                qInfo() << "Supplied file is of type:" << type;
             }
         }
     }
@@ -116,11 +116,11 @@ void processArguments(QCoreApplication &app, QCommandLineParser &parser){
     if( parser.isSet("conversion")){
         QString t = parser.value("conversion").toLower();
         if( t == "dot" ||  t == "hvln" || t == "vplg"  ){
-            qInfo() << "[info] The supplied conversion type is set to:" <<t;
+            qInfo() << "The supplied conversion type is set to:" <<t;
             conversionType = t;
         }
         else{
-            qWarning() << "[warning] The supplied conversion type is not recognised.";
+            qCritical() << "The supplied conversion type is not recognised.";
             parser.showHelp();
             ret = 1;
             return;
@@ -130,18 +130,18 @@ void processArguments(QCoreApplication &app, QCommandLineParser &parser){
     // Output file stem
     if( parser.isSet("output")  ){
         outputFileStem= parser.value("output");
-        qInfo() << "[info] Optional argument output set to:" <<outputFileStem;
+        qInfo() << "Optional argument output set to:" <<outputFileStem;
     }
     else{
-        qInfo() << "[info] Optional argument output not set. Moving on.";
+        qInfo() << "Optional argument output not set. Moving on.";
     }
     // Command to execute on the output file
     if( parser.isSet("exec") ){
         command = parser.value("exec");
-        qInfo() << "[info] Optional argument exec set to:" <<command;
+        qInfo() << "Optional argument exec set to:" <<command;
     }
     else{
-        qInfo() << "[info] Optional argument exec not set. Moving on.";
+        qInfo() << "Optional argument exec not set. Moving on.";
     }
 
     processFile(sourceFile,conversionType,outputFileStem,command);

@@ -31,17 +31,17 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 
 // Nmap
 void processNmap(const QString &inputFile,const QString &outputFile){
-    qInfo() << "[info] Starting to process nmap file:"<<inputFile<<"output stem:"<<outputFile;
+    qInfo() << "Starting to process nmap file:"<<inputFile<<"output stem:"<<outputFile;
     QString csvOFName = outputFile % ".csv";
     QString tsvOFName = outputFile % ".tsv";
     QScopedPointer<QFile> file( new QFile(inputFile) ) ;
     QScopedPointer<QDomDocument> doc(new QDomDocument());
     if( !file->open(QIODevice::ReadOnly)  ){
-        qWarning() << "[warning] Could not open"<<inputFile<<"For reading";
+        qCritical() << "Could not open"<<inputFile<<"For reading";
         return;
     }
     if( !doc->setContent(file.data()) ){
-        qWarning() << "[warning] Failed parsing"<<inputFile;
+        qCritical() << "Failed parsing"<<inputFile;
         file->close();
     }
     QString csv = "IP Address,Protocol,Port Number,Service,State,ID Method\n";
@@ -53,7 +53,9 @@ void processNmap(const QString &inputFile,const QString &outputFile){
         QDomNode node = hostList.at(i);
         QDomElement elem = node.toElement();
         if( elem.isNull() ){
-            qInfo() << "[info] Unable to cast node to element";
+#ifdef QT_DEBUG
+            qDebug() << "Unable to cast node to element";
+#endif
             continue;
         }
         QString ipAddress;
@@ -95,7 +97,7 @@ void processNmap(const QString &inputFile,const QString &outputFile){
 
     QScopedPointer<QFile> csvFile( new QFile(csvOFName) ) ;
     if( !csvFile->open(QIODevice::WriteOnly)  ){
-        qWarning() << "[warning] Could not open"<<csvOFName<<"For reading";
+        qCritical() << "Could not open"<<csvOFName<<"For reading";
     }
     else{
         QTextStream csvStream(csvFile.data());
@@ -105,7 +107,7 @@ void processNmap(const QString &inputFile,const QString &outputFile){
 
     QScopedPointer<QFile> tsvFile( new QFile(tsvOFName) ) ;
     if( !tsvFile->open(QIODevice::WriteOnly)  ){
-        qWarning() << "[warning] Could not open"<<tsvOFName<<"For reading";
+        qCritical() << "Could not open"<<tsvOFName<<"For reading";
     }
     else{
         QTextStream tsvStream(tsvFile.data());
@@ -113,22 +115,22 @@ void processNmap(const QString &inputFile,const QString &outputFile){
         tsvFile->close();
     }
 
-    qInfo() << "[info] Completed processing input:";
+    qInfo() << "Completed processing input:";
 
 }
 
 // Nessus
 void processNessus(const QString &inputFile,const QString &outputFile){
-    qInfo() << "[info] Starting to process nessus file:"<<inputFile;
+    qInfo() << "Starting to process nessus file:"<<inputFile;
 
     QScopedPointer<QDomDocument> doc(new QDomDocument());
     // QScopedPointer<QFile> file( new QFile(inputFile) ) ;
     // if( !file->open(QIODevice::ReadOnly)  ){
-    //     qWarning() << "[warning] Could not open"<<inputFile<<"For reading";
+    //     qCritical() << "Could not open"<<inputFile<<"For reading";
     //     return;
     // }
     // if( !doc->setContent(file.data()) ){
-    //     qWarning() << "[warning] Failed parsing"<<inputFile;
+    //     qCritical() << "Failed parsing"<<inputFile;
     //     file->close();
     // }
 
@@ -142,7 +144,7 @@ void processNessus(const QString &inputFile,const QString &outputFile){
     QList<PtngHostBuilder*> builders =  PtngInputParser::parseNessus(inputFile);
     builder.createFromNessus(builders,inputFile);
     if( !doc->setContent(builder.toString()) ){
-        qWarning() << "[warning] Failed parsing DGML";
+        qCritical() << "Failed parsing DGML";
     }
     QDomElement root = doc->documentElement();
     QDomNodeList nodes = root.elementsByTagName("Node");
@@ -173,7 +175,7 @@ void processNessus(const QString &inputFile,const QString &outputFile){
 
     QScopedPointer<QFile> csvFile( new QFile(csvOFName) ) ;
     if( !csvFile->open(QIODevice::WriteOnly)  ){
-        qWarning() << "[warning] Could not open"<<csvOFName<<"For reading";
+        qCritical() << "Could not open"<<csvOFName<<"For reading";
     }
     else{
         QTextStream csvStream(csvFile.data());
@@ -183,7 +185,7 @@ void processNessus(const QString &inputFile,const QString &outputFile){
 
     QScopedPointer<QFile> tsvFile( new QFile(tsvOFName) ) ;
     if( !tsvFile->open(QIODevice::WriteOnly)  ){
-        qWarning() << "[warning] Could not open"<<tsvOFName<<"For reading";
+        qCritical() << "Could not open"<<tsvOFName<<"For reading";
     }
     else{
         QTextStream tsvStream(tsvFile.data());
@@ -191,6 +193,6 @@ void processNessus(const QString &inputFile,const QString &outputFile){
         tsvFile->close();
     }
 
-    qInfo() << "[info] Completed processing input";
+    qInfo() << "Completed processing input";
 }
 

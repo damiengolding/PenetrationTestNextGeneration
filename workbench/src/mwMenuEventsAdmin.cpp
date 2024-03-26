@@ -34,24 +34,38 @@ void MainWindow::showAboutQt(){
 
 void MainWindow::showAbout(){
     QMessageBox::information(this,windowTitle,"Version: 0.0.1\n"
-                                                  "Author: Damien Golding\n"
-                                                  "Copyright: MIT 2024");
+                                              "Author: Damien Golding\n"
+                                              "Copyright: MIT 2024");
 }
 
 void MainWindow::showPreferences()
 {
+#ifdef QT_DEBUG
+    qDebug() << "Sender:"<<sender();
+#endif
     QScopedPointer<PreferencesDialog> pd( new PreferencesDialog(this) );
     pd->setParentWindow(this);
     if( pd->exec() == QDialog::Accepted){
         QSettings s;
         defaultProjectDirectory = s.value("defaultProjectDirectory").toString();
     }
+#ifdef QT_DEBUG
+    qDebug() << "About to leave showPreferences()";
+#endif
 }
 
 void MainWindow::showExplorerDock(bool show){
-        ui->explorerDockWidget->setVisible(show);
+    ui->explorerDockWidget->setVisible(show);
 }
 
 void MainWindow::showOutputDock(bool show){
     ui->outputDockWidget->setVisible(show);
+}
+
+void MainWindow::AppendOutput(const QString &line){
+    ui->plainTextEditOutput->appendPlainText(line);
+}
+
+void MainWindow::clearOutput(){
+    ui->plainTextEditOutput->clear();
 }

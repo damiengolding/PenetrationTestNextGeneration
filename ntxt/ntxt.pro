@@ -1,4 +1,4 @@
-QT = core xml gui
+QT = core xml gui testlib
 
 CONFIG += c++20 cmdline warn_off
 

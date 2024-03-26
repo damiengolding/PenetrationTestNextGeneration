@@ -1,4 +1,4 @@
-INSERT INTO project (display_name,project_id,created_date,project_title,working_directory,watch_directories) VALUES ("Test project","CUST-01-INF-02","Today","Customer #1 = Infrastructure test 02","C:\Users\damie\AppData\Local\Golding's Gym\PTNG Workbench","C:\Users\damie\AppData\Local\Golding's Gym\PTNG Workbench")
+INSERT INTO project (display_name,project_id,created_date,project_title,working_directory,watch_directories) VALUES ("Test project","CUST-01-INF-02","Today","Customer #1 - Inf 02","C:\Users\damie\AppData\Local\Golding's Gym\PTNG Workbench","C:\Users\damie\AppData\Local\Golding's Gym\PTNG Workbench")
 
 INSERT INTO artefacts (display_name,source_tool,source_file,output_file) VALUES ("Discworld nmap TCP fast XML -> DGML","nmap","D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_inf_tcp_fast_01.xml","D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_inf_tcp_fast_01.dgml")
 

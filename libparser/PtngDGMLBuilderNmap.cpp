@@ -29,7 +29,7 @@ namespace ptng{
 
 PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builders, const QString &nessusFile, const QString &zoneFile, const QString &subnetFilters, bool addLabels)
 {
-    qInfo() << "[info] Creating from nmap";
+    qInfo() << "Creating from nmap";
     dgmlObject->root.setAttribute("Title","NmapDGML");
     QStringList subnets = subnetFilters.split(",");
     QMap<QString,QString> zoneAddesses;
@@ -123,7 +123,6 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
     for( auto bClass : bClasses){
         QStringList tempList = bClass.split(".");
         QString tempStr = tempList.at(0) + "." + tempList.at(1) + ".";
-        // qInfo() << "[info] tempStr for cClass:"<<tempStr;
         for( auto cc : cClasses){
             if( cc.startsWith(tempStr)){
                 addNode(cc, cc, map);
@@ -197,7 +196,6 @@ PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builder
 
     // Add the nessus severity counts
     if( !nessusFile.isEmpty() ){
-        qInfo() << "[info] About to add nessus severities after isEmpty() test:"<<issues.count();
         addNessusSeverityCount(builders,issues);
     }
 
@@ -237,7 +235,7 @@ PtngDGMLBuilder& PtngDGMLBuilder::addNessusSeverityCount(QList<PtngHostBuilder*>
         QString address = builder->getHost()->getIpAddress();
         QMultiMap<QString,int> severityCounts = getSeverityCount(address, issues);
         if( severityCounts.count() != 5 ){
-            qWarning() << "[warning] Wrong number of severity counts:"<<severityCounts.count();
+            qCritical() << "Wrong number of severity counts:"<<severityCounts.count();
             continue;
         }
         QDomNodeList nodes = dgmlObject->doc->elementsByTagName("Node");
@@ -245,7 +243,7 @@ PtngDGMLBuilder& PtngDGMLBuilder::addNessusSeverityCount(QList<PtngHostBuilder*>
             QDomNode n = nodes.at(i);
             QDomElement e = n.toElement();
             if( e.isNull()){
-                qWarning() << "[warning] Node to element == null";
+                qCritical() << "Node to element == null";
                 continue;
             }
             if( e.hasAttribute("Label") ){

@@ -45,12 +45,18 @@ public:
     static PtngEnums::SupportedInputTypes checkFile(const QString &file);
 
 private:
-        static PtngEnums::SupportedInputTypes checkXmlFile(const QString &file);
-        static PtngEnums::SupportedInputTypes checkTextFile(const QString &file);
+    static PtngEnums::SupportedInputTypes checkXmlFile(const QString &file);
+    static PtngEnums::SupportedInputTypes checkTextFile(const QString &file);
 
 signals:
 
-};
+#ifdef QT_DEBUG
+private slots: // for QTest module
+    void checkFile_data();
+    void checkFile();
+#endif
 
+};
 } // namespace ptng
+
 

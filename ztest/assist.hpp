@@ -23,24 +23,31 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#include "inc\PtngStyleSheet.hpp"
+#pragma once
 
-namespace ptng {
+#include <QList>
+#include <QDomNodeList>
+#include <QDomNode>
+#include <QDomElement>
+#include <QFile>
+#include <QTextStream>
+#include <QDateTime>
 
-PtngStyleSheet::PtngStyleSheet(QObject *parent)
-    : QObject{parent}
-{
+/*!
+   \brief domNodeList
+   \param list
+   \return QList<QDomElement>
 
-}
-
-bool PtngStyleSheet::loadStyleSheet(const QString &file)
-{
-    bool ret = false;
-
-
-    emit styleSheetLoadFail();
-    emit styleSheetLoadSuccess();
+   Converts a QDomNodeList into a QList<QDomElement> because the inability to use for( auto node : QDomNodeList) is one of the most annoying things about Qt.
+ */
+QList<QDomElement> domElementList(const QDomNodeList &list){
+    QList<QDomElement> ret;
+    for( int i = 0; i<list.count();++i ){
+        QDomNode node = list.at(i);
+        QDomElement elem = node.toElement();
+        ret.append(elem);
+    }
     return(ret);
 }
 
-} // namespace ptng
+

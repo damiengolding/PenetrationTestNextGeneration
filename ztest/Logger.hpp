@@ -25,35 +25,26 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
 
-// Qt
-#include <QtCore/qglobal.h>
-#include <QDomDocument>
-#include <QDomNode>
-#include <QDomNodeList>
-#include <QDomElement>
-#include <QDomText>
-#include <QDomAttr>
-#include <QFile>
-#include <QTextStream>
-#include <QMap>
-#include <QList>
-#include <QDebug>
-#include <QDateTime>
-#include <QProcess>
-#include <QTest>
-#include <QDebug>
+#include <QObject>
+#include <QDir>
 
-// STD
-#include <iostream>
-#include <string>
+class Logger : public QObject
+{
+    Q_OBJECT
+    // static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(nullptr);
+public:
+    explicit Logger(QObject *parent = nullptr);
 
-// ptng
-#include "PtngEnums.hpp"
-#include "PtngIdent.hpp"
-#include "PtngHostBuilder.hpp"
-#include "PtngSpecifications.hpp"
-#include "PtngInputParser.hpp"
-#include "PtngDGMLBuilder.hpp"
-#include "PtngIP4Address.hpp"
-#include "PtngDGMLConv.hpp"
-using namespace ptng;
+    static bool isLogging;
+    static QString fileName;
+    static void install();
+    static void uninstall();
+    static void messageHandler(QtMsgType type, const QMessageLogContext &ctxt, const QString &msg);
+
+private:
+    static QFile outFile;
+
+signals:
+
+};
+

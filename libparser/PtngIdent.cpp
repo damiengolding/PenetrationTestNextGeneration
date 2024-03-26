@@ -24,6 +24,7 @@ SOFTWARE.
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #include "inc\PtngIdent.hpp"
+#include "QtTest/qtestcase.h"
 
 namespace ptng {
 
@@ -38,7 +39,6 @@ PtngEnums::SupportedInputTypes PtngIdent::checkFile(const QString &file){
     if( !f.open(QIODevice::ReadOnly) ){
         return(ret);
     }
-
     if(doc.setContent(&f)){
         f.close();
         ret = checkXmlFile(file);
@@ -49,7 +49,6 @@ PtngEnums::SupportedInputTypes PtngIdent::checkFile(const QString &file){
         ret = checkTextFile(file);
         return(ret);
     }
-
     return(ret);
 }
 
@@ -141,29 +140,34 @@ PtngEnums::SupportedInputTypes PtngIdent::checkTextFile(const QString &file){
     QStringList lines;
     QTextStream stream(f.data());
     while( !stream.atEnd() ){
-        lines.append(stream.readLine());
+        QString line = stream.readLine();
+        // TODO are there anymore files that may or may not have additional cruft at the beginning of the file?
+        if( line.isEmpty() || line.startsWith("> ls") ){ // for dig and nslookup
+            continue;
+        }
+        lines.append(line);
     }
-    if( lines.at(0).toLower().startsWith("ns:") && lines.at(1).toLower().startsWith("soa:") ){
+    if( lines.at(0).startsWith("ns:",Qt::CaseInsensitive) && lines.at(1).toLower().startsWith("soa:") ){
         ret = PtngEnums::AXFR_FIERCE;
         return(ret);
     }
-    else if( lines.at(0).toLower().startsWith("trying") && lines.at(1).toLower().startsWith("using domain server") ){
+    else if( lines.at(0).startsWith("trying",Qt::CaseInsensitive) && lines.at(1).toLower().startsWith("using domain server") ){
         ret = PtngEnums::AXFR_HOST;
         return(ret);
     }
-    else if( lines.at(0).toLower().startsWith("server:") && lines.at(1).toLower().startsWith("address:") ){
+    else if( lines.at(0).startsWith("server:",Qt::CaseInsensitive) && lines.at(1).toLower().startsWith("address:") ){
         ret =PtngEnums:: PtngEnums::AXFR_NS_LIN;
         return(ret);
     }
-    else if( lines.at(0).toLower().startsWith("[[") && lines.at(0).toLower().endsWith("]]") ){
+    else if( lines.at(0).startsWith("[[",Qt::CaseInsensitive) && lines.at(0).toLower().endsWith("]]") ){
         ret = PtngEnums::AXFR_NS_WIN;
         return(ret);
     }
-    else if( lines.at(0).toLower().startsWith("; << dig") && lines.at(0).toLower().endsWith("axfr") ){
+    else if( lines.at(0).startsWith("; <<>> dig",Qt::CaseInsensitive) && lines.at(0).toLower().endsWith("axfr") ){
         ret = PtngEnums::AXFR_DIG;
         return(ret);
     }
-    else if( lines.at(0).toLower().startsWith("[nessus_hsh]")){
+    else if( lines.at(0).startsWith("[nessus_hsh]",Qt::CaseInsensitive)){
         ret = PtngEnums::NESSUS_HSH;
         return(ret);
     }
@@ -171,15 +175,65 @@ PtngEnums::SupportedInputTypes PtngIdent::checkTextFile(const QString &file){
         ret = PtngEnums::HASHES;
         return(ret);
     }
-    else if( lines.at(0).toLower().startsWith("interface") &&  lines.at(1).toLower().startsWith("starting arp-scan")){
+    else if( lines.at(0).startsWith("interface",Qt::CaseInsensitive) &&  lines.at(1).toLower().startsWith("starting arp-scan")){
         ret = PtngEnums::ARPSCAN;
         return(ret);
     }
-    else if( lines.at(2).count(QLatin1Char(':')) == 5 ){
+    else if( lines.at(0).count(QLatin1Char(':')) == 9 ){
+        QString ipAddress = lines.at(0).split(":").at(0);
+        if( ipAddress.count(QLatin1Char('.')) == 3 ){
         ret = PtngEnums::NBTSCAN;
         return(ret);
+        }
     }
     return(ret);
 }
 
+/*
+   Unit tests
+  */
+
+#ifdef QT_DEBUG
+void PtngIdent::checkFile_data()
+{
+    // qInfo() << "Loading test data for checkFile";
+    QTest::addColumn<QString>("tool");
+    QTest::addColumn<QString>("file");
+    QTest::addRow("nmap") << "nmap" << "inf/discworld_inf_tcp_fast_01.xml";
+    QTest::addRow("Nessus") << "nessus" << "inf/discworld_nessus_01.nessus";
+    QTest::addRow("dnsrecon") << "dnsrecon" << "inf/discworld_axfr_dnsrecon_01.xml";
+    QTest::addRow("host") << "host" << "inf/discworld_axfr_host_01.txt";
+    QTest::addRow("nmap_axfr") << "nmap AXFR" << "inf/discworld_axfr_nmap_01.xml";
+    QTest::addRow("dig") << "dig" << "inf/discworld_axfr_dig_01.txt";
+    QTest::addRow("nslookup windows") << "nslookup (Windows)" << "inf/discworld_axfr_nswin_01.txt";
+    QTest::addRow("nslookup linux") << "nslookup (Linux)" << "inf/sample_strikeforce_nslookup_lin_axfr_01.txt";
+    QTest::addRow("fierce") << "fierce" << "inf/discworld_axfr_fierce_01.txt";
+    QTest::addRow("arpscan") << "arpscan" << "inf/discworld_arp-scan_01.txt";
+    QTest::addRow("nbtscan") << "nbtscan" << "inf/discworld_nbtscan_01.txt";
+    QTest::addRow("sslscan") << "sslscan" << "inf/sample_sslscan.xml";
+    QTest::addRow("hashes") << "hashes" << "inf/sample_hashes.txt";
+    QTest::addRow("DGML") << "dgml" << "inf/discworld_inf_tcp_fast_01.dgml";
+    QTest::addRow("Metasploit Framework") << "MSF" << "inf/sample_msf_01.xml";
+    QTest::addRow("OWASP ZAP") << "OWASP ZAP" << "web/zap/muillidae_01.xml";
+    QTest::addRow("Unsupported") << "unsupported" << "unsupported.file";
+}
+
+void PtngIdent::checkFile()
+{
+    QFETCH(QString,tool);
+    QFETCH(QString,file);
+    if( !QFile::exists(file) ){
+        QString message = QString(file % " does not exist. ");
+        QFAIL(qPrintable(message));
+    }
+    PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(file);
+    if( tool == "unsupported" ){
+        QVERIFY( type == PtngEnums::NUM_SUPPORTED_INPUT_TYPES );
+    }
+    else{
+        QVERIFY( type != PtngEnums::NUM_SUPPORTED_INPUT_TYPES );
+    }
+
+}
+#endif
 } // namespace ptng

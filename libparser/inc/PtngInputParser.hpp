@@ -26,6 +26,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #pragma once
 
 #include "libparser_global.hpp"
+#include "libparser_local.hpp"
 #include <QObject>
 
 #include "PtngEnums.hpp"
@@ -90,6 +91,17 @@ private:
     static QMap<QString,QString> parseAxfrHostScan(const QString &inputFile);
     static void addPorts(PtngHostBuilder* builder, const QDomNode &node);
 
+#ifdef QT_DEBUG
+private slots: // for QTest module
+    void nmapTest_data();
+    void nmapTest();
+    void nessusTest_data();
+    void nessusTest();
+    void nessusIssuesTest_data();
+    void nessusIssuesTest();
+    void nessusSeveritiesTest_data();
+    void nessusSeveritiesTest();
+#endif
 signals:
 
 };

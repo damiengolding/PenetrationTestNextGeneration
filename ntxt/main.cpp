@@ -96,7 +96,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     outputStem = parser.value("output");
     PtngEnums::SupportedInputTypes type  =PtngIdent::checkFile(inputFile);
     if( type == PtngEnums::NMAP || type == PtngEnums::NESSUS ){
-        qInfo() << "[info] Processing" << inputFile << "which is of type:" << type;
+        qInfo() << "Processing" << inputFile << "which is of type:" << type;
         if( type == PtngEnums::NMAP  ){
             processNmap(inputFile, outputStem);
         }
@@ -105,7 +105,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         }
     }
     else{
-        qWarning() << "[warning] Input file"<<inputFile<<"is of incorrect type:"<<type;
+        qCritical() << "Input file"<<inputFile<<"is of incorrect type:"<<type;
         parser.showHelp(2);
     }
 

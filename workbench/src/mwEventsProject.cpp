@@ -33,10 +33,32 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 void MainWindow::newProject(){
     QScopedPointer<NewProjectDialog> npd(new NewProjectDialog(this));
     if( npd->exec() == QDialog::Accepted ){
+        delete(currentProject);
         currentProject = npd->getProject();
-        // currentProject->create();
+        ui->listViewProject->setModel(currentProject->getProjectTable());
+        ui->listViewArtefacts->setModel(currentProject->getArtefactsTable());
     }
+    AppendOutput("Created new project at: " % currentProject->getProjectFile());
 }
+
+void MainWindow::openProject(){
+    QSettings s;
+    QString file = QFileDialog::getOpenFileName(this,
+                                                "PTNG Workbench",
+                                                s.value("defaultProjectDirectory").toString(),
+                                                "SQlLite database files (*.db)"
+                                                );
+    if( file.isEmpty() )
+        return;
+    delete(currentProject);
+    currentProject = new Project(file);
+    currentProject->setProjectFile(file);
+    currentProject->load();
+    ui->listViewProject->setModel(currentProject->getProjectTable());
+    ui->listViewArtefacts->setModel(currentProject->getArtefactsTable());
+    AppendOutput("Opened project: " % currentProject->getProjectFile());
+}
+
 // TODO Need to figure out where to do file processing e.g. to DGML -> dot -> png etc
 void MainWindow::addFile(){
     QSettings s;

@@ -31,6 +31,6 @@ void processNessusPluginFamilies(const QString &sourceFile,
                                  const QString &conversionType,
                                  const QString &outputFileStem,
                                  const QString &command){
-    qInfo() << "[info] Processing Nessus native XML to plugin families - not yet implemented";
+    qInfo() << "Processing Nessus native XML to plugin families - not yet implemented";
 
 }

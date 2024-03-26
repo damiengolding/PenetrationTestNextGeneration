@@ -43,6 +43,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QSettings>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QClipboard>
 #include <QListWidgetItem>
 #include <QToolBar>
 #include <QDirIterator>
@@ -58,10 +59,10 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "PtngIP4Address.hpp"
 #include "PtngIdent.hpp"
 #include "PtngSpecifications.hpp"
+using namespace ptng;
 
 // Ptng - from workbench
-#include "inc/PtngProject.hpp"
-using namespace ptng;
+#include "inc/Project.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -85,31 +86,33 @@ public: // Property system
     };
     Q_ENUM(WorkbenchState)
 
+    // Constructor, destructor, Ui::ui
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+private:
+    Ui::MainWindow *ui;
 
 public: // Accessors and mutators
     WorkbenchState getCurrentState() const;
     void setCurrentState(WorkbenchState newCurrentState);
-
     WorkbenchState getCurrentStateEnum() const;
     void setCurrentStateEnum(WorkbenchState newCurrentStateEnum);
 
+    // Internal objects
 private:
-    Ui::MainWindow *ui;
-
     // Directories
     QString defaultProjectDirectory;
     QString defaultDirectory;
     QString pluginDirectory;
     QString scriptDirectory;
     QString configDirectory;
+    QString logDirectory;
 
     // General objects/pointers
     QString windowTitle = "PTNG Workbench";
     QStringList mostRecentlyUsed;
-    PtngProject *currentProject;
+    Project *currentProject;
     QToolBar *mainToolBar;
     QMenu* exportMenu;
     QAction *exportNamicsoft;
@@ -123,17 +126,20 @@ private:
     WorkbenchState currentStateEnum = StateIdling;
     QState *currentState;
 
-    // Lifecycle
+    // Lifecycle functions
 private:
     void closeEvent(QCloseEvent *event);
     void restoreMainWindowState();
     void initDefaults();
-    void initConnections();
+    void initToolbar();
     void initAdminDirectories();
     void initStateMachine();
+    void initConnections();
 
+    // Menu and toolbar
 public slots:
     void newProject();
+    void openProject();
     void addFile();
     void addFolder();
     void showPreferences();
@@ -141,6 +147,11 @@ public slots:
     void showAbout();
     void showExplorerDock(bool show);
     void showOutputDock(bool show);
+
+    // Internal management
+protected slots:
+    void AppendOutput(const QString &line);
+    void clearOutput();
 
 signals:
     void currentStateEnumChanged();

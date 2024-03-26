@@ -38,15 +38,15 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
     ui->wdLineEdit->setText(s.value("defaultDirectory").toString());
     ui->pdLineEdit->setText(s.value("defaultProjectDirectory").toString());
     connect(ui->wdPushButton,
-            &QPushButton::clicked,
+            SIGNAL(clicked()),
             this,
-            &PreferencesDialog::setDefaultDirectory
+            SLOT(setDefaultDirectory())
             ,Qt::UniqueConnection
                 );
     connect(ui->pdPushButton,
-            &QPushButton::clicked,
+            SIGNAL(clicked()),
             this,
-            &PreferencesDialog::setProjectDirectory
+            SLOT(setProjectDirectory())
             ,Qt::UniqueConnection
                 );
 }

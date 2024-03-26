@@ -38,31 +38,31 @@ void processFile(const QString &sourceFile,
 
     PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(sourceFile);
     if( type == PtngEnums::NESSUS ){
-        qInfo() << "[info] Processing Nessus native XML";
+        qInfo() << "Processing Nessus native XML";
         return(processNessus(sourceFile,conversionType,outputFileStem,command));
     }
     QScopedPointer<QFile> file( new QFile(sourceFile ) ) ;
     QScopedPointer<QDomDocument> doc(new QDomDocument());
     if( !file->open(QIODevice::ReadOnly)  ){
-        qWarning() << "[warning] Could not open"<<sourceFile<<"For reading";
+        qCritical() << "Could not open"<<sourceFile<<"For reading";
         return;
     }
     if( !doc->setContent(file.data()) ){
-        qWarning() << "[warning] Failed parsing"<<sourceFile;
+        qCritical() << "Failed parsing"<<sourceFile;
         file->close();
     }
     QDomElement root = doc->documentElement();
     if( !root.hasAttribute("Title") ){
-        qWarning() << "[warning] The XML document root does not have a \"Title\" attribute. It does not appear to be a valid PTNG DGML file.";
+        qCritical() << "The XML document root does not have a \"Title\" attribute. It does not appear to be a valid PTNG DGML file.";
         return;
     }
     QString title = root.attribute("Title");
     if( title.toLower() == "nmapdgml" ){
-        qInfo() << "[info] Processing NmapDGML input";
+        qInfo() << "Processing NmapDGML input";
         processNmap( sourceFile,conversionType,outputFileStem,command );
     }
     else if( title.toLower() == "nessusdgml" ){
-        qInfo() << "[info] Processing NessusDGML input";
+        qInfo() << "Processing NessusDGML input";
         processNessus( sourceFile,conversionType,outputFileStem,command );
     }
 }
@@ -72,9 +72,9 @@ void processNmap(const QString &sourceFile,
                  const QString &outputFileStem,
                  const QString &command){
     QScopedPointer<QFile> file( new QFile(sourceFile ) ) ;
-    // qInfo() << "[info] Starting to process input";
+    qInfo() << "Starting to process input";
     if( !file->open(QIODevice::ReadOnly)  ){
-        qWarning() << "[warning] Could not open"<<sourceFile<<"For reading";
+        qCritical() << "Could not open"<<sourceFile<<"For reading";
         return;
     }
     QString dgml = file->readAll();
@@ -96,7 +96,7 @@ void processNmap(const QString &sourceFile,
     }
     QFile oFile(ofName);
     if( !oFile.open(QIODevice::WriteOnly) ){
-        qWarning() << "[warning] Could not open file for writing";
+        qCritical() << "Could not open file for writing";
         return;
     }
     QTextStream out(&oFile);
@@ -113,9 +113,11 @@ void processNmap(const QString &sourceFile,
     QProcess proc;
     proc.startCommand(procCmd);
     proc.waitForFinished();
-    qInfo() << "[info] Completed processing input";
+    qInfo() << "Completed processing input";
     if( outputFileStem.isEmpty() ){
-        qInfo() << "[info] dot runcontrol:"<<dotOutput;
+#ifdef QT_DEBUG
+        qDebug() << "dot runcontrol:"<<dotOutput;
+#endif
     }
 }
 
@@ -128,18 +130,18 @@ void processNessus(const QString &sourceFile,
         processNessusXml(sourceFile,conversionType,outputFileStem,command);
     }
     else if( conversionType.toLower() == "dot" ){
-        qInfo() << "[info] Nessus conversion to dot";
+        qInfo() << "Nessus conversion to dot";
         return(processNmap(sourceFile,conversionType,outputFileStem,command));
     }
     else if( conversionType.toLower() == "hvln" || conversionType.toLower() == "vplg" ){
-        qInfo() << "[info] Nessus native XML conversion";
+        qInfo() << "Nessus native XML conversion";
         return(processNessusXml(sourceFile,conversionType,outputFileStem,command));
     }
     else{
-        qWarning() << "[warning] Conversion type"<<conversionType<<"is not recognised/supported.";
+        qCritical() << "Conversion type"<<conversionType<<"is not recognised/supported.";
     }
 
-    qInfo() << "[info] Completed processing input";
+    qInfo() << "Completed processing input";
 }
 
 void processNessusXml(const QString &sourceFile,
@@ -148,7 +150,7 @@ void processNessusXml(const QString &sourceFile,
                       const QString &command){
     QString conv = conversionType.toLower();
     if( conv == "dot" ){
-        qWarning() << "[warning] Nessus native XML conversion to dot is not supported. Use ndgml first to create a dgml source file.";
+        qCritical() << "Nessus native XML conversion to dot is not supported. Use ndgml first to create a dgml source file.";
         return;
     }
     else if( conv == "hvln" ){
@@ -158,6 +160,6 @@ void processNessusXml(const QString &sourceFile,
         processNessusPluginFamilies(sourceFile,conversionType,outputFileStem,command);
     }
     else{
-        qWarning() << "[warning] Conversion type"<<conversionType<<"is not recognised/supported.";
+        qCritical() << "Conversion type"<<conversionType<<"is not recognised/supported.";
     }
 }

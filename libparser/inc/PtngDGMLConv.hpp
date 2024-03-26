@@ -28,6 +28,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QObject>
 
 #include "libparser_global.hpp"
+#include "libparser_local.hpp"
 
 namespace ptng {
 

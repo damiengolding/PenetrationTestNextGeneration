@@ -25,47 +25,20 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #pragma once
 
-#include <QObject>
-#include <QColor>
-#include <QFont>
-#include "libparser_global.hpp"
+#include "PtngDGMLBuilder.hpp"
+#include "PtngDGMLConv.hpp"
+#include "PtngHostBuilder.hpp"
+#include "PtngEnums.hpp"
+#include "PtngIP4Address.hpp"
+#include "PtngIdent.hpp"
+#include "PtngSpecifications.hpp"
+#include "PtngDGMLBuilder.hpp"
+#include "PtngDGMLConv.hpp"
+#include "PtngInputParser.hpp"
+using namespace ptng;
 
-namespace ptng {
+#include "Logger.hpp"
 
-/*!
-   \brief The PtngStyleSheet class
+#include <QTest>
 
-   Since most of the PTNG tools produce graphical or other output, it makes sense to have a common, configurable object with sensible defaults
- */
-class LIBPARSER_EXPORT PtngStyleSheet : public QObject
-{
-    Q_OBJECT
-public:
-    explicit PtngStyleSheet(QObject *parent = nullptr);
-
-public:
-    // Colors - in QColor
-    QColor colorCritical = QColorConstants::Red;
-    QColor colorHigh = QColorConstants::Magenta;
-    QColor colorMedium = QColorConstants::Yellow;
-    QColor colorLow = QColorConstants::Green;
-    QColor colorInfo = QColorConstants::Blue;
-
-    // Fonts and text
-    QFont mainFont = QFont("Open Sans",10);
-    QFont titleFont = QFont("Open Sans",15);
-    QColor fontColor = QColorConstants::Black;
-    QColor highlightColor = QColorConstants::Gray;
-    QColor borderColor = QColorConstants::Black;
-    QColor backgroundColor = QColorConstants::White;
-
-public:
-    bool loadStyleSheet(const QString &file);
-
-signals:
-    void styleSheetLoadSuccess();
-    void styleSheetLoadFail();
-};
-
-} // namespace ptng
-
+void testInput();
