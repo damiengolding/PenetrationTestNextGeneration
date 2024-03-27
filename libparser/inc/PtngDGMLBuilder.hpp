@@ -102,7 +102,6 @@ public: // Creational - from known source types, e.g. nmap QList<PtngHostBuilder
     PtngDGMLBuilder& createSimple(const QMap<QString,QString> &hosts, const QString &subnetFilters = "", bool addLabels = true);
     PtngDGMLBuilder& createFromNmap(QList<PtngHostBuilder*> builders, const QString &nessusFile = "", const QString &zoneFile = "", const QString &subnetFilters = "", bool addLabels = true);
     PtngDGMLBuilder& createFromNessus(QList<PtngHostBuilder*> builders, const QString &nessusFile, const QString &severityFilters = "", const QString &subnetFilters = "");
-
     PtngDGMLBuilder& addNessusSeverityCount(QList<PtngHostBuilder*> builders, QList<PtngIssue> issues);
 
 private: // Helper functions
@@ -115,14 +114,18 @@ private: // Helper functions
 public: // Other accessors/mutators
     QString toString(int indent = 1);
 
-signals: // Q_PROPERTY NOTIFY entries
-
-public: //  Q_PROPERTY READ WRITE entries,. Also, class accessors and mutators
-
-public: // Q_PROPERTY declarations
-
 private: // Members
     PtngDGML *dgmlObject;
+
+#ifdef QT_DEBUG
+private slots: // for QTest module
+    void shouldCreateDGMLFromNmap_data();
+    void shouldCreateDGMLFromNessus_data();
+    void shouldCreateDGMLFromSimple_data();
+    void shouldCreateDGMLFromNmap();
+    void shouldCreateDGMLFromNessus();
+    void shouldCreateDGMLFromSimple();
+#endif
 };
 
 } // namespace ptng

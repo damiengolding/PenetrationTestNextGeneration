@@ -29,7 +29,6 @@ namespace ptng{
 
 PtngDGMLBuilder &PtngDGMLBuilder::createFromNmap(QList<PtngHostBuilder*> builders, const QString &nessusFile, const QString &zoneFile, const QString &subnetFilters, bool addLabels)
 {
-    qInfo() << "Creating from nmap";
     dgmlObject->root.setAttribute("Title","NmapDGML");
     QStringList subnets = subnetFilters.split(",");
     QMap<QString,QString> zoneAddesses;

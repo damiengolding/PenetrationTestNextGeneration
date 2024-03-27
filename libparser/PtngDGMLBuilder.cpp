@@ -201,9 +201,6 @@ PtngDGMLBuilder &PtngDGMLBuilder::addNode(const QString &id, const QString &labe
     newNode.setAttribute("Id",id);
     newNode.setAttribute("Label",label);
     QDomNodeList nodeList = dgmlObject->doc->elementsByTagName("Nodes");
-#ifdef QT_DEBUG
-    qDebug() << "Number of Nodes:"<<nodeList.count();
-#endif
     if( nodeList.count() != 1 ){
 #ifdef QT_DEBUG
         qDebug() << "Wrong number of \'Nodes\':"<<nodeList.count();
@@ -340,5 +337,152 @@ bool PtngDGMLBuilder::isInSeverityFilter(const QStringList &criticalityFilters, 
     }
     return(false);
 }
+
+#ifdef QT_DEBUG
+void PtngDGMLBuilder::shouldCreateDGMLFromNmap_data(){
+    QScopedPointer<QFile> file(new QFile(PtngConfig::testConfiguration));
+    QScopedPointer<QDomDocument> doc(new QDomDocument(""));
+
+    if( !file->open(QIODevice::ReadOnly) ){
+        QString message = QString("Couldn't open the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    if( !doc->setContent(file->readAll()) ){
+        QString message = QString("Couldn't parse the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    QDomNodeList testFiles = doc->elementsByTagName("ptngdgmlbuilder");
+    QTest::addColumn<QString>("tool");
+    QTest::addColumn<QString>("file");
+
+    for( int i = 0; i< testFiles.count(); ++i ){
+        QDomNode node = testFiles.at(i);
+        QDomElement elem = node.toElement();
+        if( elem.isNull()){
+            continue;
+        }
+        QString name = elem.attribute("name");
+        if( name != "nmap" ){
+            continue;
+        }
+        QString value = elem.attribute("value");
+        QTest::addRow(qPrintable(name)) << name << value;
+    }
+}
+void PtngDGMLBuilder::shouldCreateDGMLFromNessus_data(){
+    QScopedPointer<QFile> file(new QFile(PtngConfig::testConfiguration));
+    QScopedPointer<QDomDocument> doc(new QDomDocument(""));
+
+    if( !file->open(QIODevice::ReadOnly) ){
+        QString message = QString("Couldn't open the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    if( !doc->setContent(file->readAll()) ){
+        QString message = QString("Couldn't parse the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    QDomNodeList testFiles = doc->elementsByTagName("ptngdgmlbuilder");
+    QTest::addColumn<QString>("tool");
+    QTest::addColumn<QString>("file");
+
+    for( int i = 0; i< testFiles.count(); ++i ){
+        QDomNode node = testFiles.at(i);
+        QDomElement elem = node.toElement();
+        if( elem.isNull()){
+            continue;
+        }
+        QString name = elem.attribute("name");
+        if( name != "nessus" ){
+            continue;
+        }
+        QString value = elem.attribute("value");
+        QTest::addRow(qPrintable(name)) << name << value;
+    }
+}
+void PtngDGMLBuilder::shouldCreateDGMLFromSimple_data(){
+    QScopedPointer<QFile> file(new QFile(PtngConfig::testConfiguration));
+    QScopedPointer<QDomDocument> doc(new QDomDocument(""));
+
+    if( !file->open(QIODevice::ReadOnly) ){
+        QString message = QString("Couldn't open the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    if( !doc->setContent(file->readAll()) ){
+        QString message = QString("Couldn't parse the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    QDomNodeList testFiles = doc->elementsByTagName("ptngdgmlbuilder");
+    QTest::addColumn<QString>("tool");
+    QTest::addColumn<QString>("file");
+
+    for( int i = 0; i< testFiles.count(); ++i ){
+        QDomNode node = testFiles.at(i);
+        QDomElement elem = node.toElement();
+        if( elem.isNull()){
+            continue;
+        }
+        QString name = elem.attribute("name");
+        if( name != "axfr" ){
+            continue;
+        }
+        QString value = elem.attribute("value");
+        QTest::addRow(qPrintable(name)) << name << value;
+    }
+}
+void PtngDGMLBuilder::shouldCreateDGMLFromNmap(){
+    QFETCH(QString,file);
+    QList<PtngHostBuilder*> hosts = PtngInputParser::parseNmap(file);
+    PtngDGMLBuilder builder;
+    builder.createFromNmap(hosts);
+    QScopedPointer<QDomDocument> doc( new QDomDocument("input") );
+    if( !doc->setContent(builder.toString())  ){
+        QFAIL("Could not parse DGML");
+    }
+    QDomNodeList nodeList = doc->elementsByTagName("Node");
+    QDomNodeList linkList = doc->elementsByTagName("Link");
+    QDomNodeList categoryList = doc->elementsByTagName("Category");
+    QCOMPARE(nodeList.count(),13);
+    QCOMPARE(linkList.count(),12);
+    QCOMPARE(categoryList.count(),7);
+}
+void PtngDGMLBuilder::shouldCreateDGMLFromNessus(){
+    QFETCH(QString,file);
+    QList<PtngHostBuilder*> hosts = PtngInputParser::parseNessus(file);
+    PtngDGMLBuilder builder;
+    builder.createFromNessus(hosts,file);
+    QScopedPointer<QDomDocument> doc( new QDomDocument("input") );
+    if( !doc->setContent(builder.toString())  ){
+        QFAIL("Could not parse DGML");
+    }
+    QDomNodeList nodeList = doc->elementsByTagName("Node");
+    QDomNodeList linkList = doc->elementsByTagName("Link");
+    QDomNodeList categoryList = doc->elementsByTagName("Category");
+    QCOMPARE(nodeList.count(),13);
+    QCOMPARE(linkList.count(),12);
+    QCOMPARE(categoryList.count(),7);
+}
+void PtngDGMLBuilder::shouldCreateDGMLFromSimple(){
+    QFETCH(QString,file);
+    QMap<QString,QString> hosts = PtngInputParser::parseZoneTransfer(file);
+    PtngDGMLBuilder builder;
+    builder.createSimple(hosts);
+    QScopedPointer<QDomDocument> doc( new QDomDocument("input") );
+    if( !doc->setContent(builder.toString())  ){
+        QFAIL("Could not parse DGML");
+    }
+    QDomNodeList nodeList = doc->elementsByTagName("Node");
+    QDomNodeList linkList = doc->elementsByTagName("Link");
+    QDomNodeList categoryList = doc->elementsByTagName("Category");
+    QCOMPARE(nodeList.count(),14);
+    QCOMPARE(linkList.count(),13);
+    QCOMPARE(categoryList.count(),7);
+}
+#endif
 
 } // namespace ptng

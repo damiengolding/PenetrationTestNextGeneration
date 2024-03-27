@@ -8,7 +8,6 @@ DEFINES+= QT_MESSAGELOGCONTEXT
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        Logger.cpp \
         main.cpp \
         tests.cpp
 
@@ -24,6 +23,11 @@ INCLUDEPATH += $$PWD/../../PtngOutput/libparser/inc
 DEPENDPATH += $$PWD/../../PtngOutput/libparser/inc
 
 HEADERS += \
-    Logger.hpp \
     main.hpp \
     tests.hpp
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../WaifsAndStraysOutput/release/ -lWaifsAndStrays
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../WaifsAndStraysOutput/debug/ -lWaifsAndStrays
+
+INCLUDEPATH += $$PWD/../../WaifsAndStraysOutput/inc
+DEPENDPATH += $$PWD/../../WaifsAndStraysOutput/inc

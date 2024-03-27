@@ -35,10 +35,11 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "PtngDGMLBuilder.hpp"
 #include "PtngDGMLConv.hpp"
 #include "PtngInputParser.hpp"
+#include "PtngConfig.hpp"
 using namespace ptng;
 
 #include "Logger.hpp"
-
 #include <QTest>
 
 void testInput();
+void testConversion();

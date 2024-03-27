@@ -112,6 +112,12 @@ public: // Category settings
     QString subnetFontSize;
     QString subnetStroke;
 
+#ifdef QT_DEBUG
+private slots: // for QTest module
+    void shouldCreateDotRunControl_data();
+    void shouldCreateDotRunControl();
+#endif
+
 };
 
 } // namespace ptng

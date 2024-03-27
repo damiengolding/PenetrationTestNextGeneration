@@ -1,5 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parser_lib_test>
-  <ptngident name="" value="" />
-  <ptnginputparser name="" value="" />
+<!-- PtngIdent -->
+  <ptngident name="nmap" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_inf_tcp_fast_01.xml" />
+  <ptngident name="nessus" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_nessus_01.nessus" />
+  <ptngident name="dnsrecon" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_dnsrecon_01.xml" />
+  <ptngident name="host" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_host_01.txt" />
+  <ptngident name="nmap_axfr" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_nmap_01.xml" />
+  <ptngident name="dig" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_dig_01.txt" />
+  <ptngident name="nslookup_windows" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_nswin_01.txt" />
+  <ptngident name="nslookup_linux" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\sample_strikeforce_nslookup_lin_axfr_01.txt" />
+  <ptngident name="fierce" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_fierce_01.txt" />
+  <ptngident name="arpscan" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_arp-scan_01.txt" />
+  <ptngident name="nbtscan" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_nbtscan_01.txt" />
+  <ptngident name="sslscan" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\sample_sslscan.xml" />
+  <ptngident name="hashes" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\sample_hashes.txt" />
+  <ptngident name="dgml" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_nessus_01.dgml" />
+  <ptngident name="metasploit" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\sample_msf_01.xml" />
+  <ptngident name="owasp_zap" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\web\zap\muillidae_01.xml" />
+  <ptngident name="unsupported" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\unsupported.file"/>
+  
+  <!-- PtngInputParser - nmap & nessus -->
+  <ptnginputparser name="nmap" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_inf_tcp_fast_01.xml" />
+  <ptnginputparser name="nessus" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_nessus_01.nessus" />
+  
+  <!-- PtngInputParser - AXFR files -->
+  <ptnginputparser name="dnsrecon" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_dnsrecon_01.xml" />
+  <ptnginputparser name="nslookup_windows" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_nswin_01.txt" />
+  <ptnginputparser name="nslookup_linux" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\sample_strikeforce_nslookup_lin_axfr_01.txt" />
+  <ptnginputparser name="arpscan" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_arp-scan_01.txt" />
+  <ptnginputparser name="nbtscan" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_nbtscan_01.txt" />
+  <ptnginputparser name="host" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_host_01.txt" />
+  <ptnginputparser name="nmap_axfr" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_nmap_01.xml" />
+  
+  <!-- PtngDGMLBuilder -->
+  <ptngdgmlbuilder name="nmap" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_inf_tcp_fast_01.xml" />
+  <ptngdgmlbuilder name="nessus" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_nessus_01.nessus" />
+  <ptngdgmlbuilder name="axfr" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_axfr_dnsrecon_01.xml" />
+  
+  <!-- PtngDGMLConv -->
+  <ptngdgmlconv name="dot" value="D:\Development\Sources\Repos\Qt\PtngDataVisualization\testfiles\inf\discworld_nessus_01.dot" />
+  
 </parser_lib_test>

@@ -27,6 +27,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 
 #include "libparser_global.hpp"
 #include "libparser_local.hpp"
+#include "PtngConfig.hpp"
 #include <QObject>
 
 #include "PtngEnums.hpp"
@@ -93,14 +94,33 @@ private:
 
 #ifdef QT_DEBUG
 private slots: // for QTest module
-    void nmapTest_data();
-    void nmapTest();
-    void nessusTest_data();
-    void nessusTest();
+    // nmap & nessus
+    void shouldCountNmapHosts_data();
+    void shouldCountNessusHosts_data();
     void shouldCountNessusIssues_data();
-    void shouldCountNessusIssues();
     void shouldCountNessusSeverities_data();
+
+    void shouldCountNmapHosts();
+    void shouldCountNessusHosts();
+    void shouldCountNessusIssues();
     void shouldCountNessusSeverities();
+
+    // AXFR files
+    void shouldCountDnsreconAXFRHosts_data();
+    void shouldCountNmapAXFRHosts_data();
+    void shouldCountNslookupWindowsAXFRHosts_data();
+    void shouldCountNslookupLinuxAXFRHosts_data();
+    void shouldCountArpscanAXFRHosts_data();
+    void shouldCountNbtscanAXFRHosts_data();
+    void shouldCountHostAXFRHosts_data();
+
+    void shouldCountDnsreconAXFRHosts();
+    void shouldCountNmapAXFRHosts();
+    void shouldCountNslookupWindowsAXFRHosts();
+    void shouldCountNslookupLinuxAXFRHosts();
+    void shouldCountArpscanAXFRHosts();
+    void shouldCountNbtscanAXFRHosts();
+    void shouldCountHostAXFRHosts();
 #endif
 signals:
 

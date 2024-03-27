@@ -24,6 +24,7 @@ SOFTWARE.
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #include "inc/PtngDGMLConv.hpp"
+#include "inc/PtngConfig.hpp"
 
 namespace ptng {
 
@@ -270,5 +271,61 @@ QStringList PtngDGMLConv::getDisplaySettings(const QDomNode &node)
     }
     return(displaySettings);
 }
+
+#ifdef QT_DEBUG
+
+void PtngDGMLConv::shouldCreateDotRunControl_data(){
+    QScopedPointer<QFile> file(new QFile(PtngConfig::testConfiguration));
+    QScopedPointer<QDomDocument> doc(new QDomDocument(""));
+
+    if( !file->open(QIODevice::ReadOnly) ){
+        QString message = QString("Couldn't open the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    if( !doc->setContent(file->readAll()) ){
+        QString message = QString("Couldn't parse the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    QDomNodeList testFiles = doc->elementsByTagName("ptngdgmlconv");
+    QTest::addColumn<QString>("tool");
+    QTest::addColumn<QString>("file");
+
+    for( int i = 0; i< testFiles.count(); ++i ){
+        QDomNode node = testFiles.at(i);
+        QDomElement elem = node.toElement();
+        if( elem.isNull()){
+            continue;
+        }
+        QString name = elem.attribute("name");
+        if( name != "dot" ){
+            continue;
+        }
+        QString value = elem.attribute("value");
+        QTest::addRow(qPrintable(name)) << name << value;
+    }
+}
+void PtngDGMLConv::shouldCreateDotRunControl(){
+    QFETCH(QString,file);
+    QScopedPointer<QFile> inputFile(new QFile(file));
+    if( !inputFile->open(QIODevice::ReadOnly)){
+        QString message = QString( "Could not open file %1 for reading" ).arg(file);
+        QFAIL(qPrintable(message));
+    }
+    QString dotRuncontrol = inputFile->readAll();
+    QVERIFY (dotRuncontrol.contains("0->2") );
+    QVERIFY (dotRuncontrol.contains("2->4") );
+    QVERIFY (dotRuncontrol.contains("4->5") );
+    QVERIFY (dotRuncontrol.contains("5->6") );
+    QVERIFY (dotRuncontrol.contains("5->7") );
+    QVERIFY (dotRuncontrol.contains("5->8") );
+    QVERIFY (dotRuncontrol.contains("5->9") );
+    QVERIFY (dotRuncontrol.contains("5->10") );
+    QVERIFY (dotRuncontrol.contains("5->11") );
+    QVERIFY (dotRuncontrol.contains("5->12") );
+}
+
+#endif
 
 } // namespace ptng

@@ -78,9 +78,9 @@ QMap<QString, QString> PtngInputParser::parseZoneTransfer(const QString &inputFi
         addresses = parseAxfrNmap(inputFile);
         break;
     }
-    case PtngEnums::NMAP:{
-        break;
-    }
+    // case PtngEnums::NMAP:{
+    //     break;
+    // }
     default:{
         break;
     }
@@ -138,16 +138,17 @@ QMap<QString, QString> PtngInputParser::parseAxfrNslookupLin(const QString &inpu
     }
     for( int i = 0;i<lines.length();++i){
         QString line = lines.at(i);
-        if( line.toLower().startsWith("name") ){
+        if( line.startsWith("name",Qt::CaseInsensitive) ){
             QStringList lineSplit = line.split(":");
             QString dnsName = lineSplit.at(1).simplified();
-            if( dnsName.toLower().startsWith("forestdnszones") || dnsName.toLower().startsWith("domaindnszones") ){
+            if( dnsName.startsWith("forestdnszones",Qt::CaseInsensitive) || dnsName.startsWith("domaindnszones",Qt::CaseInsensitive) ){
                 continue;
             }
             QString address;
             QString line2 = lines.at(i+1);
-            lineSplit = line2.split(":");
-            if( lineSplit.at(1).contains(":") || !lineSplit.at(1).contains(".") ){
+            QStringList lineSplit2 = line2.split(":");
+            QString line3 = lineSplit2.at(1);
+            if( line3.contains(":") || !line3.contains(".") ){
                 continue;
             }
             address = lineSplit.at(1).trimmed();

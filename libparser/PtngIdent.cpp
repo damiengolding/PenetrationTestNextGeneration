@@ -24,6 +24,7 @@ SOFTWARE.
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 #include "inc\PtngIdent.hpp"
+#include "inc/PtngConfig.hpp"
 #include "QtTest/qtestcase.h"
 
 namespace ptng {
@@ -182,8 +183,8 @@ PtngEnums::SupportedInputTypes PtngIdent::checkTextFile(const QString &file){
     else if( lines.at(0).count(QLatin1Char(':')) == 9 ){
         QString ipAddress = lines.at(0).split(":").at(0);
         if( ipAddress.count(QLatin1Char('.')) == 3 ){
-        ret = PtngEnums::NBTSCAN;
-        return(ret);
+            ret = PtngEnums::NBTSCAN;
+            return(ret);
         }
     }
     return(ret);
@@ -196,26 +197,35 @@ PtngEnums::SupportedInputTypes PtngIdent::checkTextFile(const QString &file){
 #ifdef QT_DEBUG
 void PtngIdent::shouldRecogniseFile_data()
 {
-    // qInfo() << "Loading test data for checkFile";
+    QScopedPointer<QFile> file(new QFile(PtngConfig::testConfiguration));
+    QScopedPointer<QDomDocument> doc(new QDomDocument(""));
+
+    if( !file->open(QIODevice::ReadOnly) ){
+        QString message = QString("Couldn't open the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    if( !doc->setContent(file->readAll()) ){
+        QString message = QString("Couldn't parse the XML configuration file: %1").arg( PtngConfig::testConfiguration );
+        QFAIL(qPrintable(message));
+    }
+
+    QDomNodeList testFiles = doc->elementsByTagName("ptngident");
+    // qInfo() << "ptngident elements:"<<testFiles.count();
     QTest::addColumn<QString>("tool");
     QTest::addColumn<QString>("file");
-    QTest::addRow("nmap") << "nmap" << "inf/discworld_inf_tcp_fast_01.xml";
-    QTest::addRow("Nessus") << "nessus" << "inf/discworld_nessus_01.nessus";
-    QTest::addRow("dnsrecon") << "dnsrecon" << "inf/discworld_axfr_dnsrecon_01.xml";
-    QTest::addRow("host") << "host" << "inf/discworld_axfr_host_01.txt";
-    QTest::addRow("nmap_axfr") << "nmap AXFR" << "inf/discworld_axfr_nmap_01.xml";
-    QTest::addRow("dig") << "dig" << "inf/discworld_axfr_dig_01.txt";
-    QTest::addRow("nslookup windows") << "nslookup (Windows)" << "inf/discworld_axfr_nswin_01.txt";
-    QTest::addRow("nslookup linux") << "nslookup (Linux)" << "inf/sample_strikeforce_nslookup_lin_axfr_01.txt";
-    QTest::addRow("fierce") << "fierce" << "inf/discworld_axfr_fierce_01.txt";
-    QTest::addRow("arpscan") << "arpscan" << "inf/discworld_arp-scan_01.txt";
-    QTest::addRow("nbtscan") << "nbtscan" << "inf/discworld_nbtscan_01.txt";
-    QTest::addRow("sslscan") << "sslscan" << "inf/sample_sslscan.xml";
-    QTest::addRow("hashes") << "hashes" << "inf/sample_hashes.txt";
-    QTest::addRow("DGML") << "dgml" << "inf/discworld_inf_tcp_fast_01.dgml";
-    QTest::addRow("Metasploit Framework") << "MSF" << "inf/sample_msf_01.xml";
-    QTest::addRow("OWASP ZAP") << "OWASP ZAP" << "web/zap/muillidae_01.xml";
-    QTest::addRow("Unsupported") << "unsupported" << "unsupported.file";
+
+    for( int i = 0; i< testFiles.count(); ++i ){
+        QDomNode node = testFiles.at(i);
+        QDomElement elem = node.toElement();
+        if( elem.isNull()){
+            continue;
+        }
+        QString name = elem.attribute("name");
+        QString value = elem.attribute("value");
+        QTest::addRow(qPrintable(name)) << name << value;
+    }
+
 }
 
 void PtngIdent::shouldRecogniseFile()

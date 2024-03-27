@@ -27,10 +27,17 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "tests.hpp"
 
 void testInput(){
-    qDebug() << "[TEST] Testing category: input ";
+    qDebug() << "[TEST] Testing category: input";
     PtngIdent ident;
     QTest::qExec(&ident);
     PtngInputParser ip;
     QTest::qExec(&ip);
+}
 
+void testConversion(){
+    qDebug() << "[TEST] Testing category: conversion";
+    PtngDGMLBuilder builder;
+    QTest::qExec(&builder);
+    PtngDGMLConv conv;
+    QTest::qExec(&conv);
 }

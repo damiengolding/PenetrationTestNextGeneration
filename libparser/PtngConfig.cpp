@@ -23,23 +23,16 @@ SOFTWARE.
 
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
-#pragma once
+#include "inc/PtngConfig.hpp"
 
-// Internal
-#include "tests.hpp"
+namespace ptng {
 
-#include "Logger.hpp"
-using namespace GoldingsGym;
+QString PtngConfig::testConfiguration = "test_config.xml";
 
-// Qt
-#include <QCoreApplication>
-#include <QCommandLineOption>
-#include <QCommandLineParser>
-#include <QNetworkAccessManager>
-void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser);
-void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
-void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
-void listTypes();
+PtngConfig::PtngConfig(QObject *parent)
+    : QObject{parent}
+{
 
-QList<QCommandLineOption> commandLineOptions;
-QStringList testTypes;
+}
+
+} // namespace ptng

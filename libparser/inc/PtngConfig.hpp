@@ -26,25 +26,21 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #pragma once
 
 #include <QObject>
-#include <QDir>
+#include "libparser_global.hpp"
 
-class Logger : public QObject
+namespace ptng {
+
+class LIBPARSER_EXPORT PtngConfig : public QObject
 {
     Q_OBJECT
-    // static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(nullptr);
 public:
-    explicit Logger(QObject *parent = nullptr);
+    explicit PtngConfig(QObject *parent = nullptr);
 
-    static bool isLogging;
-    static QString fileName;
-    static void install();
-    static void uninstall();
-    static void messageHandler(QtMsgType type, const QMessageLogContext &ctxt, const QString &msg);
-
-private:
-    static QFile outFile;
+public:
+    static QString testConfiguration;
 
 signals:
-
 };
+
+} // namespace ptng
 

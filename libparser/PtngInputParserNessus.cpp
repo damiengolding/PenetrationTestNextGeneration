@@ -28,7 +28,6 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 namespace ptng {
 
 QList<PtngHostBuilder*> PtngInputParser::parseNessus(const QString &inputFile){
-    qInfo() << "Starting to parse nessus file:"<<inputFile;
     QList<PtngHostBuilder*> builderList;
     PtngEnums::SupportedInputTypes type = PtngIdent::checkFile(inputFile);
     if( type != PtngEnums::NESSUS ){
@@ -48,9 +47,7 @@ QList<PtngHostBuilder*> PtngInputParser::parseNessus(const QString &inputFile){
         return(builderList);
     }
     QDomNodeList nodes = doc->elementsByTagName("ReportHost");
-    qInfo() << "Number of ReportHost nodes:"<<nodes.length();
     for( int i = 0; i != nodes.length(); ++i ){
-        // qInfo() << "Node number:"<<i;
         QDomNode node = nodes.at(i);
         PtngHostBuilder *hb = new PtngHostBuilder();
         hb->addNessusScanXmlNode(node);
@@ -62,7 +59,6 @@ QList<PtngHostBuilder*> PtngInputParser::parseNessus(const QString &inputFile){
 QList<PtngIssue> PtngInputParser::parseNesusIssues(const QString &inputFile)
 {
     QList<PtngIssue> issueList;
-    qInfo() << "Starting to process nessus file:"<<inputFile;
     QStringList ipAddresses;
     QScopedPointer<QDomDocument> doc(new QDomDocument("input"));
     QScopedPointer<QFile> f(new QFile(inputFile));
@@ -139,14 +135,12 @@ QList<PtngIssue> PtngInputParser::parseNesusIssues(const QString &inputFile)
             issueList.append(issue);
         }
     }
-    qInfo() << "Nessus issue count (full):"<<issueList.count();
     return(issueList);
 }
 
 QMap<QString, QString> PtngInputParser::parseNesusSeverities(const QString &inputFile)
 {
     QList<PtngIssue> issueList = parseNesusIssues(inputFile);
-    // qInfo() << "issueList size:"<<issueList.count();
     QMap<QString, QString> severityMap;
     // QString ipAddress="";
     QStringList ipAddresses;
@@ -156,7 +150,6 @@ QMap<QString, QString> PtngInputParser::parseNesusSeverities(const QString &inpu
     doc->setContent(f.data());
     QDomElement rootElem = doc->documentElement();
     QDomNodeList hosts = rootElem.elementsByTagName("ReportHost");
-    // qInfo() << "Number of ReportHosts:"<<hosts.count();
     QString address;
 
     for( auto issue : issueList ){
@@ -169,14 +162,10 @@ QMap<QString, QString> PtngInputParser::parseNesusSeverities(const QString &inpu
             continue;
         }
         address = issue.ipAddress;
-        // qInfo() << "address from issueList:"<<address;
         QString entry=address;
         for( auto issue : issueList){
-            // qInfo() << "Checking severity for:"<<issue.ipAddress;
-            // PtngIssue issue = issueList.at(i);
             if( address == issue.ipAddress ){
                 QString risk_factor = issue.riskFactor.toLower();
-                // qInfo() << "Risk factor: "<<risk_factor;
                 if( risk_factor == "critical" )
                     critical++;
                 else if( risk_factor == "high" )
@@ -210,10 +199,8 @@ QMap<QString, QString> PtngInputParser::parseNesusSeverities(const QString &inpu
         medium=0;
         low=0;
         none=0;
-        // qInfo() << "Sev for"<<issue.ipAddress<<sevStr;
         severityMap.insert(address,sevStr);
     } // top is for( auto address : ipAddresses ){
-    // qInfo() << "IP Addresses/sev count:"<<severityMap.count();
     return(severityMap);
 }
 

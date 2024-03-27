@@ -43,15 +43,25 @@ int main(int argc, char *argv[])
     // Setup logger
     Logger::fileName = logFile;
     Logger::install();
+    if( configFile.isEmpty() || !QFile::exists(configFile) ){
+        qCritical() << "A valid XML configuration file must be supplied. Exiting.";
+        p.showHelp();
+    }
+    // Setup libparser library config
+    PtngConfig::testConfiguration = configFile;
     // qInfo() << "Current directory:"<<QDir::currentPath();
     // Run tests
     if( testTypes.contains("all",Qt::CaseInsensitive) ){
         testInput();
+        testConversion();
         return(0);
     }
     else if( testTypes.contains("input",Qt::CaseInsensitive) ){
         testInput();
-
+        return(0);
+    }
+    else if( testTypes.contains("conv",Qt::CaseInsensitive) ){
+        testConversion();
         return(0);
     }
     // return(a.exec());
@@ -79,7 +89,7 @@ void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addPositionalArgument("list-types", "List supported types");
     parser.addOption({{"t","types"},"Tests to run. A comma delimited list: any of input,builder,conv,misc or just all, default: all","types"});
     parser.addOption({{"l","log"},"File to log to. Default is ./log.txt","log file"});
-    parser.addOption({{"c","config"},"Configuration XML file location","config"});
+    parser.addOption({{"c","config"},"[required] Configuration XML file location","config"});
 }
 
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
@@ -101,6 +111,7 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     if( parser.isSet("config") ){
         configFile = parser.value("config");
     }
+
 }
 
 void listTypes(){
