@@ -1,4 +1,4 @@
-QT = core gui xml testlib
+QT = core gui xml testlib network
 
 CONFIG += c++20 cmdline warn_off
 DEFINES+= QT_MESSAGELOGCONTEXT
@@ -25,6 +25,5 @@ DEPENDPATH += $$PWD/../../PtngOutput/libparser/inc
 
 HEADERS += \
     Logger.hpp \
-    assist.hpp \
     main.hpp \
     tests.hpp

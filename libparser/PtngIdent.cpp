@@ -194,7 +194,7 @@ PtngEnums::SupportedInputTypes PtngIdent::checkTextFile(const QString &file){
   */
 
 #ifdef QT_DEBUG
-void PtngIdent::checkFile_data()
+void PtngIdent::shouldRecogniseFile_data()
 {
     // qInfo() << "Loading test data for checkFile";
     QTest::addColumn<QString>("tool");
@@ -218,7 +218,7 @@ void PtngIdent::checkFile_data()
     QTest::addRow("Unsupported") << "unsupported" << "unsupported.file";
 }
 
-void PtngIdent::checkFile()
+void PtngIdent::shouldRecogniseFile()
 {
     QFETCH(QString,tool);
     QFETCH(QString,file);

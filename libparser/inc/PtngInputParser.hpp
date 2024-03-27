@@ -97,10 +97,10 @@ private slots: // for QTest module
     void nmapTest();
     void nessusTest_data();
     void nessusTest();
-    void nessusIssuesTest_data();
-    void nessusIssuesTest();
-    void nessusSeveritiesTest_data();
-    void nessusSeveritiesTest();
+    void shouldCountNessusIssues_data();
+    void shouldCountNessusIssues();
+    void shouldCountNessusSeverities_data();
+    void shouldCountNessusSeverities();
 #endif
 signals:
 

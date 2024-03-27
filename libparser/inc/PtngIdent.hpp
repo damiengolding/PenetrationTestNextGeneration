@@ -52,8 +52,8 @@ signals:
 
 #ifdef QT_DEBUG
 private slots: // for QTest module
-    void checkFile_data();
-    void checkFile();
+    void shouldRecogniseFile_data();
+    void shouldRecogniseFile();
 #endif
 
 };

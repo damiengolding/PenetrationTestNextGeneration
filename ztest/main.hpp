@@ -34,7 +34,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include <QCoreApplication>
 #include <QCommandLineOption>
 #include <QCommandLineParser>
-
+#include <QNetworkAccessManager>
 void initArgumentParser(QCoreApplication &app, QCommandLineParser &parser);
 void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser);

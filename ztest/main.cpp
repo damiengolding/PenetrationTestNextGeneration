@@ -24,24 +24,11 @@ SOFTWARE.
 Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 */
 
-// Ptng
-// #include "PtngDGMLBuilder.hpp"
-// #include "PtngDGMLConv.hpp"
-// #include "PtngHostBuilder.hpp"
-// #include "PtngEnums.hpp"
-// #include "PtngIP4Address.hpp"
-// #include "PtngIdent.hpp"
-// #include "PtngSpecifications.hpp"
-// #include "PtngDGMLBuilder.hpp"
-// #include "PtngDGMLConv.hpp"
-// #include "PtngInputParser.hpp"
-// using namespace ptng;
-
 #include "main.hpp"
 
 // QString logFile = "D:\\Development\\Sources\\Repos\\Qt\\TestLogs\\ztest.txt";
 QString logFile = "log.txt";
-QString workingDirectory="";
+QString configFile="";
 
 int main(int argc, char *argv[])
 {
@@ -56,7 +43,7 @@ int main(int argc, char *argv[])
     // Setup logger
     Logger::fileName = logFile;
     Logger::install();
-    qInfo() << "Current directory:"<<QDir::currentPath();
+    // qInfo() << "Current directory:"<<QDir::currentPath();
     // Run tests
     if( testTypes.contains("all",Qt::CaseInsensitive) ){
         testInput();
@@ -67,7 +54,7 @@ int main(int argc, char *argv[])
 
         return(0);
     }
-    //    return(a.exec());
+    // return(a.exec());
     return(0);
 }
 
@@ -92,7 +79,7 @@ void initArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
     parser.addPositionalArgument("list-types", "List supported types");
     parser.addOption({{"t","types"},"Tests to run. A comma delimited list: any of input,builder,conv,misc or just all, default: all","types"});
     parser.addOption({{"l","log"},"File to log to. Default is ./log.txt","log file"});
-    parser.addOption({{"w","working-directory"},"Set the working directory. Default is the directory the application is called from.","directory"});
+    parser.addOption({{"c","config"},"Configuration XML file location","config"});
 }
 
 void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
@@ -111,9 +98,8 @@ void processArgumentOptions(QCoreApplication &app, QCommandLineParser &parser){
         logFile = parser.value("log");
     }
 
-    if( parser.isSet("working-directory") ){
-        workingDirectory = parser.value("working-directory");
-        QDir::setCurrent(workingDirectory);
+    if( parser.isSet("config") ){
+        configFile = parser.value("config");
     }
 }
 

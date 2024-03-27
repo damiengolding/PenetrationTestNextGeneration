@@ -27,7 +27,7 @@ Don't use it to find and eat babies ... unless you're really REALLY hungry ;-)
 #include "tests.hpp"
 
 void testInput(){
-    qDebug() << "[TEST] Testing input category";
+    qDebug() << "[TEST] Testing category: input ";
     PtngIdent ident;
     QTest::qExec(&ident);
     PtngInputParser ip;

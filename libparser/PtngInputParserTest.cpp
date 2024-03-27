@@ -30,34 +30,34 @@ using namespace ptng;
 
 #ifdef QT_DEBUG
 void PtngInputParser::nmapTest_data(){
-
+    QFAIL("TDD");
 }
 
 void PtngInputParser::nmapTest(){
-
+    QFAIL("TDD");
 }
 
 void PtngInputParser::nessusTest_data(){
-
+    QFAIL("TDD");
 }
 
 void PtngInputParser::nessusTest(){
-
+    QFAIL("TDD");
 }
 
-void PtngInputParser::nessusIssuesTest_data(){
-
+void PtngInputParser::shouldCountNessusIssues_data(){
+    QFAIL("TDD");
 }
 
-void PtngInputParser::nessusIssuesTest(){
-
+void PtngInputParser::shouldCountNessusIssues(){
+    QFAIL("TDD");
 }
 
-void PtngInputParser::nessusSeveritiesTest_data(){
-
+void PtngInputParser::shouldCountNessusSeverities_data(){
+    QFAIL("TDD");
 }
 
-void PtngInputParser::nessusSeveritiesTest(){
-
+void PtngInputParser::shouldCountNessusSeverities(){
+    QFAIL("TDD");
 }
 #endif
