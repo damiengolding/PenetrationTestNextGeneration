@@ -38,12 +38,21 @@
      <number>5</number>
     </property>
     <item row="0" column="0">
-     <widget class="QStackedWidget" name="centralStackedWidget">
-      <widget class="QWidget" name="imagePage"/>
-      <widget class="QWidget" name="tablePage"/>
-      <widget class="QWidget" name="xmlPage"/>
-      <widget class="QWidget" name="textPage"/>
-      <widget class="QWidget" name="codePage"/>
+     <widget class="QTabWidget" name="tabWidgetCentral">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="tabWelcome">
+       <attribute name="title">
+        <string>Welcome to workbench</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>

@@ -47,3 +47,5 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../PtngOutput/libpar
 
 INCLUDEPATH += $$PWD/../../PtngOutput/libparser/inc
 DEPENDPATH += $$PWD/../../PtngOutput/libparser/inc
+
+DISTFILES +=
